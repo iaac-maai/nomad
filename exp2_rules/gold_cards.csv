@@ -1,0 +1,11 @@
+id,check,value,unit,quote,page,applies_to,filled_by
+Q01,min_area,,m2,,,,
+Q02,min_area,,m2,,,,
+Q03,fits_circle,,m,,,,
+Q04,min_area,,m2,,,,
+Q05,fits_square,,m,,,,
+Q06,min_length,,m,,,,
+Q07,min_height,,m,,,,
+Q08,min_height,,m,,,,
+Q09,min_ratio,,ratio,,,,
+Q10,min_length,,m,,,,

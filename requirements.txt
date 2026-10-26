@@ -1,0 +1,8 @@
+requests
+python-dotenv
+pypdf
+pandas
+numpy
+scikit-learn
+xgboost
+matplotlib
