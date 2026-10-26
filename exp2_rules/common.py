@@ -41,7 +41,7 @@ def norm(text):
     Used to check if a quote really exists in the PDF."""
     text = text or ""
     text = text.replace("·", "")          # l·l -> ll
-    text = re.sub(r"-\s*\n\s*", "", text)      # word-\nbreak -> wordbreak
+    text = re.sub(r"(?<=\w)-\s*(?=\w)", "", text)   # in-\nterior / in- terior -> interior
     text = unicodedata.normalize("NFKD", text)
     text = "".join(c for c in text if not unicodedata.combining(c))
     text = text.lower()

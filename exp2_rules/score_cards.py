@@ -62,8 +62,16 @@ def find_quote(quote, pages_norm, pages_words):
     qn = norm(quote)
     if not qn:
         return False, None, 0.0
+        # a quote shortened with "..." counts as found if every piece is on the same page, in order
+    parts = [x for x in (norm(piece) for piece in re.split(r"\.\.\.|\u2026", quote or "")) if x]
     for i, p in enumerate(pages_norm):
-        if qn in p:
+        pos = 0
+        for part in parts:
+            pos = p.find(part, pos)
+            if pos < 0:
+                break
+            pos += len(part)
+        else:
             return True, i + 1, 1.0
     words = [w for w in qn.split() if len(w) >= 3]
     if not words:
