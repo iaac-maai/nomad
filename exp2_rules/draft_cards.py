@@ -93,19 +93,26 @@ def retrieve_notebook(query, k):
 
 
 # ---------------------------------------------------------------- LLM calls
-def post_with_retry(url, headers, body):
-    for attempt in range(5):
-        r = requests.post(url, headers=headers, json=body, timeout=120)
+def post_with_retry(url, headers, body, tries=8):
+    for attempt in range(tries):
+        wait = min(60, 10 * (attempt + 1))
+        try:
+            r = requests.post(url, headers=headers, json=body, timeout=180)
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError):
+            print("    no answer from the server, waiting %ss..." % wait)
+            time.sleep(wait)
+            continue
         if r.status_code in (429, 500, 502, 503, 529):
-            wait = 5 * (attempt + 1)
             print("    server busy (%s), waiting %ss..." % (r.status_code, wait))
             time.sleep(wait)
             continue
+        if r.status_code in (400, 401, 403, 404):
+            raise SystemExit("Stopped: HTTP %s. Check the API key and the model name in .env.\n%s"
+                             % (r.status_code, r.text[:400]))
         if r.status_code >= 400:
             raise RuntimeError("HTTP %s: %s" % (r.status_code, r.text[:400]))
         return r.json()
-    raise RuntimeError("gave up after 5 tries")
-
+    raise RuntimeError("gave up after %d tries" % tries)
 
 def call_anthropic(prompt):
     key = os.getenv("ANTHROPIC_API_KEY")
