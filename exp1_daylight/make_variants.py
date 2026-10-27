@@ -16,15 +16,14 @@ import numpy as np
 
 HERE = Path(__file__).resolve().parent
 
-# name: (low, high) in metres or as a ratio
 RANGES = {
-    "depth_m": (10.0, 30.0),         # distance from the window facade to the back
-    "width_m": (12.0, 40.0),         # facade length
-    "floor_height_m": (3.0, 6.0),    # floor to ceiling (old factories are tall)
-    "wwr": (0.15, 0.60),             # window-to-wall ratio of each lit facade
-    "win_height_target_m": (1.2, 2.6),
-    "obs_dist_m": (6.0, 30.0),       # distance to the building opposite
-    "obs_height_m": (0.0, 25.0),     # height of the building opposite (0 = open)
+    "depth_m": (8.0, 25.0),           # shop depth
+    "width_m": (4.0, 12.0),           # street frontage
+    "floor_height_m": (3.0, 4.5),     # ground-floor height
+    "wwr": (0.20, 0.80),              # shop windows are large
+    "win_height_target_m": (2.0, 3.5),
+    "obs_dist_m": (8.0, 20.0),        # street width (Eixample is about 20 m)
+    "obs_height_m": (12.0, 25.0),     # apartment block across the street
 }
 
 
@@ -50,7 +49,7 @@ def main():
         for j, name in enumerate(names):
             lo, hi = RANGES[name]
             r[name] = round(lo + u[i, j] * (hi - lo), 2)
-        r["lit_facades"] = 1 if u[i, -1] < 0.5 else 2   # 1 = street side only, 2 = street + back
+        r["lit_facades"] = 2 if u[i, -1] < 0.2 else 1   # 80 % street only, 20 % also a back patio
         h = r["floor_height_m"]
         # Honeybee keeps the ratio: if the ratio needs taller windows, they get taller.
         win_h = max(r["win_height_target_m"], r["wwr"] * h * 1.05)
