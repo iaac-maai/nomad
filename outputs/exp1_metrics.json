@@ -1,0 +1,13 @@
+{
+  "model": "XGBoost",
+  "target": "mean_df",
+  "n_variants": 50,
+  "n_train": 40,
+  "n_test": 10,
+  "test_r2_model": 0.802,
+  "test_mae_model": 0.293,
+  "test_r2_rule": 0.654,
+  "test_mae_rule": 0.444,
+  "cv5_r2_model": 0.739,
+  "cv5_mae_model": 0.375
+}
