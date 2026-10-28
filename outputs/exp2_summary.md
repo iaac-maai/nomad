@@ -8,7 +8,7 @@
 | Accuracy against gold cards | 38 / 50 (76 %) |
 | Cards sent to the expert (confidence < 0.8) | 1 of 10 |
 | ML trust layer | Logistic regression on 4 signals, leave-one-question-out: accuracy 0.76 (always-guess baseline 0.76), Brier score 0.220, 50 drafts. |
-| Manual baseline (time to read the 10 clauses by hand) | fill in: ... minutes |
+| Manual baseline (time to read the 10 clauses by hand) | fill in: 20 minutes (non-expert, with Google Translate) + expert check |
 
 | Question | Majority card | Gold | Agreement | Grounding | Accuracy | Confidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- | --- |
