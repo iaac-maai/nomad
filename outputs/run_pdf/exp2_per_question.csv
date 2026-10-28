@@ -1,0 +1,11 @@
+id,runs,majority_check,majority_value,gold_value,agreement,grounding,accuracy,majority_correct,confidence,decision
+Q01,5,min_area,36.0,36.0,1.0,1.0,1.0,1,1.0,auto-approve
+Q02,5,min_area,20.0,20.0,1.0,1.0,1.0,1,1.0,auto-approve
+Q03,5,not_found,,2.8,1.0,0.0,0.0,0,0.0,expert check
+Q04,5,not_found,,6.0,1.0,0.0,0.0,0,0.0,expert check
+Q05,5,fits_square,2.6,2.0,1.0,1.0,0.0,0,1.0,auto-approve
+Q06,5,not_found,,2.2,0.6,0.4,0.4,0,0.24,expert check
+Q07,5,min_height,2.5,2.5,1.0,1.0,1.0,1,1.0,auto-approve
+Q08,5,min_height,2.2,2.2,1.0,1.0,1.0,1,1.0,auto-approve
+Q09,5,min_area,0.125,0.125,0.8,1.0,0.2,0,0.8,auto-approve
+Q10,5,min_area,1.0,1.0,0.8,1.0,0.0,0,0.8,auto-approve

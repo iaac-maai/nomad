@@ -1,0 +1,52 @@
+id,run,check,value,unit,quote_found,quote_page,quote_coverage,number_in_quote,agreement,correct,quote,p_correct
+Q01,1,min_area,36.0,m2,1,13,1.0,1,1.0,1,tenir una superfície útil interior no inferior a 36 m2,0.74
+Q01,2,min_area,36.0,m2,1,13,1.0,1,1.0,1,tenir una superfície útil interior no inferior a 36 m2.,0.74
+Q01,3,min_area,36.0,m2,1,13,1.0,1,1.0,1,tenir una superfície útil interior no inferior a 36 m2.,0.74
+Q01,4,min_area,36.0,m2,1,13,1.0,1,1.0,1,tenir una superfície útil interior no inferior a 36 m2.,0.74
+Q01,5,min_area,36.0,m2,1,13,1.0,1,1.0,1,tenir una superfície útil interior no inferior a 36 m2.,0.74
+Q02,1,min_area,20.0,m2,1,15,1.0,1,1.0,1,"La seva superfície mínima, en el cas que no estigui regulada per la normativa municipal, en cap cas serà inferior a 20 m2.",0.74
+Q02,2,min_area,20.0,m2,1,15,1.0,1,1.0,1,"La seva superfície mínima, en el cas que no estigui regulada per la normativa municipal, en cap cas serà inferior a 20 m2.",0.74
+Q02,3,min_area,20.0,m2,1,15,1.0,1,1.0,1,En cap cas serà inferior a 20 m2.,0.74
+Q02,4,min_area,20.0,m2,1,15,1.0,1,1.0,1,"La seva superfície mínima, en el cas que no estigui regulada per la normativa municipal, en cap cas serà inferior a 20 m2.",0.74
+Q02,5,min_area,20.0,m2,1,15,1.0,1,1.0,1,En cap cas serà inferior a 20 m2.,0.74
+Q03,1,fits_circle,2.8,m,1,15,1.0,1,1.0,1,"L'espai que contingui la sala d'estar (E) i/o el menjador (M) ha de permetre la inscripció entre paraments d'un cercle de diàmetre de dos metres i vuitanta centímetres (2,80 m).",0.74
+Q03,2,fits_circle,2.8,m,1,15,1.0,1,1.0,1,"L'espai que contingui la sala d'estar (E) i/o el menjador (M) ha de permetre la inscripció entre paraments d'un cercle de diàmetre de dos metres i vuitanta centímetres (2,80 m).",0.74
+Q03,3,fits_circle,2.8,m,1,15,1.0,1,1.0,1,"L'espai que contingui la sala d'estar (E) i/o el menjador (M) ha de permetre la inscripció entre paraments d'un cercle de diàmetre de dos metres i vuitanta centímetres (2,80 m).",0.74
+Q03,4,fits_circle,2.8,m,1,15,1.0,1,1.0,1,"L'espai que contingui la sala d'estar (E) i/o el menjador (M) ha de permetre la inscripció entre paraments d'un cercle de diàmetre de dos metres i vuitanta centímetres (2,80 m).",0.74
+Q03,5,fits_circle,2.8,m,1,15,1.0,1,1.0,1,"L'espai que contingui la sala d'estar (E) i/o el menjador (M) ha de permetre la inscripció entre paraments d'un cercle de diàmetre de dos metres i vuitanta centímetres (2,80 m).",0.74
+Q04,1,min_area,5.0,m2,1,18,1.0,1,1.0,0,Les habitacions hauran de tenir una superfície útil no inferior a 5 m2,0.85
+Q04,2,min_area,5.0,m2,1,18,1.0,1,1.0,0,Les habitacions hauran de tenir una superfície útil no inferior a 5 m2,0.85
+Q04,3,min_area,5.0,m2,1,18,1.0,1,1.0,0,Les habitacions hauran de tenir una superfície útil no inferior a 5 m2,0.85
+Q04,4,min_area,5.0,m2,1,18,1.0,1,1.0,0,Les habitacions hauran de tenir una superfície útil no inferior a 5 m2,0.85
+Q04,5,min_area,5.0,m2,1,18,1.0,1,1.0,0,Les habitacions hauran de tenir una superfície útil no inferior a 5 m2,0.85
+Q05,1,fits_square,2.6,m,1,15,1.0,1,1.0,0,"en habitatges de tres habitacions o més, almenys en una de les habitacions s'hi haurà de poder inscriure un quadrat de 2,60 m de costat. En la resta d'habitacions, i en els habitatges de fins a 2 habitacions, s'hi ha de poder inscriure un quadrat de 2,00 m de costat.",0.85
+Q05,2,fits_square,2.6,m,1,15,1.0,1,1.0,0,"en habitatges de tres habitacions o més, almenys en una de les habitacions s'hi haurà de poder inscriure un quadrat de 2,60 m de costat. En la resta d'habitacions, i en els habitatges de fins a 2 habitacions, s'hi ha de poder inscriure un quadrat de 2,00 m de costat.",0.85
+Q05,3,fits_square,2.6,m,1,15,1.0,1,1.0,0,"almenys en una de les habitacions s'hi haurà de poder inscriure un quadrat de 2,60 m de costat",0.85
+Q05,4,fits_square,2.6,m,1,15,1.0,1,1.0,0,"almenys en una de les habitacions s'hi haurà de poder inscriure un quadrat de 2,60 m de costat. En la resta d'habitacions, i en els habitatges de fins a 2 habitacions, s'hi ha de poder inscriure un quadrat de 2,00 m de costat.",0.85
+Q05,5,fits_square,2.6,m,1,15,1.0,1,1.0,0,"en habitatges de tres habitacions o més, almenys en una de les habitacions s'hi haurà de poder inscriure un quadrat de 2,60 m de costat. En la resta d'habitacions, i en els habitatges de fins a 2 habitacions, s'hi ha de poder inscriure un quadrat de 2,00 m de costat.",0.85
+Q06,1,min_length,2.2,m,1,15,1.0,1,1.0,1,"En aquest espai, el contacte amb la façana serà d'una amplada mínima de dos metres i vint centímetres (2,20 m)",0.74
+Q06,2,min_length,2.2,m,1,15,1.0,1,1.0,1,"En aquest espai, el contacte amb la façana serà d'una amplada mínima de dos metres i vint centímetres (2,20 m)",0.74
+Q06,3,min_length,2.2,m,1,15,1.0,1,1.0,1,"En aquest espai, el contacte amb la façana serà d'una amplada mínima de dos metres i vint centímetres (2,20 m)",0.74
+Q06,4,min_length,2.2,m,1,15,1.0,1,1.0,1,"En aquest espai, el contacte amb la façana serà d'una amplada mínima de dos metres i vint centímetres (2,20 m)",0.74
+Q06,5,min_length,2.2,m,1,15,1.0,1,1.0,1,"En aquest espai, el contacte amb la façana serà d'una amplada mínima de dos metres i vint centímetres (2,20 m)",0.74
+Q07,1,min_height,2.5,m,1,14,1.0,1,1.0,1,"L'alçada lliure entre el paviment acabat i el sostre ha de ser com a mínim de 2,50 m.",0.74
+Q07,2,min_height,2.5,m,1,14,1.0,1,1.0,1,"L'alçada lliure entre el paviment acabat i el sostre ha de ser com a mínim de 2,50 m.",0.74
+Q07,3,min_height,2.5,m,1,14,1.0,1,1.0,1,"L'alçada lliure entre el paviment acabat i el sostre ha de ser com a mínim de 2,50 m.",0.74
+Q07,4,min_height,2.5,m,1,14,1.0,1,1.0,1,"L'alçada lliure entre el paviment acabat i el sostre ha de ser com a mínim de 2,50 m.",0.74
+Q07,5,min_height,2.5,m,1,14,1.0,1,1.0,1,"L'alçada lliure entre el paviment acabat i el sostre ha de ser com a mínim de 2,50 m.",0.74
+Q08,1,min_height,2.2,m,1,14,1.0,1,1.0,1,"En el cas de cambres higièniques, cuines i espais de circulació, aquesta alçada no serà inferior a 2,20 m.",0.74
+Q08,2,min_height,2.2,m,1,14,1.0,1,1.0,1,"En el cas de cambres higièniques, cuines i espais de circulació, aquesta alçada
+no serà inferior a 2,20 m.",0.74
+Q08,3,min_height,2.2,m,1,14,1.0,1,1.0,1,"En el cas de cambres higièniques, cuines i espais de circulació, aquesta alçada no serà inferior a 2,20 m.",0.74
+Q08,4,min_height,2.2,m,1,14,1.0,1,1.0,1,"En el cas de cambres higièniques, cuines i espais de circulació, aquesta alçada no serà inferior a 2,20 m.",0.74
+Q08,5,min_height,2.2,m,1,14,1.0,1,1.0,1,"En el cas de cambres higièniques, cuines i espais de circulació, aquesta alçada no serà inferior a 2,20 m.",0.74
+Q09,1,min_area,0.125,ratio,1,15,1.0,1,0.4,0,Els espais d'ús comú i les habitacions han de tenir ventilació i il·luminació natural directa des de l'exterior mitjançant obertures d'una superfície no inferior a 1/8 de la seva superfície útil,0.78
+Q09,2,min_ratio,0.125,ratio,1,15,1.0,1,0.6,1,obertures d'una superfície no inferior a 1/8 de la seva superfície útil,0.78
+Q09,3,min_ratio,0.125,ratio,1,15,1.0,1,0.6,1,Els espais d'ús comú i les habitacions han de tenir ventilació i il·luminació natural directa des de l'exterior mitjançant obertures d'una superfície no inferior a 1/8 de la seva superfície útil,0.78
+Q09,4,min_ratio,0.125,ratio,1,15,1.0,1,0.6,1,Els espais d'ús comú i les habitacions han de tenir ventilació i il·luminació natural directa des de l'exterior mitjançant obertures d'una superfície no inferior a 1/8 de la seva superfície útil,0.78
+Q09,5,min_area,0.125,ratio,1,15,1.0,1,0.4,0,Els espais d'ús comú i les habitacions han de tenir ventilació i il·luminació natural directa des de l'exterior mitjançant obertures d'una superfície no inferior a 1/8 de la seva superfície útil,0.78
+Q10,1,min_length,1.0,m,1,14,1.0,1,1.0,1,Els espais interiors destinats a la circulació que connectin l'accés a l'habitatge i els espais practicables han de tenir una amplada mínima d'un metre (1 m),0.74
+Q10,2,min_length,1.0,m,1,14,1.0,1,1.0,1,Els espais interiors destinats a la circulació que connectin l'accés a l'habitatge i els espais practicables han de tenir una amplada mínima d'un metre (1 m),0.74
+Q10,3,min_length,1.0,m,1,14,1.0,1,1.0,1,Els espais interiors destinats a la circulació que connectin l'accés a l'habitatge i els espais practicables han de tenir una amplada mínima d'un metre (1 m),0.74
+Q10,4,min_length,1.0,m,1,14,1.0,1,1.0,1,Els espais interiors destinats a la circulació que connectin l'accés a l'habitatge i els espais practicables han de tenir una amplada mínima d'un metre (1 m),0.74
+Q10,5,min_length,1.0,m,1,14,1.0,1,1.0,1,Els espais interiors destinats a la circulació que connectin l'accés a l'habitatge i els espais practicables han de tenir una amplada mínima d'un metre (1 m),0.74
