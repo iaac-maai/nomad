@@ -60,7 +60,6 @@ def pdf_chunks(pages, size=120, step=80):
             chunks.append({"page": i + 1, "text": piece, "norm": norm(piece).split()})
     return chunks
 
-
 def retrieve_pdf(query, chunks, k):
     """Very simple keyword search: count how many query words (by their first 5 letters) appear."""
     prefixes = [w[:5] for w in norm(query).split() if len(w) >= 4]
@@ -72,23 +71,32 @@ def retrieve_pdf(query, chunks, k):
     scored.sort(key=lambda x: (x[0], x[1]), reverse=True)
     return [{"page": c["page"], "text": c["text"]} for _, _, c in scored[:k]]
 
-
-def retrieve_notebook(query, k):
-    """Vector search in open-notebook (Docker must be running, PDFs must be uploaded)."""
+def retrieve_notebook(query, k, pages_norm=None):
+    """Vector search in open-notebook (Docker must be running, the PDF must be uploaded).
+    open-notebook groups the hits by source; we keep only the law text (ids that start
+    with "source:"), skip its AI summaries, and find the PDF page of each excerpt."""
     url = os.getenv("OPEN_NOTEBOOK_URL", "http://localhost:5055").rstrip("/") + "/api/search"
     headers = {}
     if os.getenv("OPEN_NOTEBOOK_PASSWORD"):
         headers["Authorization"] = "Bearer " + os.getenv("OPEN_NOTEBOOK_PASSWORD")
-    body = {"query": query, "type": "vector", "limit": k,
+    body = {"query": query, "type": "vector", "limit": 10,
             "search_sources": True, "search_notes": False}
-    r = requests.post(url, json=body, headers=headers, timeout=60)
+    r = requests.post(url, json=body, headers=headers, timeout=120)
     r.raise_for_status()
     out = []
     for item in r.json().get("results", []):
-        text = item.get("content") or item.get("highlight") or ""
-        if isinstance(text, list):
-            text = " ".join(map(str, text))
-        out.append({"page": None, "text": str(text), "source": item.get("title")})
+        if not str(item.get("id", "")).startswith("source:"):
+            continue
+        for text in item.get("matches") or []:
+            page = None
+            probe = norm(str(text))[:80]
+            for i, p in enumerate(pages_norm or []):
+                if probe and probe in p:
+                    page = i + 1
+                    break
+            out.append({"page": page, "text": str(text)})
+            if len(out) >= k:
+                return out
     return out
 
 
@@ -178,7 +186,9 @@ def main():
         wanted = {x.strip() for x in args.only.split(",")}
         questions = [q for q in questions if q["id"] in wanted]
 
-    chunks = None
+    chunks, pages_norm = None, None
+    if retrieval == "notebook":
+        pages_norm = [norm(p) for p in load_pdf_pages(pdf_path())]
     if retrieval == "pdf":
         pages = load_pdf_pages(pdf_path())
         chunks = pdf_chunks(pages)
@@ -201,7 +211,7 @@ def main():
           % (provider, model, retrieval, len(questions), args.runs))
     for q in questions:
         context = (retrieve_pdf(q["query"], chunks, args.k) if retrieval == "pdf"
-                   else retrieve_notebook(q["query"], args.k))
+                        else retrieve_notebook(q["query"], args.k, pages_norm))
         if not context:
             print("%s: no excerpts found, check the query in questions.csv" % q["id"])
         ctx_text = "\n\n".join("[page %s] %s" % (c.get("page") or "?", c["text"]) for c in context)
