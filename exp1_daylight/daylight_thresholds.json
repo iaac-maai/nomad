@@ -1,0 +1,12 @@
+{
+  "source": "ESP_CT_Barcelona.081800_TMYx.epw",
+  "daylight_hours": 4655,
+  "Ev_d_med_lux": 14730,
+  "D_target_pct": 2.04,
+  "D_minimum_pct": 0.68,
+  "classes": {
+    "livable": ">= D_target",
+    "needs_change": "D_minimum to D_target",
+    "not_livable": "< D_minimum"
+  }
+}

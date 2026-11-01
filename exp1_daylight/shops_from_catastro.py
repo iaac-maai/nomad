@@ -17,7 +17,8 @@ From data : empty / active status, address, district, cadastral reference, door 
             footprint (v0: whole building, not the individual shop);
             floors = built area / footprint area (Catastro has no floor count in this merge);
             obs_dist_m = from the shop door, straight out of the street facade, to the first
-            building hit (the building across the street);
+            building hit (the building across the street; footprints under 50 m2 such as
+            kiosks are skipped);
             obs_height_m = 5 m ground floor + 3 m per upper floor of that building.
 Assumed   : floor_height_m 4.0, wwr 0.6, window head 3.9 m, lit_facades 1 ("assumed" column).
 """
@@ -54,27 +55,42 @@ def height_from_floors(n):
     return 5.0 + 3.0 * (n - 1)
 
 
-def facade_ray(poly, door, length):
-    """start point on the facade nearest to the door + unit normal pointing to the street"""
+def facade_ray(poly, door, length, is_built):
+    """Ray from the shop door straight out of its STREET facade.
+
+    Candidate facade segments are tried from the one nearest to the door. A segment is a
+    street facade only if the point 1.5 m outside it is open ground (not inside any
+    building); otherwise it is a party wall or a patio wall and the next segment is tried.
+    Returns (start, ray, ok): ok = False when no free facade was found near the door.
+    """
     ring = poly.exterior
-    p0 = ring.interpolate(ring.project(door))
     xy = np.asarray(ring.coords)
-    best, best_d = None, np.inf
+    cands = []
     for i in range(len(xy) - 1):
         seg = LineString(xy[i:i + 2])
-        if seg.length < 2.0:          # skip tiny corner pieces, their direction is noise
-            continue
-        d = seg.distance(p0)
-        if d < best_d:
-            best, best_d = xy[i:i + 2], d
-    if best is None:
+        if seg.length >= 2.0:          # skip tiny corner pieces, their direction is noise
+            cands.append((seg.distance(door), seg))
+    if not cands:
         return None
-    t = best[1] - best[0]
-    n = np.array([-t[1], t[0]]) / np.hypot(*t)
-    if poly.contains(Point(p0.x + 0.5 * n[0], p0.y + 0.5 * n[1])):
-        n = -n                         # make it point out of the building
-    start = np.array([p0.x, p0.y])
-    return start, LineString([start + 0.3 * n, start + length * n])
+    cands.sort(key=lambda c: c[0])
+    nearest = cands[0][0]
+    fallback = None
+    for d_door, seg in cands:
+        if d_door > nearest + 8.0:     # only facades close to the door
+            break
+        (x1, y1), (x2, y2) = seg.coords
+        t = np.array([x2 - x1, y2 - y1])
+        n = np.array([-t[1], t[0]]) / np.hypot(*t)
+        p0 = seg.interpolate(seg.project(door))
+        if poly.contains(Point(p0.x + 0.5 * n[0], p0.y + 0.5 * n[1])):
+            n = -n                     # make it point out of the building
+        start = np.array([p0.x, p0.y])
+        ray = LineString([start + 0.3 * n, start + length * n])
+        if fallback is None:
+            fallback = (start, ray, False)
+        if not is_built(Point(*(start + 1.5 * n))):
+            return start, ray, True
+    return fallback
 
 
 def main():
@@ -84,6 +100,7 @@ def main():
     ap.add_argument("--all-premises", action="store_true", help="also active shops, not only empty ones")
     ap.add_argument("--out", default=str(HERE / "shops_bcn.csv"))
     ap.add_argument("--search", type=float, default=60.0, help="max distance to the opposite building (m)")
+    ap.add_argument("--min-area", type=float, default=50.0, help="ignore smaller footprints across the street (kiosks, metro exits)")
     args = ap.parse_args()
     data = Path(args.data)
 
@@ -131,28 +148,34 @@ def main():
     sindex = gdf.sindex
     geoms = gdf.geometry.to_numpy()
     heights = gdf["height_est"].to_numpy()
+    small = (gdf.geometry.area < args.min_area).to_numpy()   # kiosks, metro exits, sheds
+    print("small structures ignored as opposite buildings (< %.0f m2): %d" % (args.min_area, small.sum()))
     height_fill = float(np.nanmedian(heights))
 
     # ---- 3. one row per shop: ray from the door across the street
-    rows, n_noray, n_nohit, n_fill = [], 0, 0, 0
+    rows, n_noray, n_nohit, n_fill, n_wall = [], 0, 0, 0, 0
+
+    def is_built(pt):
+        return any(geoms[j].contains(pt) for j in sindex.query(pt, predicate="intersects"))
     for k, (_, p) in enumerate(prem[prem["building_reference"].isin(pos)].iterrows()):
         i = pos[p["building_reference"]]
         own = geoms[i]
         poly = outer(own)
         width, depth = rect_sides(own)
         door = Point(float(p["X_UTM_ETRS89"]), float(p["Y_UTM_ETRS89"]))
-        ray = facade_ray(poly, door, args.search)
+        ray = facade_ray(poly, door, args.search, is_built)
         if ray is None:
             n_noray += 1
             continue
-        start, line = ray
+        start, line, facade_ok = ray
+        n_wall += 0 if facade_ok else 1
         p_start = Point(*start)
 
         # neighbours sharing a party wall are not "across the street"
         touching = set(sindex.query(own.buffer(1.0), predicate="intersects"))
         od, oh, no_opp = np.nan, np.nan, 0
         for j in sindex.query(line, predicate="intersects"):
-            if j in touching:
+            if j in touching or small[j]:
                 continue
             d = p_start.distance(line.intersection(geoms[j]))
             if d >= 3.0 and (np.isnan(od) or d < od):
@@ -174,6 +197,7 @@ def main():
             "lon": p.get("Longitud", np.nan), "lat": p.get("Latitud", np.nan),
             "door_to_facade_m": round(door.distance(poly.exterior), 2),
             "depth_m": round(depth, 2), "width_m": round(width, 2),
+            "street_facade_found": int(facade_ok),
             "obs_dist_m": round(od, 2), "obs_height_m": round(oh, 2), "no_opposite": no_opp,
         })
         if (k + 1) % 500 == 0:
@@ -184,6 +208,7 @@ def main():
         raise SystemExit("No shop rows produced - send this output to Claude.")
     print("skipped (no usable facade): %d | nothing across the street: %d | opposite height filled with median: %d"
           % (n_noray, n_nohit, n_fill))
+    print("no free street facade near the door (ray kept from the nearest wall, check these): %d" % n_wall)
 
     h = FLOOR_H
     win_h = min(max(WIN_TARGET, WWR * h * 1.05), h - 0.3)

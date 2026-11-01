@@ -22,6 +22,9 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 HERE = Path(__file__).resolve().parent
+CLASSES = [("not_livable", "#c0392b", "not livable: daylit zone under 2.8 m"),
+           ("needs_change", "#f0a030", "needs a change: daylit zone fits a living room"),
+           ("livable", "#2e86c1", "livable: daylit over half the floor")]
 OUT = HERE.parent / "outputs"
 
 
@@ -30,8 +33,17 @@ def draw(ax, buildings, shops, val, bbox, basemap, title, label_all):
     b = buildings.cx[xmin:xmax, ymin:ymax]
     b.plot(ax=ax, color="#d9d6cf", edgecolor="#b5b0a6", linewidth=0.2, zorder=1)
     s = shops.cx[xmin:xmax, ymin:ymax]
-    sc = ax.scatter(s.geometry.x, s.geometry.y, c=s["pred_mean_df"].clip(0.5, 3.0), cmap="RdYlBu_r",
-                    vmin=0.5, vmax=3.0, s=14 if label_all else 7, edgecolor="black", linewidth=0.2, zorder=3)
+    if "daylight_class" in s.columns:   # 3 classes from the EN 17037 thresholds
+        for cls, col, name in CLASSES:
+            part = s[s["daylight_class"] == cls]
+            ax.scatter(part.geometry.x, part.geometry.y, color=col, s=16 if label_all else 9,
+                       edgecolor="black", linewidth=0.2, zorder=3,
+                       label="%s (%d)" % (name, int((shops["daylight_class"] == cls).sum())))
+        ax.legend(loc="upper left", fontsize=8, frameon=True)
+        sc = None
+    else:
+        sc = ax.scatter(s.geometry.x, s.geometry.y, c=s["pred_mean_df"].clip(0.5, 3.0), cmap="RdYlBu_r",
+                        vmin=0.5, vmax=3.0, s=14 if label_all else 7, edgecolor="black", linewidth=0.2, zorder=3)
     v = val.cx[xmin:xmax, ymin:ymax]
     ax.scatter(v.geometry.x, v.geometry.y, s=160, facecolor="none", edgecolor="black", linewidth=1.4, zorder=4)
     for _, r in v.iterrows():
@@ -82,8 +94,9 @@ def main():
     # 1. whole district
     fig, ax = plt.subplots(figsize=(10, 9))
     sc = draw(ax, b, shops, val, (x0 - pad, y0 - pad, x1 + pad, y1 + pad), args.basemap,
-              "Predicted daylight factor of %d empty shops (v0)" % len(shops), label_all=False)
-    fig.colorbar(sc, ax=ax, shrink=0.6, label="predicted mean DF (%)")
+              ("Can these %d empty shops get enough daylight? (EN 17037, v0)" if "daylight_class" in shops.columns else "Predicted daylight factor of %d empty shops (v0)") % len(shops), label_all=False)
+    if sc is not None:
+        fig.colorbar(sc, ax=ax, shrink=0.6, label="predicted mean DF (%)")
     fig.text(0.01, 0.01, credit, fontsize=7)
     fig.tight_layout()
     fig.savefig(OUT / "shops_map_catastro.png", dpi=220)
@@ -96,7 +109,8 @@ def main():
     fig, ax = plt.subplots(figsize=(10, 9))
     sc = draw(ax, b, shops, val, (vx0 - zpad, vy0 - zpad, vx1 + zpad, vy1 + zpad), args.basemap,
               "5 validation shops: model prediction vs Radiance simulation (DF %)", label_all=True)
-    fig.colorbar(sc, ax=ax, shrink=0.6, label="predicted mean DF (%)")
+    if sc is not None:
+        fig.colorbar(sc, ax=ax, shrink=0.6, label="predicted mean DF (%)")
     fig.text(0.01, 0.01, credit, fontsize=7)
     fig.tight_layout()
     fig.savefig(OUT / "shops_map_catastro_zoom.png", dpi=220)
