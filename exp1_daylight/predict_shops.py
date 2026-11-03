@@ -46,7 +46,8 @@ def lit_depth(df, d_target):
     return np.array(out)
 
 
-ROOM_MIN_M = 2.8   # Decret 141/2012, Annex 1: the living room must fit a 2.80 m circle
+ROOM_MIN_M = 2.8    # Decret 141/2012, Annex 1: the living room must fit a 2.80 m circle
+HOME_MIN_M2 = 36.0  # Decret 141/2012, Annex 1: minimum useful area of a dwelling
 
 
 def make_model():
@@ -79,8 +80,10 @@ def predict():
     model = make_model()
     model.fit(train[FEATURES].to_numpy(float), train["mean_df"].to_numpy(float))  # all 50 runs
     shops["pred_mean_df"] = model.predict(shops[FEATURES].to_numpy(float)).round(3)
-    # v0 flag: a street under 8 m in the Eixample is suspicious unless it is a passage (PTGE)
-    shops["check_street"] = ((shops["obs_dist_m"] < 8) &
+    # v0 flag: a street under 8 m in the Eixample grid is suspicious unless it is a passage (PTGE).
+    # Other districts (Ciutat Vella, Gracia...) really have narrow streets, so they are not flagged.
+    eix = shops["district"].astype(str).str.lower().eq("eixample") if "district" in shops.columns else True
+    shops["check_street"] = ((shops["obs_dist_m"] < 8) & eix &
                              ~shops["address"].astype(str).str.startswith("PTGE")).astype(int)
     print("streets to check by hand (under 8 m, not a passage): %d" % shops["check_street"].sum())
 
@@ -97,18 +100,29 @@ def predict():
         m2.fit(tr[FEATURES].to_numpy(float), tr["lit_depth_m"].to_numpy(float))
         shops["lit_depth_m"] = np.clip(m2.predict(shops[FEATURES].to_numpy(float)), 0, shops["depth_m"]).round(2)
         shops["lit_floor_share"] = (shops["lit_depth_m"] / shops["depth_m"]).round(3)
+        # a home only needs daylight in its rooms, not in the whole shop: so the question is
+        # whether a minimum home (36 m2) fits inside the daylit front zone.
+        shops["lit_area_m2"] = (shops["lit_depth_m"] * shops["width_m"]).round(1)
         shops["daylight_class"] = np.select(
-            [shops["lit_floor_share"] >= 0.5, shops["lit_depth_m"] >= ROOM_MIN_M],
+            [(shops["lit_depth_m"] >= ROOM_MIN_M) & (shops["lit_area_m2"] >= HOME_MIN_M2),
+             shops["lit_depth_m"] >= ROOM_MIN_M],
             ["livable", "needs_change"], default="not_livable")
         print("\nlit depth = metres of floor at DF >= %.2f %% (EN 17037 300 lx, Barcelona)" % dt)
         print("   lit-depth model, 5-fold CV mean error: %.2f m (on %d simulations)" % (cv_mae, len(tr)))
-        print("   classes: livable = lit over >= 50 % of the floor (EN 17037 target);")
-        print("            needs_change = lit zone >= %.1f m (a living room fits, Decret 141); not_livable = less" % ROOM_MIN_M)
+        print("   classes: livable = a %.0f m2 home fits in the daylit zone (Decret 141 minimum dwelling);" % HOME_MIN_M2)
+        print("            needs_change = daylit zone >= %.1f m deep but under %.0f m2 (a living room fits);" % (ROOM_MIN_M, HOME_MIN_M2))
+        print("            not_livable = daylit zone under %.1f m deep" % ROOM_MIN_M)
+        print("   whole shop daylit over >= 50 %% of its floor (EN 17037 for the whole space): %d shops" %
+              int((shops["lit_floor_share"] >= 0.5).sum()))
         for c in ["livable", "needs_change", "not_livable"]:
             k = int((shops["daylight_class"] == c).sum())
             print("   %-13s %4d shops (%.0f %%)" % (c, k, 100 * k / len(shops)))
         print("   lit depth: median %.1f m, shop depth: median %.1f m" % (
             shops["lit_depth_m"].median(), shops["depth_m"].median()))
+        if "district" in shops.columns and shops["district"].nunique() > 1:
+            t = pd.crosstab(shops["district"], shops["daylight_class"])
+            t["total"] = t.sum(axis=1)
+            print("\nby district:\n", t.sort_values("total", ascending=False).to_string())
     else:
         print("\nno daylight_thresholds.json or no df_values in results.csv: classes skipped")
     shops.to_csv(HERE / "shops_bcn_pred.csv", index=False, encoding="utf-8")

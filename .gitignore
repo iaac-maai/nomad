@@ -7,3 +7,5 @@ surreal_data/
 .DS_Store
 Thumbs.db
 .vscode/
+data/ESP_CT_Barcelona.081800_TMYx/
+*.rhl
