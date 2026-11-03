@@ -1,0 +1,421 @@
+{
+ "flats": 13444,
+ "rooms": 94471,
+ "ground_floor_flats": 2127,
+ "space_by_type": {
+  "1-bed": {
+   "flats": 2077,
+   "useful_m2": {
+    "p10": 46.0,
+    "median": 60.0,
+    "p90": 72.4
+   },
+   "living": 0.42,
+   "bedroom": 0.26,
+   "kitchen": 0.12,
+   "bath": 0.07,
+   "circulation": 0.1,
+   "storage": 0.0
+  },
+  "2-bed": {
+   "flats": 5284,
+   "useful_m2": {
+    "p10": 56.1,
+    "median": 76.5,
+    "p90": 93.3
+   },
+   "living": 0.33,
+   "bedroom": 0.35,
+   "kitchen": 0.1,
+   "bath": 0.07,
+   "circulation": 0.12,
+   "storage": 0.0
+  },
+  "3-bed": {
+   "flats": 5822,
+   "useful_m2": {
+    "p10": 63.4,
+    "median": 91.1,
+    "p90": 112.5
+   },
+   "living": 0.27,
+   "bedroom": 0.42,
+   "kitchen": 0.09,
+   "bath": 0.07,
+   "circulation": 0.12,
+   "storage": 0.0
+  },
+  "studio": {
+   "flats": 261,
+   "useful_m2": {
+    "p10": 40.8,
+    "median": 49.6,
+    "p90": 64.4
+   },
+   "living": 0.75,
+   "bedroom": 0.0,
+   "kitchen": 0.11,
+   "bath": 0.07,
+   "circulation": 0.07,
+   "storage": 0.0
+  }
+ },
+ "circulation": {
+  "share": {
+   "p10": 0.06,
+   "median": 0.12,
+   "p90": 0.18
+  },
+  "corridor_m2": {
+   "p10": 3.73,
+   "median": 9.15,
+   "p90": 15.3
+  },
+  "clear_width_m": {
+   "p10": 1.21,
+   "median": 1.75,
+   "p90": 2.51
+  },
+  "flats_without_corridor": 0.043,
+  "tiny_leftover_rooms_per_flat": 0.028
+ },
+ "entrance": {
+  "opens_into": {
+   "CORRIDOR": 0.85,
+   "LIVING_DINING": 0.058,
+   "ROOM": 0.028,
+   "BATHROOM": 0.015,
+   "STOREROOM": 0.015,
+   "KITCHEN": 0.01
+  },
+  "from_all": {
+   "common corridor": 0.44,
+   "common staircase": 0.416,
+   "other unit": 0.068,
+   "outside the building": 0.037,
+   "common elevator": 0.03,
+   "common corridors_and_halls": 0.006
+  },
+  "from_ground_floor": {
+   "common corridor": 0.408,
+   "common staircase": 0.389,
+   "outside the building": 0.106,
+   "other unit": 0.074,
+   "common elevator": 0.017,
+   "common corridors_and_halls": 0.002
+  },
+  "into_ground_floor": {
+   "CORRIDOR": 0.811,
+   "LIVING_DINING": 0.092,
+   "ROOM": 0.041,
+   "KITCHEN": 0.013,
+   "LIVING_ROOM": 0.012,
+   "BATHROOM": 0.011
+  }
+ },
+ "reached_from": {
+  "bath": {
+   "circulation": 0.814,
+   "living": 0.066,
+   "not reached": 0.063,
+   "bedroom": 0.036,
+   "entrance": 0.009
+  },
+  "bedroom": {
+   "circulation": 0.782,
+   "living": 0.099,
+   "not reached": 0.074,
+   "bedroom": 0.014,
+   "entrance": 0.013
+  },
+  "kitchen": {
+   "circulation": 0.556,
+   "living": 0.347,
+   "not reached": 0.053,
+   "bedroom": 0.026,
+   "entrance": 0.01
+  },
+  "living": {
+   "circulation": 0.821,
+   "entrance": 0.076,
+   "not reached": 0.046,
+   "kitchen": 0.032,
+   "living": 0.009
+  }
+ },
+ "walk_through": {
+  "flats_with_a_room_walked_through": 0.253,
+  "bedrooms_reached_through_living": 0.099,
+  "baths_reached_through_a_bedroom": 0.036
+ },
+ "light": {
+  "bath": {
+   "with_window": 0.169,
+   "on_facade": 0.451,
+   "window_m": {
+    "p10": 0.64,
+    "median": 1.05,
+    "p90": 1.77
+   },
+   "window_m_per_m2": {
+    "p10": 0.15,
+    "median": 0.25,
+    "p90": 0.43
+   }
+  },
+  "bedroom": {
+   "with_window": 0.85,
+   "on_facade": 0.955,
+   "window_m": {
+    "p10": 1.29,
+    "median": 2.0,
+    "p90": 3.54
+   },
+   "window_m_per_m2": {
+    "p10": 0.1,
+    "median": 0.15,
+    "p90": 0.24
+   }
+  },
+  "circulation": {
+   "with_window": 0.055,
+   "on_facade": 0.245,
+   "window_m": {
+    "p10": 0.51,
+    "median": 1.43,
+    "p90": 2.9
+   },
+   "window_m_per_m2": {
+    "p10": 0.05,
+    "median": 0.13,
+    "p90": 0.27
+   }
+  },
+  "kitchen": {
+   "with_window": 0.514,
+   "on_facade": 0.767,
+   "window_m": {
+    "p10": 1.01,
+    "median": 1.65,
+    "p90": 3.04
+   },
+   "window_m_per_m2": {
+    "p10": 0.12,
+    "median": 0.19,
+    "p90": 0.34
+   }
+  },
+  "living": {
+   "with_window": 0.778,
+   "on_facade": 0.953,
+   "window_m": {
+    "p10": 1.7,
+    "median": 3.1,
+    "p90": 6.16
+   },
+   "window_m_per_m2": {
+    "p10": 0.06,
+    "median": 0.12,
+    "p90": 0.21
+   }
+  },
+  "storage": {
+   "with_window": 0.037,
+   "on_facade": 0.329,
+   "window_m": {
+    "p10": 0.61,
+    "median": 1.24,
+    "p90": 2.68
+   },
+   "window_m_per_m2": {
+    "p10": 0.12,
+    "median": 0.41,
+    "p90": 1.38
+   }
+  }
+ },
+ "depth_from_window_m": {
+  "p10": 4.5,
+  "median": 6.0,
+  "p90": 8.0
+ },
+ "shape": {
+  "bath": {
+   "area_m2": {
+    "p10": 1.79,
+    "median": 3.78,
+    "p90": 5.51
+   },
+   "clear_width_m": {
+    "p10": 1.06,
+    "median": 1.61,
+    "p90": 1.94
+   },
+   "short_side_m": {
+    "p10": 1.08,
+    "median": 1.68,
+    "p90": 2.07
+   },
+   "long_over_short": {
+    "p10": 1.1,
+    "median": 1.4,
+    "p90": 1.89
+   },
+   "rect_fill": {
+    "p10": 0.88,
+    "median": 1.0,
+    "p90": 1.0
+   }
+  },
+  "bedroom": {
+   "area_m2": {
+    "p10": 10.31,
+    "median": 13.96,
+    "p90": 17.6
+   },
+   "clear_width_m": {
+    "p10": 2.47,
+    "median": 3.18,
+    "p90": 3.76
+   },
+   "short_side_m": {
+    "p10": 2.47,
+    "median": 3.21,
+    "p90": 3.85
+   },
+   "long_over_short": {
+    "p10": 1.09,
+    "median": 1.4,
+    "p90": 1.8
+   },
+   "rect_fill": {
+    "p10": 0.92,
+    "median": 1.0,
+    "p90": 1.0
+   }
+  },
+  "circulation": {
+   "area_m2": {
+    "p10": 3.04,
+    "median": 7.65,
+    "p90": 14.33
+   },
+   "clear_width_m": {
+    "p10": 1.23,
+    "median": 1.77,
+    "p90": 2.53
+   },
+   "short_side_m": {
+    "p10": 1.26,
+    "median": 2.11,
+    "p90": 3.94
+   },
+   "long_over_short": {
+    "p10": 1.1,
+    "median": 1.73,
+    "p90": 3.34
+   },
+   "rect_fill": {
+    "p10": 0.56,
+    "median": 0.85,
+    "p90": 1.0
+   }
+  },
+  "kitchen": {
+   "area_m2": {
+    "p10": 5.56,
+    "median": 7.7,
+    "p90": 11.98
+   },
+   "clear_width_m": {
+    "p10": 1.82,
+    "median": 2.26,
+    "p90": 2.76
+   },
+   "short_side_m": {
+    "p10": 1.87,
+    "median": 2.32,
+    "p90": 2.92
+   },
+   "long_over_short": {
+    "p10": 1.09,
+    "median": 1.49,
+    "p90": 2.31
+   },
+   "rect_fill": {
+    "p10": 0.88,
+    "median": 0.98,
+    "p90": 1.0
+   }
+  },
+  "living": {
+   "area_m2": {
+    "p10": 18.45,
+    "median": 27.75,
+    "p90": 38.3
+   },
+   "clear_width_m": {
+    "p10": 3.49,
+    "median": 4.02,
+    "p90": 4.71
+   },
+   "short_side_m": {
+    "p10": 3.57,
+    "median": 4.6,
+    "p90": 6.48
+   },
+   "long_over_short": {
+    "p10": 1.06,
+    "median": 1.37,
+    "p90": 2.16
+   },
+   "rect_fill": {
+    "p10": 0.64,
+    "median": 0.88,
+    "p90": 1.0
+   }
+  },
+  "storage": {
+   "area_m2": {
+    "p10": 1.08,
+    "median": 2.19,
+    "p90": 4.25
+   },
+   "clear_width_m": {
+    "p10": 0.82,
+    "median": 1.18,
+    "p90": 1.72
+   },
+   "short_side_m": {
+    "p10": 0.85,
+    "median": 1.2,
+    "p90": 1.81
+   },
+   "long_over_short": {
+    "p10": 1.07,
+    "median": 1.45,
+    "p90": 2.2
+   },
+   "rect_fill": {
+    "p10": 0.88,
+    "median": 1.0,
+    "p90": 1.0
+   }
+  }
+ },
+ "services": {
+  "open_kitchen": 0.0,
+  "kitchen_as_room": 0.972,
+  "kitchen_and_bath_share_a_wall": 0.467,
+  "doors_per_flat": {
+   "p10": 4.0,
+   "median": 7.0,
+   "p90": 9.0
+  },
+  "door_width_m": {
+   "p10": 0.77,
+   "median": 0.84,
+   "p90": 0.93
+  }
+ }
+}

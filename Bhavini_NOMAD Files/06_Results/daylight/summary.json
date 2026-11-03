@@ -1,0 +1,15 @@
+{
+ "shops": 1650,
+ "in_training_range": 211,
+ "median_pred_df": 1.2000000476837158,
+ "bands": {
+  "some daylight (1-2 %)": 858,
+  "well lit (DF >= 2 %)": 420,
+  "dark (DF < 1 %)": 372
+ },
+ "median_lit_depth_m": 2.95,
+ "median_depth_m": 20.265,
+ "median_obs_dist_m": 11.84,
+ "no_opposite": 105,
+ "source": "Bars Babila, iaac-maai/nomad exp1_daylight (50 Ladybug/Honeybee runs, XGBoost)"
+}

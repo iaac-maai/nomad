@@ -1,0 +1,15 @@
+{
+ "questions": 16,
+ "answer_accuracy": 1.0,
+ "coverage": 0.938,
+ "answer_accuracy_when_checked": 1.0,
+ "citation_accuracy_when_checked": 1.0,
+ "search_hit@1": 0.812,
+ "search_hit@5": 0.938,
+ "search_hit@10": 0.938,
+ "search_mrr": 0.846,
+ "wrong": [],
+ "not_checked": [
+  "G02"
+ ]
+}

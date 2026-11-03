@@ -1,0 +1,132 @@
+{
+ "source": "Swiss Dwellings v3.0.0 flats that pass all 9 Nomad rules",
+ "programs": {
+  "studio": {
+   "bedrooms": 0,
+   "flats_learned_from": 387,
+   "useful_m2": {
+    "p25": 43.0,
+    "median": 49.0,
+    "p75": 54.6
+   },
+   "living_m2": {
+    "p25": 29.0,
+    "median": 35.5
+   },
+   "main_bedroom_m2": null,
+   "other_bedroom_m2": null,
+   "kitchen_m2": {
+    "p25": 5.0,
+    "median": 5.8
+   },
+   "bath_m2": {
+    "p25": 2.5,
+    "median": 3.4
+   },
+   "baths_median": 1,
+   "circulation_m2": {
+    "p25": 0.0,
+    "median": 3.8
+   }
+  },
+  "1bed": {
+   "bedrooms": 1,
+   "flats_learned_from": 2706,
+   "useful_m2": {
+    "p25": 51.3,
+    "median": 57.5,
+    "p75": 64.6
+   },
+   "living_m2": {
+    "p25": 18.9,
+    "median": 24.0
+   },
+   "main_bedroom_m2": {
+    "p25": 13.8,
+    "median": 14.8
+   },
+   "other_bedroom_m2": null,
+   "kitchen_m2": {
+    "p25": 5.6,
+    "median": 6.9
+   },
+   "bath_m2": {
+    "p25": 3.7,
+    "median": 4.3
+   },
+   "baths_median": 1,
+   "circulation_m2": {
+    "p25": 4.1,
+    "median": 6.1
+   }
+  },
+  "2bed": {
+   "bedrooms": 2,
+   "flats_learned_from": 6155,
+   "useful_m2": {
+    "p25": 67.9,
+    "median": 75.9,
+    "p75": 85.8
+   },
+   "living_m2": {
+    "p25": 19.9,
+    "median": 25.0
+   },
+   "main_bedroom_m2": {
+    "p25": 14.2,
+    "median": 15.0
+   },
+   "other_bedroom_m2": {
+    "p25": 10.5,
+    "median": 11.6
+   },
+   "kitchen_m2": {
+    "p25": 6.5,
+    "median": 7.7
+   },
+   "bath_m2": {
+    "p25": 3.8,
+    "median": 4.9
+   },
+   "baths_median": 1,
+   "circulation_m2": {
+    "p25": 7.5,
+    "median": 9.8
+   }
+  },
+  "3bed": {
+   "bedrooms": 3,
+   "flats_learned_from": 4196,
+   "useful_m2": {
+    "p25": 88.7,
+    "median": 96.0,
+    "p75": 105.5
+   },
+   "living_m2": {
+    "p25": 22.9,
+    "median": 28.8
+   },
+   "main_bedroom_m2": {
+    "p25": 14.5,
+    "median": 15.2
+   },
+   "other_bedroom_m2": {
+    "p25": 10.1,
+    "median": 11.0
+   },
+   "kitchen_m2": {
+    "p25": 6.9,
+    "median": 8.2
+   },
+   "bath_m2": {
+    "p25": 5.3,
+    "median": 6.3
+   },
+   "baths_median": 2,
+   "circulation_m2": {
+    "p25": 9.7,
+    "median": 12.8
+   }
+  }
+ }
+}

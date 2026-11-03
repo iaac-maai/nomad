@@ -1,0 +1,25 @@
+{
+ "not_modelled_with_catastro_plan": 537,
+ "outline_found": 459,
+ "modelled": 273,
+ "status": {
+  "modelled": 273,
+  "outline found": 186,
+  "zone": 39,
+  "door more than 8 m from any shop unit": 20,
+  "no shop unit on the ground floor": 19
+ },
+ "as_is": {
+  "NO": 231,
+  "PARTLY": 37,
+  "YES": 5
+ },
+ "after": {
+  "NO": 228,
+  "PARTLY": 35,
+  "YES": 10
+ },
+ "homes_as_asked_after": 90,
+ "most_homes": 121,
+ "shops_with_a_home": 66
+}

@@ -1,0 +1,489 @@
+kind,name,area,old_asis,old_asked,old_asked_all,old_most,old_homes_share,old_patio_only,new_asis,new_asked,new_asked_all,new_most,new_homes_share,new_iterations,new_strategies,new_back_flats,new_failing_flats,tried
+test,shop_145057,86.2,1,1,0,1,0.503,0,1,1,0,1,0.754,1,street flats only,0,0,76
+test,shop_145764,72.5,1,1,0,1,0.583,0,1,1,0,1,0.708,1,street flats only,0,0,76
+test,shop_145855,51.8,0,0,0,0,0.0,0,1,1,0,1,0.807,1,street flats only,0,0,76
+test,shop_146499,125.5,2,2,0,2,0.69,0,1,1,0,2,0.821,1,"small flats, fill the shop",0,0,76
+test,shop_146518,190.5,2,2,0,3,0.673,0,2,2,0,2,0.783,1,street flats only,0,0,76
+test,shop_146519,232.0,3,3,1,4,0.764,0,3,3,1,3,0.829,1,street flats only,0,0,76
+test,shop_146655,215.7,1,1,0,1,0.191,0,0,0,0,1,0.229,1,"small flats, fill the shop",0,0,76
+test,shop_149273,204.6,2,2,0,3,0.639,0,1,2,0,2,0.612,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_149274,204.6,2,2,0,3,0.639,0,1,2,0,2,0.612,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_149275,205.0,2,2,0,3,0.638,0,1,2,0,2,0.611,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_149276,210.5,2,2,0,2,0.414,0,1,2,0,2,0.681,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_149277,178.9,2,2,0,2,0.487,0,1,2,0,2,0.612,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_149279,291.3,2,2,0,2,0.294,0,2,2,0,2,0.51,1,street flats only,0,0,76
+test,shop_149281,50.8,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_149668,76.9,1,1,0,1,0.554,0,1,1,0,1,0.756,1,street flats only,0,0,76
+test,shop_149669,54.5,0,0,0,0,0.0,0,0,0,0,1,0.807,1,"small flats, fill the shop",0,0,76
+test,shop_149747,203.9,2,2,0,3,0.641,0,1,2,0,2,0.614,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_151155,102.9,1,1,0,1,0.423,0,1,1,0,1,0.738,1,street flats only,0,0,76
+test,shop_151247,86.0,1,1,0,1,0.508,0,1,1,0,1,0.879,1,street flats only,0,0,76
+test,shop_152272,53.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_152354,314.9,3,3,1,4,0.554,0,3,3,1,4,0.758,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152355,339.8,3,3,1,4,0.506,0,3,3,1,4,0.796,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152356,115.7,1,1,0,1,0.422,0,1,1,0,1,0.597,1,street flats only,0,0,76
+test,shop_152357,663.4,3,3,1,8,0.522,0,3,3,1,7,0.654,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152358,242.7,2,2,0,3,0.52,0,2,2,0,3,0.688,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152359,232.5,2,2,0,3,0.606,0,2,2,0,3,0.741,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152398,204.6,1,1,0,3,0.629,0,1,1,0,2,0.56,1,"small flats, fill the shop",0,0,76
+test,shop_152399,168.9,1,1,0,2,0.516,0,1,1,0,2,0.726,1,"small flats, fill the shop",0,0,76
+test,shop_152401,189.0,1,1,0,2,0.461,0,1,1,0,2,0.601,1,"small flats, fill the shop",0,0,76
+test,shop_152402,118.4,1,1,0,1,0.356,0,0,0,0,1,0.42,1,"small flats, fill the shop",0,0,76
+test,shop_152403,100.7,1,1,0,1,0.436,0,1,1,0,1,0.83,1,street flats only,0,0,76
+test,shop_152405,169.8,1,1,0,2,0.514,0,1,1,0,2,0.722,1,"small flats, fill the shop",0,0,76
+test,shop_152406,169.0,1,1,0,2,0.516,0,1,1,0,2,0.725,1,"small flats, fill the shop",0,0,76
+test,shop_152409,374.4,3,3,1,6,0.7,0,3,3,1,4,0.661,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152410,196.0,1,1,0,3,0.656,0,1,1,0,2,0.632,1,"small flats, fill the shop",0,0,76
+test,shop_152411,177.7,1,1,0,2,0.491,0,1,1,0,2,0.69,1,"small flats, fill the shop",0,0,76
+test,shop_152412,560.3,3,3,1,7,0.549,0,3,3,1,7,0.811,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152413,212.0,2,2,0,3,0.617,0,2,2,0,2,0.787,1,street flats only,0,0,76
+test,shop_152414,410.3,3,3,1,6,0.638,0,3,3,1,5,0.686,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152415,445.3,3,3,1,7,0.684,0,3,3,1,6,0.674,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152416,494.8,3,3,1,7,0.617,0,3,3,1,7,0.711,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152417,350.3,3,3,1,5,0.622,0,3,3,1,5,0.731,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152418,849.6,3,3,1,12,0.614,0,3,3,1,10,0.583,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152419,489.0,3,3,1,7,0.624,0,3,3,1,5,0.656,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152420,352.2,3,3,1,5,0.618,0,3,3,1,4,0.695,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152421,272.1,2,2,0,3,0.479,0,1,2,0,2,0.513,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152422,373.8,3,3,1,4,0.467,0,2,3,1,3,0.582,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152507,87.4,1,1,0,1,0.499,0,1,1,0,1,0.872,1,street flats only,0,0,76
+test,shop_152508,558.7,3,3,1,7,0.541,2,3,3,1,4,0.448,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152522,390.9,3,3,1,3,0.335,0,2,2,0,2,0.381,1,street flats only,0,0,76
+test,shop_152575,85.3,1,1,0,1,0.509,0,1,1,0,1,0.883,1,street flats only,0,0,76
+test,shop_152685,148.8,1,1,0,1,0.293,0,1,1,0,1,0.665,1,street flats only,0,0,76
+test,shop_152686,165.9,1,1,0,1,0.26,0,1,1,0,1,0.42,1,street flats only,0,0,76
+test,shop_152744,53.4,0,0,0,1,0.895,0,0,0,0,1,0.886,1,"small flats, fill the shop",0,0,76
+test,shop_152748,235.6,2,2,0,3,0.555,0,2,3,1,4,0.862,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152749,235.6,2,2,0,3,0.555,0,2,3,1,4,0.862,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_152804,126.9,0,0,0,0,0.0,0,0,0,0,1,0.4,1,"small flats, fill the shop",0,0,76
+test,shop_152811,115.6,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_152821,104.1,1,1,0,1,0.419,0,1,1,0,1,0.82,1,street flats only,0,0,76
+test,shop_152823,99.3,1,1,0,1,0.439,0,1,1,0,1,0.765,1,street flats only,0,0,76
+test,shop_152824,142.2,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_152827,111.3,1,1,0,1,0.392,0,1,1,0,1,0.712,1,street flats only,0,0,76
+test,shop_152966,156.1,1,1,0,1,0.269,0,0,0,0,0,0.0,1,street flats only,0,1,76
+test,shop_152998,78.0,1,1,0,1,0.522,0,1,1,0,1,0.682,1,street flats only,0,0,76
+test,shop_153128,104.4,1,1,0,1,0.417,0,1,1,0,1,0.726,1,street flats only,0,0,76
+test,shop_154363,82.2,1,1,0,1,0.53,0,1,1,0,1,0.797,1,street flats only,0,0,76
+test,shop_154604,1154.4,3,3,1,9,0.339,3,3,3,1,4,0.243,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_154605,114.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_154606,109.9,0,0,0,1,0.379,0,0,0,0,1,0.483,1,"small flats, fill the shop",0,0,76
+test,shop_154607,203.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_154608,226.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_154610,2196.6,3,3,1,5,0.098,0,3,3,1,10,0.29,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_154646,1392.3,3,3,1,12,0.373,1,3,3,1,11,0.496,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_154745,346.0,3,3,1,4,0.499,0,2,2,0,3,0.459,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_154749,53.9,0,0,0,1,0.8,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_154807,52.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_154808,350.8,2,3,1,3,0.373,1,1,1,0,2,0.426,1,"small flats, fill the shop",0,0,76
+test,shop_154809,62.8,0,0,0,1,0.685,0,0,0,0,0,0.0,1,street flats only,0,1,76
+test,shop_154816,43.0,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_154822,256.9,1,2,0,2,0.339,1,1,1,0,1,0.313,1,street flats only,0,0,76
+test,shop_154823,424.9,3,3,1,5,0.505,0,3,3,1,4,0.597,1,"small flats, fill the shop",0,0,76
+test,shop_154824,445.9,3,3,1,5,0.479,0,3,3,1,5,0.582,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_154825,391.7,3,3,1,5,0.553,0,3,3,1,3,0.497,1,street flats only,0,0,76
+test,shop_154826,2050.3,3,3,1,22,0.465,5,3,3,1,15,0.425,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_154827,752.8,3,3,1,8,0.458,0,3,3,1,8,0.547,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_154828,941.5,2,3,1,10,0.46,5,2,2,0,10,0.664,2,"flats on both façades; small flats, fill the shop",0,1,76
+test,shop_154829,1136.8,3,3,1,14,0.532,0,3,3,1,11,0.564,2,"flats on both façades; small flats, fill the shop",0,1,76
+test,shop_154831,280.4,2,2,0,2,0.332,0,1,2,0,2,0.389,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_154832,41.2,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_154833,59.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_154834,60.0,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_154835,41.0,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_154836,60.4,0,0,0,1,0.707,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_155363,161.3,1,1,0,1,0.27,0,1,1,0,1,0.4,1,street flats only,0,0,76
+test,shop_155367,69.0,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_155760,320.7,3,3,1,3,0.407,0,2,2,0,4,0.721,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_155774,102.3,1,1,0,1,0.426,0,1,1,0,1,0.717,1,street flats only,0,0,76
+test,shop_155799,101.8,1,1,0,1,0.421,0,1,1,0,1,0.653,1,street flats only,0,0,76
+test,shop_157657,144.1,1,1,0,1,0.301,0,1,1,0,1,0.586,1,street flats only,0,0,76
+test,shop_157695,385.5,3,3,1,6,0.686,0,3,3,1,5,0.706,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_157696,247.7,2,2,0,3,0.52,0,2,2,0,3,0.747,1,"small flats, fill the shop",0,0,76
+test,shop_158306,96.8,1,1,0,1,0.44,0,1,1,0,1,0.805,1,street flats only,0,0,76
+test,shop_158307,105.5,1,1,0,1,0.428,0,1,1,0,1,0.674,1,street flats only,0,0,76
+test,shop_158308,102.5,1,1,0,1,0.425,0,1,1,0,1,0.834,1,street flats only,0,0,76
+test,shop_158309,93.6,1,1,0,1,0.435,0,1,1,0,1,0.596,1,street flats only,0,0,76
+test,shop_158310,106.5,1,1,0,1,0.409,0,1,1,0,1,0.728,1,street flats only,0,0,76
+test,shop_158311,94.8,1,1,0,1,0.458,0,1,1,0,1,0.81,1,street flats only,0,0,76
+test,shop_158385,107.2,1,1,0,1,0.407,0,1,1,0,1,0.86,1,street flats only,0,0,76
+test,shop_158386,237.1,2,2,0,3,0.551,0,2,2,0,3,0.642,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_158387,130.5,1,1,0,1,0.334,0,1,1,0,1,0.727,1,street flats only,0,0,76
+test,shop_158431,52.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_158519,156.9,1,1,0,1,0.278,0,1,1,0,1,0.42,1,street flats only,0,0,76
+test,shop_158520,82.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_158608,162.9,1,1,0,1,0.262,0,1,1,0,1,0.45,1,street flats only,0,0,76
+test,shop_158609,162.2,1,1,0,2,0.538,0,1,1,0,2,0.752,1,"small flats, fill the shop",0,0,76
+test,shop_158610,268.1,2,2,0,3,0.487,0,2,2,0,3,0.708,1,"small flats, fill the shop",0,0,76
+test,shop_158611,112.1,1,1,0,1,0.388,0,1,1,0,1,0.884,1,street flats only,0,0,76
+test,shop_158612,71.9,1,1,0,1,0.598,0,0,0,0,1,0.757,1,"small flats, fill the shop",0,0,76
+test,shop_158613,62.2,1,1,0,1,0.723,0,1,1,0,1,0.894,1,street flats only,0,0,76
+test,shop_158782,207.7,1,1,0,1,0.21,0,1,1,0,1,0.384,1,street flats only,0,0,76
+test,shop_158783,100.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_158784,182.8,2,2,0,3,0.719,0,1,1,0,2,0.519,1,"small flats, fill the shop",0,0,76
+test,shop_158911,166.5,1,1,0,2,0.524,0,1,1,0,2,0.706,1,"small flats, fill the shop",0,0,76
+test,shop_158912,107.5,0,0,0,1,0.395,0,0,0,0,1,0.556,1,"small flats, fill the shop",0,0,76
+test,shop_158916,58.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_158917,205.5,2,2,0,3,0.633,0,1,2,0,2,0.588,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_158918,172.1,1,1,0,2,0.507,0,1,1,0,2,0.647,1,"small flats, fill the shop",0,0,76
+test,shop_158919,143.3,1,1,0,2,0.59,0,1,1,0,1,0.595,1,street flats only,0,0,76
+test,shop_158920,228.0,2,2,0,2,0.382,0,2,2,0,2,0.642,1,street flats only,0,0,76
+test,shop_158922,64.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_158924,239.2,2,2,0,3,0.546,0,1,1,0,2,0.612,1,"small flats, fill the shop",0,0,76
+test,shop_158925,203.6,0,1,0,1,0.238,1,0,0,0,1,0.297,1,"small flats, fill the shop",0,1,76
+test,shop_158926,155.5,2,2,0,2,0.554,0,2,2,0,2,0.871,1,street flats only,0,0,76
+test,shop_158927,232.1,2,2,0,2,0.371,0,1,1,0,1,0.308,1,street flats only,0,0,76
+test,shop_158928,52.3,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_158931,66.5,1,1,0,1,0.656,0,0,0,0,1,0.823,1,"small flats, fill the shop",0,0,76
+test,shop_158933,54.5,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_158934,151.2,2,2,0,2,0.575,0,1,1,0,2,0.695,1,"small flats, fill the shop",0,0,76
+test,shop_158935,182.8,1,1,0,2,0.477,0,1,1,0,2,0.607,1,"small flats, fill the shop",0,0,76
+test,shop_158936,121.2,1,1,0,2,0.719,0,1,1,0,2,0.89,1,"small flats, fill the shop",0,0,76
+test,shop_158967,374.1,3,3,1,4,0.464,0,3,3,1,4,0.65,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_158968,317.3,3,3,1,4,0.55,0,3,3,1,3,0.647,1,street flats only,0,0,76
+test,shop_158988,380.0,3,3,1,4,0.458,0,3,3,1,4,0.741,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_159012,264.9,2,2,0,3,0.485,0,2,2,0,2,0.597,1,street flats only,0,0,76
+test,shop_159014,229.1,2,2,0,2,0.38,0,1,2,0,2,0.552,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_159015,83.3,0,0,0,1,0.523,0,0,0,0,1,0.733,1,"small flats, fill the shop",0,0,76
+test,shop_159016,63.6,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_159017,90.1,0,0,0,1,0.484,0,0,0,0,1,0.63,1,"small flats, fill the shop",0,0,76
+test,shop_159018,121.7,1,1,0,2,0.717,0,1,1,0,2,0.866,1,"small flats, fill the shop",0,0,76
+test,shop_159019,137.6,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_159020,77.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_159038,52.3,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_159066,258.5,2,2,0,3,0.52,0,2,2,0,2,0.485,1,street flats only,0,0,76
+test,shop_159067,173.2,1,1,0,1,0.289,0,1,1,0,1,0.322,1,street flats only,0,0,76
+test,shop_159068,149.6,2,2,0,2,0.599,0,1,1,0,2,0.708,1,"small flats, fill the shop",0,0,76
+test,shop_159162,627.9,3,3,1,7,0.498,0,3,3,1,5,0.473,2,"flats on both façades; small flats, fill the shop",0,3,76
+test,shop_159356,77.0,0,0,0,1,0.566,0,0,0,0,1,0.7,1,"small flats, fill the shop",0,0,76
+test,shop_159519,132.4,1,1,0,1,0.329,0,1,1,0,1,0.715,1,street flats only,0,0,76
+test,shop_159523,125.2,0,0,0,0,0.0,0,1,2,0,2,0.9,1,flats on both façades,0,0,76
+test,shop_159524,110.1,1,1,0,1,0.393,0,1,1,0,1,0.76,1,street flats only,0,0,76
+test,shop_159747,98.7,0,0,0,1,0.434,0,0,0,0,1,0.507,1,"small flats, fill the shop",0,0,76
+test,shop_159748,60.8,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_159909,427.6,3,3,1,4,0.408,0,3,3,1,5,0.646,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_159910,356.7,3,3,1,4,0.486,0,3,3,1,3,0.603,1,street flats only,0,0,76
+test,shop_159911,425.7,3,3,1,4,0.41,0,3,3,1,6,0.898,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_160072,385.4,3,3,1,6,0.674,0,3,3,1,5,0.707,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_160073,142.9,1,1,0,1,0.305,0,1,1,0,2,0.654,1,"small flats, fill the shop",0,0,76
+test,shop_160074,356.3,3,3,1,4,0.488,0,2,2,0,3,0.48,1,"small flats, fill the shop",0,2,76
+test,shop_160075,142.9,1,1,0,1,0.305,0,1,1,0,2,0.654,1,"small flats, fill the shop",0,0,76
+test,shop_160076,124.9,1,1,0,1,0.341,0,1,2,0,2,0.854,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_160104,62.8,1,1,0,1,0.705,0,1,1,0,1,0.908,1,street flats only,0,0,76
+test,shop_160105,64.3,1,1,0,1,0.658,0,1,1,0,1,0.785,1,street flats only,0,0,76
+test,shop_160139,219.4,2,2,0,3,0.593,0,2,2,0,2,0.68,1,street flats only,0,0,76
+test,shop_160140,205.0,1,1,0,2,0.425,0,1,1,0,2,0.664,1,"small flats, fill the shop",0,0,76
+test,shop_160329,147.0,2,2,0,2,0.571,0,1,1,0,2,0.797,1,"small flats, fill the shop",0,0,76
+test,shop_160331,130.7,1,1,0,2,0.667,0,1,1,0,2,0.864,1,"small flats, fill the shop",0,0,76
+test,shop_160376,67.5,1,1,0,1,0.641,0,0,0,0,1,0.716,1,"small flats, fill the shop",0,0,76
+test,shop_160378,83.8,1,1,0,1,0.542,0,1,1,0,1,0.9,1,street flats only,0,0,76
+test,shop_160598,52.3,0,0,0,1,0.816,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_160599,95.9,1,1,0,1,0.455,0,0,0,0,1,0.567,1,"small flats, fill the shop",0,0,76
+test,shop_160600,96.0,1,1,0,1,0.454,0,0,0,0,1,0.57,1,"small flats, fill the shop",0,0,76
+test,shop_160601,42.2,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+test,shop_160845,70.8,1,1,0,1,0.6,0,1,1,0,1,0.845,1,street flats only,0,0,76
+test,shop_161227,738.7,3,3,1,8,0.464,0,3,3,1,11,0.727,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_161228,725.4,3,3,1,8,0.47,0,3,3,1,7,0.582,1,"small flats, fill the shop",0,0,76
+test,shop_161229,627.1,3,3,1,7,0.477,0,3,3,1,10,0.78,2,"flats on both façades; small flats, fill the shop",0,0,76
+test,shop_161230,1529.5,3,3,1,8,0.23,0,3,3,1,7,0.271,1,"small flats, fill the shop",0,1,76
+test,shop_161231,207.6,2,2,0,3,0.63,0,2,2,0,2,0.497,1,flats on both façades,0,0,76
+real,9038102DF2893G,76.0,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1062132DF3816A,133.6,0,0,0,1,0.32,0,0,0,0,1,0.431,1,"small flats, fill the shop",0,0,76
+real,6536807DF2863F,548.7,3,3,1,6,0.476,0,3,3,1,6,0.648,2,"flats on both façades; small flats, fill the shop",0,0,76
+real,1641103DF3814B,228.5,2,2,0,1,0.191,0,1,2,0,2,0.53,2,"flats on both façades; small flats, fill the shop",0,0,76
+real,9807616DF2890F,177.7,1,1,0,1,0.245,0,1,1,0,1,0.445,1,street flats only,0,0,76
+real,9409423DF2890G,837.7,2,3,1,7,0.364,5,2,2,0,2,0.182,1,street flats only,0,0,76
+real,0036516DF3803E,298.1,3,3,1,4,0.585,0,3,3,1,3,0.733,1,street flats only,0,0,76
+real,1671710DF3817B,131.8,1,1,0,0,0.0,0,1,1,0,1,0.387,1,street flats only,0,0,76
+real,1414107DF3811C,231.9,1,1,0,1,0.188,0,1,1,0,2,0.496,1,"small flats, fill the shop",0,0,76
+real,0515807DF3801F,59.6,0,0,0,1,0.795,0,0,0,0,1,0.78,1,"small flats, fill the shop",0,0,76
+real,2047707DF3824E,628.1,1,1,0,1,0.069,0,1,1,0,1,0.149,1,street flats only,0,0,76
+real,8642106DF2884B,332.8,1,1,0,3,0.393,2,1,1,0,1,0.214,1,street flats only,0,0,76
+real,1985519DF3818F,229.9,2,2,0,3,0.569,0,2,2,0,2,0.654,1,street flats only,0,0,76
+real,9771103DF2897B,149.6,2,2,0,2,0.563,0,0,0,0,2,0.818,1,"small flats, fill the shop",0,0,76
+real,2244814DF3824C,103.5,0,0,0,1,0.415,0,1,1,0,1,0.555,1,street flats only,0,0,76
+real,0051418DF3805A,87.1,1,1,0,1,0.501,0,1,1,0,1,0.683,1,street flats only,0,0,76
+real,7622103DF2872B,243.5,1,1,0,1,0.179,0,1,1,0,1,0.352,1,street flats only,0,0,76
+real,1318202DF3811G,120.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1649916DF3814H,87.6,1,1,0,1,0.498,0,1,1,0,1,0.821,1,street flats only,0,0,76
+real,2462728DF3826A,128.3,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,8510409DF2881B,271.9,3,3,1,3,0.48,0,3,3,1,2,0.612,1,flats on both façades,0,0,76
+real,0343813DF3804C,203.7,2,2,0,2,0.428,0,2,2,0,2,0.808,1,corridor to the block interior,1,0,76
+real,0024310DF3802C,317.4,1,2,0,2,0.275,0,1,1,0,2,0.367,1,"small flats, fill the shop",0,0,76
+real,6910520DF2861B,275.0,1,2,0,2,0.317,1,1,1,0,1,0.314,1,street flats only,0,0,76
+real,1424113DF3812C,105.6,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0254624DF3805C,139.9,2,2,0,2,0.617,0,1,2,0,2,0.866,1,flats on both façades,0,0,76
+real,9635412DF2893F,140.2,1,1,0,1,0.311,0,1,1,0,1,0.759,1,street flats only,0,0,76
+real,1384701DF3818C,136.9,2,2,0,1,0.325,0,1,1,0,2,0.721,1,"small flats, fill the shop",0,0,76
+real,0244516DF3804C,164.3,1,1,0,1,0.265,0,1,1,0,1,0.466,1,street flats only,0,0,76
+real,9445712DF2894E,166.5,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0019131DF3801G,466.8,2,2,0,3,0.278,0,1,1,0,2,0.28,1,"small flats, fill the shop",0,0,76
+real,2377822DF3827E,83.5,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9918812DF2891H,328.3,1,1,0,1,0.142,0,1,1,0,1,0.194,1,street flats only,0,0,76
+real,6438510DF2863G,533.7,3,3,1,6,0.49,0,3,3,1,5,0.689,3,"flats on both façades; corridor to the block interior; small flats, fill the shop",3,0,76
+real,9729526DF2892H,140.5,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1065728DF3816E,96.5,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9408718DF2890G,156.7,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1424130DF3812C,44.2,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1023313DF3812C,603.4,3,3,1,5,0.361,0,3,3,1,4,0.532,2,"flats on both façades; small flats, fill the shop",0,0,76
+real,0507323DF3800H,446.1,3,3,1,4,0.391,0,3,3,1,4,0.69,2,flats on both façades; corridor to the block interior,2,0,76
+real,9843804DF2894D,75.8,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0054926DF3805C,260.0,0,0,0,2,0.335,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9319403DF2891G,142.6,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0512812DF3801B,104.8,1,1,0,2,0.821,0,1,1,0,1,0.857,1,street flats only,0,0,76
+real,8334507DF2883C,194.6,2,2,0,3,0.707,0,1,1,0,3,0.843,1,"small flats, fill the shop",0,0,76
+real,1954628DF3815D,142.7,1,1,0,1,0.29,0,1,1,0,1,0.309,1,street flats only,0,0,76
+real,9644624DF2894D,283.0,1,2,0,2,0.306,0,1,1,0,2,0.412,1,"small flats, fill the shop",0,0,76
+real,0110222DF3801A,987.3,3,3,1,13,0.572,5,3,3,1,8,0.493,2,"flats on both façades; small flats, fill the shop",0,0,76
+real,1519801DF3811H,52.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1533411DF3813D,383.1,1,1,0,1,0.114,0,1,1,0,1,0.275,1,street flats only,0,0,76
+real,9617116DF2891F,222.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0756609DF3805F,165.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1414309DF3811C,149.7,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1549124DF3814H,68.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0614916DF3801D,180.6,1,1,0,1,0.241,0,1,1,0,1,0.402,1,street flats only,0,0,76
+real,1018511DF3811G,51.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1745918DF3814F,484.8,2,2,0,4,0.36,0,2,2,0,3,0.459,1,"small flats, fill the shop",0,0,76
+real,2771318DF3827B,218.1,2,2,0,2,0.394,0,1,1,0,2,0.52,1,"small flats, fill the shop",0,0,76
+real,9635411DF2893F,75.7,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,7508410DF2870H,80.4,0,0,0,0,0.0,0,1,1,0,1,0.654,1,street flats only,0,0,76
+real,2149602DF3824G,559.0,2,3,1,4,0.31,2,1,1,0,1,0.16,1,street flats only,0,1,76
+real,0606213DF3800F,204.1,2,2,0,2,0.425,0,1,1,0,1,0.485,1,street flats only,0,0,76
+real,0620214DF3802B,1617.5,2,3,1,4,0.108,2,2,2,0,2,0.108,1,street flats only,0,0,76
+real,9662307DF2896D,90.7,1,1,0,1,0.453,0,0,0,0,0,0.0,1,street flats only,0,1,76
+real,0437719DF3803E,474.4,1,2,0,3,0.274,1,1,1,0,2,0.244,1,"small flats, fill the shop",0,0,76
+real,3836317DF3833F,462.8,3,3,1,7,0.659,0,3,3,1,5,0.7,2,"flats on both façades; small flats, fill the shop",0,0,76
+real,3132413DF3833C,486.2,3,3,1,4,0.353,2,3,3,1,3,0.49,1,flats on both façades,0,0,76
+real,1519201DF3811H,341.5,3,3,1,4,0.511,0,3,3,1,3,0.657,1,street flats only,0,0,76
+real,0218801DF3801G,77.7,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,1,76
+real,6911813DF2861B,322.5,3,3,1,4,0.526,0,2,2,0,3,0.509,1,"small flats, fill the shop",0,1,76
+real,8743403DF2884D,108.3,0,0,0,1,0.4,0,0,0,0,1,0.554,1,"small flats, fill the shop",1,0,76
+real,1617707DF3811F,61.0,0,0,0,1,0.769,0,1,1,0,1,0.805,1,street flats only,0,0,76
+real,2770410DF3827B,224.8,1,2,0,2,0.388,1,1,1,0,1,0.341,1,street flats only,0,0,76
+real,8018306DF2881G,331.1,0,0,0,1,0.127,0,0,0,0,1,0.154,1,"small flats, fill the shop",0,0,76
+real,1450757DF3815A,294.5,0,0,0,1,0.146,0,0,0,0,1,0.179,1,"small flats, fill the shop",0,0,76
+real,1261701DF3816A,154.7,2,2,0,2,0.576,0,1,1,0,2,0.74,1,"small flats, fill the shop",0,0,76
+real,8441703DF2884A,107.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9534304DF2893D,57.3,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1187522DF3818G,78.6,1,1,0,1,0.553,0,1,1,0,1,0.645,1,street flats only,0,0,76
+real,8815622DF2881F,202.7,1,2,0,2,0.427,1,1,1,0,1,0.432,1,street flats only,0,0,76
+real,6909841DF2860H,169.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1280807DF3818A,189.3,1,1,0,2,0.459,1,1,1,0,1,0.417,1,street flats only,0,0,76
+real,0214107DF3801C,153.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9641104DF2894B,222.2,2,2,0,3,0.587,0,2,2,0,2,0.734,1,street flats only,0,0,76
+real,2594707DF3829D,182.5,1,1,0,2,0.461,0,1,1,0,2,0.582,1,"small flats, fill the shop",0,0,76
+real,8612718DF2881B,189.5,1,1,0,1,0.23,0,0,0,0,1,0.323,1,"small flats, fill the shop",0,0,76
+real,2176303DF3827E,252.9,2,2,0,2,0.351,0,2,2,0,2,0.488,1,flats on both façades,0,0,76
+real,7916704DF2871F,226.5,2,2,0,2,0.385,0,2,2,0,2,0.653,1,street flats only,0,0,76
+real,6834913DF2863D,47.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,8130202DF2883A,559.4,2,3,1,4,0.312,2,2,2,0,2,0.246,1,street flats only,0,0,76
+real,0875104DF3807F,306.2,3,3,1,4,0.559,0,2,2,0,3,0.588,1,"small flats, fill the shop",0,0,76
+real,8707312DF2880H,96.7,0,0,0,1,0.451,0,0,0,0,1,0.583,1,"small flats, fill the shop",0,0,76
+real,8742810DF2884B,185.9,1,1,0,2,0.455,0,1,1,0,2,0.487,1,"small flats, fill the shop",0,0,76
+real,8222807DF2882A,723.6,3,3,1,6,0.361,2,3,3,1,3,0.29,1,street flats only,0,0,76
+real,1420820DF3812A,264.8,2,2,0,3,0.491,0,2,2,0,2,0.664,1,street flats only,0,0,76
+real,9635413DF2893F,375.1,3,3,1,3,0.349,0,2,2,0,3,0.535,1,"small flats, fill the shop",0,0,76
+real,0241310DF3804A,570.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,2064213DF3826C,179.8,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,7614404DF2871D,62.0,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,8508619DF2880H,107.3,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,6636307DF2863F,60.5,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9617110DF2891F,309.7,1,1,0,1,0.141,0,1,1,0,1,0.288,1,street flats only,0,0,76
+real,8329314DF2882G,463.5,2,2,0,5,0.468,3,1,1,0,2,0.268,1,"small flats, fill the shop",0,0,76
+real,1022329DF3812C,138.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1737409DF3813H,519.1,2,3,1,4,0.336,2,2,2,0,2,0.306,1,street flats only,0,0,76
+real,1479706DF3817G,154.1,0,0,0,1,0.283,0,0,0,0,1,0.386,1,"small flats, fill the shop",0,0,76
+real,1264712DF3816C,84.0,0,0,0,1,0.519,0,0,0,0,1,0.699,1,"small flats, fill the shop",0,0,76
+real,8962801DF2886B,64.5,1,1,0,1,0.679,0,1,1,0,1,0.73,1,street flats only,0,0,76
+real,3136422DF3833E,133.5,1,1,0,1,0.327,0,0,0,0,0,0.0,1,street flats only,0,1,76
+real,1671707DF3817B,128.0,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,7131407DF2873A,162.0,2,2,0,3,0.797,0,2,2,0,2,0.827,1,street flats only,0,0,76
+real,2580812DF3828B,153.3,1,1,0,2,0.614,0,1,1,0,2,0.712,1,"small flats, fill the shop",0,0,76
+real,9934608DF2893D,455.1,1,1,0,3,0.287,2,1,1,0,1,0.147,1,street flats only,0,0,76
+real,1149635DF3814G,253.8,1,1,0,2,0.34,0,1,1,0,1,0.282,1,street flats only,0,0,76
+real,7817303DF2871H,180.6,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,2263416DF3826C,132.4,1,1,0,1,0.329,0,1,1,0,1,0.647,1,street flats only,0,0,76
+real,0767620DF3806H,794.4,2,2,0,2,0.109,0,1,1,0,1,0.096,1,street flats only,0,0,76
+real,9565502DF2896F,159.8,1,1,0,1,0.273,0,1,1,0,1,0.616,1,street flats only,0,0,76
+real,1126610DF3812E,358.8,2,2,0,3,0.38,0,1,1,0,3,0.424,1,"small flats, fill the shop",0,1,76
+real,0270730DF3807A,57.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0629619DF3802H,104.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,1,76
+real,9213912DF2891C,323.0,2,2,0,2,0.285,0,2,2,0,2,0.449,1,flats on both façades,1,0,76
+real,8662276DF2886B,653.0,3,3,1,7,0.465,2,3,3,1,5,0.464,1,"small flats, fill the shop",0,0,76
+real,9609423DF2890H,242.6,1,1,0,2,0.359,0,1,1,0,2,0.446,1,"small flats, fill the shop",0,0,76
+real,6733215DF2863D,304.8,3,3,1,4,0.579,0,3,3,1,4,0.86,2,"flats on both façades; small flats, fill the shop",0,0,76
+real,9163203DF2896C,63.7,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1353212DF3815C,117.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1516105DF3811F,246.4,1,1,0,1,0.177,0,1,1,0,1,0.36,1,street flats only,0,0,76
+real,0909310DF3800H,157.7,2,2,0,2,0.544,0,2,1,0,1,0.386,1,corridor to the block interior,1,0,76
+real,2071214DF3827A,95.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,8929516DF2882H,49.3,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,7804802DF2870D,416.2,3,3,1,6,0.615,0,3,3,1,4,0.572,2,"flats on both façades; small flats, fill the shop",0,0,76
+real,1282416DF3818C,130.2,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,8961610DF2886B,335.7,3,3,1,5,0.649,0,3,3,1,3,0.598,2,flats on both façades; corridor to the block interior,1,0,76
+real,6712527DF2861D,114.2,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1648816DF3814H,127.8,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,7107608DF2870G,247.1,2,2,0,2,0.349,0,2,2,0,2,0.718,2,flats on both façades; corridor to the block interior,1,0,76
+real,8147213DF2884E,106.8,1,1,0,1,0.397,0,0,0,0,1,0.436,1,"small flats, fill the shop",1,0,76
+real,1059925DF3815G,72.9,0,0,0,0,0.0,0,1,1,0,1,0.768,1,street flats only,0,0,76
+real,9910214DF2891B,154.4,2,2,0,2,0.565,0,1,1,0,1,0.486,1,street flats only,0,0,76
+real,8408217DF2880G,205.7,2,2,0,2,0.422,0,1,1,0,2,0.676,1,"small flats, fill the shop",0,0,76
+real,1872508DF3817D,349.5,1,2,0,2,0.249,0,1,1,0,1,0.319,1,street flats only,0,0,76
+real,2354321DF3825C,87.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0513810DF3801D,686.0,3,3,1,10,0.636,0,3,3,1,8,0.6,2,"flats on both façades; small flats, fill the shop",0,0,76
+real,2269629DF3826G,157.9,1,1,0,1,0.26,0,0,0,0,1,0.404,1,"small flats, fill the shop",0,0,76
+real,9340215DF2894A,68.0,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0944325DF3804D,381.9,1,2,0,3,0.341,2,1,1,0,1,0.173,1,street flats only,0,0,76
+real,0345517DF3804E,118.7,1,1,0,1,0.398,0,1,1,0,1,0.474,1,street flats only,0,0,76
+real,2567308DF3826H,191.2,2,2,0,2,0.456,0,1,1,0,1,0.49,1,corridor to the block interior,1,0,76
+real,0304310DF3800C,273.8,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9649902DF2894H,302.0,3,3,1,4,0.57,0,2,2,0,3,0.71,1,"small flats, fill the shop",0,0,76
+real,1120205DF3812A,73.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,7107201DF2870G,138.2,1,1,0,2,0.627,0,1,1,0,1,0.423,1,street flats only,0,0,76
+real,0222708DF3802A,192.1,1,1,0,1,0.209,0,0,0,0,0,0.0,1,street flats only,0,1,76
+real,9869111DF2896H,112.4,1,1,0,1,0.381,0,1,1,0,1,0.659,1,street flats only,0,0,76
+real,7703311DF2870D,147.8,1,1,0,1,0.295,0,1,1,0,1,0.454,1,street flats only,0,0,76
+real,6612707DF2861B,161.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9142121DF2894A,200.4,1,1,0,2,0.435,0,1,1,0,2,0.577,1,"small flats, fill the shop",0,0,76
+real,1229820DF3812G,567.6,2,2,0,2,0.154,0,1,1,0,2,0.212,1,"small flats, fill the shop",0,0,76
+real,9345434DF2894E,148.5,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,8711819DF2881B,326.8,1,2,0,2,0.267,1,1,1,0,1,0.309,1,street flats only,0,0,76
+real,8855802DF2885F,371.7,3,3,1,4,0.472,0,3,3,1,3,0.511,1,street flats only,0,0,76
+real,9665804DF2896F,221.4,2,2,0,2,0.394,0,1,1,0,1,0.464,1,street flats only,0,0,76
+real,1272809DF3817A,1871.2,3,3,1,19,0.442,0,3,3,1,17,0.502,2,"flats on both façades; small flats, fill the shop",0,0,76
+real,9140732DF2894A,224.8,1,2,0,2,0.388,1,1,1,0,1,0.328,1,street flats only,0,0,76
+real,7742804DF2874B,204.7,1,1,0,1,0.213,0,1,1,0,1,0.404,1,street flats only,0,0,76
+real,7706828DF2870F,125.8,0,0,0,0,0.0,0,1,1,0,1,0.448,1,street flats only,0,0,76
+real,6733502DF2863D,143.2,1,1,0,1,0.304,0,1,1,0,1,0.65,1,street flats only,0,0,76
+real,1284606DF3818C,453.7,3,3,1,6,0.574,0,3,3,1,5,0.697,2,"flats on both façades; small flats, fill the shop",0,0,76
+real,8104907DF2880C,142.1,2,2,0,2,0.614,0,1,1,0,2,0.854,1,"small flats, fill the shop",0,0,76
+real,7310201DF2871A,64.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1254811DF3815C,187.5,2,2,0,2,0.465,0,0,0,0,2,0.694,1,"small flats, fill the shop",0,0,76
+real,3740119DF3834B,131.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,8141402DF2884A,178.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,2048403DF3824G,96.3,1,1,0,1,0.46,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,7012705DF2871A,300.6,1,2,0,2,0.288,1,1,1,0,2,0.337,1,"small flats, fill the shop",0,0,76
+real,1984614DF3818D,241.0,2,2,0,3,0.543,0,2,2,0,2,0.715,1,street flats only,0,0,76
+real,1539408DF3813H,199.4,2,2,0,1,0.218,0,2,1,0,1,0.298,1,corridor to the block interior,1,0,76
+real,0434107DF3803C,210.1,2,2,0,2,0.415,0,2,1,0,1,0.333,1,corridor to the block interior,1,0,76
+real,8393107DF2789C,45.5,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9746307DF2894F,223.5,2,2,0,4,0.778,0,1,1,0,2,0.521,1,"small flats, fill the shop",2,0,76
+real,0814408DF3801D,148.6,1,1,0,1,0.279,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0345218DF3804E,192.2,1,1,0,1,0.221,0,1,1,0,1,0.51,1,street flats only,0,0,76
+real,1758201DF3815H,354.2,2,2,0,3,0.369,0,2,2,0,3,0.555,1,"small flats, fill the shop",0,0,76
+real,1487719DF3818E,129.5,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,8310710DF2881A,71.5,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9322825DF2892A,322.0,1,2,0,2,0.271,0,1,1,0,2,0.359,1,"small flats, fill the shop",0,0,76
+real,1126606DF3812E,596.1,3,3,1,5,0.366,0,2,2,0,4,0.432,2,"flats on both façades; small flats, fill the shop",0,0,76
+real,1750511DF3815B,66.1,0,0,0,0,0.0,0,1,1,0,1,0.746,1,street flats only,0,0,76
+real,1686110DF3818F,59.5,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,8512216DF2881B,484.7,3,3,1,7,0.63,0,3,3,1,6,0.757,2,"flats on both façades; small flats, fill the shop",0,0,76
+real,9523422DF2892D,138.0,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9407604DF2890E,106.6,1,1,0,1,0.409,0,1,1,0,1,0.803,1,street flats only,0,0,76
+real,0548306DF3804H,74.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,7904308DF2870D,182.7,2,2,0,2,0.477,0,1,1,0,1,0.527,1,street flats only,0,0,76
+real,9923412DF2892D,136.3,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1454218DF3815C,126.3,0,0,0,1,0.344,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,8531411DF2883B,138.1,2,2,0,1,0.316,0,0,0,0,2,0.765,1,"small flats, fill the shop",0,0,76
+real,1164117DF3816C,257.5,2,2,0,3,0.508,0,1,1,0,2,0.45,1,"small flats, fill the shop",0,0,76
+real,0541108DF3804B,179.3,2,2,0,2,0.508,0,2,2,0,2,0.762,1,corridor to the block interior,1,0,76
+real,1488219DF3818G,103.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0308834DF3800G,242.9,2,2,0,2,0.359,0,2,1,0,1,0.413,1,corridor to the block interior,1,0,76
+real,9606308DF2890F,178.3,1,1,0,2,0.489,0,1,1,0,2,0.622,1,"small flats, fill the shop",0,0,76
+real,7419114DF2871G,120.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0442108DF3804A,135.2,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,8220232DF2882A,681.0,3,3,1,5,0.32,4,3,3,1,3,0.364,1,street flats only,0,0,76
+real,0541128DF3804B,96.9,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1617709DF3811F,76.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9936617DF2893F,148.1,1,1,0,2,0.578,0,1,1,0,1,0.46,1,street flats only,0,0,76
+real,8916629DF2881F,214.4,1,1,0,1,0.202,0,1,1,0,1,0.283,1,street flats only,0,0,76
+real,7811440DF2871B,239.2,2,2,0,3,0.547,0,2,2,0,2,0.74,1,street flats only,0,0,76
+real,1718211DF3811H,116.7,1,1,0,2,0.733,0,1,1,0,2,0.841,1,"small flats, fill the shop",0,0,76
+real,9615828DF2891F,229.3,0,0,0,0,0.0,0,0,0,0,1,0.199,1,"small flats, fill the shop",0,0,76
+real,1685605DF3818F,105.5,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0216206DF3801E,111.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9508815DF2890H,70.0,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1949502DF3814H,107.6,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,2076615DF3827E,184.2,1,1,0,1,0.237,0,1,1,0,1,0.477,1,street flats only,0,0,76
+real,0107308DF3800G,199.2,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1291910DF3819A,220.3,1,1,0,2,0.39,0,1,1,0,1,0.282,1,street flats only,0,0,76
+real,0319218DF3801G,140.8,2,2,0,2,0.619,0,1,1,0,2,0.688,1,"small flats, fill the shop",0,0,76
+real,9217910DF2891E,152.2,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,3636406DF3833F,106.2,0,0,0,0,0.0,0,1,1,0,1,0.522,1,street flats only,0,0,76
+real,2131407DF3823A,236.8,2,2,0,2,0.368,0,1,1,0,2,0.457,1,"small flats, fill the shop",0,0,76
+real,3145815DF3834E,308.8,2,2,0,3,0.424,0,2,2,0,2,0.428,1,corridor to the block interior,2,0,76
+real,0568111DF3806H,135.9,0,0,0,2,0.642,0,0,0,0,1,0.422,1,"small flats, fill the shop",1,0,76
+real,9806313DF2890F,207.0,2,2,0,3,0.637,0,2,2,0,2,0.674,1,street flats only,0,0,76
+real,0125404DF3802E,215.8,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9745710DF2894F,101.0,1,1,0,2,0.879,0,1,1,0,1,0.652,1,street flats only,0,0,76
+real,8096830DF2789E,314.3,1,2,0,2,0.277,1,1,1,0,1,0.292,1,street flats only,0,0,76
+real,0346612DF3804E,41.3,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1339535DF3813G,298.3,0,0,0,1,0.146,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1187523DF3818G,273.6,2,2,0,2,0.317,2,1,1,0,2,0.369,1,"small flats, fill the shop",0,0,76
+real,2212517DF3821C,70.5,1,1,0,1,0.618,0,1,1,0,1,0.867,1,street flats only,0,0,76
+real,8242401DF2884C,358.3,3,3,1,4,0.481,0,2,2,0,3,0.521,2,"flats on both façades; small flats, fill the shop",0,1,76
+real,1350122DF3815A,197.1,1,1,0,1,0.221,0,1,1,0,1,0.307,1,street flats only,0,0,76
+real,2313602DF3821C,74.5,1,1,0,1,0.585,0,1,1,0,1,0.77,1,street flats only,0,0,76
+real,2216701DF3821E,67.5,0,0,0,0,0.0,0,1,1,0,1,0.779,1,street flats only,0,0,76
+real,1521210DF3812B,53.8,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9847109DF2894F,463.1,3,3,1,6,0.565,0,3,3,1,6,0.759,2,"flats on both façades; small flats, fill the shop",0,0,76
+real,0112130DF3801A,183.2,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9806906DF2890F,237.3,2,2,0,4,0.713,0,1,1,0,2,0.441,2,"corridor to the block interior; small flats, fill the shop",2,0,76
+real,2691256DF3829B,55.0,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0039819DF3803G,137.6,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9920207DF2892B,150.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1564314DF3816D,85.8,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9617106DF2891F,460.8,1,3,1,3,0.284,2,1,1,0,1,0.237,1,street flats only,0,0,76
+real,8320806DF2882A,177.2,1,1,0,2,0.527,0,1,1,0,2,0.622,1,"small flats, fill the shop",0,0,76
+real,9336206DF2893E,117.1,2,2,0,2,0.735,0,1,1,0,2,0.869,1,"small flats, fill the shop",0,0,76
+real,2051916DF3825A,71.8,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,8042201DF2884C,115.8,1,1,0,2,0.753,0,1,1,0,1,0.644,1,street flats only,0,0,76
+real,2274510DF3827C,88.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1539403DF3813H,428.5,3,3,1,4,0.407,0,3,3,1,4,0.651,3,"flats on both façades; corridor to the block interior; small flats, fill the shop",2,0,76
+real,1212723DF3811A,140.6,2,2,0,1,0.306,0,0,0,0,1,0.351,1,"small flats, fill the shop",0,1,76
+real,3538920DF3833H,115.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9406603DF2890E,175.2,1,1,0,2,0.482,0,1,1,0,1,0.479,1,street flats only,0,0,76
+real,9139718DF2893G,151.0,0,0,0,2,0.577,0,0,0,0,1,0.379,1,"small flats, fill the shop",1,0,76
+real,1223609DF3812C,71.4,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1489912DF3818G,107.7,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,7916717DF2871F,145.2,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,3777104DF3837F,110.2,1,1,0,1,0.368,0,1,1,0,1,0.517,1,street flats only,0,0,76
+real,6809543DF2860H,120.2,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9537405DF2893H,165.5,1,1,0,1,0.261,0,1,1,0,1,0.41,1,street flats only,0,0,76
+real,0816935DF3801F,181.6,2,2,0,2,0.48,0,1,1,0,2,0.595,1,"small flats, fill the shop",0,0,76
+real,9112903DF2891C,68.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9406609DF2890E,140.3,1,1,0,1,0.304,0,1,1,0,1,0.419,1,street flats only,0,0,76
+real,9867913DF2896H,331.3,2,2,0,4,0.526,0,2,2,0,3,0.596,1,"small flats, fill the shop",0,0,76
+real,9714802DF2891D,282.0,1,2,0,2,0.309,1,1,1,0,1,0.343,1,street flats only,0,0,76
+real,1562905DF3816B,76.5,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,2087119DF3828E,334.1,1,2,0,3,0.391,1,1,1,0,2,0.361,1,"small flats, fill the shop",0,0,76
+real,1482917DF3818A,89.6,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9142137DF2894A,299.9,3,3,1,4,0.584,0,2,2,0,3,0.624,2,"flats on both façades; small flats, fill the shop",2,0,76
+real,1420834DF3812A,85.1,1,1,0,1,0.511,0,1,1,0,1,0.839,1,street flats only,0,0,76
+real,1486802DF3818E,103.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1260939DF3816A,485.0,3,3,1,4,0.36,1,2,2,0,2,0.264,1,street flats only,0,1,76
+real,1183919DF3818C,67.8,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,7815918DF2871F,392.4,2,2,0,4,0.443,1,1,1,0,2,0.326,1,"small flats, fill the shop",1,0,76
+real,1416607DF3811E,303.3,1,2,0,2,0.288,1,1,1,0,1,0.358,1,street flats only,0,0,76
+real,1424118DF3812C,42.7,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1187512DF3818G,360.8,2,3,1,4,0.479,2,2,2,0,2,0.432,1,street flats only,0,0,76
+real,1758221DF3815H,147.6,1,1,0,1,0.291,0,1,1,0,1,0.496,1,street flats only,0,0,76
+real,8224712DF2882C,207.1,1,1,0,1,0.207,0,1,1,0,1,0.224,1,street flats only,0,0,76
+real,0569606DF3806H,172.3,1,1,0,1,0.253,0,1,1,0,1,0.461,1,street flats only,0,0,76
+real,1671716DF3817B,110.0,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,6836706DF2863F,97.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,1149628DF3814G,65.8,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9869113DF2896H,133.2,1,1,0,2,0.628,0,2,2,0,2,0.882,1,street flats only,0,0,76
+real,0837728DF3803F,468.1,2,3,1,3,0.279,1,2,2,0,2,0.331,1,street flats only,0,0,76
+real,0714706DF3801D,89.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0316423DF3801E,72.1,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,9364409DF2896C,672.9,3,3,1,8,0.518,0,3,3,1,7,0.632,2,"flats on both façades; small flats, fill the shop",0,0,76
+real,8111105DF2881A,208.4,2,2,0,3,0.622,0,2,2,0,2,0.618,1,street flats only,0,0,76
+real,9057627DF2895G,86.4,1,1,0,1,0.492,0,0,0,0,0,0.0,1,street flats only,0,1,76
+real,9435313DF2893E,77.5,0,0,0,0,0.0,0,0,0,0,0,0.0,1,street flats only,0,0,76
+real,0217205DF3801G,80.9,1,1,0,1,0.539,0,1,1,0,1,0.805,1,street flats only,0,0,76
+real,7031911DF2873A,325.3,2,2,0,3,0.401,1,1,1,0,2,0.398,1,"small flats, fill the shop",0,0,76
+real,1260918DF3816A,148.0,1,1,0,1,0.313,0,1,1,0,1,0.485,1,street flats only,0,0,76
+real,1832403DF3813D,256.6,1,1,0,2,0.34,0,1,1,0,1,0.432,1,street flats only,0,0,76
+real,9061811DF2896A,242.8,2,2,0,2,0.359,0,2,2,0,2,0.646,1,street flats only,0,0,76
+real,9668215DF2896H,139.8,1,1,0,1,0.312,0,1,1,0,1,0.477,1,street flats only,0,1,76

@@ -1,0 +1,12 @@
+{
+ "scale given": {
+  "plans": 398,
+  "read_ok": 398,
+  "median_iou": 0.683,
+  "iou_over_0.8": 0.281,
+  "median_area_error": 0.221,
+  "area_within_10pct": 0.191,
+  "median_facade_error": 71.4,
+  "median_scale_error": 0.0
+ }
+}

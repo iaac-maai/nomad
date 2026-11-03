@@ -1,0 +1,12 @@
+{
+ "empty_premises": 6149,
+ "matched_to_a_building": 6056,
+ "buildings": 5322,
+ "alone_in_building": 2039,
+ "sharing_the_ground_floor": 4017,
+ "median_ground_m2": 275.35,
+ "median_street_facade_m": 16.9,
+ "no_street_facade": 416,
+ "median_floors": 7.0,
+ "median_building_depth_m": 25.5
+}

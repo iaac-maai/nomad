@@ -1,0 +1,47 @@
+{
+ "1 x 1-bed": {
+  "shops": 188,
+  "verdicts": {
+   "YES": 144,
+   "NO": 44
+  },
+  "cards_failed": {
+   "Flats that fit": 41,
+   "Living room": 3
+  }
+ },
+ "2 x 1-bed + 1 x 2-bed": {
+  "shops": 188,
+  "verdicts": {
+   "PARTLY": 105,
+   "NO": 43,
+   "YES": 40
+  },
+  "cards_failed": {
+   "Flats that fit": 146,
+   "Living room": 3,
+   "Bedrooms": 1,
+   "Bathroom": 1,
+   "Flats inside the shop": 1
+  }
+ },
+ "5 x 1-bed + 2 x 2-bed": {
+  "shops": 188,
+  "verdicts": {
+   "PARTLY": 140,
+   "NO": 43,
+   "YES": 5
+  },
+  "cards_failed": {
+   "Flats that fit": 182,
+   "Living room": 3,
+   "Bedrooms": 1,
+   "Flats inside the shop": 1
+  }
+ },
+ "daylight": {
+  "shops_with_over_20pct_dark": 26,
+  "median_dark_share": 0.0,
+  "note": "lit = within 5,5 m of a façade with windows (design assumption, not a law)"
+ }
+}

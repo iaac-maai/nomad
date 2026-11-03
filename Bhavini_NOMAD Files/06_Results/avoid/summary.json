@@ -1,0 +1,84 @@
+{
+ "premises": 6149,
+ "answers": {
+  "not modelled": 3332,
+  "not liveable": 1007,
+  "candidate": 959,
+  "keep it a shop": 545,
+  "not allowed": 306
+ },
+ "retail_100m_cut": 4.0,
+ "median_retail_100m": 16.0,
+ "by_district": {
+  "Ciutat Vella": {
+   "not modelled": 309,
+   "not liveable": 149,
+   "candidate": 108,
+   "not allowed": 67,
+   "keep it a shop": 3
+  },
+  "Eixample": {
+   "not modelled": 797,
+   "candidate": 246,
+   "not liveable": 126,
+   "not allowed": 46,
+   "keep it a shop": 9
+  },
+  "Gràcia": {
+   "not modelled": 301,
+   "not liveable": 124,
+   "candidate": 99,
+   "keep it a shop": 25,
+   "not allowed": 18
+  },
+  "Horta-Guinardó": {
+   "not modelled": 244,
+   "candidate": 91,
+   "keep it a shop": 78,
+   "not liveable": 57,
+   "not allowed": 15
+  },
+  "Les Corts": {
+   "not modelled": 179,
+   "keep it a shop": 52,
+   "not liveable": 38,
+   "candidate": 20,
+   "not allowed": 12
+  },
+  "Nou Barris": {
+   "not modelled": 246,
+   "candidate": 82,
+   "not liveable": 64,
+   "keep it a shop": 41,
+   "not allowed": 15
+  },
+  "Sant Andreu": {
+   "not modelled": 218,
+   "not liveable": 99,
+   "candidate": 68,
+   "keep it a shop": 56,
+   "not allowed": 34
+  },
+  "Sant Martí": {
+   "not modelled": 390,
+   "keep it a shop": 141,
+   "not liveable": 72,
+   "not allowed": 65,
+   "candidate": 62
+  },
+  "Sants-Montjuïc": {
+   "not modelled": 281,
+   "not liveable": 183,
+   "candidate": 112,
+   "keep it a shop": 66,
+   "not allowed": 22
+  },
+  "Sarrià-Sant Gervasi": {
+   "not modelled": 367,
+   "not liveable": 95,
+   "keep it a shop": 74,
+   "candidate": 71,
+   "not allowed": 12
+  }
+ }
+}

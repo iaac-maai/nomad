@@ -1,0 +1,15 @@
+case,reader,plans,plans_tested,median_outline_overlap,area_within_10pct,median_facade_error
+dark | test_plans,Dark lines alone (no AI),clean,60,0.933,0.883,0.193
+f3d | test_plans,floorplan-to-3d + dark lines (in NOMAD),clean,60,0.922,0.867,0.162
+f3d_only | test_plans,floorplan-to-3d model alone,clean,60,0.928,0.817,0.191
+mitunet | test_plans,MitUNet walls + dark lines,clean,60,0.913,0.833,0.162
+dark | test_plans_cubicasa,Dark lines alone (no AI),clean,398,0.709,0.261,85.2
+f3d | test_plans_cubicasa,floorplan-to-3d + dark lines (in NOMAD),clean,398,0.685,0.196,83.55
+f3d_only | test_plans_cubicasa,floorplan-to-3d model alone,clean,398,0.611,0.186,60.55
+mitunet | test_plans_cubicasa,MitUNet walls + dark lines,clean,398,0.683,0.191,71.4
+scans | test_plans_cubicasa,scans,clean,398,0.617,0.108,83.0
+scans_only | test_plans_cubicasa,scans_only,clean,398,0.61,0.219,83.1
+dark | test_plans_messy,Dark lines alone (no AI),"messy (text, dimensions, scan noise)",60,0.931,0.867,0.221
+f3d | test_plans_messy,floorplan-to-3d + dark lines (in NOMAD),"messy (text, dimensions, scan noise)",60,0.91,0.833,0.287
+f3d_only | test_plans_messy,floorplan-to-3d model alone,"messy (text, dimensions, scan noise)",60,0.929,0.717,0.242
+mitunet | test_plans_messy,MitUNet walls + dark lines,"messy (text, dimensions, scan noise)",60,0.879,0.633,0.337

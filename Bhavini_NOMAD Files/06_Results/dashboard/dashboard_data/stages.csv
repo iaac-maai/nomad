@@ -1,0 +1,11 @@
+stage,name,status,what_exists
+0,Setup,Done,"Folders, Python environment, CLAUDE.md"
+1,Rulebook,Done,"2,470 pieces from 22 norms at 4 levels; viewer at localhost:8765"
+2,Search,Done (word search),Word search in the viewer and on the website; meaning-based search not built
+3,Zoning + rule cards,Done (v1),"Zoning: 6,149 empty premises on the MUC map, 5,026 (82%) in a zone that admits housing (PGM art. 225.7). Rule cards: 16 cards in rules/rules.json, each quote checked word for word in the rulebook; 1 to review."
+4,Read a floor plan,Done (v1),"Plan image -> outline + façade: overlap 0.93 on 180 drawn plans. On 398 real scans (CubiCasa5K test split): dark lines 0.71, ours 0.69, MitUNet 0.68. Fine-tuning on real scans running. Real Barcelona shops: shells from the Catastro for 5,688 premises."
+5,Check + flags,Done (v2),"Zoning card first, then the rules; YES / PARTLY / NO. 188 test shops with 2 x 1-bed + 1 x 2-bed: 40 YES, 105 PARTLY, 43 NO. 1,694 real Barcelona shops: 155 YES, 946 PARTLY, 593 NO as they are. Daylight bands kept as is (Bars owns daylight)."
+6,Better plans,Done (v2),"Three layouts per shop: as asked 266 homes, compact rooms 304, most homes 466 (188 test shops). Real shops: up to 2,855 homes in 1,192 shops."
+7,3D model,Done (v2),"Zoning blocks, then walls, doors and windows in Rhino; IFC (IfcOpenShell, schema-valid) and glTF export outside Rhino."
+8,App,Done (v1),"Website: check an address, design homes in the browser (NOMAD's Python in Pyodide), 3D, city in 3D, simple view, Catalan and Spanish, plan upload, value, saved shops, PDF report."
+9,Evaluation,Done (v1),"Golden set of 16 checked questions: 16 of 16 right after the rule fixes (75% before)."

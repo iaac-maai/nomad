@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nomad Rulebook</title>
+<style>
+  :root { --bg:#fbfaf7; --card:#fff; --ink:#1f1e1b; --muted:#6b6963; --line:#e4e1d8;
+          --nat:#534AB7; --nat-bg:#EEEDFE; --cat:#0F6E56; --cat-bg:#E1F5EE; --pgm:#993C1D; --pgm-bg:#FAECE7;
+          --bcn:#993556; --bcn-bg:#FBEAF0; --warn:#854F0B; --warn-bg:#FAEEDA; --mark:#FAC775; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+          --bg:#1b1a18; --card:#252421; --ink:#ecebe6; --muted:#a3a19a; --line:#3a3935;
+          --nat:#CECBF6; --nat-bg:#3C3489; --cat:#9FE1CB; --cat-bg:#085041; --pgm:#F5C4B3; --pgm-bg:#712B13;
+          --bcn:#F4C0D1; --bcn-bg:#72243E; --warn:#FAC775; --warn-bg:#633806; --mark:#854F0B; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .wrap { max-width:1000px; margin:0 auto; padding:24px 16px 64px; }
+  h1 { font-size:22px; font-weight:600; margin:0 0 4px; }
+  .sub { color:var(--muted); margin:0 0 20px; }
+  .levels { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin-bottom:20px; }
+  .lvl { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; cursor:pointer; }
+  .lvl.on { outline:2px solid var(--ink); }
+  .lvl b { font-size:24px; display:block; }
+  .lvl small { color:var(--muted); display:block; }
+  .bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; position:sticky; top:0; background:var(--bg); padding:8px 0; z-index:2; }
+  .bar input, .bar select { font:inherit; padding:9px 12px; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--ink); }
+  .bar input { flex:1 1 260px; }
+  .bar select { flex:0 1 230px; min-width:0; }
+  .hint { color:var(--muted); font-size:13px; margin:0 0 16px; }
+  .res { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:10px; }
+  .res h3 { font-size:16px; font-weight:600; margin:6px 0 4px; }
+  .meta { display:flex; gap:6px; flex-wrap:wrap; align-items:center; font-size:12px; color:var(--muted); }
+  .tag { padding:2px 8px; border-radius:999px; font-weight:600; }
+  .national { background:var(--nat-bg); color:var(--nat); } .catalonia { background:var(--cat-bg); color:var(--cat); }
+  .pgm { background:var(--pgm-bg); color:var(--pgm); } .barcelona { background:var(--bcn-bg); color:var(--bcn); }
+  .warn { background:var(--warn-bg); color:var(--warn); padding:6px 10px; border-radius:8px; font-size:13px; margin-top:8px; }
+  .snip { margin:6px 0 0; color:var(--ink); }
+  pre { white-space:pre-wrap; word-break:break-word; font:13px/1.55 ui-monospace, Consolas, monospace; background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:12px; max-height:520px; overflow:auto; }
+  mark { background:var(--mark); color:inherit; border-radius:3px; padding:0 1px; }
+  a { color:inherit; }
+  .acts { display:flex; gap:14px; margin-top:8px; font-size:13px; }
+  button.link { background:none; border:0; padding:0; font:inherit; color:inherit; text-decoration:underline; cursor:pointer; }
+  .empty { color:var(--muted); text-align:center; padding:40px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Nomad rulebook</h1>
+  <p class="sub">Every official piece we have collected, in one place. Type words to search; click a card to filter a level. Each piece links back to its official source.</p>
+  <div class="levels" id="levels"></div>
+  <div class="bar">
+    <input id="q" type="search" placeholder="Search, e.g. ventilación, 1,80 m, superfície útil, planta baixa" autofocus>
+    <select id="norm"><option value="">All norms</option></select>
+  </div>
+  <p class="hint" id="count">Loading rulebook…</p>
+  <div id="out"></div>
+</div>
+<script>
+const LEVELS = [["national","National (Spain)"],["catalonia","Catalonia"],["pgm","Metropolitan plan (PGM)"],["barcelona","Barcelona"]];
+let ALL = [], level = "";
+const norm = s => (s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const esc = s => (s||"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function highlight(text, terms) {
+  let html = esc(text);
+  if (!terms.length) return html;
+  // highlight on the accent-free copy, then map back by position (same length after NFD-strip per char)
+  const plain = norm(text);
+  const marks = [];
+  for (const t of terms) { let i = 0; while ((i = plain.indexOf(t, i)) >= 0) { marks.push([i, i + t.length]); i += t.length; } }
+  if (!marks.length) return html;
+  marks.sort((a,b) => a[0]-b[0]);
+  let out = "", pos = 0;
+  for (const [s,e] of marks) { if (s < pos) continue; out += esc(text.slice(pos,s)) + "<mark>" + esc(text.slice(s,e)) + "</mark>"; pos = e; }
+  return out + esc(text.slice(pos));
+}
+
+function snippet(text, terms) {
+  const plain = norm(text);
+  let i = terms.length ? plain.indexOf(terms[0]) : 0;
+  if (i < 0) i = 0;
+  const s = Math.max(0, i - 120), e = Math.min(text.length, i + 260);
+  return (s ? "…" : "") + text.slice(s, e).replace(/\n/g, " ") + (e < text.length ? "…" : "");
+}
+
+function render() {
+  const terms = norm(document.getElementById("q").value).split(/\s+/).filter(Boolean);
+  const nm = document.getElementById("norm").value;
+  let hits = ALL.filter(c => (!level || c.level === level) && (!nm || c.norm === nm));
+  let anyWord = false;
+  if (terms.length) {
+    const phrase = terms.join(" ");
+    const scoreAll = (c, needAll) => {
+      let score = 0, found = 0;
+      for (const t of terms) {
+        const inText = c._text.split(t).length - 1, inTitle = c._title.split(t).length - 1;
+        if (inText || inTitle) found++; else if (needAll) return null;
+        score += inTitle * 5 + inText;
+      }
+      if (!found) return null;
+      if (terms.length > 1 && (c._text.includes(phrase) || c._title.includes(phrase))) score += 50;   // exact phrase first
+      return [score + found * 20, c];
+    };
+    let ranked = hits.map(c => scoreAll(c, true)).filter(Boolean);
+    if (!ranked.length && terms.length > 1) { ranked = hits.map(c => scoreAll(c, false)).filter(Boolean); anyWord = true; }
+    hits = ranked.sort((a,b) => b[0]-a[0]).map(x => x[1]);
+  }
+  document.getElementById("count").textContent =
+    `${hits.length.toLocaleString()} of ${ALL.length.toLocaleString()} pieces` +
+    (anyWord ? " — no piece has all the words, showing pieces with any of them" : terms.length ? " (best matches first)" : "") +
+    (hits.length > 60 ? " — showing the first 60" : "");
+  const out = document.getElementById("out");
+  if (!hits.length) { out.innerHTML = '<p class="empty">Nothing found. Try fewer or shorter words (accents do not matter).</p>'; return; }
+  out.innerHTML = hits.slice(0, 60).map((c, i) => `
+    <div class="res">
+      <div class="meta"><span class="tag ${c.level}">${esc(LEVELS.find(l=>l[0]===c.level)?.[1] || c.level)}</span>
+        <span>${esc(c.norm)}</span><span>· ${esc(c.block_id)}</span>
+        ${c.in_force_from ? `<span>· in force from ${esc(String(c.in_force_from).replace(/(\d{4})(\d\d)(\d\d)/,"$3/$2/$1"))}</span>` : ""}</div>
+      <h3>${highlight(c.title || c.block_type || "", terms)}</h3>
+      <p class="snip">${highlight(snippet(c.text, terms), terms)}</p>
+      ${c.note ? `<div class="warn">${esc(c.note)}</div>` : ""}
+      <div class="acts"><button class="link" data-i="${i}">Show full text</button>
+        <a href="${esc(c.source_url)}" target="_blank" rel="noopener">Open official source ↗</a></div>
+      <div class="full" id="full${i}"></div>
+    </div>`).join("");
+  out.querySelectorAll("button.link").forEach(b => b.onclick = () => {
+    const box = document.getElementById("full" + b.dataset.i);
+    if (box.innerHTML) { box.innerHTML = ""; b.textContent = "Show full text"; return; }
+    box.innerHTML = `<pre>${highlight(hits[+b.dataset.i].text, terms)}</pre>`; b.textContent = "Hide full text";
+  });
+}
+
+function drawLevels() {
+  const el = document.getElementById("levels");
+  el.innerHTML = LEVELS.map(([k, name]) => {
+    const n = ALL.filter(c => c.level === k), norms = new Set(n.map(c => c.norm)).size;
+    return `<div class="lvl ${level===k?"on":""}" data-k="${k}"><span class="tag ${k}">${name}</span>
+      <b>${n.length.toLocaleString()}</b><small>${n.length ? `pieces from ${norms} norm${norms>1?"s":""}` : "not collected yet"}</small></div>`;
+  }).join("");
+  el.querySelectorAll(".lvl").forEach(d => d.onclick = () => { level = level === d.dataset.k ? "" : d.dataset.k; drawLevels(); render(); });
+}
+
+fetch("../../data/rulebook.jsonl").then(r => { if (!r.ok) throw new Error(r.status); return r.text(); }).then(t => {
+  ALL = t.split("\n").filter(Boolean).map(l => JSON.parse(l));
+  for (const c of ALL) { c._text = norm(c.text); c._title = norm(c.title); }
+  const sel = document.getElementById("norm");
+  for (const n of [...new Set(ALL.map(c => c.norm))]) sel.insertAdjacentHTML("beforeend", `<option>${esc(n)}</option>`);
+  drawLevels(); render();
+}).catch(e => { document.getElementById("count").textContent = "Could not load data/rulebook.jsonl (" + e.message + "). Start the viewer with the 'rulebook' preview."; });
+let tmr; document.getElementById("q").oninput = () => { clearTimeout(tmr); tmr = setTimeout(render, 200); };
+document.getElementById("norm").onchange = render;
+</script>
+</body>
+</html>

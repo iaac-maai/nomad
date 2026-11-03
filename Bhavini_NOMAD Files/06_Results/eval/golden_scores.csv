@@ -1,0 +1,17 @@
+qid,question,golden,nomad,code_has_value,answer_ok,nomad_cite,cite_ok,search_rank,top1
+G01,Minimum useful area of a new dwelling in Catalonia?,36,36.0,True,True,"Decret 141/2012, Annex 1, 3.1",True,3,Ordenances metropolitanes d'edificació (OME) | OME:art.-55.-superf-cie-til
+G02,Minimum area of the living-dining-kitchen space?,not in force,not checked,,True,,,1,Decret 141/2012 | annex1-3.7.1
+G03,Diameter of the circle the living room must fit?,2.80,2.8,True,True,Decret 141/2012 Annex 1 3.7.2,True,1,Decret 141/2012 | annex1-3.7.2
+G04,Minimum bedroom area?,6,6.0,True,True,Decret 141/2012 Annex 1 3.8,True,,Decret 141/2012 | annex1-3.10
+G05,Side of the square a bedroom must fit?,2.00,2.0,True,True,Decret 141/2012 Annex 1 3.8,True,1,Decret 141/2012 | annex1-3.8
+G06,Minimum width of the living room's contact with the facade?,2.20,2.2,True,True,Decret 141/2012 Annex 1 3.7.2,True,1,Decret 141/2012 | annex1-3.7.2
+G07,Minimum clear height of rooms (new build)?,2.50,2.5,True,True,"Decret 141/2012, Annex 1, 3.5",True,1,Decret 141/2012 | annex1-3.5
+G08,"Minimum clear height in bathrooms, kitchens and corridors?",2.20,2.2,True,True,Decret 141/2012 Annex 1 3.5,True,1,Decret 141/2012 | annex1-3.5
+G09,Minimum window area as a share of the room floor?,0.125,0.125,True,True,Decret 141/2012 Annex 1 3.9.1,True,1,Decret 141/2012 | annex1-3.9
+G10,Minimum width of the corridor from the entrance to the accessible rooms?,1.00,1.0,True,True,Decret 141/2012 Annex 1 3.4.1.d,True,1,Decret 141/2012 | annex1-3.4
+G11,Minimum useful area of a dwelling in Barcelona?,40,40.0,True,True,MPGM 2004 Barcelona DA1 2.a,True,1,MPGM 2004 nombre màxim d'habitatges (Barcelona) | MPGM-2004-habitatges-parcela:disposicions-addicionals-de-la-m
+G12,Minimum facade contact of each dwelling in Barcelona?,3,3.0,True,True,MPGM 2004 Barcelona DA1 2.b,True,1,MPGM 2004 nombre màxim d'habitatges (Barcelona) | MPGM-2004-habitatges-parcela:disposicions-addicionals-de-la-m
+G13,How many dwellings may a building in zone 13 hold?,80,80.0,True,True,MPGM 2004 Barcelona art. 318 (zone 12) / art. 323,True,5,Ordenances metropolitanes d'edificació (OME) | OME:art.-180.-nombre-m-xim-d-habitat-2
+G14,Minimum clear height when part of a building is converted to housing?,2.40,2.4,True,True,Decret 141/2012 Annex 4 apartat 2 (group C),True,1,Decret 141/2012 | annex4-apartat-2
+G15,Diameter of the circle a patio that lights bedrooms must fit?,3,3.0,True,True,Decret 141/2012 Annex 1 2.5.1,True,1,Decret 141/2012 | annex1-2.5.1
+G16,Minimum facade length of a dwelling as a share of its area?,0.1111,0.1111,True,True,Decret 141/2012 Annex 1 3.6.2,True,1,Decret 141/2012 | annex1-3.6

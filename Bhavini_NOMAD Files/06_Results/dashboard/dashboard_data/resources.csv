@@ -1,0 +1,15 @@
+resource,kind,what_it_does,licence,verdict,status
+codigotecnico.org (CTE),Official PDFs,"Spain's technical building code: ventilation, fire, accessibility, noise, energy",Official text,Using,In rulebook (648 pieces)
+Swiss Dwellings v3.0.0,Dataset (Zenodo),"46,937 real apartments + 341 shops with rooms, walls, windows in metres",CC BY 4.0,Using,Main test set
+ResPlan,Dataset (GitHub),"17,000 residential plans as vector geometry",CC BY 4.0 data / MIT code,Using,"Second test set (11,542 plans checked)"
+Yytsi floorplan-to-3d + HF weights,Model (GitHub + Hugging Face),"Image of a plan -> walls, doors, windows -> 3D",MIT,Using,"Installed; walls work, windows confused by non-plan graphics"
+JoaoMigSilva/floorplans,Dataset (Hugging Face),"9,560 coloured plan images with room labels",MIT,Using for tests,4 sample images downloaded
+hypercadaster_ES,Library (GitHub),"Spanish cadastre for an address: footprint, floors, use, orientation",EUPL-1.2,Next (Stage 4),Downloaded; not run yet
+Raster2Seq,Model (GitHub),Image -> room outlines with names (SIGGRAPH 2026),MIT code / CC BY-NC weights,Later,Downloaded code only; weights are non-commercial
+CubiCasa5K (GitHub + Kaggle),Dataset,"5,000 Finnish plans, every wall/door/window labelled; trained floorplan-to-3d",CC BY-NC 4.0,Only if retraining,Not downloaded (5 GB)
+FloorPlanCAD,Dataset (Hugging Face),"15,663 CAD drawings with symbols (doors, furniture)",CC BY-SA 4.0 (card),Later (DXF/CAD input),Not downloaded
+Graph2Plan,Code (GitHub),Plan from a building outline + room list (Chinese flats),No licence,Reference only,Downloaded to read; cannot copy code
+Human UI (Rhino plugin),Grasshopper plugin,"App-style windows: sliders, buttons, charts on top of Grasshopper",Free,Using,Installed and loading in Rhino 7
+Magnetizing Floor Plan Generator,Grasshopper plugin,Lays rooms inside a boundary from a room list (Stage 6),Free,Not on Rhino 7.1,"Installed but cannot load on 7.1; we stay on 7.1, so Stage 6 uses our own Python generator"
+PlanFinder,Grasshopper plugin (commercial),Apartment layouts and unit mix,Commercial,Not on Rhino 7.1,Needs Rhino 7.4+; not installed
+Swiftlet / Rhino MCP,Grasshopper plugin,Lets Claude drive Grasshopper live,Free,Needs Rhino 8,Not installed

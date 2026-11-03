@@ -1,0 +1,29 @@
+{
+ "shops_in": 6056,
+ "removed": {
+  "not one premises": 144,
+  "door far from façade": 112,
+  "door far from building": 112
+ },
+ "kept": 5688,
+ "labelled": {
+  "shares the ground floor": 3680,
+  "ready": 1939,
+  "façade under 3 m": 40,
+  "under 40 m²": 29
+ },
+ "outlines_simplified": 20,
+ "nomad_runs_on": 1694,
+ "nomad_runs_on_by_district": {
+  "Eixample": 301,
+  "Sants-Montjuïc": 229,
+  "Gràcia": 205,
+  "Ciutat Vella": 204,
+  "Horta-Guinardó": 158,
+  "Nou Barris": 145,
+  "Sant Andreu": 134,
+  "Sarrià-Sant Gervasi": 133,
+  "Sant Martí": 132,
+  "Les Corts": 53
+ }
+}

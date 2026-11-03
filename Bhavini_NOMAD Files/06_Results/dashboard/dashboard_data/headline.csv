@@ -1,0 +1,17 @@
+metric,value
+rulebook_pieces,2470.0
+norms,22.0
+flats_tested,46937.0
+flats_all_pass,0.322
+shops_tested,341.0
+shops_convertible,97.0
+resplan_tested,11542.0
+resplan_all_pass,0.385
+clean_shops,180.0
+shops_with_proposal,144
+flats_generated,360
+reader_plans,180
+reader_iou,0.928
+reader_area_within_10pct,0.767
+experiments,32
+repos_checked,31

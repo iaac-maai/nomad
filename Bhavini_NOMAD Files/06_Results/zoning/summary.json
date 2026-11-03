@@ -1,0 +1,96 @@
+{
+ "empty_premises": 6149,
+ "zone_polygons": 12583,
+ "matched": 6149,
+ "on_edge_nearest": 60,
+ "housing": {
+  "YES": 5026,
+  "CHECK": 817,
+  "NO": 306
+ },
+ "by_key": {
+  "13a": 2334,
+  "12": 1383,
+  "13b": 1259,
+  "15": 49,
+  "14b": 1
+ },
+ "eixample": {
+  "empty": 1224,
+  "housing": {
+   "YES": 1160,
+   "NO": 46,
+   "CHECK": 18
+  }
+ },
+ "by_district": {
+  "Ciutat Vella": {
+   "YES": 563,
+   "NO": 67,
+   "CHECK": 6
+  },
+  "Eixample": {
+   "YES": 1160,
+   "NO": 46,
+   "CHECK": 18
+  },
+  "Gràcia": {
+   "YES": 528,
+   "CHECK": 21,
+   "NO": 18
+  },
+  "Horta-Guinardó": {
+   "YES": 397,
+   "CHECK": 73,
+   "NO": 15
+  },
+  "Les Corts": {
+   "YES": 189,
+   "CHECK": 100,
+   "NO": 12
+  },
+  "Nou Barris": {
+   "YES": 321,
+   "CHECK": 112,
+   "NO": 15
+  },
+  "Sant Andreu": {
+   "YES": 381,
+   "CHECK": 60,
+   "NO": 34
+  },
+  "Sant Martí": {
+   "YES": 353,
+   "CHECK": 312,
+   "NO": 65
+  },
+  "Sants-Montjuïc": {
+   "YES": 597,
+   "CHECK": 45,
+   "NO": 22
+  },
+  "Sarrià-Sant Gervasi": {
+   "YES": 537,
+   "CHECK": 70,
+   "NO": 12
+  }
+ },
+ "top_zones": {
+  "Densificació Urbana Intensiva": 2334,
+  "Densificació Urbana Semiintensiva": 1259,
+  "Nucli Antic de Substitució de l'Edificació": 1014,
+  "Ordenació en volumetria específica": 645,
+  "Nucli Antic de Conservació": 369,
+  "Equipaments comunitaris i dotacions": 115,
+  "Ordenació en edif. aïllada: plurifamiliar": 73,
+  "Zona d'activitats @": 58,
+  "Parcs i jardins urbans": 52,
+  "Conservació est. urbana i edif.": 49,
+  "Terciari en àmbit portuari": 37,
+  "Zona industrial": 35
+ },
+ "sources": {
+  "census": "Open Data BCN, cens-locals-planta-baixa-act-economica, 2024 (CC BY 4.0)",
+  "zoning": "MUC Qualificació, Departament de Territori (Generalitat), via https://gissrv.diba.cat/arcgis/rest/services/CARTOBASE/MUC/MapServer/1"
+ }
+}

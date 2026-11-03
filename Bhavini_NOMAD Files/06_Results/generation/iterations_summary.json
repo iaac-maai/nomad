@@ -1,0 +1,36 @@
+{
+ "asked": "2 x 1-bed + 1 x 2-bed",
+ "shops": 188,
+ "stage5_flags_as_it_is": {
+  "PARTLY": 104,
+  "NO": 43,
+  "YES": 41
+ },
+ "iterations": {
+  "1 as asked": {
+   "homes": 266,
+   "verdicts": {
+    "PARTLY": 103,
+    "NO": 42,
+    "YES": 43
+   }
+  },
+  "2 as asked, compact rooms": {
+   "homes": 304,
+   "verdicts": {
+    "PARTLY": 104,
+    "NO": 31,
+    "YES": 53
+   }
+  },
+  "3 most homes": {
+   "homes": 466,
+   "verdicts": {
+    "YES": 154,
+    "NO": 31,
+    "PARTLY": 3
+   },
+   "shops_with_at_least_one_home": 157
+  }
+ }
+}

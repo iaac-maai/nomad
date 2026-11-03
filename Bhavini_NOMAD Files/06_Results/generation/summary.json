@@ -1,0 +1,156 @@
+{
+ "shells": 188,
+ "by_mix": {
+  "1 of each (studio, 1, 2, 3-bed)": {
+   "compact": {
+    "proposals_that_work": 1,
+    "share": 0.005,
+    "flats_placed": 322,
+    "flats_passing": 261,
+    "top_fail_reasons": {
+     "useful": 57,
+     "bath": 8,
+     "living": 7
+    },
+    "shells_short_of_facade_or_depth": 156
+   },
+   "typical": {
+    "proposals_that_work": 23,
+    "share": 0.122,
+    "flats_placed": 284,
+    "flats_passing": 276,
+    "top_fail_reasons": {
+     "living": 5,
+     "bath": 4,
+     "useful": 2
+    },
+    "shells_short_of_facade_or_depth": 164
+   }
+  },
+  "1 x 1-bed": {
+   "compact": {
+    "proposals_that_work": 152,
+    "share": 0.809,
+    "flats_placed": 161,
+    "flats_passing": 152,
+    "top_fail_reasons": {
+     "useful": 8,
+     "living": 5
+    },
+    "shells_short_of_facade_or_depth": 27
+   },
+   "typical": {
+    "proposals_that_work": 144,
+    "share": 0.766,
+    "flats_placed": 147,
+    "flats_passing": 144,
+    "top_fail_reasons": {
+     "living": 3
+    },
+    "shells_short_of_facade_or_depth": 41
+   }
+  },
+  "1 x studio": {
+   "compact": {
+    "proposals_that_work": 17,
+    "share": 0.09,
+    "flats_placed": 168,
+    "flats_passing": 17,
+    "top_fail_reasons": {
+     "useful": 151,
+     "bath": 3
+    },
+    "shells_short_of_facade_or_depth": 20
+   },
+   "typical": {
+    "proposals_that_work": 153,
+    "share": 0.814,
+    "flats_placed": 158,
+    "flats_passing": 153,
+    "top_fail_reasons": {
+     "bath": 5,
+     "useful": 1
+    },
+    "shells_short_of_facade_or_depth": 30
+   }
+  },
+  "2 x 1-bed + 1 x 2-bed": {
+   "compact": {
+    "proposals_that_work": 49,
+    "share": 0.261,
+    "flats_placed": 292,
+    "flats_passing": 285,
+    "top_fail_reasons": {
+     "living": 6,
+     "useful": 4
+    },
+    "shells_short_of_facade_or_depth": 137
+   },
+   "typical": {
+    "proposals_that_work": 40,
+    "share": 0.213,
+    "flats_placed": 256,
+    "flats_passing": 251,
+    "top_fail_reasons": {
+     "living": 3,
+     "bedroom": 1,
+     "bath": 1
+    },
+    "shells_short_of_facade_or_depth": 146
+   }
+  },
+  "5 x 1-bed + 2 x 2-bed": {
+   "compact": {
+    "proposals_that_work": 12,
+    "share": 0.064,
+    "flats_placed": 381,
+    "flats_passing": 369,
+    "top_fail_reasons": {
+     "living": 9,
+     "useful": 6,
+     "bath": 1,
+     "bedroom": 1
+    },
+    "shells_short_of_facade_or_depth": 172
+   },
+   "typical": {
+    "proposals_that_work": 5,
+    "share": 0.027,
+    "flats_placed": 310,
+    "flats_passing": 306,
+    "top_fail_reasons": {
+     "living": 3,
+     "bedroom": 1
+    },
+    "shells_short_of_facade_or_depth": 182
+   }
+  },
+  "best fit (max flats)": {
+   "compact": {
+    "proposals_that_work": 155,
+    "share": 0.824,
+    "flats_placed": 447,
+    "flats_passing": 447,
+    "top_fail_reasons": {
+     "nothing fits": 33
+    },
+    "shells_short_of_facade_or_depth": 0
+   },
+   "typical": {
+    "proposals_that_work": 144,
+    "share": 0.766,
+    "flats_placed": 360,
+    "flats_passing": 360,
+    "top_fail_reasons": {
+     "nothing fits": 44
+    },
+    "shells_short_of_facade_or_depth": 0
+   }
+  }
+ },
+ "best_fit_typical": {
+  "shells_with_a_proposal": 144,
+  "flats_total": 360,
+  "median_flats_per_shell": 2.0
+ }
+}

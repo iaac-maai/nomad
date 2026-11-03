@@ -1,0 +1,22 @@
+{
+ "scale estimated": {
+  "plans": 180,
+  "read_ok": 180,
+  "median_iou": 0.231,
+  "iou_over_0.8": 0.028,
+  "median_area_error": 0.795,
+  "area_within_10pct": 0.044,
+  "median_facade_error": 0.567,
+  "median_scale_error": 0.542
+ },
+ "scale given": {
+  "plans": 180,
+  "read_ok": 180,
+  "median_iou": 0.928,
+  "iou_over_0.8": 0.783,
+  "median_area_error": 0.046,
+  "area_within_10pct": 0.767,
+  "median_facade_error": 0.252,
+  "median_scale_error": 0.0
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "plans_in": 17000,
+ "in_library": 6920,
+ "skipped": {
+  "no rooms": 5458,
+  "not rectilinear": 4200,
+  "4+ bedrooms": 422
+ },
+ "by_bedrooms": {
+  "3": 3451,
+  "2": 3184,
+  "1": 284,
+  "0": 1
+ },
+ "lit": {
+  "front": 1274,
+  "back+front": 822,
+  "front+right": 811,
+  "back+front+right": 773,
+  "front+left": 763,
+  "back+front+left": 744,
+  "front+left+right": 726,
+  "back+front+left+right": 706
+ },
+ "entrance": {
+  "left": 1471,
+  "back": 2369,
+  "right": 1510,
+  "inside": 1166,
+  "front": 401,
+  "null": 3
+ },
+ "minutes": 2.2
+}
