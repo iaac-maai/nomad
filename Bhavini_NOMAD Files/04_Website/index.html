@@ -2189,8 +2189,8 @@ const TYPO = [["old town (12)", "#B9785C"], ["Eixample type (13a)", "#D2A957"], 
   ["industrial", "#8E8A84"], ["facility or system", "#B4A6CF"], ["other", "#C9C5BC"]];
 const USES = [["1", "residential", "#DED3BD"], ["4_2", "retail", "#E2A35A"], ["4_1", "office", "#7FA4CC"], ["3", "industrial", "#97928A"],
   ["4_3", "public services", "#A98FCB"], ["", "other", "#C9C5BC"]];
-const NOMADC = { YES: "#3F8F5A", PARTLY: "#C98A2B", CHECK: "#C98A2B", NO: "#C4473A", ZONE: "#7E9CB0", "": "#CBC7BF" };
-const ANSKEY = [["YES", "livable"], ["PARTLY", "needs a change"], ["NO", "not livable"], ["ZONE", "zone only"], ["", "no empty shop"]];
+const NOMADC = { YES: "#3F8F5A", PARTLY: "#C98A2B", CHECK: "#C98A2B", NO: "#C4473A", ZONE: "#7E9CB0", NOZONE: "#4A4F55", "": "#CBC7BF" };   // NOZONE = the 2D map's --m-slate
+const ANSKEY = [["YES", "livable"], ["PARTLY", "needs a change"], ["NO", "not livable"], ["ZONE", "zone only"], ["NOZONE", "zone does not allow homes"], ["", "no empty shop"]];
 const GROUND = { road_main: ["main roads", "#8F969D"], road: ["streets", "#ABB0B5"], path: ["civic and pedestrian paths", "#D6C9B2"],
   park: ["parks and gardens", "#7DB463"], forest: ["forest", "#4E8C4A"], rail: ["railway", "#7E746D"], water: ["port and water", "#6FA6CF"],
   facility: ["facility ground", "#D9CCBD"] };
@@ -2256,18 +2256,18 @@ function buildingTypo(ref, x, y) {
   return t;
 }
 /* NOMAD's answer per building (cadastral ref, first 14 characters): the daylight class of its empty shops (Bars's model,
-   r.dl.cls), L = livable, C = needs a change, N = not livable; a zone that takes no housing is not livable whatever the
-   daylight. A shop without a daylight match falls back to the zone answer of city.index.shops: NO stays not livable,
-   YES or CHECK is "zone only". With several shops the best answer wins. */
+   r.dl.cls), L = livable, C = needs a change, N = not livable; a zone that takes no housing is "zone does not allow homes"
+   whatever the daylight. A shop without a daylight match falls back to the zone answer of city.index.shops: NO is "zone
+   does not allow homes", YES or CHECK is "zone only". With several shops the best answer wins. */
 let CITYANS = null;
 function answerIndex() {
   if (CITYANS) return CITYANS;
-  const rank = { NO: 0, ZONE: 1, PARTLY: 2, YES: 3 }, m = new Map(), put = (ref, a) => { const o = m.get(ref); if (o === undefined || rank[a] > rank[o]) m.set(ref, a); };
-  P.forEach(r => { if (r.ref && r.dl) put(r.ref.slice(0, 14), r.housing === "NO" ? "NO" : { L: "YES", C: "PARTLY", N: "NO" }[r.dl.cls] || "ZONE"); });
+  const rank = { NOZONE: -1, NO: 0, ZONE: 1, PARTLY: 2, YES: 3 }, m = new Map(), put = (ref, a) => { const o = m.get(ref); if (o === undefined || rank[a] > rank[o]) m.set(ref, a); };
+  P.forEach(r => { if (r.ref && r.dl) put(r.ref.slice(0, 14), r.housing === "NO" ? "NOZONE" : { L: "YES", C: "PARTLY", N: "NO" }[r.dl.cls] || "ZONE"); });
   const lit = new Set(m.keys());
   ((city && city.index && city.index.shops) || []).forEach(s => {
     const ref = s[5]; if (!ref || lit.has(ref)) return;
-    const a = s[4] === "NO" ? "NO" : s[4] === "YES" || s[4] === "CHECK" ? "ZONE" : null;
+    const a = s[4] === "NO" ? "NOZONE" : s[4] === "YES" || s[4] === "CHECK" ? "ZONE" : null;
     if (a) put(ref, a);
   });
   if (city && city.index) CITYANS = m;                               // the zone answers arrive with the index: cache only then
@@ -2345,7 +2345,7 @@ function initCity() {
     const wx = hit.point.x + city.cx, wy = -hit.point.z + city.cy;
     $("#cityhud").innerHTML = `<b>Catastro ${esc(ref)}</b><div class="meta">${esc((TYPO[typ] || TYPO[10])[0])} · ${esc(String(use).replace(/^[\d_]+/, "").replace(/_/g, " "))} · ${floors} floors${dwell ? " · " + dwell + " dwellings" : ""}</div>
       ${shops.length ? shops.slice(0, 3).map(p => `<div>${esc(p.street)} ${esc(p.num)}: empty, zone <span class="pill ${p.housing}">${WORD[p.housing]}</span></div>`).join("") : `<div class="hint2">No empty shop in the 2024 census.</div>`}
-      ${st ? `<div>NOMAD: <span class="pill ${st === "ZONE" ? "" : st}">${ANSKEY.find(([k]) => k === st)[1]}</span></div>` : ""}
+      ${st ? `<div>NOMAD: <span class="pill ${/ZONE/.test(st) ? "" : st}">${ANSKEY.find(([k]) => k === st)[1]}</span></div>` : ""}
       ${shops.length ? `<div><button type="button" class="chip" id="hudopen">Plans, units and 3D of this building</button></div>` : ""}`;
     const op = $("#hudopen");
     if (op) op.addEventListener("click", () => { show(shops[0]); $("#check").scrollIntoView({ behavior: "smooth" }); });
@@ -2379,7 +2379,8 @@ function buildPanel() {
 function drawKey() {
   const items = cityMode === "use" ? USES.map(([, l, c]) => [l, c]) : cityMode === "nomad" ? ANSKEY.map(([k, l]) => [l, NOMADC[k]])
     : cityMode === "height" ? [["1 floor", "#DED6C4"], ["8 floors", "#8B97A3"], ["15+ floors", "#345682"]] : TYPO;
-  $("#ckey").innerHTML = items.map(([l, c]) => `<span><i style="background:${c}"></i>${esc(l)}</span>`).join("");
+  $("#ckey").innerHTML = items.map(([l, c]) => `<span><i style="background:${c}"></i>${esc(l)}</span>`).join("")
+    + (cityMode === "typology" ? `<div class="hint2">zones outside the census shops are estimated from the base map</div>` : "");
 }
 function setSun() {
   const date = $("#sdate").value || "2026-06-21", h = +$("#stime").value, s = sunAt(date, h);
