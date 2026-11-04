@@ -2189,17 +2189,89 @@ const TYPO = [["old town (12)", "#B9785C"], ["Eixample type (13a)", "#D2A957"], 
   ["industrial", "#8E8A84"], ["facility or system", "#B4A6CF"], ["other", "#C9C5BC"]];
 const USES = [["1", "residential", "#DED3BD"], ["4_2", "retail", "#E2A35A"], ["4_1", "office", "#7FA4CC"], ["3", "industrial", "#97928A"],
   ["4_3", "public services", "#A98FCB"], ["", "other", "#C9C5BC"]];
-const NOMADC = { YES: "#3F8F5A", PARTLY: "#C98A2B", CHECK: "#C98A2B", NO: "#C4473A", "": "#CBC7BF" };
+const NOMADC = { YES: "#3F8F5A", PARTLY: "#C98A2B", CHECK: "#C98A2B", NO: "#C4473A", ZONE: "#7E9CB0", "": "#CBC7BF" };
+const ANSKEY = [["YES", "livable"], ["PARTLY", "needs a change"], ["NO", "not livable"], ["ZONE", "zone only"], ["", "no empty shop"]];
 const GROUND = { road_main: ["main roads", "#8F969D"], road: ["streets", "#ABB0B5"], path: ["civic and pedestrian paths", "#D6C9B2"],
   park: ["parks and gardens", "#7DB463"], forest: ["forest", "#4E8C4A"], rail: ["railway", "#7E746D"], water: ["port and water", "#6FA6CF"],
   facility: ["facility ground", "#D9CCBD"] };
 let city = null, cityMode = "typology";
 const hexRGB = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
-function partColour(meta, up) {
+function partColour(meta, up, typ) {
   if (cityMode === "use") { const u = String(meta[1] || ""); return (USES.find(([k]) => k && u.startsWith(k)) || USES[USES.length - 1])[2]; }
-  if (cityMode === "nomad") return NOMADC[meta[5] || ""] || NOMADC[""];
+  if (cityMode === "nomad") return NOMADC[answerIndex().get(meta[0]) || ""];
   if (cityMode === "height") { const t = Math.min(1, (up - 1) / 14); const a = [222, 214, 196], b = [52, 86, 130]; return "#" + a.map((v, i) => Math.round(v + (b[i] - v) * t).toString(16).padStart(2, "0")).join(""); }
-  return (TYPO[meta[4]] || TYPO[10])[1];
+  return (TYPO[typ] || TYPO[10])[1];
+}
+
+/* The city tiles carry [ref, use, dwellings, floors] only, so the PGM zone and NOMAD's answer of each building are found
+   here, once (the indexes once per page, the zone once per building ref while a tile is built), never per frame. */
+const inRing = (x, y, ring) => {
+  let ins = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i], [xj, yj] = ring[j];
+    if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) ins = !ins;
+  }
+  return ins;
+};
+const TYPO_OF = k => { k = String(k || ""); return k === "12" ? 0 : k === "13a" ? 1 : k === "13b" ? 2 : k === "15" ? 3 : /^14/.test(k) ? 4
+  : k === "18" ? 5 : k === "20" ? 6 : k === "22@" ? 7 : /^22/.test(k) ? 8 : -1; };
+/* Typology: basemap.json's zone polygons (res / other / green) have no PGM key, so each takes the majority key of the
+   empty shops inside it (premises.json; 98 % of shops agree with their polygon), an unlabelled residential polygon the key
+   of the nearest shop within 250 m, an unlabelled green one "facility or system". A building with an empty shop keeps its
+   own key. */
+let ZIDX = null;
+function zoneIndex() {
+  if (ZIDX) return ZIDX;
+  const G = 250, cell = (x, y) => Math.floor(x / G) + "_" + Math.floor(y / G), polys = new Map(), shops = new Map(), byRef = new Map();
+  const add = (m, k, v) => { let a = m.get(k); if (!a) m.set(k, a = []); a.push(v); };
+  for (const kind of ["res", "other", "green"]) for (const ring of (B && B[kind]) || []) {
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity, sx = 0, sy = 0;
+    for (const [x, y] of ring) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); sx += x; sy += y; }
+    const p = { ring, kind, bb: [x0, y0, x1, y1], c: [sx / ring.length, sy / ring.length], votes: {}, typ: -1 };
+    for (let i = Math.floor(x0 / G); i <= Math.floor(x1 / G); i++) for (let j = Math.floor(y0 / G); j <= Math.floor(y1 / G); j++) add(polys, i + "_" + j, p);
+  }
+  const at = (x, y) => { for (const p of polys.get(cell(x, y)) || []) if (x >= p.bb[0] && x <= p.bb[2] && y >= p.bb[1] && y <= p.bb[3] && inRing(x, y, p.ring)) return p; return null; };
+  P.forEach(r => {
+    const t = TYPO_OF(r.key); if (t < 0) return;
+    if (r.ref) byRef.set(r.ref.slice(0, 14), t);
+    add(shops, cell(r.x, r.y), [r.x, r.y, t]);
+    const p = at(r.x, r.y); if (p) p.votes[t] = (p.votes[t] || 0) + 1;
+  });
+  const near = (x, y) => {
+    let best = -1, d2 = G * G; const i0 = Math.floor(x / G), j0 = Math.floor(y / G);
+    for (let i = i0 - 1; i <= i0 + 1; i++) for (let j = j0 - 1; j <= j0 + 1; j++) for (const [sx, sy, t] of shops.get(i + "_" + j) || []) { const d = (sx - x) ** 2 + (sy - y) ** 2; if (d < d2) { d2 = d; best = t; } }
+    return best;
+  };
+  new Set([].concat(...polys.values())).forEach(p => {
+    let n = 0; for (const t in p.votes) if (p.votes[t] > n) { n = p.votes[t]; p.typ = +t; }
+    if (p.typ < 0) p.typ = p.kind === "res" ? near(p.c[0], p.c[1]) : p.kind === "green" ? 9 : 10;
+    if (p.typ < 0) p.typ = 10;
+  });
+  return ZIDX = { byRef, at, ref: new Map() };                   // ref: the cache of every building already placed
+}
+function buildingTypo(ref, x, y) {
+  const Z = zoneIndex();
+  let t = Z.ref.get(ref);
+  if (t === undefined) { t = Z.byRef.get(ref); if (t === undefined) { const p = Z.at(x, y); t = p ? p.typ : 10; } Z.ref.set(ref, t); }
+  return t;
+}
+/* NOMAD's answer per building (cadastral ref, first 14 characters): the daylight class of its empty shops (Bars's model,
+   r.dl.cls), L = livable, C = needs a change, N = not livable; a zone that takes no housing is not livable whatever the
+   daylight. A shop without a daylight match falls back to the zone answer of city.index.shops: NO stays not livable,
+   YES or CHECK is "zone only". With several shops the best answer wins. */
+let CITYANS = null;
+function answerIndex() {
+  if (CITYANS) return CITYANS;
+  const rank = { NO: 0, ZONE: 1, PARTLY: 2, YES: 3 }, m = new Map(), put = (ref, a) => { const o = m.get(ref); if (o === undefined || rank[a] > rank[o]) m.set(ref, a); };
+  P.forEach(r => { if (r.ref && r.dl) put(r.ref.slice(0, 14), r.housing === "NO" ? "NO" : { L: "YES", C: "PARTLY", N: "NO" }[r.dl.cls] || "ZONE"); });
+  const lit = new Set(m.keys());
+  ((city && city.index && city.index.shops) || []).forEach(s => {
+    const ref = s[5]; if (!ref || lit.has(ref)) return;
+    const a = s[4] === "NO" ? "NO" : s[4] === "YES" || s[4] === "CHECK" ? "ZONE" : null;
+    if (a) put(ref, a);
+  });
+  if (city && city.index) CITYANS = m;                               // the zone answers arrive with the index: cache only then
+  return m;
 }
 
 /* the sun over Barcelona (NOAA solar position): azimuth from north, elevation, for a local date and hour */
@@ -2268,12 +2340,12 @@ function initCity() {
     const hit = ray.intersectObjects(Object.values(city.tiles).map(t => t.mesh).filter(m => m && m.visible))[0];
     if (!hit) return;
     const t = hit.object.userData.tile, part = t.triPart[hit.faceIndex], meta = t.data.b[t.data.bid[part]];
-    const [ref, use, dwell, floors, typ, st, homes] = meta;
+    const [ref, use, dwell, floors] = meta, typ = t.typo[part], st = answerIndex().get(ref);
     const shops = P.filter(p => (p.ref || "").slice(0, 14) === ref);
     const wx = hit.point.x + city.cx, wy = -hit.point.z + city.cy;
     $("#cityhud").innerHTML = `<b>Catastro ${esc(ref)}</b><div class="meta">${esc((TYPO[typ] || TYPO[10])[0])} · ${esc(String(use).replace(/^[\d_]+/, "").replace(/_/g, " "))} · ${floors} floors${dwell ? " · " + dwell + " dwellings" : ""}</div>
       ${shops.length ? shops.slice(0, 3).map(p => `<div>${esc(p.street)} ${esc(p.num)}: empty, zone <span class="pill ${p.housing}">${WORD[p.housing]}</span></div>`).join("") : `<div class="hint2">No empty shop in the 2024 census.</div>`}
-      ${st && homes ? `<div>NOMAD: <span class="pill ${st}">${st}</span> · up to ${homes} home${homes === 1 ? "" : "s"}</div>` : ""}
+      ${st ? `<div>NOMAD: <span class="pill ${st === "ZONE" ? "" : st}">${ANSKEY.find(([k]) => k === st)[1]}</span></div>` : ""}
       ${shops.length ? `<div><button type="button" class="chip" id="hudopen">Plans, units and 3D of this building</button></div>` : ""}`;
     const op = $("#hudopen");
     if (op) op.addEventListener("click", () => { show(shops[0]); $("#check").scrollIntoView({ behavior: "smooth" }); });
@@ -2305,7 +2377,7 @@ function buildPanel() {
   drawKey(); setSun();
 }
 function drawKey() {
-  const items = cityMode === "use" ? USES.map(([, l, c]) => [l, c]) : cityMode === "nomad" ? [["YES", NOMADC.YES], ["PARTLY or check the plan", NOMADC.PARTLY], ["NO", NOMADC.NO], ["no empty shop", NOMADC[""]]]
+  const items = cityMode === "use" ? USES.map(([, l, c]) => [l, c]) : cityMode === "nomad" ? ANSKEY.map(([k, l]) => [l, NOMADC[k]])
     : cityMode === "height" ? [["1 floor", "#DED6C4"], ["8 floors", "#8B97A3"], ["15+ floors", "#345682"]] : TYPO;
   $("#ckey").innerHTML = items.map(([l, c]) => `<span><i style="background:${c}"></i>${esc(l)}</span>`).join("");
 }
@@ -2381,11 +2453,13 @@ function loadNear() {
 }
 function buildTile(data) {
   const raw = Uint8Array.from(atob(data.xy), c => c.charCodeAt(0)), xy = new Int16Array(raw.buffer);
-  const pos = [], shade = [], vPart = [], triPart = [];
+  const pos = [], shade = [], vPart = [], triPart = [], typo = new Int8Array(data.n.length);
   const ox = data.x0 - city.cx, oz = -(data.y0 - city.cy);
   let k = 0;
   data.n.forEach((n, part) => {
-    const ring = []; for (let i = 0; i < n; i++, k += 2) ring.push([ox + xy[k] / 10, oz - xy[k + 1] / 10]);
+    const k0 = k, ring = []; for (let i = 0; i < n; i++, k += 2) ring.push([ox + xy[k] / 10, oz - xy[k + 1] / 10]);
+    let sx = 0, sy = 0; for (let i = k0; i < k; i += 2) { sx += xy[i]; sy += xy[i + 1]; }   // the part's centroid, UTM
+    typo[part] = buildingTypo(data.b[data.bid[part]][0], data.x0 + sx / n / 10, data.y0 + sy / n / 10);
     const h = 5 + 3 * (data.up[part] - 1);                        // 5 m ground floor + 3 m per upper floor, as exp1_daylight/shops_from_catastro.py
     for (let i = 0; i < n; i++) {
       const a = ring[i], b = ring[(i + 1) % n];
@@ -2400,7 +2474,7 @@ function buildTile(data) {
   g.computeVertexNormals();
   const mesh = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ vertexColors: true, side: THREE.DoubleSide, shadowSide: THREE.BackSide }));
   mesh.castShadow = mesh.receiveShadow = true;
-  const t = { data, mesh, triPart, vPart, shade, trees: [] }; mesh.userData.tile = t; city.scene.add(mesh);
+  const t = { data, mesh, triPart, vPart, shade, typo, trees: [] }; mesh.userData.tile = t; city.scene.add(mesh);
   recolourTile(t);
   // trees: crowns and trunks as instances; size class 0-4, 5 = palm
   if (data.tr) {
@@ -2425,7 +2499,7 @@ function recolourTile(t) {
   for (let v = 0; v < t.vPart.length; v++) {
     const part = t.vPart[v];
     let c = cache[part];
-    if (!c) { c = cache[part] = hexRGB(partColour(t.data.b[t.data.bid[part]], t.data.up[part])); }
+    if (!c) { c = cache[part] = hexRGB(partColour(t.data.b[t.data.bid[part]], t.data.up[part], t.typo[part])); }
     const s = t.shade[v]; col.setXYZ(v, c[0] * s, c[1] * s, c[2] * s);
   }
   col.needsUpdate = true;
