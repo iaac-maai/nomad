@@ -6,7 +6,7 @@ This repo holds our first two experiments (studio review, Thursday 29 Oct 2026).
 | Folder | What |
 | --- | --- |
 | `exp2_rules/` | Experiment 2 — the AI drafts rule cards from Decret 141/2012; we score grounding, agreement and accuracy |
-| `exp1_daylight/` | Experiment 1 — 50 factory floors simulated with Ladybug, XGBoost learns to predict daylight |
+| `exp1_daylight/` | Exp 4 (folder exp1_daylight) — 50 factory floors simulated with Ladybug, XGBoost learns to predict daylight |
 | `data/regulations/` | Regulation PDFs |
 | `outputs/` | Results for the slides |
 | `docs/AI_LOG.md` | AI use log (IAAC rule) |
@@ -30,7 +30,7 @@ python exp2_rules/draft_cards.py              # all 10 questions x 5 runs
 python exp2_rules/score_cards.py              # -> outputs/exp2_summary.md
 ```
 
-## Experiment 1 — daylight predictor
+## Exp 4 (folder exp1_daylight) — daylight predictor
 
 ```bash
 python exp1_daylight/make_variants.py         # -> exp1_daylight/variants.csv (50 variants)

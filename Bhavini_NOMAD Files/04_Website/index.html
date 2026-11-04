@@ -2,35 +2,36 @@
 <title>NOMAD Barcelona</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
 /* Layout: a drafting sheet. A sticky title block, then one sheet per question NOMAD answers; plans and data sit on paper,
    the verdict is always words in a pill, never paint on a plan. */
 :root {
-  --paper: #F2F0EA; --sheet: #FBFAF7; --ink: #1F1F1F; --slate: #4A4F55; --muted: #6B6962; --line: #E2DED5;
-  --grid: rgba(31,31,31,.045); --terra: #C0704F; --terra-ink: #9A5032; --pink: #F3DDD2;
-  --yes: #3F8F5A; --check: #B57A1E; --no: #C4473A; --blue: #2C5D8F;
-  --yes-bg: #E3F0E6; --check-bg: #F6EBD6; --no-bg: #F6E1DE;
-  --yes-ink: #2E6B43; --check-ink: #7A5210; --no-ink: #9E3328;   /* verdict text: same hues, dark enough for small text */
+  --paper: #C9CBC6; --sheet: #D7D9D4; --ink: #111211; --slate: #3B3D3A; --muted: #5F615D; --line: #9EA09B;
+  --grid: transparent; --terra: #111211; --terra-ink: #111211; --pink: rgba(229,255,0,.55); --neon: #E5FF00; --deep: #B9BBB6;
+  --yes: #E5FF00; --check: #8A8D86; --no: #111211; --blue: #111211;
+  --yes-bg: #E5FF00; --check-bg: transparent; --no-bg: #111211;
+  --yes-ink: #111211; --check-ink: #111211; --no-ink: #D7D9D4;   /* verdicts: neon fill / neon outline / ink fill, always with the word */
+  --m-yes: #3F8F5A; --m-check: #B57A1E; --m-no: #C4473A; --m-blue: #2C5D8F; --m-slate: #4A4F55; --m-line: #E2DED5; --m-sheet: #FBFAF7; --m-ink: #1F1F1F;
   --map-res: #E3DFD6; --map-green: #DCE7D3; --map-other: #ECEAE5;
-  --display: "Courier Prime", "Courier New", Courier, monospace;
-  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-  --mono: "IBM Plex Mono", "Courier New", monospace;
+  --display: "Inter Tight", "Arial Narrow", Arial, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", "Courier New", monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --paper: #17181A; --sheet: #202225; --ink: #ECEAE4; --slate: #B7B9BC; --muted: #8E8C86; --line: #34363A;
-  --grid: rgba(236,234,228,.045); --terra: #DB8C69; --terra-ink: #E9A585; --pink: #3B2A23;
-  --yes: #6CBB85; --check: #DDA548; --no: #E2766B; --blue: #79A6D6;
-  --yes-bg: #1F3326; --check-bg: #3A2E18; --no-bg: #3E2220;
-  --yes-ink: #6CBB85; --check-ink: #DDA548; --no-ink: #E2766B;
-  --map-res: #2C2D2F; --map-green: #23302A; --map-other: #262729; color-scheme: dark } }
+  --paper: #121312; --sheet: #1C1D1B; --ink: #ECEDE8; --slate: #B9BBB4; --muted: #8C8E88; --line: #3A3C38;
+  --grid: transparent; --terra: #ECEDE8; --terra-ink: #ECEDE8; --pink: rgba(229,255,0,.22); --neon: #E5FF00; --deep: #0B0C0B;
+  --yes: #E5FF00; --check: #8C8E88; --no: #ECEDE8; --blue: #ECEDE8;
+  --yes-bg: #E5FF00; --check-bg: transparent; --no-bg: #ECEDE8;
+  --yes-ink: #111211; --check-ink: #ECEDE8; --no-ink: #121312;
+ --m-yes: #6CBB85; --m-check: #DDA548; --m-no: #E2766B; --m-blue: #79A6D6; --m-slate: #B7B9BC; --m-line: #34363A; --m-sheet: #202225; --m-ink: #ECEAE4; --map-res: #2C2D2F; --map-green: #23302A; --map-other: #262729; color-scheme: dark } }
 :root[data-theme="dark"] {
-  --paper: #17181A; --sheet: #202225; --ink: #ECEAE4; --slate: #B7B9BC; --muted: #8E8C86; --line: #34363A;
-  --grid: rgba(236,234,228,.045); --terra: #DB8C69; --terra-ink: #E9A585; --pink: #3B2A23;
-  --yes: #6CBB85; --check: #DDA548; --no: #E2766B; --blue: #79A6D6;
-  --yes-bg: #1F3326; --check-bg: #3A2E18; --no-bg: #3E2220;
-  --yes-ink: #6CBB85; --check-ink: #DDA548; --no-ink: #E2766B;
-  --map-res: #2C2D2F; --map-green: #23302A; --map-other: #262729; color-scheme: dark }
+  --paper: #121312; --sheet: #1C1D1B; --ink: #ECEDE8; --slate: #B9BBB4; --muted: #8C8E88; --line: #3A3C38;
+  --grid: transparent; --terra: #ECEDE8; --terra-ink: #ECEDE8; --pink: rgba(229,255,0,.22); --neon: #E5FF00; --deep: #0B0C0B;
+  --yes: #E5FF00; --check: #8C8E88; --no: #ECEDE8; --blue: #ECEDE8;
+  --yes-bg: #E5FF00; --check-bg: transparent; --no-bg: #ECEDE8;
+  --yes-ink: #111211; --check-ink: #ECEDE8; --no-ink: #121312;
+ --m-yes: #6CBB85; --m-check: #DDA548; --m-no: #E2766B; --m-blue: #79A6D6; --m-slate: #B7B9BC; --m-line: #34363A; --m-sheet: #202225; --m-ink: #ECEAE4; --map-res: #2C2D2F; --map-green: #23302A; --map-other: #262729; color-scheme: dark }
 
 * { box-sizing: border-box }
 html { scroll-behavior: smooth; scroll-padding-top: 64px }
@@ -62,6 +63,7 @@ h3 { font-size: 19px; line-height: 1.2 }
 .panel { background: var(--sheet); border: 1px solid var(--line) }
 /* rulebook flipbook */
 .still3d { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
+.stilltag { position: absolute; right: 10px; bottom: 10px; z-index: 1; padding: 3px 8px; border-radius: 6px; background: rgba(17,18,17,.78); color: #ECEDE8; font: 600 11px var(--mono); letter-spacing: .04em }
 .bk { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 16px; margin-top: 18px; align-items: start }
 .bk-side { padding: 12px; max-height: 760px; overflow: auto; position: sticky; top: 110px }
 .bk-side input[type=search] { width: 100%; font: 13px var(--body); padding: 7px 9px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); margin: 6px 0 10px }
@@ -348,7 +350,7 @@ footer .wrap { padding-block: 16px 22px; display: flex; justify-content: space-b
 .savedlist { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-top: 18px }
 .saved { padding: 12px 14px; display: grid; gap: 6px; font-size: 13.5px }
 .saved label { display: flex; gap: 8px; align-items: center; font-weight: 600 }
-body.simple #steps, body.simple #shops, body.simple #rules, body.simple #experiments, body.simple #city, body.simple #real,
+body.simple #steps, body.simple #shops, body.simple .rtabs, body.simple #rp-rules, body.simple #experiments, body.simple #city, body.simple #real,
 body.simple .viewer, body.simple #ddetail .viewer, body.simple .mapbox .mapctl #to3d { display: none !important }
 body.simple #ddetail { grid-template-columns: minmax(0, 1fr) }
 body.simple .cards { display: none } body.simple .cards.open { display: block } body.simple .ws-right .drawer:not(:first-child) { display: none }
@@ -367,26 +369,389 @@ body.simple .cards { display: none } body.simple .cards.open { display: block } 
   .tally b { font-size: 21px }
   .exps { grid-template-columns: minmax(0, 1fr) }
 }
+
+/* ===== wayfinding neon layer (3 Nov 2026): grey paper, black ink, one fluorescent accent; mono labels; Inter Tight headlines ===== */
+:root { --spring: cubic-bezier(0.34, 1.56, 0.64, 1); --halftone: radial-gradient(var(--neon) 1.4px, transparent 1.7px) 0 0 / 6px 6px }
+body { background: var(--paper); background-image: none; -webkit-font-smoothing: antialiased }
+h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -.03em }
+h1 { font-size: clamp(36px, 6vw, 64px); line-height: .98 }
+h2 { font-size: clamp(28px, 3.8vw, 44px); line-height: 1.02 }
+h3 { font-weight: 700; letter-spacing: -.015em }
+a { color: var(--ink); text-decoration-color: var(--neon); text-decoration-thickness: 3px; text-underline-offset: 3px }
+a:hover { background: var(--pink) }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px }
+/* title block: a plan's legend strip */
+header.bar { background: var(--paper); border-bottom: 2px solid var(--ink) }
+header.bar::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 12px; background: var(--halftone);
+  -webkit-mask: linear-gradient(#000, transparent); mask: linear-gradient(#000, transparent); pointer-events: none }
+.logo { font: 800 22px/1 var(--display); letter-spacing: -.02em; text-transform: none }
+.logo small, nav a, .eyebrow, .fig, .chip, .tabs button, .legend, .answer dt, .answer .meta, .search label, .drawer > summary,
+.ws-left h4, .bk-lvl, .planc .lab, .step .exp, .kf dd, .pill, button.go, .hint2 b { font-family: var(--mono) }
+nav a, .eyebrow, .fig, .chip, .tabs button, .drawer > summary, .ws-left h4, .bk-lvl, .step .exp, .pill, button.go { text-transform: uppercase; letter-spacing: .06em }
+nav a { font-weight: 500; font-size: 11.5px; color: var(--ink); border: 1.5px solid transparent; border-radius: 0 }
+nav a:hover { border-color: var(--ink); background: var(--neon) }
+/* every sheet opens with a neon wall that fades into dots */
+section.sheet { position: relative; padding-block: 56px 16px }
+section.sheet::before { content: ""; position: absolute; left: max(16px, calc(50% - 590px)); top: 24px; width: 112px; height: 8px; background: var(--neon) }
+section.sheet::after { content: ""; position: absolute; left: max(16px, calc(50% - 590px)); top: 32px; width: 112px; height: 10px; background: var(--halftone);
+  -webkit-mask: linear-gradient(#000, transparent); mask: linear-gradient(#000, transparent) }
+.eyebrow { font-weight: 700; font-size: 11.5px; color: var(--ink) }
+.eyebrow::before { content: "→ " }
+.lede { color: var(--slate) }
+.panel { background: var(--sheet); border: 1.5px solid var(--ink); border-radius: 0 }
+.fig { color: var(--ink); font-weight: 700 }
+.fig b { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; border: 1.5px solid var(--ink); border-radius: 999px; color: var(--ink); font-size: 10px }
+/* controls: ink outlines, neon when on; respond on press (spring) */
+.chip, .tabs button, .vlist button, .bk-mark, .legend button { border-radius: 0; transition: transform .2s var(--spring), background .1s }
+.chip { border: 1.5px solid var(--ink); background: transparent; color: var(--ink); font-weight: 500; font-size: 11.5px }
+.chip:hover { background: var(--pink) }
+.chip[aria-pressed="true"], .tabs button[aria-selected="true"] { background: var(--neon); color: #111211; border-color: var(--ink); box-shadow: none }
+.chip:active, .tabs button:active, button.go:active, .vlist button:active, .dplan:active, .galopt:active { transform: scale(.97) }
+button.go { background: var(--neon); color: #111211; border: 2px solid var(--ink); border-radius: 0; font-weight: 700; font-size: 13px; padding: 12px 18px; cursor: pointer;
+  transition: transform .2s var(--spring), box-shadow .1s }
+button.go:hover { box-shadow: 4px 4px 0 var(--ink) }
+button.go[disabled] { background: var(--deep); color: var(--muted) }
+.search input { border: 2px solid var(--ink); background: var(--sheet); font-family: var(--mono) }
+.search input:focus { outline: none; box-shadow: 0 0 0 4px var(--neon) }
+input[type=range] { accent-color: #111211 }
+/* verdicts: neon fill = yes, neon ring = check / partly, ink = no (the word is always written) */
+.pill { border-radius: 999px; font-weight: 700; font-size: 11px; padding: 4px 10px }
+.pill::before { width: 8px; height: 8px }
+.YES { color: #111211; background: var(--neon) } .YES::before { background: #111211 }
+.PARTLY, .CHECK { color: var(--ink); background: transparent; box-shadow: inset 0 0 0 2px var(--neon), inset 0 0 0 3.5px var(--ink) }
+.NO { color: var(--no-ink); background: var(--no-bg) }
+/* the eight steps: circled numbers, like a legend */
+.step { background: var(--sheet); border: 1.5px solid var(--ink); border-radius: 0 }
+.step .n { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); font: 700 13px var(--mono) }
+.step:hover .n { background: var(--neon); color: #111211 }
+.step .exp { color: var(--ink) }
+.wn { display: inline-grid; place-items: center; width: 30px; height: 30px; border: 1.5px solid var(--ink); border-radius: 50%; background: transparent; color: var(--ink); font: 700 13px var(--mono) }
+.tally { background: var(--ink); border: 1.5px solid var(--ink); gap: 1.5px }
+.tally div { background: var(--sheet) }
+.tally b { font: 800 30px/1 var(--display); letter-spacing: -.03em }
+.legend { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink) }
+.planc[aria-pressed="true"], .dplan[aria-pressed="true"] { outline: 3px solid var(--neon); outline-offset: -3px; box-shadow: inset 0 0 0 4.5px var(--ink) }
+.vlist button { border: 1.5px solid var(--ink); background: transparent }
+.vlist button[aria-pressed="true"] { background: var(--neon); color: #111211; box-shadow: none }
+.drawer > summary { font-weight: 700; font-size: 11.5px }
+.drawer > summary::after { color: var(--ink) }
+.agent { border: 1.5px solid var(--ink); border-radius: 0; background: var(--sheet) }
+.agentlog .me { background: var(--ink); color: var(--paper); border-radius: 0 } .agentlog .bot { background: var(--paper); border-radius: 0; border: 1px solid var(--line) }
+.pbars i { background: var(--neon); box-shadow: inset 0 0 0 1.5px var(--ink); border-radius: 0; height: 14px }
+.ambmap { background: var(--m-sheet) }
+.swatch { border-color: var(--ink) }
+
+/* ===== the rulebook as a flipbook on its own (after Heyzine): no frame, page stack, curling corners, floating tools ===== */
+.fb { position: relative; padding: 52px 64px 64px; min-height: 420px; min-width: 0 }
+.fb:fullscreen { background: var(--paper); padding: 72px 96px 80px; display: flex; flex-direction: column; justify-content: center }
+.fb .bk-stage { background: transparent; padding: 0; min-height: 0; perspective: 2600px }
+.fb .bk-stage:focus-visible { outline: none; box-shadow: none }
+.fb .bk-spread { max-width: 1120px; filter: drop-shadow(0 22px 26px rgba(0,0,0,.28)) drop-shadow(0 3px 5px rgba(0,0,0,.18)) }
+.fb:fullscreen .bk-spread { max-width: min(1500px, 92vw); max-height: 82vh; aspect-ratio: 1.414 / 1 }
+.fb .bk-spread { width: min(100%, 1120px, calc((100vh - 230px) * 1.414)) }
+.bk:has(.fb) { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); margin-top: 28px }
+.bk:has(.fb) .bk-side { border: 1.5px solid var(--ink); max-height: calc(100vh - 140px) }
+.fb .bk-spread.one { max-width: 560px; width: min(100%, 560px, calc((100vh - 230px) * .707)) }
+.fb:fullscreen .bk-spread { width: min(92vw, calc((100vh - 160px) * 1.414)) }
+.fb:fullscreen .bk-spread.one { max-width: none; width: min(92vw, calc((100vh - 160px) * .707)) }
+.fb .bk-pg { background: #FFFFFF }
+.fb .bk-pg.l { box-shadow: inset -26px 0 30px -22px rgba(0,0,0,.38), -1px 0 0 #E4E4E0, -2px 0 0 #FFFFFF, -3px 0 0 #DCDCD7, -4px 0 0 #FFFFFF, -5px 0 0 #D4D4CF, -6px 0 0 #FAFAF8 }
+.fb .bk-pg.r { box-shadow: inset 26px 0 30px -22px rgba(0,0,0,.30), 1px 0 0 #E4E4E0, 2px 0 0 #FFFFFF, 3px 0 0 #DCDCD7, 4px 0 0 #FFFFFF, 5px 0 0 #D4D4CF, 6px 0 0 #FAFAF8 }
+.fb .bk-spread.one .bk-pg.r { box-shadow: 1px 0 0 #E4E4E0, 2px 0 0 #FFFFFF, 3px 0 0 #DCDCD7, 4px 0 0 #FFFFFF, 5px 0 0 #D4D4CF, 6px 0 0 #FAFAF8, inset 6px 0 10px -6px rgba(0,0,0,.25) }
+/* the corner curls when you reach for it */
+.fb .bk-pg::after { content: ""; position: absolute; bottom: 0; width: 0; height: 0; pointer-events: none; transition: width .28s var(--spring, ease), height .28s var(--spring, ease);
+  filter: drop-shadow(-3px -3px 4px rgba(0,0,0,.22)) }
+.fb .bk-pg.r::after { right: 0; background: linear-gradient(315deg, transparent 50%, #E9E9E5 50%, #FFFFFF 64%, #F1F1EE 100%) }
+.fb .bk-pg.l::after { left: 0; background: linear-gradient(45deg, transparent 50%, #E9E9E5 50%, #FFFFFF 64%, #F1F1EE 100%); filter: drop-shadow(3px -3px 4px rgba(0,0,0,.22)) }
+.fb .bk-pg:not(.blank):hover::after { width: 72px; height: 72px }
+.fb .bk-leaf { background: #FFFFFF; box-shadow: 0 0 40px rgba(0,0,0,.25) }
+.fb .bk-leaf::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.18), transparent 30%, transparent 70%, rgba(0,0,0,.12)); pointer-events: none }
+/* floating tools, like the reader's own */
+.fb-tools { position: absolute; top: 0; right: 0; display: flex; gap: 4px; z-index: 3 }
+.fb-ic { all: unset; position: relative; box-sizing: border-box; width: 44px; height: 44px; display: grid; place-items: center; cursor: pointer; color: var(--ink); transition: transform .2s var(--spring, ease), background .1s }
+.fb-ic svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round }
+.fb-ic:hover { background: var(--neon); color: #111211 } .fb-ic:active { transform: scale(.94) } .fb-ic:focus-visible { outline: 2px solid var(--ink) }
+.fb-badge { position: absolute; top: 4px; right: 2px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--neon); color: #111211; font: 700 10px/18px var(--mono); text-align: center; box-shadow: 0 0 0 1.5px var(--ink) }
+.fb-arrow { all: unset; position: absolute; bottom: 8px; width: 52px; height: 40px; display: grid; place-items: center; cursor: pointer; color: var(--ink); transition: transform .2s var(--spring, ease) }
+.fb-arrow svg { width: 48px; height: 32px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round }
+.fb-arrow.prev { left: 8px } .fb-arrow.next { right: 8px }
+.fb-arrow:hover { color: var(--ink); transform: translateY(-2px) } .fb-arrow:active { transform: scale(.94) } .fb-arrow:focus-visible { outline: 2px solid var(--ink) }
+.fb-arrow[disabled] { opacity: .2; cursor: default }
+.fb-foot { position: absolute; left: 72px; right: 72px; bottom: 14px; margin: 0; text-align: center; font: 500 11.5px var(--mono); letter-spacing: .04em; color: var(--slate); white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.fb-foot input { width: 64px; font: 600 12px var(--mono); text-align: center; padding: 3px 4px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink) }
+/* the contents drawer */
+.fb-drawer { position: absolute; top: 48px; right: 0; bottom: 48px; width: min(360px, 92%); z-index: 4; background: var(--sheet); border: 1.5px solid var(--ink); padding: 14px 16px; overflow: auto;
+  box-shadow: 8px 8px 0 var(--ink); animation: fbIn .28s var(--spring, ease) }
+@keyframes fbIn { from { transform: translateX(16px); opacity: 0 } to { transform: none; opacity: 1 } }
+@media (prefers-reduced-motion: reduce) { .fb-drawer { animation: none } .fb .bk-pg::after { transition: none } }
+.fb-close { position: absolute; top: 4px; right: 4px }
+.fb-drawer input[type=search] { width: 100%; font: 13px var(--body); padding: 8px 10px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); margin: 10px 0 }
+@media (max-width: 860px) { .fb { padding: 52px 8px 72px } .fb-foot { left: 60px; right: 60px } .fb-arrow { bottom: 18px } }
+
+/* ===== black by default: the site is dark on every device (light only if a page asks for it) ===== */
+:root:not([data-theme="light"]) {
+  --paper: #121312; --sheet: #1C1D1B; --ink: #ECEDE8; --slate: #B9BBB4; --muted: #8C8E88; --line: #3A3C38;
+  --grid: transparent; --terra: #ECEDE8; --terra-ink: #ECEDE8; --pink: rgba(229,255,0,.22); --neon: #E5FF00; --deep: #0B0C0B;
+  --yes: #E5FF00; --check: #8C8E88; --no: #ECEDE8; --blue: #ECEDE8;
+  --yes-bg: #E5FF00; --check-bg: transparent; --no-bg: #ECEDE8;
+  --yes-ink: #111211; --check-ink: #ECEDE8; --no-ink: #121312;
+ --m-yes: #6CBB85; --m-check: #DDA548; --m-no: #E2766B; --m-blue: #79A6D6; --m-slate: #B7B9BC; --m-line: #34363A; --m-sheet: #202225; --m-ink: #ECEAE4; --map-res: #2C2D2F; --map-green: #23302A; --map-other: #262729; color-scheme: dark }
+
+/* ===== layout system (after SimiStar, in the neon look): one content edge, an 8 pt grid, five type sizes,
+   pill tabs in the header, section tabs in a tray, one button family ===== */
+:root { --r: 8px; --r-sm: 6px }
+html { scroll-padding-top: 88px }
+.wrap { max-width: 1240px; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)) }
+a:hover { background: none }
+/* header: brand | tabs | preferences, one line */
+header.bar { background: var(--paper) }
+header.bar .wrap { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 24px; padding-block: 12px }
+.logo { display: inline-flex; align-items: baseline; gap: 10px; white-space: nowrap }
+.logo small { margin: 0; font-size: 11px; letter-spacing: .08em }
+nav.main { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 0 }
+.ptab, nav.main a.ptab { all: unset; box-sizing: border-box; display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border-radius: var(--r);
+  font: 600 12px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); cursor: pointer; white-space: nowrap; transition: background .12s, color .12s }
+.ptab:hover, nav.main a.ptab:hover { background: var(--sheet); color: var(--ink) }
+.ptab.on, nav.main a.ptab.on { background: var(--neon); color: #111211 }
+.ptab:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px }
+.ptab .car { font-size: 9px; transition: transform .2s var(--spring) } .ptab[aria-expanded="true"] .car { transform: rotate(180deg) }
+.pgroup { position: relative }
+.pmenu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 20; min-width: 210px; display: grid; gap: 2px; padding: 6px; background: var(--sheet); border: 1.5px solid var(--ink); border-radius: var(--r) }
+.pmenu[hidden] { display: none }
+.pgroup:last-child .pmenu { left: auto; right: 0 }
+nav.main .pmenu a { display: flex; align-items: center; height: 36px; padding: 0 12px; border: 0; border-radius: var(--r-sm); background: none;
+  font: 600 12px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink); text-decoration: none }
+nav.main .pmenu a:hover { background: var(--pink) }
+nav.main .pmenu a.on { background: var(--neon); color: #111211 }
+.prefs { gap: 8px; justify-self: end } .prefs .chip { white-space: nowrap }
+.prefs select { height: 32px; padding: 0 8px; border: 1.5px solid var(--ink); border-radius: var(--r-sm); background: var(--paper); color: var(--ink); font: 600 12px var(--mono) }
+/* every section: neon wall on the content edge, then eyebrow, title, lede, and the content 32 px below */
+section.sheet { padding-block: 72px 24px }
+section.sheet::before, section.sheet::after { content: none }
+section.sheet > .wrap { position: relative }
+section.sheet > .wrap::before { content: ""; display: block; width: 112px; height: 18px; margin-bottom: 24px;
+  background: linear-gradient(var(--neon), var(--neon)) 0 0 / 100% 8px no-repeat, radial-gradient(var(--neon) 1.4px, transparent 1.7px) 0 8px / 6px 6px;
+  -webkit-mask: linear-gradient(#000 8px, transparent); mask: linear-gradient(#000 8px, transparent) }
+.eyebrow { margin: 0 0 12px; font-size: 11px; letter-spacing: .08em }
+h1, h2 { margin: 0 }
+.lede { margin: 16px 0 0; max-width: 68ch; font-size: 16px; line-height: 1.55 }
+.hero, .wiz, .tabs, .steps, .rulegrid, .exps, .citybox, .realgrid, .bk, .bk:has(.fb), .savedlist, .golden, #pout { margin-top: 32px }
+section.sheet > .wrap > .src-table, section.sheet > .wrap > .reqrow:first-of-type { margin-top: 32px }
+section.sheet > .wrap > h3 { margin: 48px 0 8px; font-size: 22px }
+.note, .hint2 { font-size: 13px; line-height: 1.5 } .note { margin-top: 16px }
+/* panels: one radius, one padding, gaps on the 8 pt grid */
+.panel { border-radius: var(--r) }
+.answer, .wstep, .golden, .exps .exp { padding: 24px }
+.step a.exp { display: inline-flex; align-self: flex-start; padding: 0; border: 0; gap: 0 }
+.mapbox, .viewer, .citybox, .ws-left, .cards, .saved, .bk-side, .rule { padding: 16px }
+.answer { margin-top: 24px; gap: 16px } .tally { margin-top: 24px; border-radius: var(--r); overflow: hidden }
+.hero { gap: 32px } .wiz, .detail, .plans, .rulegrid, .exps, .savedlist, .cityrow, .ws-right, .steps { gap: 16px }
+.detail, .detail.ws { margin-top: 16px }
+.wstep { gap: 16px } .wstep h3 { gap: 12px; font-size: 20px }
+.realgrid, .tally { gap: 1.5px } .realgrid { border-radius: var(--r); overflow: hidden; background: var(--ink); border: 1.5px solid var(--ink) }
+.realgrid div, .tally div { padding: 16px }
+.step { border-radius: var(--r); padding: 16px; gap: 8px }
+.drawer > summary { padding: 12px 16px; align-items: center } .drawer > div, .drawer .cards { padding: 0 16px 16px }
+.viewer .stage, .citystage, .bldg .bstage { border-radius: var(--r-sm) }
+.fig { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 11px; letter-spacing: .08em }
+.legend, .mapctl, .bar2 { margin-top: 12px; gap: 8px; align-items: center }
+/* buttons: one family. 32 px controls, 40 px for the main action, 6 px corners */
+.chip, label.chip { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 32px; padding: 6px 12px; border: 1.5px solid var(--ink); border-radius: var(--r-sm);
+  background: transparent; color: var(--ink); font: 600 12px/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; cursor: pointer; text-align: center }
+.chip:hover { background: var(--sheet) }
+.chip[aria-pressed="true"] { background: var(--neon); color: #111211; border-color: var(--neon) }
+.go, button.go { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 20px; border-radius: var(--r-sm); font: 700 13px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase }
+.examples, .reqrow { gap: 8px }
+.examples { margin-top: 12px; font: 600 11px var(--mono); letter-spacing: .08em; text-transform: uppercase }
+.reqrow input[type=number], .value input, .bk-side input[type=search], .citypanel input[type=date] { min-height: 32px; border: 1.5px solid var(--ink); border-radius: var(--r-sm); padding: 4px 8px }
+.search label { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px }
+.search input { border-radius: var(--r-sm); min-height: 48px }
+.sugg { border-radius: 0 0 var(--r-sm) var(--r-sm) }
+.stepper { border: 1.5px solid var(--ink); border-radius: var(--r-sm); overflow: hidden } .stepper button { width: 32px; min-height: 30px; display: grid; place-items: center }
+/* section tabs (SimiStar's tray): the choices sit in one box, the one you are on is lit */
+.tabs, .mapmode { display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 4px; background: var(--sheet); border: 1.5px solid var(--ink); border-radius: var(--r) }
+.mapmode { margin-top: 12px }
+.tabs button, .mapmode .chip { min-height: 32px; padding: 6px 12px; border: 0; border-radius: var(--r-sm); background: transparent; color: var(--muted);
+  font: 600 12px/1.25 var(--mono); letter-spacing: .06em; text-transform: uppercase; box-shadow: none }
+.tabs button:hover, .mapmode .chip:hover { background: var(--paper); color: var(--ink) }
+.tabs button[aria-selected="true"], .mapmode .chip[aria-pressed="true"] { background: var(--neon); color: #111211 }
+.shophead { margin: 24px 0 16px }
+/* tables: caps headings, 13 px rows */
+table { font-size: 13px; background: var(--sheet) } .src-table { border: 1.5px solid var(--ink); border-radius: var(--r) }
+th { font-size: 11px; letter-spacing: .08em; padding: 12px 16px } td { padding: 10px 16px }
+tr:last-child td { border-bottom: 0 }
+.answer dt, .legend, .ws-left h4, .citypanel legend, .drawer > summary, .bk-lvl, .step .exp, .exp .tag, .planc .lab { font-size: 11px; letter-spacing: .08em }
+.bk:has(.fb) .bk-side { border-radius: var(--r) }
+.bk-mark { border-radius: var(--r-sm) }
+footer .wrap { padding-block: 24px }
+@media (max-width: 1080px) {
+  header.bar .wrap { grid-template-columns: auto auto; row-gap: 8px }
+  nav.main { grid-column: 1 / -1; grid-row: 2 }
+  html { scroll-padding-top: 128px }
+}
+@media (max-width: 560px) {
+  .wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
+  .logo small { display: none }
+  .ptab, nav.main a.ptab { height: 32px; padding: 0 10px; font-size: 11px }
+  section.sheet { padding-block: 48px 16px }
+  .answer, .wstep, .golden, .exps .exp { padding: 16px }
+  .tabs, .mapmode { display: flex }
+}
+
+/* ===== the address check in three columns: search + answer | the building, plan and 3D, + the tally | the map (widest).
+   The handles between them change the widths. ===== */
+.wrap { max-width: 1600px }
+.hero3 { display: grid; grid-template-columns: minmax(0, var(--c1, 22fr)) 16px minmax(0, var(--c2, 34fr)) 16px minmax(0, var(--c3, 44fr)); margin-top: 32px; align-items: start }
+.hcol { display: grid; gap: 0; min-width: 0 }
+.hcol > .search { margin-top: 0 }
+.bcol { padding: 16px }
+.bcol .bgrid { grid-template-columns: minmax(0, 1fr); gap: 16px }
+.bcol .bplan svg { max-height: 360px }
+.bcol .bstage { height: 340px }
+.bcol .bhead { font-size: 13px; color: var(--slate) }
+.hcol > .tally { margin-top: 16px }
+.hero3 .mapbox { position: sticky; top: 80px }
+.gut { position: relative; cursor: col-resize; align-self: stretch; touch-action: none; outline: none }
+.gut::after { content: ""; position: absolute; top: 0; bottom: 0; left: 7px; width: 2px; border-radius: 1px; background: var(--line); transition: background .12s, width .12s, left .12s }
+.gut:hover::after, .gut.on::after, .gut:focus-visible::after { left: 6px; width: 4px; background: var(--neon) }
+@media (max-width: 1100px) {
+  .hero3 { grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1fr) }
+  .hero3 > .gut ~ .gut { display: none }
+  .hero3 > .gut { pointer-events: none }
+  .hero3 .mapbox { grid-column: 1 / -1; position: static; margin-top: 16px }
+}
+@media (max-width: 760px) {
+  .hero3 { grid-template-columns: minmax(0, 1fr) }
+  .hero3 > .gut { display: none }
+  .hero3 > .hcol + .gut + .hcol { margin-top: 16px }
+}
+
+/* the three columns are three equal boxes: same top, same bottom (the tallest sets the height, the others stretch) */
+.hero3 { align-items: stretch }
+.hcol { display: flex; flex-direction: column; min-width: 0 }
+.qcol { padding: 16px }
+.qcol .answer { flex: 1; align-content: start; margin-top: 16px; padding: 16px 0 0; border: 0; border-top: 1.5px solid var(--line); border-radius: 0; background: none }
+.bcol { flex: 1 }
+.hero3 .mapbox { position: static; display: flex; flex-direction: column }
+.hero3 .mapbox .note { margin-top: auto; padding-top: 16px }
+@media (max-width: 1100px) { .hero3 .mapbox { margin-top: 16px } }
+
+/* design homes: the three steps are three equal boxes (same top and bottom); rows inside line up on one left edge */
+.wiz { align-items: stretch }
+.wstep .reqrow { align-items: center }
+.wstep .reqrow > .hint2 { flex-basis: 100%; margin: 0 }
+.wstep .reqrow[role=radiogroup] { display: grid; gap: 8px; justify-items: start }
+.wstep .reqrow[role=radiogroup] > label { display: flex; gap: 8px; align-items: flex-start; line-height: 1.4 }
+.wstep .reqrow[role=radiogroup] > label input { margin: 3px 0 0; flex: none }
+input[type=radio], input[type=checkbox] { accent-color: var(--neon) }
+.reqtype { grid-template-columns: 96px auto minmax(0, 1fr) }
+.wstep .examples { align-items: center }
+
+/* design homes workspace: key figures | 3D | four detail tabs. The tabs' box is exactly as tall as the other two and scrolls inside */
+.detail.ws { grid-template-columns: minmax(0, 250px) minmax(0, 1fr) minmax(0, 400px); align-items: stretch }
+.ws-right { position: relative; display: block; min-height: 480px }
+.wsbox { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 8px }
+.wstabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; flex: none }
+.wstabs button { padding: 6px 4px; text-align: center; font-size: 11px; line-height: 1.25; white-space: normal }
+.wstabs button:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px }
+.wspane { flex: 1; min-height: 0; overflow: auto; padding: 16px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; scrollbar-gutter: stable }
+.wspane::-webkit-scrollbar { width: 8px } .wspane::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px } .wspane::-webkit-scrollbar-thumb:hover { background: var(--neon) }
+.wspane .cards { max-height: none; overflow: visible; padding: 0 }
+.wspane li, .wspane .v, .wspane .c { overflow-wrap: anywhere; white-space: normal }
+body.simple .wstabs button:not(:first-child) { display: none }
+@media (max-width: 1150px) { .detail.ws { grid-template-columns: minmax(0, 250px) minmax(0, 1fr) } .ws-right { grid-column: 1 / -1; display: block; height: 560px } }
+@media (max-width: 760px) { .detail.ws { grid-template-columns: minmax(0, 1fr) } }
+
+/* workflow order: step numbers on the header tabs, and step titles that lead to their section */
+.ptab .sn { display: inline-grid; place-items: center; min-width: 20px; height: 18px; padding: 0 5px; border: 1.5px solid currentColor; border-radius: 999px; font-size: 10px; letter-spacing: 0 }
+.step h3 a.sgo { color: inherit; text-decoration: none } .step h3 a.sgo::after { content: " →"; color: var(--muted); font-size: .85em }
+.step:hover h3 a.sgo { text-decoration: underline; text-decoration-color: var(--neon); text-decoration-thickness: 3px; text-underline-offset: 3px }
+#steps .steps { margin-top: 32px }
+
+/* step 4: the rules | the rulebook, as tabs */
+#rp-rules > .lede, #book > .lede { margin-top: 24px }
+#rp-rules .golden { margin-top: 24px }
+body.simple #book { display: block !important }
+
+/* weights: label and share on one line, the slider full width under it; one slider look for the whole site */
+.weights .wrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "l o" "r r"; gap: 4px 12px; align-items: baseline; margin: 12px 0 0 }
+.weights .wrow label { grid-area: l; font-size: 14px } .weights .wrow output { grid-area: o; font: 700 13px var(--mono); text-align: right; min-width: 4.5ch }
+.weights .wrow input[type=range] { grid-area: r; width: 100% }
+input[type=range] { accent-color: var(--neon); height: 24px; margin: 0; cursor: pointer }
+input[type=range]:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 6px }
+.weights > summary { padding: 4px 0 }
+
+/* ===== simple copy: App | Research, two doors, plain words; easier to read (brighter greys, 16 px text, sentence-case buttons) ===== */
+:root:not([data-theme="light"]) { --muted: #A9ABA5; --slate: #CFD1CA }
+body { font-size: 16px }
+.hint2, .note { font-size: 14px }
+body[data-view="app"] section[data-view="research"], body[data-view="research"] section[data-view="app"],
+body[data-view="app"] nav.main [data-view="research"], body[data-view="research"] nav.main [data-view="app"] { display: none }
+header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
+.views { display: inline-flex; gap: 2px; padding: 4px; border: 1.5px solid var(--ink); border-radius: var(--r) }
+.vt { all: unset; box-sizing: border-box; height: 32px; padding: 0 16px; display: inline-flex; align-items: center; border-radius: var(--r-sm); cursor: pointer;
+  font: 700 13px var(--body); color: var(--muted) }
+.vt:hover { color: var(--ink); background: var(--sheet) } .vt[aria-selected="true"] { background: var(--ink); color: var(--paper) }
+.vt:focus-visible { outline: 2px solid var(--neon); outline-offset: 2px }
+.chip, label.chip, .go, button.go, .ptab, nav.main a.ptab, nav.main .pmenu a, .tabs button, .mapmode .chip, .examples, .prefs select {
+  text-transform: none; letter-spacing: .005em; font-family: var(--body) }
+.chip, label.chip, .tabs button, .mapmode .chip { font-size: 14px; font-weight: 600 }
+.go, button.go { font-size: 15px; font-weight: 700 } .ptab, nav.main a.ptab, nav.main .pmenu a { font-size: 14px; font-weight: 600 }
+/* the two doors */
+.start h1 { max-width: 16ch }
+.doors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 32px; max-width: 980px }
+.door { display: flex; flex-direction: column; gap: 10px; padding: 24px; text-decoration: none; color: var(--ink); transition: transform .2s var(--spring), background .12s }
+.door:hover { background: var(--sheet); transform: translateY(-2px) } .door:hover .dgo { background: var(--neon); color: #111211 }
+.door .dk { font: 700 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.door b { font: 800 30px/1.05 var(--display); letter-spacing: -.02em } .door span { font-size: 16px; color: var(--slate) }
+.door .dgo { margin-top: auto; align-self: flex-start; padding: 10px 16px; border: 1.5px solid var(--ink); border-radius: var(--r-sm); font: 700 15px var(--body); color: var(--ink) }
+.start .hint2 { margin-top: 24px }
+/* the zoning answer: the verdict first, the details on request */
+.answer .pill { font-size: 13px; padding: 6px 12px; text-transform: none; letter-spacing: .01em; font-family: var(--body) }
+.answer .next { border-top: 0; padding-top: 0; font-size: 16px; color: var(--ink) }
+.answer details.more > summary { cursor: pointer; font-weight: 600; color: var(--slate) } .answer details.more[open] > summary { margin-bottom: 12px }
+@media (max-width: 760px) { .doors { grid-template-columns: 1fr } header.bar .wrap { grid-template-columns: auto auto } .views { grid-column: 1 / -1 } }
 </style>
 
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="wrap">
-  <a class="logo" href="#check">NOMAD<small>BARCELONA · IAAC MaAI</small></a>
+  <a class="logo" href="#start">NOMAD<small>BARCELONA · IAAC MaAI</small></a>
+  <div class="views" role="tablist" aria-label="Part of NOMAD"><button type="button" role="tab" class="vt" data-v="app" aria-selected="true">App</button><button type="button" role="tab" class="vt" data-v="research" aria-selected="false">Research</button></div>
+  <nav class="main" id="mainnav" aria-label="Sections">
+    <a class="ptab" data-view="app" href="#check"><span class="sn">1</span>Your shop</a>
+    <a class="ptab" data-view="app" href="#design"><span class="sn">2</span>Your homes</a>
+    <a class="ptab" data-view="app" href="#saved"><span class="sn">3</span>Saved</a>
+    <div class="pgroup" data-view="app"><button type="button" class="ptab" aria-expanded="false" aria-haspopup="true">For the city<span class="car" aria-hidden="true">▾</span></button>
+      <div class="pmenu" hidden><a href="#policy">Where to start</a><a href="#city">City in 3D</a></div></div>
+    <a class="ptab" data-view="app" href="#rules">The laws</a>
+    <a class="ptab" data-view="research" href="#steps">Workflow</a>
+    <a class="ptab" data-view="research" href="#real">Results</a>
+    <a class="ptab" data-view="research" href="#rulecards">Rule cards</a>
+    <a class="ptab" data-view="research" href="#experiments">Experiments</a>
+    <a class="ptab" data-view="research" href="#precedents">Precedents</a>
+    <a class="ptab" data-view="research" href="#sources">Sources</a>
+  </nav>
   <div class="prefs"><label class="vh" for="lang">Language</label><select id="lang" aria-label="Language"><option value="en">English</option><option value="ca">Català</option><option value="es">Español</option></select>
     <button class="chip" id="mode" aria-pressed="false" title="Plain words, no 3D: for owners and slow devices">Simple view</button></div>
-  <nav aria-label="Sections">
-    <a href="#check" data-t="nav_check">Check an address</a><a href="#design" data-t="nav_design">Design homes</a><a href="#saved" data-t="nav_saved">Saved</a><a href="#city" data-t="nav_city">City in 3D</a><a href="#real" data-t="nav_real">Real shops</a><a href="#policy">For the city</a><a href="#precedents">Precedents</a>
-    <a href="#steps">How it works</a><a href="#shops">Five shops</a><a href="#book">Rulebook</a><a href="#rules">The rules</a><a href="#experiments">Experiments</a><a href="#sources">Sources</a>
-  </nav>
 </div></header>
 
 <main id="main" tabindex="-1">
-<section class="sheet" id="check"><div class="wrap">
-  <p class="eyebrow">Step 3 · zoning · 6,149 empty ground-floor premises</p>
-  <h1>Can this empty shop become homes?</h1>
-  <p class="lede">NOMAD checks whether an empty ground-floor shop in Barcelona can legally become housing, draws the homes that fit, and builds them in 3D. The first question is the zone: type the address of any empty premises in the city's 2024 census.</p>
-  <div class="hero">
-    <div>
+<section class="sheet start" id="start" data-view="app"><div class="wrap">
+  <p class="eyebrow">NOMAD · Barcelona</p>
+  <h1>Can an empty shop become homes?</h1>
+  <p class="lede">NOMAD checks an empty ground floor against Barcelona's rules, draws the homes that fit and builds them in 3D. In a minute, in plain words.</p>
+  <div class="doors">
+    <a class="door panel" href="#check"><span class="dk">For owners</span><b>I have a shop</b><span>Type its address. NOMAD says if homes are allowed, draws them, and gives you a report to take to an architect.</span><span class="dgo">Check my shop →</span></a>
+    <a class="door panel" href="#policy"><span class="dk">For the city</span><b>I work for the city</b><span>See every empty shop and unused building, how many homes they could give, and which to start with.</span><span class="dgo">See the city →</span></a>
+  </div>
+  <p class="hint2">Want to know how NOMAD works, and how we tested it? Open <a href="#steps">Research</a> at the top.</p>
+</div></section>
+<section class="sheet" id="check" data-view="app"><div class="wrap">
+  <p class="eyebrow">Step 1 · your shop</p>
+  <h2>Find your shop</h2>
+  <p class="lede">Type the address, or click a dot on the map. NOMAD tells you first whether the zone allows homes there.</p>
+  <div class="hero3" id="hero3">
+  <div class="hcol panel qcol">
       <div class="search">
         <label for="q">Street and number, or cadastral reference</label>
         <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="València 640" aria-autocomplete="list" aria-controls="sugg">
@@ -394,9 +759,14 @@ body.simple .cards { display: none } body.simple .cards.open { display: block } 
       </div>
       <div class="examples">Try: <button class="chip" data-ex="València 640">València 640</button><button class="chip" data-ex="Gaiarre 84">Gaiarre 84</button><button class="chip" id="ex-check">a 22@ shop</button><button class="chip" id="ex-no">a shop that cannot</button></div>
       <article class="answer panel" id="answer" aria-live="polite"></article>
-      <div class="tally" id="tally"></div>
-    </div>
-    <div class="mapbox panel">
+  </div>
+  <div class="gut" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Drag to change the column widths (double-click to reset)"></div>
+  <div class="hcol">
+    <div class="panel bcol"><div class="fig">The building · plan and 3D</div><div id="bldgcol"></div></div>
+    <div class="tally" id="tally"></div>
+  </div>
+  <div class="gut" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Drag to change the column widths (double-click to reset)"></div>
+  <div class="mapbox panel">
       <div class="fig"><b>FIG.1</b>&nbsp; every empty ground-floor premises, by what its zone allows</div>
       <canvas id="map" width="900" height="900" aria-label="Map of Barcelona with every empty ground-floor premises coloured by zoning answer. Click a dot to check it."></canvas>
       <div class="mapmode" role="group" aria-label="Colour the map by"><button type="button" class="chip" data-mm="zone" aria-pressed="true">What the zone allows</button><button type="button" class="chip" data-mm="ans" aria-pressed="false">NOMAD's answer, with "avoid"</button><button type="button" class="chip" data-mm="wh" aria-pressed="false">Empty warehouses and commercial buildings</button></div>
@@ -408,10 +778,10 @@ body.simple .cards { display: none } body.simple .cards.open { display: block } 
   </div>
 </div></section>
 
-<section class="sheet" id="design"><div class="wrap">
-  <p class="eyebrow">Steps 6 to 8 for your shop · NOMAD runs in this page</p>
-  <h2>Tell NOMAD what you need, and it draws the homes</h2>
-  <p class="lede">Pick a shop, say which flats you want and how big, and NOMAD checks the shop, draws a layout for each way of reaching the flats and builds each one in 3D. It is the same code as the Rhino file, running in your browser.</p>
+<section class="sheet" id="design" data-view="app"><div class="wrap">
+  <p class="eyebrow">Step 2 · your homes</p>
+  <h2>What homes fit in your shop?</h2>
+  <p class="lede">Your shop from step 1 is already here. Say which flats you want, press <b>Make the layouts</b>, and NOMAD draws the homes, checks every rule and builds them in 3D.</p>
   <ol class="wiz" id="wiz">
     <li class="panel wstep" id="w1"><h3><span class="wn">1</span> Your shop</h3>
       <div class="search"><label for="dq">An empty shop's address in Barcelona, or a cadastral reference</label>
@@ -432,11 +802,11 @@ body.simple .cards { display: none } body.simple .cards.open { display: block } 
         <label><input type="radio" name="scheme" value="shared"> shared-space homes: small private homes (24 m² and up) with shared living rooms and kitchens</label>
         <span class="hint2">Shared-space homes ("allotjaments amb espais comuns complementaris", Llei 18/2007 art. 18 bis): a fast, small-home route for people who need a home now. The whole shop stays one property. In Barcelona each home needs 40 m² of private space plus its share of the shared rooms. Density may be exceeded for homes for groups needing social attention (MPGM 2004 DA2). "Temporary protection housing" is only allowed on public land for facilities, not in a private shop.</span></div>
       <details class="weights" id="wts"><summary>What matters most (weights)</summary>
-        <p class="hint2">Like Finch's sliders: NOMAD tries many layouts and keeps, for each way of reaching the flats, the one that scores best with these weights.</p>
-        <div class="wrow"><label for="w-match">The flats I asked for</label><input type="range" id="w-match" min="0" max="20" step="1" value="10"><output for="w-match">10</output></div>
-        <div class="wrow"><label for="w-passing">As many homes as fit</label><input type="range" id="w-passing" min="0" max="20" step="1" value="1"><output for="w-passing">1</output></div>
-        <div class="wrow"><label for="w-eff">Floor used by homes</label><input type="range" id="w-eff" min="0" max="20" step="1" value="3"><output for="w-eff">3</output></div>
-        <div class="wrow"><label for="w-plan">How well the real plans fit</label><input type="range" id="w-plan" min="0" max="20" step="1" value="2"><output for="w-plan">2</output></div>
+        <p class="hint2">Like Finch's sliders: NOMAD tries many layouts and keeps, for each way of reaching the flats, the one that scores best. The four shares always add up to 100 %: raise one and the others make room.</p>
+        <div class="wrow"><label for="w-match">The flats I asked for</label><output for="w-match" id="wo-match">62 %</output><input type="range" id="w-match" min="0" max="100" step="1" value="62"></div>
+        <div class="wrow"><label for="w-passing">As many homes as fit</label><output for="w-passing" id="wo-passing">6 %</output><input type="range" id="w-passing" min="0" max="100" step="1" value="6"></div>
+        <div class="wrow"><label for="w-eff">Floor used by homes</label><output for="w-eff" id="wo-eff">19 %</output><input type="range" id="w-eff" min="0" max="100" step="1" value="19"></div>
+        <div class="wrow"><label for="w-plan">How well the real plans fit</label><output for="w-plan" id="wo-plan">13 %</output><input type="range" id="w-plan" min="0" max="100" step="1" value="13"></div>
       </details>
       <details class="weights" id="ownp"><summary>Your own plans</summary>
         <p class="hint2">Add a flat plan you drew: a DXF (Rhino: File &gt; Export Selected) or JSON. Each room is a closed polyline on a layer named by its use (living, bedroom, kitchen, bath, hall, storage; or estar, dormitori, cuina, bany, rebedor). Doors and windows are lines across the opening, on layers "door" and "window". The flat's entrance door goes on "entrance", and rooms open to each other get a line on "open". NOMAD checks your plan like every real plan and furnishes it. If it passes, your layouts can use it, with its walls kept.</p>
@@ -462,25 +832,36 @@ body.simple .cards { display: none } body.simple .cards.open { display: block } 
     <div class="viewer panel"><div class="fig" id="dviewfig"><b>FIG.4</b>&nbsp; 3D</div>
       <div class="stage" id="dstage"><canvas id="dthree" role="img" aria-label="3D model of the selected layout. The plans and rule cards above give the same information as text."></canvas><span class="hint">drag to turn · scroll to zoom</span></div>
       <div class="bar2"><span>Show:</span><button class="chip" id="dv-walls" aria-pressed="true">walls, doors, windows</button><button class="chip" id="dv-zone" aria-pressed="false">zoning (room blocks)</button></div></div>
-    <aside class="ws-right" aria-label="Details of the selected layout">
-      <details class="drawer panel" open><summary>Rule cards</summary><div class="cards" id="dcards"></div></details>
-      <details class="drawer panel" open><summary>Real plans for each flat</summary><div id="dgal" class="gal"></div></details>
-      <details class="drawer panel" open><summary>Compare the layouts</summary><div id="dcmp"></div></details>
-      <details class="drawer panel"><summary>Laws for this project</summary><div id="dlaws" class="bk-marks"></div></details>
-    </aside>
+    <aside class="ws-right" aria-label="Details of the selected layout"><div class="wsbox">
+      <div class="tabs wstabs" role="tablist" aria-label="Details of the selected layout"><button type="button" role="tab" id="wt-0" aria-controls="wp-0" aria-selected="true" tabindex="0">Checks</button><button type="button" role="tab" id="wt-1" aria-controls="wp-1" aria-selected="false" tabindex="-1">Other plans</button><button type="button" role="tab" id="wt-2" aria-controls="wp-2" aria-selected="false" tabindex="-1">Compare</button></div>
+      <div class="wspane panel"><div role="tabpanel" id="wp-0" aria-labelledby="wt-0"><div class="cards" id="dcards"></div></div><div role="tabpanel" id="wp-1" aria-labelledby="wt-1" hidden><div id="dgal" class="gal"></div></div><div role="tabpanel" id="wp-2" aria-labelledby="wt-2" hidden><div id="dcmp"></div></div><div hidden><div id="dlaws" class="bk-marks"></div></div></div>
+    </div></aside>
   </div>
 </div></section>
 
-<section class="sheet" id="saved"><div class="wrap">
-  <p class="eyebrow" data-t="saved_eb">Your shops</p>
+<section class="sheet" id="saved" data-view="app"><div class="wrap">
+  <p class="eyebrow" data-t="saved_eb">Step 3 · keep and share</p>
   <h2 data-t="saved_h">Saved shops, side by side</h2>
   <p class="lede" data-t="saved_lede">Every shop you save keeps your requirements and NOMAD's answer. Tick two or more to compare them. Only you can see your saved shops.</p>
   <div id="savedlist" class="savedlist"></div>
   <div class="src-table"><table id="compare"></table></div>
 </div></section>
 
-<section class="sheet" id="city"><div class="wrap">
-  <p class="eyebrow">Barcelona in 3D · 262,384 building parts from the Catastro</p>
+<section class="sheet" id="policy" data-view="app"><div class="wrap">
+  <p class="eyebrow">For the city · where to start</p>
+  <h2>Where can the city find homes?</h2>
+  <p class="lede">Every empty shop and every unused warehouse, commercial or office building in Barcelona was run through NOMAD: zoning, daylight (Bars's model where it exists), real plans, every rule. Set how many homes the city needs. NOMAD picks the fewest places that reach it and lists the ones to avoid.</p>
+  <div class="reqrow"><label for="pneed">Homes the city needs</label><input id="pneed" type="number" min="1" step="50" value="1000">
+    <label><input type="checkbox" id="pcheck"> also where the zone's own plan decides (to confirm)</label></div>
+  <div class="reqrow" id="pkinds"><span>Use:</span>
+    <label><input type="checkbox" value="shop" checked> empty shops</label><label><input type="checkbox" value="warehouse" checked> warehouses</label>
+    <label><input type="checkbox" value="commercial" checked> commercial buildings</label><label><input type="checkbox" value="office" checked> office buildings</label></div>
+  <div id="pout" aria-live="polite"><p class="hint2">Loading NOMAD's city results…</p></div>
+  <p class="note">Homes: the most legal homes NOMAD finds in each place (asked 2 x 1-bed + 1 x 2-bed, and "most homes"); warehouses at 6 m clear height (two levels). In use or not: the 2024 census of ground-floor premises, a hint, not proof. To build a list for the city, every place still needs its owner and a visit.</p>
+</div></section>
+
+<section class="sheet" id="city" data-view="app"><div class="wrap">
+  <p class="eyebrow">For the city · walk the streets</p>
   <h2>Walk the streets and see every empty shop</h2>
   <p class="lede">Every building in the city, raised from its Catastro footprint and floors. The ground floor of each empty shop is coloured by what its zone allows. Click a building to see its floors and use, and open its real façade in Street View.</p>
   <div class="citybox panel">
@@ -489,36 +870,75 @@ body.simple .cards { display: none } body.simple .cards.open { display: block } 
     <div class="bar2"><button class="chip" id="cv-top">from above</button><button class="chip" id="cv-tilt">tilted</button><button class="chip" id="cv-street">street level</button>
       <span class="hint2">Left drag: move · right drag or two fingers: turn · scroll: zoom</span></div>
     <p class="vh-summary" id="citysum">What you see: Barcelona's buildings raised from the Catastro, coloured by their PGM zone; streets, paths, parks, rail and water from the zoning map; 222,617 trees; and the ground floor of each empty shop coloured by what its zone allows. Click a building for its details.</p>
-    <div class="note">Buildings: Catastro (heights estimated: 4 m ground floor + 3 m per floor). Roads, paths, parks, rail, water and zones: Mapa Urbanístic de Catalunya. Trees: Open Data BCN street, zone and park trees (CC BY 4.0). Sun: computed for Barcelona on the chosen date and time. Façade textures are not open data: the Street View link shows the real street.</div>
+    <div class="note">Buildings: Catastro (heights estimated: 5 m ground floor + 3 m per upper floor). Roads, paths, parks, rail, water and zones: Mapa Urbanístic de Catalunya. Trees: Open Data BCN street, zone and park trees (CC BY 4.0). Sun: computed for Barcelona on the chosen date and time. Façade textures are not open data: the Street View link shows the real street.</div>
   </div>
 </div></section>
 
-<section class="sheet" id="real"><div class="wrap">
-  <p class="eyebrow">Part 2 · NOMAD on Barcelona's real empty shops</p>
+<section class="sheet" id="rules" data-view="app"><div class="wrap">
+  <p class="eyebrow">The laws · for anyone who wants to read them</p>
+  <h2>Every law NOMAD uses, in one book</h2>
+  <div id="book">
+  <p class="lede">The original official PDFs from Spain, Catalonia, the metropolitan plan and Barcelona, compiled into one book with an index and page numbers. Pick a title in the index to open it. After you check a shop in <a href="#design">Design homes</a>, bookmarks appear for the laws that decided your answer, and the lines are highlighted where the page has text.</p>
+  <div class="bk">
+    <aside class="bk-side panel" aria-label="Rules and index">
+      <div class="bk-marks" id="bkmarks" aria-live="polite"></div>
+      <label class="vh" for="bkfind">Find a document</label>
+      <input id="bkfind" type="search" placeholder="Find a document (e.g. habitabilitat, ruido, PGM)">
+      <nav id="bkindex" aria-label="Rulebook index"></nav>
+    </aside>
+  <div class="fb" id="fb">
+    <div class="fb-tools" role="toolbar" aria-label="Rulebook tools">
+      <a class="fb-ic" id="bkdl" href="#" download title="Download this document (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17.5a4.5 4.5 0 0 1-.4-9 6 6 0 0 1 11.6 1.5A3.75 3.75 0 0 1 17.5 17.5M12 11v9m-3.5-3.5L12 20l3.5-3.5"/></svg><span class="vh">Download this document (PDF)</span></a>
+      <button type="button" class="fb-ic" id="fbfull" title="Full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg><span class="vh">Full screen</span></button>
+    </div>
+    <div class="bk-stage" id="bkstage" tabindex="0" aria-label="Rulebook pages. Use the left and right arrow keys to turn pages.">
+      <div class="bk-spread" id="bkspread"></div>
+    </div>
+    <button type="button" class="fb-arrow prev" id="bkprev" aria-label="Previous pages"><svg viewBox="0 0 48 32" aria-hidden="true"><path d="M44 28c-2-11-11-17-24-17H6m0 0 8-7M6 11l8 7"/></svg></button>
+    <button type="button" class="fb-arrow next" id="bknext" aria-label="Next pages"><svg viewBox="0 0 48 32" aria-hidden="true"><path d="M4 28c2-11 11-17 24-17h14m0 0-8-7m8 7-8 7"/></svg></button>
+    <p class="fb-foot"><label class="vh" for="bkpage">Page</label><input id="bkpage" type="number" min="1" value="1"> <span id="bkof"></span> · <span class="bk-where" id="bkwhere"></span></p>
+  </div>
+  </div>
+  <p class="hint2" id="bknote">Click a page or its curling corner to turn it, or use the arrow keys. The pages are the official documents; NOMAD only added the index, the dividers and the page numbers.</p>
+  </div>
+</div></section>
+
+<section class="sheet" id="steps" data-view="research"><div class="wrap">
+  <p class="eyebrow">Research · the workflow</p>
+  <h2>From an empty shop to legal homes in 8 steps</h2>
+  <p class="lede">Each step runs on real data, and this page follows them in order: pick a step to jump to it. Five experiments test the steps, each against a simple method or on real cases. Everything runs inside one Rhino + Grasshopper file.</p>
+  <div class="steps" id="steplist"></div>
+</div></section>
+
+<section class="sheet" id="real" data-view="research"><div class="wrap">
+  <p class="eyebrow">Results · NOMAD on Barcelona's real empty shops</p>
   <h2>What the real shops can become</h2>
   <p class="lede" id="reallede"></p>
   <div class="realgrid" id="realgrid"></div>
   <div class="src-table"><table id="realtable"></table></div>
-</div></section>
-
-<section class="sheet" id="policy"><div class="wrap">
-  <p class="eyebrow">For the city · policy makers</p>
-  <h2>The city needs homes: where, how many, and what to avoid</h2>
-  <p class="lede">Every empty shop and every unused warehouse, commercial or office building in Barcelona was run through NOMAD: zoning, daylight (Bars's model where it exists), real plans, every rule. Set how many homes the city needs. NOMAD picks the fewest places that reach it and lists the ones to avoid.</p>
-  <div class="reqrow"><label for="pneed">Homes the city needs</label><input id="pneed" type="number" min="1" step="50" value="1000">
-    <label><input type="checkbox" id="pcheck"> also where the zone's own plan decides (to confirm)</label></div>
-  <div class="reqrow" id="pkinds"><span>Use:</span>
-    <label><input type="checkbox" value="shop" checked> empty shops</label><label><input type="checkbox" value="warehouse" checked> warehouses</label>
-    <label><input type="checkbox" value="commercial" checked> commercial buildings</label><label><input type="checkbox" value="office" checked> office buildings</label></div>
-  <div id="pout" aria-live="polite"><p class="hint2">Loading NOMAD's city results…</p></div>
   <h3>Beyond Barcelona: the metropolitan area (36 towns)</h3>
   <p class="hint2">Warehouses, commercial and office buildings with no homes in every AMB town (Catastro), by what their zone allows (MUC zoning of the Generalitat). Outside Barcelona there is no census of empty premises, so in use or not is unknown.</p>
   <div id="amb"></div>
-  <p class="note">Homes: the most legal homes NOMAD finds in each place (asked 2 x 1-bed + 1 x 2-bed, and "most homes"); warehouses at 6 m clear height (two levels). In use or not: the 2024 census of ground-floor premises, a hint, not proof. To build a list for the city, every place still needs its owner and a visit.</p>
 </div></section>
 
-<section class="sheet" id="precedents"><div class="wrap">
-  <p class="eyebrow">Has this been done? Precedents</p>
+<section class="sheet" id="rulecards" data-view="research"><div class="wrap">
+  <p class="eyebrow">Step 4 · extract the rules · how we check them</p>
+  <h2>Every number comes from the official text</h2>
+  <div id="rp-rules">
+  <p class="lede">The 16 rules NOMAD checks, each with the sentence of the law it comes from. A card passes when its quote is found word for word in the rulebook and the number is in the quote.</p>
+  <div class="golden panel" id="golden"></div>
+  <div class="rulegrid" id="rulegrid"></div>
+  </div>
+</div></section>
+
+<section class="sheet" id="experiments" data-view="research"><div class="wrap">
+  <p class="eyebrow">Evidence · five experiments, in workflow order</p>
+  <h2>What we tested, and what we learned</h2>
+  <div class="exps" id="exps"></div>
+</div></section>
+
+<section class="sheet" id="precedents" data-view="research"><div class="wrap">
+  <p class="eyebrow">Evidence · has this been done? Precedents</p>
   <h2>Shops and offices already become homes, slowly</h2>
   <p class="lede">Every number is copied from the source next to it. <b>Official</b> = the public body itself; <b>secondary</b> = press or a company quoting it: an order of magnitude, to confirm before relying on it.</p>
   <div class="src-table"><table>
@@ -535,86 +955,26 @@ body.simple .cards { display: none } body.simple .cards.open { display: block } 
   <p class="hint2">What it means: Barcelona turns about 70 to 100 shops a year into homes (secondary figures) while 6,149 stand empty. The bottleneck is the process, not the stock: NOMAD says quickly which ones are worth starting, and which to avoid.</p>
 </div></section>
 
-<section class="sheet" id="steps"><div class="wrap">
-  <p class="eyebrow">The workflow</p>
-  <h2>From an empty shop to legal homes in 8 steps</h2>
-  <p class="lede">Each step runs on real data. Five experiments test them in order, each against a simple method or on real cases. Everything runs inside one Rhino + Grasshopper file.</p>
-  <div class="steps" id="steplist"></div>
-</div></section>
-
-<section class="sheet" id="shops"><div class="wrap">
-  <p class="eyebrow">Steps 6 to 8 · check, fit, build</p>
-  <h2>Five shops, their layouts built in 3D</h2>
-  <p class="lede">Each shop is checked as it is, then NOMAD draws one layout for each circulation strategy that adds homes (flats on both façades, a corridor to the block interior, small flats filling the shop; else street flats only) and checks each one again. Pick a layout to see its rule cards and its 3D model.</p>
-  <div class="tabs" id="tabs" role="tablist"></div>
-  <div class="shophead" id="shophead"></div>
-  <div class="plans" id="plans"></div>
-  <div class="detail">
-    <div class="viewer panel">
-      <div class="fig" id="viewfig"><b>FIG.2</b>&nbsp; 3D</div>
-      <div class="stage" id="stage"><canvas id="three" role="img" aria-label="3D model of the chosen test shop. The text and rule cards beside it give the same information."></canvas><img id="still" alt="" hidden><span class="hint" id="hint">drag to turn · scroll to zoom</span></div>
-      <div class="bar2"><span>Show:</span><button class="chip" id="v-walls" aria-pressed="true">walls, doors, windows</button><button class="chip" id="v-zone" aria-pressed="false">zoning (room blocks)</button><span id="ifc"></span></div>
-    </div>
-    <div class="cards panel" id="cards"></div>
-  </div>
-  <p class="note">The five shops are real commercial units from the Swiss Dwellings dataset (CC BY 4.0), checked against Barcelona's rules, plus one read from a plan drawing. Room colours: living orange, bedrooms purple, kitchen yellow, bath blue, hall grey; a red room fails a rule.</p>
-</div></section>
-
-<section class="sheet" id="rules"><div class="wrap">
-  <p class="eyebrow">Steps 4 and 9 · the rulebook and the golden set</p>
-  <h2>Every number comes from the official text</h2>
-  <p class="lede">The 16 rules NOMAD checks, each with the sentence of the law it comes from. A card passes when its quote is found word for word in the rulebook and the number is in the quote.</p>
-  <div class="golden panel" id="golden"></div>
-  <div class="rulegrid" id="rulegrid"></div>
-</div></section>
-
-<section class="sheet" id="book"><div class="wrap">
-  <p class="eyebrow">Step 4 · the rulebook · the official texts, in one book</p>
-  <h2>Every regulation, in one book you can flip through</h2>
-  <p class="lede">The original official PDFs from Spain, Catalonia, the metropolitan plan and Barcelona, compiled into one book with an index and page numbers. Pick a title in the index to open it. After you check a shop in <a href="#design">Design homes</a>, bookmarks appear for the laws that decided your answer, and the lines are highlighted where the page has text.</p>
-  <div class="bk">
-    <aside class="bk-side panel">
-      <div class="bk-marks" id="bkmarks" aria-live="polite"></div>
-      <label class="vh" for="bkfind">Find a document</label>
-      <input id="bkfind" type="search" placeholder="Find a document (e.g. habitabilitat, ruido, PGM)">
-      <nav id="bkindex" aria-label="Rulebook index"></nav>
-    </aside>
-    <div class="bk-main">
-      <div class="bk-bar">
-        <button type="button" class="chip" id="bkprev" aria-label="Previous pages">‹</button>
-        <label class="vh" for="bkpage">Page</label><input id="bkpage" type="number" min="1" value="1"><span id="bkof"></span>
-        <button type="button" class="chip" id="bknext" aria-label="Next pages">›</button>
-        <span class="bk-where" id="bkwhere"></span>
-        <a class="chip" id="bkdl" href="#" download>Download this document (PDF)</a>
-      </div>
-      <div class="bk-stage" id="bkstage" tabindex="0" aria-label="Rulebook pages. Use the left and right arrow keys to turn pages.">
-        <div class="bk-spread" id="bkspread"></div>
-      </div>
-      <p class="hint2" id="bknote">Click the right page to turn forward, the left page to go back, or use the arrow keys. Pages are the official documents; NOMAD only added the index, the dividers and the page numbers.</p>
-    </div>
-  </div>
-</div></section>
-
-<section class="sheet" id="experiments"><div class="wrap">
-  <p class="eyebrow">Five experiments, in workflow order</p>
-  <h2>What we tested, and what we learned</h2>
-  <div class="exps" id="exps"></div>
-</div></section>
-
-<section class="sheet" id="sources"><div class="wrap">
-  <p class="eyebrow">Data, rules and code</p>
+<section class="sheet" id="sources" data-view="research"><div class="wrap">
+  <p class="eyebrow">Evidence · data, rules and code</p>
   <h2>Sources</h2>
   <div class="src-table"><table>
     <thead><tr><th>What</th><th>Source</th><th>Licence</th></tr></thead>
     <tbody>
-      <tr><td>Empty ground-floor premises, 2024</td><td>Ajuntament de Barcelona, Open Data BCN: <a href="https://opendata-ajuntament.barcelona.cat/data/dataset/cens-locals-planta-baixa-act-economica" target="_blank" rel="noopener">cens de locals en planta baixa</a></td><td>CC BY 4.0</td></tr>
+      <tr><td>Empty ground-floor premises, 2024</td><td><a href="https://opendata-ajuntament.barcelona.cat/data/dataset/cens-locals-planta-baixa-act-economica" target="_blank" rel="noopener">Cens de locals en planta baixa 2024</a>, Ajuntament de Barcelona, Open Data BCN (CC BY 4.0)</td><td>CC BY 4.0</td></tr>
+      <tr><td>Buildings (footprints, floors, units)</td><td>Catastro (Dirección General del Catastro) via hypercadaster_ES</td><td>EUPL-1.2 (hypercadaster_ES); Catastro data: reuse with attribution</td></tr>
       <tr><td>Zoning (qualificació)</td><td>Mapa Urbanístic de Catalunya, Departament de Territori, Generalitat de Catalunya (<a href="https://territori.gencat.cat/ca/06_territori_i_urbanisme/observatori_territori/mapa_urbanistic_de_catalunya/" target="_blank" rel="noopener">MUC</a>), January 2023</td><td>Generalitat open data, attribution</td></tr>
       <tr><td>Housing rules</td><td>Decret 141/2012 (DOGC 6245), CTE (BOE-A-2006-5515), PGM art. 225 (MPGM 1999), MPGM 2004 (Barcelona), Ajuntament guide on change of use (2025): 2,470 pieces from 22 norms</td><td>Official texts, cited by article</td></tr>
-      <tr><td>Test shops and flats</td><td>Swiss Dwellings v3.0.0 (46,937 flats, 341 commercial units); ResPlan</td><td>CC BY 4.0</td></tr>
-      <tr><td>Real plan scans</td><td>CubiCasa5K, test split only (<a href="https://zenodo.org/records/2613548" target="_blank" rel="noopener">Zenodo</a>)</td><td>CC BY-NC-SA 4.0</td></tr>
+      <tr><td>Test shops and flats</td><td>Swiss Dwellings v3.0.0 (46,937 flats, 341 commercial units), <a href="https://zenodo.org/record/7788422" target="_blank" rel="noopener">Zenodo</a></td><td>CC BY 4.0</td></tr>
+      <tr><td>Real flat plans</td><td>ResPlan (<a href="https://github.com/m-agour/ResPlan" target="_blank" rel="noopener">GitHub</a>)</td><td>CC BY 4.0 (data); MIT (code)</td></tr>
+      <tr><td>Real plan scans</td><td>CubiCasa5K, test split only (<a href="https://zenodo.org/records/2613548" target="_blank" rel="noopener">Zenodo</a>)</td><td>CC BY-NC-SA 4.0 · non-commercial use only</td></tr>
       <tr><td>Plan reader model</td><td>floorplan-to-3d (Yytsi), trained on CubiCasa5K</td><td>MIT</td></tr>
       <tr><td>3D export</td><td>IfcOpenShell; trimesh</td><td>LGPL-3.0; MIT</td></tr>
-      <tr><td>Daylight (Exp 4)</td><td>Ladybug Tools + Radiance, XGBoost; team experiment</td><td>AGPL-3.0 (Ladybug), Apache-2.0</td></tr>
+      <tr><td>Daylight (Exp 4)</td><td>Ladybug Tools + Radiance, XGBoost; team experiment (Bars, folder exp1_daylight)</td><td>AGPL-3.0 (Ladybug), Apache-2.0</td></tr>
+      <tr><td>Daylight method</td><td>EN 17037 (daylight in buildings): target and minimum daylight factor for Barcelona</td><td>European standard, method cited</td></tr>
+      <tr><td>Weather file</td><td>Barcelona TMYx (ESP_CT_Barcelona.081800_TMYx.epw), <a href="https://climate.onebuilding.org" target="_blank" rel="noopener">climate.onebuilding.org</a></td><td>to check</td></tr>
+      <tr><td>Rule cards (Exp 3)</td><td>open-notebook (vector search) and Gemini 3.5 Flash Lite (drafting)</td><td>MIT (open-notebook); Gemini: Google API terms</td></tr>
+      <tr><td>AI assistant and code help</td><td>Claude (Anthropic): the "Ask NOMAD" assistant and help writing the code</td><td>Anthropic terms of use</td></tr>
     </tbody>
   </table></div>
   <p class="note">NOMAD is a master's research prototype. Its answers are a first check, not a licence: a project still needs an architect and the Ajuntament's approval.</p>
@@ -637,26 +997,78 @@ const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "
 const fmt = n => Number(n).toLocaleString("en-US");
 const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const norm = s => String(s || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toUpperCase().replace(/\s+/g, " ").trim();
-const WORD = { YES: "Housing admitted", CHECK: "Check the zone's plan", NO: "Not admitted" };   // changed by applyLang
-let D, P, B;
+const WORD = { YES: "Homes allowed", CHECK: "Maybe: the local plan decides", NO: "Homes not allowed" };   // changed by applyLang
+let D, P, B, DL = null;
 
-Promise.all(["data/nomad.json", "data/premises.json", "data/basemap.json"].map(u => fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); })))
-  .then(([d, p, b]) => { D = d; P = p.rows.map(r => Object.fromEntries(p.cols.map((c, i) => [c, r[i]]))); B = b; start(); })
+Promise.all(["data/nomad.json", "data/premises.json", "data/basemap.json"].map(u => fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); }))
+    .concat([fetch("data/daylight.json").then(r => r.ok ? r.json() : null).catch(() => null)]))
+  .then(([d, p, b, dl]) => { D = d; P = p.rows.map(r => Object.fromEntries(p.cols.map((c, i) => [c, r[i]]))); B = b; DL = dl; attachDaylight(); rescoreAnswers(); start(); })
   .catch(e => { $("#answer").innerHTML = `<p>The data did not load (${esc(e.message)}). Reload the page.</p>`; });
+
+/* ---------- daylight, Exp 4 (Bars's model, folder exp1_daylight): data/daylight.json, built by 02_Code/src/app/daylight_site.py
+   from exp1_daylight/shops_bcn_pred.csv and daylight_thresholds.json. Replaces the old per-shop df / lit of premises.json. ---------- */
+const DLC = { L: ["livable", "YES"], C: ["needs a change", "CHECK"], N: ["not livable", "NO"] };
+const dec = (x, k = 2) => Number(x).toFixed(k).replace(".", ",");
+function attachDaylight() {
+  P.forEach(r => {
+    r.df = null; r.lit = null; r.dl = null;                     // the old model's numbers are out of date
+    const list = DL && DL.shops[`${(r.ref || "").slice(0, 14)}|${r.street} ${r.num}`];
+    if (!list) return;
+    let best = list[0];
+    if (list.length > 1) { const [la, lo] = utmToLatLng(r.x, r.y); best = list.reduce((a, q) => ((q[0] - lo) ** 2 + (q[1] - la) ** 2 < (a[0] - lo) ** 2 + (a[1] - la) ** 2 ? q : a)); }
+    r.dl = { lit: best[2], share: best[3], cls: best[4], check: best[5] };
+    r.lit = best[2];                                            // the layouts use the new lit depth
+  });
+}
+/* the map's answer (src/check/avoid.py, same order of reasons) for every shop with a match in daylight.json:
+   dark now means the new "not livable" class. Shops without a match keep premises.json's answer. */
+function quantile(xs, q) { const s = xs.slice().sort((a, b) => a - b), p = (s.length - 1) * q, i = Math.floor(p); return s[i] + (s[Math.min(i + 1, s.length - 1)] - s[i]) * (p - i); }
+function rescoreAnswers() {
+  if (!DL) return;
+  const cut = quantile(P.map(r => +r.shops || 0), 0.10);      // avoid.py: retail within 100 m, lowest 10 % of the city
+  P.forEach(r => {
+    if (!r.dl) return;
+    r.ans0 = r.ans;
+    const d = r.dl, h = r.homes, day = `daylight: ${DLC[d.cls][0]}, ${dec(d.lit, 1)} m daylit (Bars's model, Exp 4)`;
+    if (r.housing === "NO") return;                              // not allowed: unchanged
+    if (r.ans === "not liveable" && /^no home that passes/.test(r.awhy || "")) return;   // the rules, not daylight: unchanged
+    if (d.cls === "N") { r.ans = "not liveable"; r.awhy = `dark: the daylit zone is only ${dec(d.lit, 1)} m deep, under ${dec(DL.classes.room_min_m, 1)} m (Bars's model, Exp 4)`; }
+    else if (r.shops <= cut) { r.ans = "keep it a shop"; r.awhy = `only ${r.shops} shops within 100 m (lowest 10 % of the city)`; }
+    else if (h != null) { r.ans = "candidate"; r.awhy = `${h} home${h === 1 ? "" : "s"} fit; ${day}`; }
+    else { r.ans = "not modelled"; r.awhy = `zone and street allow it; no clean outline yet (shared ground floor or no street façade); ${day}`; }
+  });
+}
+function dlThreshold() {
+  const t = DL.thresholds;
+  return `${t.method} target for Barcelona: daylight factor ${dec(t.D_target_pct)} % (minimum ${dec(t.D_minimum_pct)} %), from the ${esc(t.weather)} weather file`;
+}
+function dlClasses() {
+  const c = DL.classes;
+  return `livable = a ${c.home_min_m2} m² home fits in the daylit zone (Decret 141 minimum dwelling); needs a change = daylit zone at least ${dec(c.room_min_m, 1)} m deep; not livable = less`;
+}
+function dlNote() {
+  const v = DL.validation;
+  return `Bars's model (Exp 4): ${DL.simulations} Radiance simulations + ${esc(DL.model)}; lit depth checked on ${v.shops} real shops against Radiance, mean error ${dec(v.lit_depth_mae_m)} m. Floor height and windows assumed.`;
+}
+function dlHtml(d) {                                             // one shop's daylight, in words
+  return `<span class="pill ${DLC[d.cls][1]}">${DLC[d.cls][0]}</span> ${dec(d.lit, 1)} m of floor in from the window reach the target (${Math.round(100 * d.share)} % of the floor)`
+    + (d.check ? ` · <b>check the street width by hand</b>` : "");
+}
 
 function start() {
   P.forEach(r => { r.n = norm(r.street); });
-  for (const f of [drawTally, initMap, initSearch, drawSteps, initShops, drawRules, drawExps, initDesign, initCity, drawReal, initExtras, initBook])
+  for (const f of [drawTally, initMap, initSearch, drawSteps, drawRules, drawExps, initDesign, initCity, drawReal, initExtras, initBook, () => setShare("match", +$("#w-match").value), initNav, initCols, initWsTabs, initViews])
     try { const r = f(); if (r && r.catch) r.catch(e => console.error(f.name, e)); } catch (e) { console.error(f.name, e); }   // one part failing (no WebGL, say) must not stop the rest
   const first = P.find(r => r.street === "VALÈNCIA" && r.num === "640") || P.find(r => r.housing === "YES");
   show(first);
+  syncDesign = true;                                                   // from now on, the shop you check is also the shop in Design homes
 }
 
 /* ---------- 1. address check ---------- */
 function drawTally() {
   const z = D.experiments.zoning, h = z.housing;
   $("#tally").innerHTML = ["YES", "CHECK", "NO"].map(k =>
-    `<div><b class="num" style="color:var(--${k === "YES" ? "yes" : k === "CHECK" ? "check" : "no"})">${fmt(h[k] || 0)}</b><span>${WORD[k].toLowerCase()} (${Math.round(100 * (h[k] || 0) / z.empty_premises)} %)</span></div>`).join("");
+    `<div><b class="num" style="color:var(--m-${k === "YES" ? "yes" : k === "CHECK" ? "check" : "no"})">${fmt(h[k] || 0)}</b><span>${WORD[k].toLowerCase()} (${Math.round(100 * (h[k] || 0) / z.empty_premises)} %)</span></div>`).join("");
 }
 function show(r) {
   if (!r) return;
@@ -665,18 +1077,22 @@ function show(r) {
   $("#answer").innerHTML = `
     <div><div class="addr">${esc(r.street)} ${esc(r.num)}</div><div class="meta">${esc(r.barri)} · ${esc(r.district)} · empty, ${esc(r.offer)}${r.ref ? " · ref. " + esc(r.ref) : ""}</div></div>
     <div><span class="pill ${r.housing}">${WORD[r.housing]}</span></div>
-    <dl><dt>ZONE</dt><dd>${esc(r.zone)}${r.key ? ` <span class="num">(PGM key ${esc(r.key)})</span>` : ""}</dd>
+    <details class="more"><summary>Show the details</summary><dl><dt>ZONE</dt><dd>${esc(r.zone)}${r.key ? ` <span class="num">(PGM key ${esc(r.key)})</span>` : ""}</dd>
         <dt>WHY</dt><dd>${esc(r.why)}</dd>
         <dt>RULE</dt><dd>PGM art. 225.7 (MPGM 1999): housing on the ground floor in zones built along street lines</dd>
         ${r.ans ? `<dt>NOMAD</dt><dd><b>${esc(r.ans)}</b>: ${esc(r.awhy)}</dd>` : ""}
-        ${r.df != null ? `<dt>DAYLIGHT</dt><dd>predicted daylight factor ${r.df} %; daylight factor 2 % reaches ${r.lit} m in from the window <span class="meta">(Bars's model: 50 Ladybug simulations + XGBoost; floor height and windows assumed)</span></dd>` : ""}
+        ${r.dl ? `<dt>DAYLIGHT</dt><dd>${dlHtml(r.dl)} <span class="meta">(${dlThreshold()}; ${dlClasses()}. ${dlNote()})</span></dd>` : ""}
         ${r.shops != null ? `<dt>STREET LIFE</dt><dd>${r.shops} shops within 100 m <span class="meta">(city median 16)</span></dd>` : ""}
-        ${r.ref ? `<dt>BUILDING</dt><dd><div class="bldg" id="bldg"></div></dd>` : ""}</dl>
-    <div class="next">${r.housing === "YES" ? "Zoning passes. Next NOMAD checks the shop itself: its façade, light, size and height, and draws the homes that fit (see the five shops below). In Rhino, type this address into NOMAD.gh." :
-      r.housing === "CHECK" ? "The zone's own detailed plan decides the ground floor here. NOMAD marks the shop PARTLY until that plan is checked." :
-      "This zone does not take housing (a facility, a park, industry or a future street). NOMAD answers NO before drawing any plan."}${others ? ` <span class="meta">${others} more empty premises share this cadastral reference.</span>` : ""}</div>`;
+</dl></details>
+    <div class="next">${r.housing === "YES" ? "Good news: the zone allows homes on this ground floor. Next, see which homes fit: your shop is already in step 2 below." :
+      r.housing === "CHECK" ? "Maybe: this zone has its own detailed plan, and that plan decides. Ask the Ajuntament, or see which homes would fit in step 2." :
+      "This zone does not take homes (a facility, a park, industry or a future street). Try another shop."}${others ? ` <span class="meta">${others} more empty premises share this cadastral reference.</span>` : ""}</div>`;
+  bldgBox(r.ref ? "" : "This premises has no cadastral reference, so NOMAD has no building to draw.");
   if (r.ref) showBuilding(r.ref, r);
+  if (syncDesign) { $("#dq").value = `${r.street} ${r.num}`; pickRealShop(r); }
 }
+let syncDesign = false;
+function bldgBox(msg) { $("#bldgcol").innerHTML = msg ? `<p class="meta">${esc(msg)}</p>` : `<div class="bldg" id="bldg"></div>`; }
 
 function showWh(r) {                                           // a whole building: what NOMAD knows, and "design homes in it"
   sel = r; drawMap();
@@ -689,11 +1105,16 @@ function showWh(r) {                                           // a whole buildi
         <dt>IN USE?</dt><dd>${esc(r.status)} <span class="meta">(hint from the 2024 census of ground-floor premises, not proof)</span></dd>
         <dt>SIZE</dt><dd>${fmt(r.built_m2)} m² built · ${fmt(r.ground_m2)} m² ground floor · ${r.floors} storey${r.floors > 1 ? "s" : ""} · ${r.street_m} m on the street${r.open_m ? `, ${r.open_m} m on open ground` : ""}</dd>
         <dt>RULE</dt><dd>Decret 141/2012 Annex 4 Group B: total change of use of a building (Annex 1 with its building rules, patios -10 %, 2,40 m clear height)</dd>
-        <dt>BUILDING</dt><dd><div class="bldg" id="bldg"></div></dd></dl>
+</dl>
     <div class="next">${WH.shells[r.ref] ? `<button type="button" class="go" id="whgo">Design homes in this building</button>` :
       r.housing === "NO" ? "This zone does not take housing (industry, a facility or a future street): NOMAD answers NO." : "NOMAD has no usable outline with a façade for this building."}</div>`;
   const b = $("#whgo"); if (b) b.onclick = () => { pickWh(r); location.hash = "design"; };
-  showBuilding(r.ref, r);
+  bldgBox(""); showBuilding(r.ref, r);
+  if (syncDesign) {
+    $("#dq").value = r.street ? `${r.street} ${r.num}` : r.ref;
+    if (WH.shells[r.ref]) pickWh(r);
+    else { dShop = null; $("#dshop").innerHTML = `<p>${r.street ? esc(r.street) + " " + esc(r.num) : "Catastro " + esc(r.ref)}: NOMAD has no usable outline with a façade for this building. Pick another place.</p>`; }
+  }
 }
 function pickWh(r) {
   const s = WH.shells[r.ref]; if (!s) return;
@@ -820,8 +1241,8 @@ function initSearch() {
 /* map: Barcelona's zones (merged, 3 m) and every premises as a dot */
 let sel = null, view = null, layers = { YES: true, CHECK: true, NO: true }, mapMode = "zone";
 // NOMAD's answer for each empty shop (src/check/avoid.py): the first reason that applies
-const ANS = [["candidate", "--yes", "candidate: homes fit, daylight not dark"], ["not liveable", "--no", "avoid: not liveable"],
-  ["keep it a shop", "--blue", "avoid: keep it a shop"], ["not allowed", "--slate", "avoid: zone does not allow it"], ["not modelled", "--line", "not modelled yet"]];
+const ANS = [["candidate", "--m-yes", "candidate: homes fit, daylight not dark"], ["not liveable", "--m-no", "avoid: not liveable"],
+  ["keep it a shop", "--m-blue", "avoid: keep it a shop"], ["not allowed", "--m-slate", "avoid: zone does not allow it"], ["not modelled", "--m-line", "not modelled yet"]];
 const ansLayers = Object.fromEntries(ANS.map(([k]) => [k, true]));
 /* whole buildings (src/zoning/warehouses.py): warehouses, commercial and office buildings with no homes */
 let WH = null, whLayers = { YES: true, CHECK: true, NO: false }, whKinds = { warehouse: true, commercial: true, office: true }, whUnused = true;
@@ -845,13 +1266,13 @@ function drawLegend() {
   if (mapMode === "plan") { lg.innerHTML = `<span class="hint2">${fmt(policySel.length)} places chosen for ${fmt(policySel.reduce((a, x) => a + x.homes, 0))} homes (For the city)</span>`; return; }
   if (mapMode === "wh") {
     const n = k => fmt((WH || []).filter(r => r.housing === k && whKinds[r.kind] && (!whUnused || r.status !== "active business")).length);
-    lg.innerHTML = ["YES", "CHECK", "NO"].map(k => `<button type="button" data-k="${k}" aria-pressed="${whLayers[k]}"><i style="background:var(--${k === "YES" ? "yes" : k === "CHECK" ? "check" : "no"})"></i>${WORD[k].toLowerCase()} (${n(k)})</button>`).join("")
+    lg.innerHTML = ["YES", "CHECK", "NO"].map(k => `<button type="button" data-k="${k}" aria-pressed="${whLayers[k]}"><i style="background:var(--m-${k === "YES" ? "yes" : k === "CHECK" ? "check" : "no"})"></i>${WORD[k].toLowerCase()} (${n(k)})</button>`).join("")
       + Object.keys(WHKIND).map(k => `<button type="button" data-kind="${k}" aria-pressed="${whKinds[k]}">${WHKIND[k]}</button>`).join("")
       + `<button type="button" data-unused="1" aria-pressed="${whUnused}">only not in use (census hint)</button>`;
     return;
   }
   lg.innerHTML = mapMode === "zone"
-    ? ["YES", "CHECK", "NO"].map(k => `<button type="button" data-k="${k}" aria-pressed="${layers[k]}"><i style="background:var(--${k === "YES" ? "yes" : k === "CHECK" ? "check" : "no"})"></i>${WORD[k].toLowerCase()}</button>`).join("")
+    ? ["YES", "CHECK", "NO"].map(k => `<button type="button" data-k="${k}" aria-pressed="${layers[k]}"><i style="background:var(--m-${k === "YES" ? "yes" : k === "CHECK" ? "check" : "no"})"></i>${WORD[k].toLowerCase()}</button>`).join("")
     : ANS.map(([k, c, l]) => `<button type="button" data-k="${k}" aria-pressed="${ansLayers[k]}"><i style="background:var(${c})"></i>${l} (${fmt(P.filter(r => (r.ans || "not modelled") === k).length)})</button>`).join("");
 }
 function initMap() {
@@ -911,14 +1332,14 @@ function drawMap() {
   const dpr = Math.min(2, window.devicePixelRatio || 1), W = Math.round(cv.clientWidth * dpr);
   cv.width = cv.height = W;
   const g = cv.getContext("2d");
-  g.fillStyle = css("--sheet"); g.fillRect(0, 0, W, W);
+  g.fillStyle = css("--m-sheet"); g.fillRect(0, 0, W, W);
   for (const [k, col] of [["other", "--map-other"], ["green", "--map-green"], ["res", "--map-res"]]) {
     g.beginPath();
     for (const ring of B[k] || []) ring.forEach(([x, y], i) => { const [px, py] = proj(x, y, W); i ? g.lineTo(px, py) : g.moveTo(px, py); });
     g.fillStyle = css(col); g.fill("evenodd");
   }
   const r0 = Math.max(1.4, W / 520) * Math.min(3, Math.pow((view.s0 || view.s) / view.s, 0.4));
-  const groups = mapMode !== "ans" ? [["NO", "--no"], ["CHECK", "--check"], ["YES", "--yes"]] : [...ANS].reverse().map(([k, c]) => [k, c]);
+  const groups = mapMode !== "ans" ? [["NO", "--m-no"], ["CHECK", "--m-check"], ["YES", "--m-yes"]] : [...ANS].reverse().map(([k, c]) => [k, c]);
   for (const [k, col] of groups) {
     if (mapMode !== "wh" && !(mapMode === "zone" ? layers : ansLayers)[k]) continue;
     g.fillStyle = css(col);
@@ -928,9 +1349,9 @@ function drawMap() {
   }
   if (sel) {
     const [px, py] = proj(sel.x, sel.y, W);
-    g.lineWidth = 2.5 * dpr; g.strokeStyle = css("--ink"); g.fillStyle = css("--sheet");
+    g.lineWidth = 2.5 * dpr; g.strokeStyle = css("--m-ink"); g.fillStyle = css("--m-sheet");
     g.beginPath(); g.arc(px, py, 9 * dpr, 0, 7); g.fill(); g.stroke();
-    g.fillStyle = css(sel.housing === "YES" ? "--yes" : sel.housing === "CHECK" ? "--check" : "--no");
+    g.fillStyle = css(sel.housing === "YES" ? "--m-yes" : sel.housing === "CHECK" ? "--m-check" : "--m-no");
     g.beginPath(); g.arc(px, py, 5 * dpr, 0, 7); g.fill();
   }
 }
@@ -939,15 +1360,15 @@ function drawMap() {
 function drawSteps() {
   const e = D.experiments, z = e.zoning, v = e.check.verdicts, st = e.check.strategies.test, n = (v.YES || 0) + (v.PARTLY || 0) + (v.NO || 0);
   const steps = [
-    ["Find empty shops", `${fmt(z.empty_premises)} empty ground-floor premises in the city's 2024 census.`, "", "#check"],
-    ["Read the building", `A plan drawing becomes an outline and a street façade; the Catastro gives the building.`, "Exp 1", "#exp1"],
-    ["Check zoning", `${Math.round(100 * z.housing.YES / z.empty_premises)} % of empty shops stand in a zone that admits housing.`, "Exp 2", "#exp2"],
-    ["Extract the rules", `${fmt(e.rules.pieces)} pieces of ${e.rules.norms} norms in one rulebook; ${D.rules.length} rule cards.`, "Exp 3", "#exp3"],
-    ["Predict daylight", "An AI model trained on Radiance simulations predicts daylight in seconds.", "Exp 4", "#exp4"],
-    ["Check the shop", `Every rule with its article: ${v.YES} YES, ${v.PARTLY} PARTLY, ${v.NO} NO over ${n} shops.`, "Exp 5", "#exp5"],
-    ["Fit the homes", `One layout per circulation strategy, each checked again; ${fmt(st.homes_most.new)} legal homes when as many as fit.`, "Exp 5", "#shops"],
-    ["Report", "Plans, 3D, verdict and articles on one sheet; IFC and glTF for BIM and the web.", "Exp 5", "#shops"]];
-  $("#steplist").innerHTML = steps.map(([h, p, x, href], i) => `<div class="step"><div class="n">${i + 1}</div><h3>${h}</h3><p>${esc(p)}</p>${x ? `<a class="exp" href="${href}">${x} →</a>` : `<a class="exp" href="${href}">open the map →</a>`}</div>`).join("");
+    ["Find empty shops", `${fmt(z.empty_premises)} empty ground-floor premises in the city's 2024 census.`, "", "#check", "#check"],
+    ["Read the building", `A plan drawing becomes an outline and a street façade; the Catastro gives the building.`, "Exp 1", "#exp1", "#check"],
+    ["Check zoning", `${Math.round(100 * z.housing.YES / z.empty_premises)} % of empty shops stand in a zone that admits housing.`, "Exp 2", "#exp2", "#check"],
+    ["Extract the rules", `${fmt(e.rules.pieces)} pieces of ${e.rules.norms} norms in one rulebook; ${D.rules.length} rule cards.`, "Exp 3", "#exp3", "#rules"],
+    ["Predict daylight", "An AI model trained on Radiance simulations predicts daylight in seconds.", "Exp 4", "#exp4", "#check"],
+    ["Check the shop", `Every rule with its article: ${v.YES} YES, ${v.PARTLY} PARTLY, ${v.NO} NO over ${n} shops.`, "Exp 5", "#exp5", "#design"],
+    ["Fit the homes", `One layout per circulation strategy, each checked again; ${fmt(st.homes_most.new)} legal homes when as many as fit.`, "Exp 5", "#exp5", "#design"],
+    ["Report", "Plans, 3D, verdict and articles on one sheet; IFC and glTF for BIM and the web.", "Exp 5", "#exp5", "#saved"]];
+  $("#steplist").innerHTML = steps.map(([h, p, x, href, go], i) => `<div class="step"><div class="n">${i + 1}</div><h3><a class="sgo" href="${go}">${h}</a></h3><p>${esc(p)}</p>${x ? `<a class="exp" href="${href}">${x} →</a>` : `<a class="exp" href="${href}">open the map →</a>`}</div>`).join("");
 }
 
 /* ---------- 3. five shops ---------- */
@@ -1077,8 +1498,9 @@ function drawExps() {
       chart: bars([["before the fixes", 75, C("--muted")], ["after", pct(e.golden.answer_accuracy), C("--yes")]], 100, " %"),
       l: "The golden set found real bugs: shop conversions need 2,40 m (Annex 4 group C), not 2,50 m, and 8 shops had been thrown out for it." },
     { id: "exp4", tag: "EXP 4 · STEP 5 · TEAM", h: "Can AI predict daylight without a simulation?",
-      p: "50 shops simulated with Ladybug and Radiance (25-50 s each); XGBoost trained on 40, tested on 10 it never saw. Then 1,376 real Eixample shops predicted in seconds, 5 checked in Radiance.",
-      chart: bars([["XGBoost", 0.80, C("--blue")], ["rule of thumb", 0.65, C("--muted")]], 1, " R²"),
+      p: DL ? `${DL.simulations} shop variants simulated in Radiance (Ladybug/Honeybee); ${DL.model} learns the daylight and how many metres of floor reach the ${DL.thresholds.method} target for Barcelona (daylight factor ${dec(DL.thresholds.D_target_pct)} %, minimum ${dec(DL.thresholds.D_minimum_pct)} %, from the TMYx weather file). Then all ${fmt(DL.counts.shops)} empty shops of the 2024 census, in ${DL.counts.districts} districts, predicted in seconds: ${fmt(DL.counts.livable)} livable, ${fmt(DL.counts.needs_change)} need a change, ${fmt(DL.counts.not_livable)} not livable (${dlClasses()}). Lit depth checked on ${DL.validation.shops} real shops against Radiance: mean error ${dec(DL.validation.lit_depth_mae_m)} m. Floor height and windows assumed.`
+         : "Bars's daylight results did not load.",
+      chart: `<div class="fig">R² of the first 50 simulations (mean daylight factor)</div>` + bars([["XGBoost", 0.80, C("--blue")], ["rule of thumb", 0.65, C("--muted")]], 1, " R²"),
       l: "The model starts from the rule of thumb and corrects it with the number of lit façades and the window size." },
     { id: "exp5", tag: "EXP 5 · STEPS 6-8", h: "Can NOMAD check a shop, fit legal homes and build them in 3D?",
       p: `${n} shops asking for two one-bedroom flats and one two-bedroom flat: ${v.YES} YES, ${v.PARTLY} PARTLY, ${v.NO} NO. Layouts as circulation strategies: ${fmt(st.homes_as_asked.new)} homes as asked and ${fmt(st.homes_most.new)} at most (the old patio layouts: ${fmt(st.homes_most.old)}, but ${fmt(st.old_most_patio_only_flats)} of those flats were lit only by a patio, which is not their façade). Every layout is built in Rhino and exported as IFC.`,
@@ -1254,6 +1676,7 @@ function restyle(root) {                                        // walls warm gr
 }
 /* ---------- shared: E05 room colours, UTM 31N -> latitude/longitude (for Street View links) ---------- */
 const ROOMC = { living: "#F09F26", bed_main: "#8078DE", bed: "#B0A8ED", kitchen: "#FAC775", bath: "#85B8EB", hall: "#CCCCCC", storage: "#B5B0A5" };
+const FAILC = "#E34A4A", SHAREDC = "#9ED3A6";   // plans, map and 3D keep their own colours (not the site's neon look)
 function utmToLatLng(x, y) {                                    // ETRS89 / UTM zone 31N (EPSG:25831)
   const a = 6378137, f = 1 / 298.257222101, e2 = f * (2 - f), k0 = 0.9996, ep2 = e2 / (1 - e2);
   const M = y / k0, mu = M / (a * (1 - e2 / 4 - 3 * e2 * e2 / 64 - 5 * e2 ** 3 / 256));
@@ -1281,7 +1704,7 @@ function planSvg(shop, plan, opt = {}) {
     (plan.corridors || []).forEach(q => g += `<polygon points="${P(q)}" fill="#DEDEDA"/>`);
     (plan.cores || []).forEach(q => g += `<polygon points="${P(q)}" fill="#7d838c" stroke="#1F1F1F" stroke-width="${s / 300}"><title>core: stair (two 1,00 m flights) and lift</title></polygon>`);
     (plan.existing || []).forEach(q => g += `<polygon points="${P(q)}" fill="#5b5f66" stroke="#1F1F1F" stroke-width="${s / 300}"><title>the building's existing portal / stair (Catastro)</title></polygon>`);
-    plan.units.forEach(u => u.rooms.forEach(r => g += `<polygon points="${P(r.pts)}" fill="${!(r.ok && u.ok !== false) ? "#E34A4A" : u.shared ? "#9ED3A6" : ROOMC[r.kind] || "#ccc"}" fill-opacity=".82" stroke="#fff" stroke-width="${s / 300}"><title>${esc(r.name)} ${r.area || ""} m²${r.why ? " · " + esc(r.why) : ""}</title></polygon>`));
+    plan.units.forEach(u => u.rooms.forEach(r => g += `<polygon points="${P(r.pts)}" fill="${!(r.ok && u.ok !== false) ? FAILC : u.shared ? SHAREDC : ROOMC[r.kind] || "#ccc"}" fill-opacity=".82" stroke="#fff" stroke-width="${s / 300}"><title>${esc(r.name)} ${r.area || ""} m²${r.why ? " · " + esc(r.why) : ""}</title></polygon>`));
     plan.units.forEach(u => (u.swings || []).forEach(q => g += `<polyline points="${P(q)}" fill="none" stroke="#1F1F1F" stroke-width="${s / 420}"/>`));
     plan.units.forEach(u => (u.furniture || []).forEach(q => g += furnSvg(q, P, s / 520)));
   }
@@ -1332,7 +1755,7 @@ const zoneSolids = plan => {
   (plan.patios || []).forEach(q => out.push({ pts: q, z0: 0, h: 0.03, rgb: [196, 224, 244] }));
   (plan.corridors || []).forEach(q => out.push({ pts: q, z0: 0, h: 0.04, rgb: [222, 222, 218] }));
   plan.units.forEach(u => u.rooms.forEach(r => {
-    const hex = (r.ok && u.ok !== false ? ROOMC[r.kind] : "#E34A4A") || "#CCCCCC";
+    const hex = (r.ok && u.ok !== false ? ROOMC[r.kind] : FAILC) || "#CCCCCC";
     out.push({ pts: r.pts, z0: 0, h: r.kind === "hall" ? 0.08 : 2.7, rgb: [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16)) });
   }));
   return out;
@@ -1373,7 +1796,7 @@ async function initDesign() {
   ul.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; ul.hidden = true; const r = P[+b.dataset.i]; q.value = r.street + " " + r.num; pickRealShop(r); });
   $("#go").addEventListener("click", makeLayouts);
   $("#ownfile").addEventListener("change", addOwnPlans); drawOwn(); startAgent(); initPolicy();
-  document.querySelectorAll("#wts input[type=range]").forEach(i => i.addEventListener("input", () => { i.nextElementSibling.textContent = i.value; }));
+  document.querySelectorAll("#wts input[type=range]").forEach(i => i.addEventListener("input", () => setShare(i.id.slice(2), +i.value)));
   $("#dv-walls").addEventListener("click", () => { dMode = "walls"; drawDesignDetail(); });
   $("#dv-zone").addEventListener("click", () => { dMode = "zone"; drawDesignDetail(); });
   pickDemoShop(0);
@@ -1403,7 +1826,7 @@ async function pickRealShop(r) {
   shopCard(dShop, `<b>${esc(r.street)} ${esc(r.num)}</b><div class="meta">${esc(r.barri)} · Catastro ${esc(ref)}</div>
     <div>${fmt(Math.round(area))} m² ground floor · ${s.floors} floors · <span class="pill ${r.housing}">${WORD[r.housing]}</span></div>
     ${s.shared ? `<div class="hint2">Other premises share this ground floor: the outline is the whole floor. The Catastro CAT file would cut out this shop.</div>` : ""}
-    ${r.df != null ? `<div>Daylight: predicted daylight factor <b>${r.df} %</b> · 2 % reaches <b>${r.lit} m</b> in from the window${r.df < 1 ? " · <span class=\"pill NO\">dark</span>" : ""}<div class="hint2">Bars's model (50 Ladybug/Honeybee simulations + XGBoost), from the street width and the building opposite; floor height and windows assumed.</div></div>` : ""}
+    ${r.dl ? `<div>Daylight: ${dlHtml(r.dl)}<div class="hint2">${dlThreshold()}. ${dlClasses()}. ${dlNote()} From the street width and the building opposite.</div></div>` : ""}
     ${r.ans ? `<div class="hint2">NOMAD's city answer: <b>${esc(r.ans)}</b> (${esc(r.awhy)}).</div>` : ""}
     <div class="hint2">Blue: street façade. Height is not in the Catastro: set it in step 2.</div>`);
 }
@@ -1417,7 +1840,7 @@ async function makeLayouts() {
   try {
     const shop = { ...dShop, height: +$("#hgt").value || dShop.height };
     const used = Object.fromEntries(Object.keys(mix).map(k => [k, sizes[k]]));
-    const wv = id => +($("#w-" + id) || { value: 0 }).value;
+    const wv = engineW;
     const weights = { match: wv("match"), passing: wv("passing"), eff: wv("eff"), plan: wv("plan") / 100 };
     dRes = await nomad({ shop: { outline: shop.outline, facade: shop.facade, height: shop.height, name: shop.name, source: shop.source,
                                  ...(shop.prem && shop.prem.lit != null ? { lit_depth: shop.prem.lit } : {}),
@@ -1503,7 +1926,7 @@ function drawWorkspace() {
       <dt>flats passing every rule</dt><dd>${f.passing} / ${f.units}</dd>
       <dt>floor used by homes</dt><dd>${fmt(Math.round(f.used))} of ${fmt(Math.round(f.shop))} m²</dd>
       <dt>façade with light</dt><dd>${R.shop.facade_m} m</dd>
-      ${prem && prem.df != null ? `<dt>daylight (Bars's model)</dt><dd>DF ${prem.df} %</dd><dt>2 % reaches</dt><dd>${prem.lit} m in</dd>` : ""}
+      ${prem && prem.dl ? `<dt>daylight (Bars's model)</dt><dd>${DLC[prem.dl.cls][0]}</dd><dt>target DF ${dec(DL.thresholds.D_target_pct)} % reaches</dt><dd>${dec(prem.dl.lit, 1)} m in</dd>` : ""}
     </dl></div>
     <div><h4>Room mix</h4><div class="ring" style="margin-top:6px">${ringSvg(f.by)}<ul>${f.by.map(([l, v, c]) => `<li><i style="background:${c}"></i><span>${esc(l)}</span><b>${Math.round(v)} m²</b></li>`).join("")}</ul></div></div>
     <div><h4>Options</h4><div class="vlist" style="margin-top:6px">${opts.map((o, k) => { const g = layoutFigures(o, R);
@@ -1566,7 +1989,7 @@ function swapOption(it, u, o) {                               // put another rea
 let agentTurns = [], agentAbort = null;
 function agentState() {
   const it = dRes && dSel > 0 ? dRes.iterations[dSel - 1] : null;
-  const wv = id => +($("#w-" + id) || { value: 0 }).value;
+  const wv = id => +($("#w-" + id) || { value: 0 }).value;   // shares in %
   return {
     shop: dShop ? { name: dShop.name, height_m: +$("#hgt").value } : "no shop picked yet (step 1)",
     asked: { ...want }, sizes_m2: { ...sizes }, weights: { match: wv("match"), passing: wv("passing"), eff: wv("eff"), plan: wv("plan") },
@@ -1579,7 +2002,7 @@ function agentState() {
   };
 }
 const AGENT_TOOLS = [
-  { name: "set_request", description: "Change what the user asks for: the number of flats of each type, target sizes in m2, the weights (0-20) and the shop's clear height. Only the fields given change. Returns the new request. Make the layouts afterwards to see the effect.",
+  { name: "set_request", description: "Change what the user asks for: the number of flats of each type, target sizes in m2, the weights (shares in %, the four add up to 100) and the shop's clear height. Only the fields given change. Returns the new request. Make the layouts afterwards to see the effect.",
     inputSchema: { type: "object", properties: {
       mix: { type: "object", description: "flats wanted per type, 0-12", properties: { studio: { type: "integer" }, "1bed": { type: "integer" }, "2bed": { type: "integer" }, "3bed": { type: "integer" } } },
       sizes_m2: { type: "object", description: "target useful area per type, m2", properties: { studio: { type: "number" }, "1bed": { type: "number" }, "2bed": { type: "number" }, "3bed": { type: "number" } } },
@@ -1588,7 +2011,7 @@ const AGENT_TOOLS = [
     execute(a) {
       Object.entries(a.mix || {}).forEach(([k, v]) => { if (k in want) { want[k] = Math.max(0, Math.min(12, Math.round(+v || 0))); const o = $("#n-" + k); if (o) o.textContent = want[k]; } });
       Object.entries(a.sizes_m2 || {}).forEach(([k, v]) => { if (k in want) { const el = $("#s-" + k); if (+v > 0) { sizes[k] = +v; if (el) { el.value = +v; el.dispatchEvent(new Event("input", { bubbles: true })); } } } });
-      Object.entries(a.weights || {}).forEach(([k, v]) => { const el = $("#w-" + k); if (el) { el.value = Math.max(0, Math.min(20, +v || 0)); el.dispatchEvent(new Event("input", { bubbles: true })); } });
+      Object.entries(a.weights || {}).forEach(([k, v]) => { if (WK.includes(k)) setShare(k, +v || 0); });
       if (+a.height_m > 0) $("#hgt").value = (+a.height_m).toFixed(2);
       const st = agentState(); return { asked: st.asked, sizes_m2: st.sizes_m2, weights: st.weights, height_m: st.shop.height_m };
     } },
@@ -1685,7 +2108,7 @@ async function drawAMB() {
   let A; try { A = await (await fetch("data/amb.json")).json(); } catch (e) { return; }
   const xs = A.pts.map(p => p[0]), ys = A.pts.map(p => p[1]);
   const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys), sc = 600 / Math.max(x1 - x0, y1 - y0);
-  const col = { Y: "var(--yes)", C: "var(--check)" };
+  const col = { Y: "var(--m-yes)", C: "var(--m-check)" };
   const svg = `<svg viewBox="0 0 ${Math.round((x1 - x0) * sc) + 10} ${Math.round((y1 - y0) * sc) + 10}" class="ambmap" role="img" aria-label="Map of the metropolitan area: buildings with no homes where the zone admits housing (green) or its plan decides (amber)">${A.pts.map(p =>
     `<circle cx="${((p[0] - x0) * sc + 5).toFixed(1)}" cy="${((y1 - p[1]) * sc + 5).toFixed(1)}" r="1.6" fill="${col[p[3]]}"/>`).join("")}</svg>`;
   const T = A.towns.slice().sort((a, b) => (b.zone_yes + b.zone_check) - (a.zone_yes + a.zone_check));
@@ -1795,7 +2218,7 @@ function initCity() {
   const r = window.THREE && THREE.MapControls ? (makeRenderer({ canvas: cv, antialias: true }) || softCityRenderer(cv)) : null;   // no WebGL: drawn on a 2D canvas
   if (!r) {
     cv.hidden = true;
-    box.insertAdjacentHTML("afterbegin", `<img class="still3d" src="img/city_still.jpg" alt="The 3D city around Barcelona's Eixample: buildings coloured by PGM zone, streets, trees and shadows">`);
+    box.insertAdjacentHTML("afterbegin", `<img class="still3d" src="img/city_still.jpg" alt="The 3D city around Barcelona's Eixample: buildings coloured by PGM zone, streets, trees and shadows"><span class="stilltag">earlier model</span>`);
     $("#cityhud").textContent = NO_GL_MSG; return;
   }
   r.setPixelRatio(Math.min(1.5, window.devicePixelRatio || 1));
@@ -1954,7 +2377,7 @@ function buildTile(data) {
   let k = 0;
   data.n.forEach((n, part) => {
     const ring = []; for (let i = 0; i < n; i++, k += 2) ring.push([ox + xy[k] / 10, oz - xy[k + 1] / 10]);
-    const h = 4 + 3 * (data.up[part] - 1);
+    const h = 5 + 3 * (data.up[part] - 1);                        // 5 m ground floor + 3 m per upper floor, as exp1_daylight/shops_from_catastro.py
     for (let i = 0; i < n; i++) {
       const a = ring[i], b = ring[(i + 1) % n];
       [[a[0], 0, a[1]], [b[0], 0, b[1]], [b[0], h, b[1]], [a[0], 0, a[1]], [b[0], h, b[1]], [a[0], h, a[1]]].forEach(v => { pos.push(...v); shade.push(0.86); vPart.push(part); });
@@ -2035,13 +2458,13 @@ function drawReal() {
 
 /* ---------- languages: English, Català, Español ---------- */
 const I18N = {
-  en: { nav_check: "Check an address", nav_design: "Design homes", nav_saved: "Saved", nav_city: "City in 3D", nav_real: "Real shops",
+  en: { nav_flow: "Workflow", g_find: "Find & check", g_design: "Design", g_report: "Report", g_evid: "Evidence", g_rules: "Rules", g_how: "How it works", nav_check: "Check an address", nav_design: "Design homes", nav_saved: "Saved", nav_city: "City in 3D", nav_real: "Real shops",
     or_test: "Or a test shop:", upload_sum: "Or upload a plan drawing of your shop", up_len: "Length of the blue street façade (m)", up_use: "Use this plan", up_draw: "Outline wrong? Draw it", up_drawhint: "Click each corner of the shop. Click the big blue dot to close the outline.",
     up_hint: "NOMAD reads the outline from the dark lines of the drawing (the method that did best on 398 real scans). Click the outline's edges that face the street, then give the length of one of them.",
     res_hint: "The shop as it is and its layouts appear here, one for each circulation strategy that adds homes: flats on both façades, a corridor to the block interior, or small flats filling the shop.",
-    save: "Save this shop", report: "Download the report (PDF)", saved_eb: "Your shops", saved_h: "Saved shops, side by side",
+    save: "Save this shop", report: "Download the report (PDF)", saved_eb: "Step 3 · keep and share", saved_h: "Saved shops, side by side",
     saved_lede: "Every shop you save keeps your requirements and NOMAD's answer. Tick two or more to compare them. Only you can see your saved shops.",
-    YES: "Housing admitted", CHECK: "Check the zone's plan", NO: "Not admitted", simple: "Simple view", expert: "Full view",
+    YES: "Homes allowed", CHECK: "Maybe: the local plan decides", NO: "Homes not allowed", simple: "Simple view", expert: "Full view",
     s_yes: (n, a) => `Yes: ${n} home${n === 1 ? "" : "s"} fit in ${a} and pass every rule.`,
     s_partly: (n, k, a) => `Partly: ${n} home${n === 1 ? "" : "s"} fit in ${a}; ${k} of the flats you asked for do not.`,
     s_no: a => `No: ${a} cannot become homes as it is.`, s_why: "Why:", law_show: "Show the law", law_hide: "Hide the law",
@@ -2049,11 +2472,11 @@ const I18N = {
     v_cost: "Your cost of the works (€ per m²)", v_margin: "Value minus works", v_note: "2018 asking prices of ground-floor flats within 800 m (idealista18, ODbL). Not today's market: a first order of magnitude.",
     no_saved: "Nothing saved yet. Make the layouts for a shop and press “Save this shop”.", compare: "Compare", saved_ok: "Saved.", saved_local: "Saved in this browser only.",
     rep_ok: "Report ready.", rep_no: "This view cannot save files.", del: "Remove" },
-  ca: { nav_check: "Consulta una adreça", nav_design: "Dissenya habitatges", nav_saved: "Desats", nav_city: "Ciutat en 3D", nav_real: "Locals reals",
+  ca: { nav_flow: "Procés", g_find: "Troba i comprova", g_design: "Disseny", g_report: "Informe", g_evid: "Proves", g_rules: "Normes", g_how: "Com funciona", nav_check: "Consulta una adreça", nav_design: "Dissenya habitatges", nav_saved: "Desats", nav_city: "Ciutat en 3D", nav_real: "Locals reals",
     or_test: "O un local de prova:", upload_sum: "O puja un plànol del teu local", up_len: "Longitud de la façana al carrer, en blau (m)", up_use: "Fes servir aquest plànol", up_draw: "Contorn erroni? Dibuixa'l", up_drawhint: "Fes clic a cada cantonada del local. Fes clic al punt blau gran per tancar el contorn.",
     up_hint: "NOMAD llegeix el contorn a partir de les línies fosques del plànol (el mètode que va funcionar millor en 398 plànols escanejats reals). Clica els costats del contorn que donen al carrer i indica la longitud d'un d'ells.",
     res_hint: "Aquí apareixen el local tal com és i les seves distribucions, una per cada manera d'arribar als habitatges que n'afegeix: pisos a les dues façanes, un passadís cap a l'interior d'illa o pisos petits que omplen el local.",
-    save: "Desa aquest local", report: "Descarrega l'informe (PDF)", saved_eb: "Els teus locals", saved_h: "Locals desats, un al costat de l'altre",
+    save: "Desa aquest local", report: "Descarrega l'informe (PDF)", saved_eb: "Pas 8 · informe · els teus locals", saved_h: "Locals desats, un al costat de l'altre",
     saved_lede: "Cada local que desis guarda les teves necessitats i la resposta de NOMAD. Marca'n dos o més per comparar-los. Només tu veus els teus locals desats.",
     YES: "Habitatge admès", CHECK: "Cal revisar el pla de la zona", NO: "No admès", simple: "Vista senzilla", expert: "Vista completa",
     s_yes: (n, a) => `Sí: hi caben ${n} habitatge${n === 1 ? "" : "s"} a ${a} i compleixen totes les normes.`,
@@ -2063,11 +2486,11 @@ const I18N = {
     v_cost: "El teu cost d'obra (€ per m²)", v_margin: "Valor menys obra", v_note: "Preus demanats el 2018 per pisos en planta baixa a menys de 800 m (idealista18, ODbL). No és el mercat d'avui: un primer ordre de magnitud.",
     no_saved: "Encara no has desat res. Fes les distribucions d'un local i prem «Desa aquest local».", compare: "Compara", saved_ok: "Desat.", saved_local: "Desat només en aquest navegador.",
     rep_ok: "Informe preparat.", rep_no: "Aquesta vista no pot desar fitxers.", del: "Esborra" },
-  es: { nav_check: "Consulta una dirección", nav_design: "Diseña viviendas", nav_saved: "Guardados", nav_city: "Ciudad en 3D", nav_real: "Locales reales",
+  es: { nav_flow: "Proceso", g_find: "Encuentra y comprueba", g_design: "Diseño", g_report: "Informe", g_evid: "Pruebas", g_rules: "Normas", g_how: "Cómo funciona", nav_check: "Consulta una dirección", nav_design: "Diseña viviendas", nav_saved: "Guardados", nav_city: "Ciudad en 3D", nav_real: "Locales reales",
     or_test: "O un local de prueba:", upload_sum: "O sube un plano de tu local", up_len: "Longitud de la fachada a la calle, en azul (m)", up_use: "Usar este plano", up_draw: "¿Contorno erróneo? Dibújalo", up_drawhint: "Haz clic en cada esquina del local. Haz clic en el punto azul grande para cerrar el contorno.",
     up_hint: "NOMAD lee el contorno a partir de las líneas oscuras del plano (el método que mejor funcionó en 398 planos escaneados reales). Haz clic en los lados del contorno que dan a la calle e indica la longitud de uno de ellos.",
     res_hint: "Aquí aparecen el local tal como está y sus distribuciones, una por cada forma de llegar a las viviendas que añade alguna: pisos en las dos fachadas, un pasillo hacia el interior de manzana o pisos pequeños que llenan el local.",
-    save: "Guardar este local", report: "Descargar el informe (PDF)", saved_eb: "Tus locales", saved_h: "Locales guardados, uno al lado del otro",
+    save: "Guardar este local", report: "Descargar el informe (PDF)", saved_eb: "Paso 8 · informe · tus locales", saved_h: "Locales guardados, uno al lado del otro",
     saved_lede: "Cada local que guardes conserva tus necesidades y la respuesta de NOMAD. Marca dos o más para compararlos. Solo tú ves tus locales guardados.",
     YES: "Vivienda admitida", CHECK: "Hay que revisar el plan de la zona", NO: "No admitida", simple: "Vista sencilla", expert: "Vista completa",
     s_yes: (n, a) => `Sí: caben ${n} vivienda${n === 1 ? "" : "s"} en ${a} y cumplen todas las normas.`,
@@ -2089,6 +2512,88 @@ function applyLang() {
   if (dRes) drawDesign();
   drawSaved();
 }
+/* the header's pill tabs (after SimiStar): groups open a small menu; the tab of the section on screen is lit */
+function initNav() {
+  const nav = $("#mainnav"), links = [...nav.querySelectorAll("a[href^='#']")], groups = [...nav.querySelectorAll(".pgroup")];
+  const close = () => groups.forEach(g => { g.querySelector("button").setAttribute("aria-expanded", "false"); g.querySelector(".pmenu").hidden = true; });
+  groups.forEach(g => { const b = g.querySelector("button"); b.addEventListener("click", () => { const open = b.getAttribute("aria-expanded") !== "true"; close(); if (open) { b.setAttribute("aria-expanded", "true"); g.querySelector(".pmenu").hidden = false; } }); });
+  document.addEventListener("click", e => { if (!nav.contains(e.target)) close(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+  links.forEach(a => a.addEventListener("click", close));
+  const secs = [...document.querySelectorAll("main > section.sheet")];
+  let last = "";
+  const spy = () => {
+    let cur = secs[0];
+    for (const x of secs) if (x.offsetParent !== null && x.getBoundingClientRect().top <= innerHeight * .3) cur = x;
+    if (cur.id === last) return; last = cur.id;
+    links.forEach(a => { const on = a.hash === "#" + cur.id; a.classList.toggle("on", on); on ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"); });
+    groups.forEach(g => g.querySelector("button").classList.toggle("on", !!g.querySelector("a.on")));
+  };
+  addEventListener("scroll", () => requestAnimationFrame(spy), { passive: true });
+  spy();
+}
+/* the address check's three columns: drag a handle to share the width; kept in this browser */
+function initCols() {
+  const g = $("#hero3"), cols = [...g.children].filter(e => !e.classList.contains("gut")), DEF = [22, 34, 44];
+  const set = f => { f.forEach((v, i) => g.style.setProperty(`--c${i + 1}`, v.toFixed(2) + "fr")); };
+  let saved = null; try { saved = JSON.parse(localStorage.getItem("nomad-cols2")); } catch (e) {}
+  set(Array.isArray(saved) && saved.length === 3 ? saved : DEF);
+  const keep = () => { const w = cols.map(c => c.getBoundingClientRect().width), t = w.reduce((a, b) => a + b, 0), f = w.map(x => 100 * x / t);
+    set(f); try { localStorage.setItem("nomad-cols2", JSON.stringify(f)); } catch (e) {} dispatchEvent(new Event("resize")); };
+  const move = (i, dx) => { const w = cols.map(c => c.getBoundingClientRect().width), MIN = 240;
+    dx = Math.max(MIN - w[i], Math.min(w[i + 1] - MIN, dx)); w[i] += dx; w[i + 1] -= dx;
+    const t = w.reduce((a, b) => a + b, 0); set(w.map(x => 100 * x / t)); };
+  g.querySelectorAll(".gut").forEach((h, i) => {
+    h.addEventListener("pointerdown", e => { e.preventDefault(); h.setPointerCapture(e.pointerId); h.classList.add("on"); let x = e.clientX;
+      const mv = ev => { move(i, ev.clientX - x); x = ev.clientX; };
+      const up = () => { h.removeEventListener("pointermove", mv); h.removeEventListener("pointerup", up); h.removeEventListener("pointercancel", up); h.classList.remove("on"); keep(); };
+      h.addEventListener("pointermove", mv); h.addEventListener("pointerup", up); h.addEventListener("pointercancel", up); });
+    h.addEventListener("keydown", e => { if (e.key === "ArrowLeft" || e.key === "ArrowRight") { e.preventDefault(); move(i, e.key === "ArrowLeft" ? -24 : 24); keep(); } });
+    h.addEventListener("dblclick", () => { set(DEF); try { localStorage.removeItem("nomad-cols2"); } catch (e) {} dispatchEvent(new Event("resize")); });
+  });
+}
+/* the layout's details: four tabs side by side, one open at a time, in a box as tall as the plan and the 3D (it scrolls inside) */
+function initWsTabs() {
+  const tabs = [...document.querySelectorAll(".wstabs [role=tab]")];
+  const pick = i => tabs.forEach((t, j) => { const on = i === j; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1; $("#wp-" + j).hidden = !on; if (on) $(".wspane").scrollTop = 0; });
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => pick(i));
+    t.addEventListener("keydown", e => { const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0; if (!d) return; e.preventDefault(); const j = (i + d + tabs.length) % tabs.length; pick(j); tabs[j].focus(); });
+  });
+}
+/* step 4: the rule cards and the rulebook are two tabs of one section */
+function ruleTab(k) { setView("app"); }          // the rulebook lives in the app; the rule cards in Research
+/* App | Research: one page, two views. A link to a section of the other view switches to it */
+function setView(v) {
+  document.body.dataset.view = v;
+  document.querySelectorAll(".vt").forEach(b => b.setAttribute("aria-selected", b.dataset.v === v));
+}
+function initViews() {
+  setView("app");
+  document.querySelectorAll(".vt").forEach(b => b.addEventListener("click", () => { setView(b.dataset.v); scrollTo(0, 0); }));
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href^="#"]'); if (!a || a.getAttribute("href").length < 2) return;
+    const t = document.querySelector(a.getAttribute("href")), sec = t && t.closest("section[data-view]");
+    if (!sec || sec.dataset.view === document.body.dataset.view) return;
+    e.preventDefault(); setView(sec.dataset.view); requestAnimationFrame(() => t.scrollIntoView({ behavior: "smooth", block: "start" }));
+    history.replaceState(null, "", a.getAttribute("href"));
+  }, true);
+  const t = location.hash && document.querySelector(location.hash), sec = t && t.closest("section[data-view]");
+  if (sec && sec.dataset.view !== "app") { setView(sec.dataset.view); t.scrollIntoView(); }
+}
+/* the weights as shares of 100 %. The engine keeps its old scale (shares x 0.16: the old 10 / 1 / 3 / 2 = 62 / 6 / 19 / 13 %) */
+const WK = ["match", "passing", "eff", "plan"];
+function setShare(k, v) {
+  const els = Object.fromEntries(WK.map(x => [x, $("#w-" + x)]));
+  v = Math.max(0, Math.min(100, Math.round(v)));
+  const rest = WK.filter(x => x !== k), was = rest.map(x => +els[x].value), sum = was.reduce((a, b) => a + b, 0);
+  const raw = rest.map((x, i) => (100 - v) * (sum ? was[i] / sum : 1 / rest.length));
+  const out = raw.map(Math.floor); let left = 100 - v - out.reduce((a, b) => a + b, 0);
+  raw.map((r, i) => [r - out[i], i]).sort((p, q) => q[0] - p[0]).forEach(([, i]) => { if (left > 0) { out[i]++; left--; } });
+  els[k].value = v; rest.forEach((x, i) => { els[x].value = out[i]; });
+  WK.forEach(x => { $("#wo-" + x).textContent = els[x].value + " %"; els[x].style.setProperty("--p", els[x].value + "%"); });
+}
+const engineW = k => +($("#w-" + k) || { value: 0 }).value * 0.16;
 function initExtras() {
   try { LANG = localStorage.getItem("nomad-lang") || (navigator.language || "en").slice(0, 2); } catch (e) {}
   if (!I18N[LANG]) LANG = "en";
@@ -2128,6 +2633,8 @@ async function initBook() {
   $("#bkprev").addEventListener("click", () => bookTurn(-1));
   $("#bknext").addEventListener("click", () => bookTurn(1));
   $("#bkpage").addEventListener("change", e => { BK.hl = null; bookGo(+e.target.value); });
+  $("#fbfull").addEventListener("click", () => { const f = $("#fb"); if (document.fullscreenElement) document.exitFullscreen(); else if (f.requestFullscreen) f.requestFullscreen(); });
+  document.addEventListener("fullscreenchange", () => { if (BK.shown) bookShow(); });
   $("#bkstage").addEventListener("keydown", e => { if (e.key === "ArrowRight") { e.preventDefault(); bookTurn(1); } if (e.key === "ArrowLeft") { e.preventDefault(); bookTurn(-1); } });
   $("#bkspread").addEventListener("click", e => { const pg = e.target.closest(".bk-pg"); if (!pg || pg.classList.contains("blank")) return; bookTurn(pg.classList.contains("l") ? -1 : 1); });
   window.addEventListener("resize", () => { clearTimeout(BK.rt); BK.rt = setTimeout(() => { if (BK.shown) bookShow(); }, 250); });
@@ -2167,6 +2674,7 @@ function bookMarks() {
   }
   el.innerHTML = head + marks.map((m, i) => `<button type="button" class="bk-mark" data-i="${i}">${m.ok === null ? "" : `<span class="pill ${m.ok ? "YES" : "NO"}">${m.ok ? "OK" : "FAILS"}</span>`}<span>${esc(m.a.name)} <small style="color:var(--muted)">· ${esc(m.a.doc)}</small></span><span class="pg">p. ${m.a.page}</span></button>`).join("");
   el.onclick = e => { const b = e.target.closest(".bk-mark"); if (!b) return; const m = marks[+b.dataset.i]; BK.hl = m.a; bookGo(m.a.page, true); };
+
 }
 function bookPart(n) { return BK.idx.parts.find(p => n >= p.first_page && n <= p.last_page); }
 function bookDoc(n) { return [...BK.idx.docs].reverse().find(d => n >= d.start); }
@@ -2175,8 +2683,8 @@ function bookPdf(part) {
   return BK.pdfs[part.file];
 }
 function bookSpread(n) {                                         // the pages on screen for page n: one on phones, else a two-page spread
-  if (bkOne()) return [n];
-  const left = n % 2 === 0 ? n : n - 1;                         // even pages on the left, odd on the right (page 1 alone, like a cover)
+  if (bkOne() || n === 1) return [n];                           // page 1 alone: the closed cover, like a printed book
+  const left = n % 2 === 0 ? n : n - 1;                         // even pages on the left, odd on the right
   return [left, left + 1].map(p => (p >= 1 && p <= BK.idx.pages) ? p : null);
 }
 async function bookRender(n, slot) {
@@ -2208,6 +2716,7 @@ async function bookShow() {
   sp.classList.toggle("one", pages.length === 1);
   sp.innerHTML = pages.map((p, i) => `<div class="bk-pg ${pages.length === 1 ? "r" : (i ? "r" : "l")} ${p ? "" : "blank"}" data-p="${p || ""}"></div>`).join("");
   $("#bkpage").value = BK.at;
+  $("#bkprev").disabled = BK.at <= 1; $("#bknext").disabled = pages[pages.length - 1] >= BK.idx.pages || BK.at >= BK.idx.pages;
   const d = BK.at >= BK.idx.docs[0].start ? bookDoc(BK.at) : null, part = bookPart(BK.at);
   $("#bkwhere").textContent = d ? `${d.short} · ${d.title}` : "Cover, how to read this book, index";
   $("#bkdl").href = "rulebook/" + part.file;
@@ -2217,7 +2726,7 @@ async function bookShow() {
 }
 function bookGo(n, scroll) {
   BK.at = Math.max(1, Math.min(BK.idx.pages, n || 1));
-  if (scroll) $("#book").scrollIntoView({ behavior: "smooth", block: "start" });
+  if (scroll) { setView("app"); $("#book").scrollIntoView({ behavior: "smooth", block: "start" }); }
   BK.shown = true; bookShow();
 }
 function bookTurn(dir) {                                         // the page turns over like a leaf, then the new spread is drawn

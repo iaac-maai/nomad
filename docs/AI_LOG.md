@@ -14,3 +14,20 @@ IAAC asks us to declare every AI tool we use. Add one row each time.
 | 2026-11-01 | Bars | Claude | Street-width fix (ray from the street facade), EN 17037 thresholds from the Barcelona TMYx weather file (climate.onebuilding.org), lit-depth model and livability classes | Scripts and results reviewed by Bars; lit depth checked on 5 shops against Radiance (mean error 0.55 m) |
 | 2026-11-03 | Bhavini | Claude | NOMAD pipeline (laws, zoning, plan reader, rule cards, real-plan library, plan generator, daylight in the check, whole buildings, city view, website, Rhino/Grasshopper, lab book E01-E32), organised into `Bhavini_NOMAD Files/` | Code, results and documents, reviewed by Bhavini; every legal number quoted from the downloaded law |
 | 2026-11-03 | Bars | Claude | 30 extra Grasshopper variants for narrow streets and deep shops, whole-Barcelona shop extraction and map, livability classes (36 m2 home in the daylit zone, Decret 141) | Lit depth checked on 5 real shops against Radiance: mean error 0.30 m |
+| 2026-11-04 | Bars | Claude | Website daylight update on branch site-daylight-update: new data file from exp1_daylight (80 Radiance simulations, EN 17037 thresholds, lit depth and classes for the 2024 census), 5 m + 3 m building heights in the 3D city, Exp 4 numbering in the docs, Sources table | Changes reviewed by Bars; lit-depth validation re-run (`predict_shops.py --compare`: mean error 0.30 m on 5 shops) |
+
+## Sources, tools and licences
+
+The same list as the website's Sources table. "to check" = licence not confirmed yet.
+
+| What | Source | Licence |
+| --- | --- | --- |
+| Empty ground-floor premises | Cens de locals en planta baixa 2024, Ajuntament de Barcelona, Open Data BCN (CC BY 4.0) | CC BY 4.0 |
+| Buildings | Catastro (Dirección General del Catastro) via hypercadaster_ES | EUPL-1.2 (hypercadaster_ES); Catastro data: reuse with attribution |
+| Weather file | Barcelona TMYx (ESP_CT_Barcelona.081800_TMYx.epw), climate.onebuilding.org | to check |
+| Daylight method | EN 17037 (daylight in buildings): D_target and D_minimum for Barcelona (exp1_daylight/daylight_thresholds.json) | European standard, method cited |
+| Test shops and flats | Swiss Dwellings v3.0.0, Zenodo (zenodo.org/record/7788422) | CC BY 4.0 |
+| Real flat plans | ResPlan, github.com/m-agour/ResPlan | CC BY 4.0 (data); MIT (code) |
+| Real plan scans | CubiCasa5K, test split only (zenodo.org/records/2613548) | CC BY-NC-SA 4.0, non-commercial use only |
+| Rule cards (Exp 3) | open-notebook (vector search) and Gemini 3.5 Flash Lite (drafting) | MIT (open-notebook); Gemini: Google API terms |
+| AI assistant and code help | Claude (Anthropic): the website's "Ask NOMAD" assistant and help writing the code | Anthropic terms of use |
