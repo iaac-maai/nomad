@@ -98,6 +98,7 @@ def main():
     ap.add_argument("--data", required=True, help="hypercadaster data folder")
     ap.add_argument("--district", default="", help="e.g. Eixample (empty = whole city)")
     ap.add_argument("--all-premises", action="store_true", help="also active shops, not only empty ones")
+    ap.add_argument("--census", default="", help="ground-floor census CSV (default: <data>/open_data/barcelona_ground_premises.csv, the 2022 census)")
     ap.add_argument("--out", default=str(HERE / "shops_bcn.csv"))
     ap.add_argument("--search", type=float, default=60.0, help="max distance to the opposite building (m)")
     ap.add_argument("--min-area", type=float, default=50.0, help="ignore smaller footprints across the street (kiosks, metro exits)")
@@ -105,8 +106,20 @@ def main():
     data = Path(args.data)
 
     # ---- 1. Open Data BCN ground-floor census
-    prem = pd.read_csv(data / "open_data" / "barcelona_ground_premises.csv", low_memory=False)
-    print("premises in census:", len(prem))
+    census = Path(args.census) if args.census else data / "open_data" / "barcelona_ground_premises.csv"
+    prem = None
+    for enc in ("utf-8", "utf-16", "latin-1"):
+        try:
+            prem = pd.read_csv(census, low_memory=False, encoding=enc)
+            break
+        except (UnicodeDecodeError, UnicodeError):
+            continue
+    need = ["Codi_Principal_Activitat", "Referencia_Cadastral", "X_UTM_ETRS89", "Y_UTM_ETRS89", "Nom_Districte"]
+    miss = [c for c in need if c not in prem.columns]
+    if miss:
+        print("columns in this file:", list(prem.columns))
+        raise SystemExit("This census file has other column names (missing %s) - send this output to Claude." % miss)
+    print("census file:", census.name, "| premises:", len(prem))
     if not args.all_premises:
         prem = prem[prem["Codi_Principal_Activitat"] == 0]  # 'Sense activitat Economica' = empty
         print("empty premises:", len(prem))

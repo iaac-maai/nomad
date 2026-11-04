@@ -1,4 +1,4 @@
-# Experiment 1 - daylight predictor v0: results
+# Exp 4 (folder exp1_daylight) - daylight predictor v0: results
 
 | | XGBoost | Light-band rule |
 | --- | --- | --- |

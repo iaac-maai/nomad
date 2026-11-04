@@ -119,7 +119,7 @@ def main():
     fig2.savefig(OUT / "exp1_importance.png", dpi=200)
 
     lines = [
-        "# Experiment 1 - daylight predictor v0: results" + ("  (FAKE TEST DATA - do not present)" if fake else ""),
+        "# Exp 4 (folder exp1_daylight) - daylight predictor v0: results" + ("  (FAKE TEST DATA - do not present)" if fake else ""),
         "",
         "| | %s | Light-band rule |" % model_name,
         "| --- | --- | --- |",
