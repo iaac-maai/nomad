@@ -31,3 +31,12 @@ The same list as the website's Sources table. "to check" = licence not confirmed
 | Real plan scans | CubiCasa5K, test split only (zenodo.org/records/2613548) | CC BY-NC-SA 4.0, non-commercial use only |
 | Rule cards (Exp 3) | open-notebook (vector search) and Gemini 3.5 Flash Lite (drafting) | MIT (open-notebook); Gemini: Google API terms |
 | AI assistant and code help | Claude (Anthropic): the website's "Ask NOMAD" assistant and help writing the code | Anthropic terms of use |
+| Base map (data/basemap.json) | Barcelona's zones from the Mapa Urbanístic de Catalunya (MUC, muc_qualificacio_bcn.geojson), merged and simplified (Bhavini_NOMAD Files/02_Code/src/app/build_site.py) | Generalitat open data, attribution |
+| Metropolitan area, 36 towns (data/amb.json) | Catastro INSPIRE Buildings (one file per town) and MUC zoning served by the Diputació de Barcelona (Bhavini_NOMAD Files/02_Code/src/zoning/amb.py) | Catastro data: reuse with attribution; MUC: Generalitat open data, attribution; Diputació service: to check |
+| Price estimates | idealista18 dataset (2018 asking prices) | ODbL |
+| Trees in the 3D city | Open Data BCN street, zone and park trees | CC BY 4.0 |
+| 3D viewer | three.js 0.147 | MIT |
+| Rulebook viewer | PDF.js 3.11 | Apache-2.0 |
+| PDF report | jsPDF 2.5 | MIT |
+| Python in the browser | Pyodide | MPL-2.0 |
+| Fonts | Inter, Inter Tight, JetBrains Mono | SIL OFL 1.1 |

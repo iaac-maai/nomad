@@ -975,6 +975,15 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
       <tr><td>Weather file</td><td>Barcelona TMYx (ESP_CT_Barcelona.081800_TMYx.epw), <a href="https://climate.onebuilding.org" target="_blank" rel="noopener">climate.onebuilding.org</a></td><td>to check</td></tr>
       <tr><td>Rule cards (Exp 3)</td><td>open-notebook (vector search) and Gemini 3.5 Flash Lite (drafting)</td><td>MIT (open-notebook); Gemini: Google API terms</td></tr>
       <tr><td>AI assistant and code help</td><td>Claude (Anthropic): the "Ask NOMAD" assistant and help writing the code</td><td>Anthropic terms of use</td></tr>
+      <tr><td>Base map (data/basemap.json)</td><td>Barcelona's zones from the Mapa Urbanístic de Catalunya (MUC, muc_qualificacio_bcn.geojson), merged and simplified (02_Code/src/app/build_site.py)</td><td>Generalitat open data, attribution</td></tr>
+      <tr><td>Metropolitan area, 36 towns (data/amb.json)</td><td>Catastro INSPIRE Buildings (one file per town) and MUC zoning served by the Diputació de Barcelona (02_Code/src/zoning/amb.py)</td><td>Catastro data: reuse with attribution; MUC: Generalitat open data, attribution; Diputació service: to check</td></tr>
+      <tr><td>Price estimates</td><td>idealista18 dataset (2018 asking prices)</td><td>ODbL</td></tr>
+      <tr><td>Trees in the 3D city</td><td>Open Data BCN street, zone and park trees</td><td>CC BY 4.0</td></tr>
+      <tr><td>3D viewer</td><td>three.js 0.147</td><td>MIT</td></tr>
+      <tr><td>Rulebook viewer</td><td>PDF.js 3.11</td><td>Apache-2.0</td></tr>
+      <tr><td>PDF report</td><td>jsPDF 2.5</td><td>MIT</td></tr>
+      <tr><td>Python in the browser</td><td>Pyodide</td><td>MPL-2.0</td></tr>
+      <tr><td>Fonts</td><td>Inter, Inter Tight, JetBrains Mono</td><td>SIL OFL 1.1</td></tr>
     </tbody>
   </table></div>
   <p class="note">NOMAD is a master's research prototype. Its answers are a first check, not a licence: a project still needs an architect and the Ajuntament's approval.</p>

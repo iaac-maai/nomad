@@ -11,6 +11,18 @@ This repo holds our first two experiments (studio review, Thursday 29 Oct 2026).
 | `outputs/` | Results for the slides |
 | `docs/AI_LOG.md` | AI use log (IAAC rule) |
 
+## Website
+
+Bhavini's NOMAD website: https://claude.ai/artifact/5Pu9capuBiKG5V4mYrYMY6 (private until Bhavini shares it).
+The page is `Bhavini_NOMAD Files/04_Website/index.html`. Its daylight data (Exp 4, folder `exp1_daylight`) is
+`Bhavini_NOMAD Files/04_Website/data/daylight.json`. Rebuild it after new daylight results, from the repo root:
+
+```bash
+conda activate ai-methods
+python exp1_daylight/predict_shops.py                         # -> exp1_daylight/shops_bcn_pred.csv
+python "Bhavini_NOMAD Files/02_Code/src/app/daylight_site.py"  # -> Bhavini_NOMAD Files/04_Website/data/daylight.json
+```
+
 ## Setup (once)
 
 ```bash
