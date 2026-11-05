@@ -50,3 +50,6 @@ Every repo, dataset and library we use, with its licence.
 
 ## NOMAD plan AI (src/ai, added 2026-11-03)
 - Training data: the plan library built from Swiss Dwellings v3.0.0 (CC BY 4.0) and ResPlan (CC BY 4.0, github.com/m-agour/ResPlan); attribution kept. Model code is our own (PyTorch, BSD-style licence); no third-party model code or weights used. GSDiff (GPL-3.0) and DiffPlanner (no licence) were read as reference only.
+
+## Metropolitan base map (src/zoning/amb_base.py, added 2026-11-05)
+- MUC zones of the 36 AMB towns (Generalitat open data, attribution), merged and simplified to site/data/amb_base.json.
