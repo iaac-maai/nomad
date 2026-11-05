@@ -50,13 +50,15 @@ def main(workers=4):
     OUT.mkdir(parents=True, exist_ok=True)
     P = json.load(open(ROOT / "site" / "data" / "premises.json", encoding="utf-8"))
     ci = P["cols"].index
-    lit, ok = {}, set()
+    lit, ok, seen = {}, set(), set()
     for r in P["rows"]:
         ref = (r[ci("ref")] or "")[:14]
         if r[ci("lit")] is not None:
             lit[ref] = r[ci("lit")]
         if r[ci("housing")] in ("YES", "CHECK"):
             ok.add(ref)
+    for k, v in json.load(open(ROOT / "site" / "data" / "daylight.json", encoding="utf-8"))["shops"].items():
+        lit[k[:14]] = max(lit.get(k[:14]) if k[:14] in seen else 0, max(q[2] for q in v)); seen.add(k[:14])   # Bars's new model (Exp 4) replaces the old lit depth
     S = json.load(open(ROOT / "results" / "real_shops" / "shells.json", encoding="utf-8"))
     clean = set(r["ref14"] for r in csv.DictReader(open(ROOT / "results" / "real_shops" / "clean_shops.csv", encoding="utf-8"))
                 if r.get("nomad_runs") == "True")             # the clean shells NOMAD runs on (src/building/clean_real_shops.py)

@@ -29,6 +29,7 @@ LOBBY = 1.50                     # CTE DB-SUA Anejo A: 1,50 m turning circle in 
 SEG = 40.0                       # one street door per 40 m of street façade: flats on both sides stay within 25 m of it
 HALLS = (1.20, 1.50)             # CTE DB-SUA Anejo A: accessible route >= 1,20 m
 DEPTHS = (6.0, 7.0, 8.0, 9.0)    # flat depths tried; real one-sided flats are 6,5-7 m deep (library median)
+DOOR_DEPTHS = (5.75, 6.0, 6.5, 7.0, 8.0, 9.0)   # flats with their own street door
 SHALLOW = (5.0,)                 # also tried in shops under 6,5 m deep
 EVAC_MAX = plan2.EVAC_MAX
 NAMES = {"living": "living", "bed_main": "bedroom 1", "bed": "bedroom", "kitchen": "kitchen", "bath": "bathroom",
@@ -40,10 +41,11 @@ _LIB = {}
 _FIT = {}
 _EXISTING = []                   # the building's own portal / stair on this ground floor (world polygons): never built over
 _OUTLINE = []                    # the shop outline (world): every room corner must lie inside it
+GAPS = [True]                    # fill the gaps along a facade with generated plans
 SMALL = [False]                  # shared.py: allow smaller, generated studios in the rows
 USEFUL_MIN = [40.0]              # MPGM 2004 DA1 2.a; shared-space housing (shared.py): 24 m² private + shared rooms
-LIT = [None]                     # lit depth (m) from a window: Bars's prediction for this place, else flags.LIT_DEPTH
-LIT_CITE = ["NOMAD liveability, not law: Bars's daylight model (DF >= 2 % reaches this depth)"]
+LIT = [None]                     # lit depth (m) from a window: the daylight prediction for this place, else flags.LIT_DEPTH
+LIT_CITE = ["NOMAD liveability, not law: the daylight model (DF >= 2 % reaches this depth)"]
 LIT_SHARE = 0.5                  # a living room or bedroom has at least half its floor in the lit depth (design choice)
 
 
@@ -93,7 +95,8 @@ def set_own(entries):
         _FIT.clear()
 
 
-MODES = {"hall": (("front",), ("back",)),                       # lit sides allowed, entrance sides allowed
+MODES = {"door": (("front",), ("front",)),                       # entered from the street through its own door
+         "hall": (("front",), ("back",)),                       # lit sides allowed, entrance sides allowed
          "through_l": (("front", "back"), ("right",)),             # a through flat left of a passage: door on its right
          "through_r": (("front", "back"), ("left",)),
          "side_l": (("front",), ("right",)),                       # a street flat left of a passage, entered from its side
@@ -206,7 +209,7 @@ def _unit(fr, u0, f, t, height, kind, back, alts=None):
                       "lit_share": _lit_share(r["pts"], D, kind == "through")})
     u = {"type": t, "outline": [tw(p) for p in ((0, 0), (W, 0), (W, D), (0, D))], "facade_w": round(W, 2), "depth": round(D, 2),
          "area_m2": round(sum(r["area"] for r in rooms), 1), "rooms": rooms, "kind": kind,
-         "entry": "passage" if kind == "through" else "shared hall",
+         "entry": {"through": "passage", "door": "own street door"}.get(kind, "shared hall"),
          "on_patio": back, "doors": [{"at": tw(d["at"]), "w": d["w"]} for d in f.get("doors", [])],
          "entrance": tw(f["entrance"]["at"]) if f.get("entrance") else None,
          "swings": [[tw(q) for q in _swing_line(x)] for x in f.get("swings", [])],
@@ -316,6 +319,8 @@ def _row(front, a, b, D, types, fill, need_depth, sizes, mode="hall"):
             ws = widths_for(t, D, mode)
             if SMALL[0]:                                  # shared-space housing: real plans re-proportioned smaller (generated)
                 ws = sorted(set(round(w * k * 4) / 4.0 for w in ws for k in (0.7, 0.8, 0.9, 1.0) if w * k >= 3.0))
+            elif GAPS[0] and ws:                          # the gaps real plans leave: generated plans, narrower and wider, same checks
+                ws = sorted(set(ws) | set(round(w * k * 4) / 4.0 for w in (ws[0], ws[-1]) for k in F.GAP_KS))
             for w in ws:
                 if u + w > b + 1e-6:
                     break
@@ -323,7 +328,7 @@ def _row(front, a, b, D, types, fill, need_depth, sizes, mode="hall"):
                     break                                 # wider reaches no deeper: stop trying wider flats here
                 if not inside_shop(front, u, w, need_depth) or not _free(front, u, u + w, need_depth):
                     continue
-                if fits(t, w, D, sizes.get(t), mode, gen=SMALL[0]):
+                if fits(t, w, D, sizes.get(t), mode, gen=SMALL[0] or GAPS[0]):
                     got = (t, w)
                     break
             if got:
@@ -603,6 +608,27 @@ def build_through(outline, facade, street, height, mix, la=0.0, fill=False, smal
     return _plan(outline, units, corridors, left, want, params, [])
 
 
+def build_doors(outline, facade, street, height, mix, D=7.0, fill=False, small_first=False, sizes=None):
+    """Flats side by side along the street, each with its own street door: no lobby and no shared hall, so a shop too
+    shallow for a hall behind the flats can still hold homes."""
+    _set_outline(outline)
+    sizes = sizes or {}
+    fronts = [f for f in plan2._fronts(outline, facade, street) if f.public]
+    want = []
+    for t in (plan2.ORDER[::-1] if small_first else plan2.ORDER):
+        want += [t] * int(mix.get(t, 0) or 0)
+    left, units = list(want), []
+    for f in fronts:
+        for a, b in sorted(f.spans, key=lambda q: q[0] - q[1]):
+            row, left = _row(f, a, b, D, left, fill, D, sizes, "door")
+            for u0, w, t in row:
+                gs = fits(t, w, D, sizes.get(t), "door")
+                if gs:
+                    units.append(_unit(f.frame, u0, gs[0], t, height, "door", False, gs[1:]))
+    params = {"layout": "doors", "D": D, "fill": fill, "small_first": small_first, "corridor_w": 0}
+    return _plan(outline, units, [], left, want, params, [])
+
+
 def _plan(outline, units, corridors, left, want, params, notes):
     plan = plan2._plan(outline, "typical", units, [], corridors, left, want, params)
     halls = sum(area([tuple(p) for p in c["pts"]]) for c in corridors)
@@ -641,6 +667,7 @@ def _sig(plan):
 
 
 STRATEGIES = [
+    ("homes with their own street door", {"doors": True}),
     ("through flats off a passage", {"through": True}),
     ("flats off a street passage", {"through": True, "kind": "side"}),
     ("as asked, off a shared hall", {"fill": [False], "back": [False, True]}),
@@ -657,8 +684,8 @@ def iterations(outline, facade, height, mix, programs=None, street=None, sizes=N
     st = street or facade
     _FIT.clear()
     layout._DEPTH.clear()
-    LIT[0] = lit_depth                                  # Bars's predicted lit depth here, else the 5,5 m design assumption
-    LIT_CITE[0] = ("NOMAD liveability, not law: lit depth %.1f m from Bars's daylight model (DF >= 2 %%) for this place" % lit_depth
+    LIT[0] = lit_depth                                  # the predicted lit depth here, else the 5,5 m design assumption
+    LIT_CITE[0] = ("NOMAD liveability, not law: lit depth %.1f m from the daylight model (DF >= 2 %%) for this place" % lit_depth
                    if lit_source == "bars" else "NOMAD liveability, not law: lit depth %.1f m assumed (no daylight prediction here)" % lit_depth)
     _EXISTING[:] = [[tuple(p) for p in q] for q in (existing or [])]
     W = dict(plan2.WEIGHTS, plan=0.02)                 # Finch-style weight sliders (the website can change them)
@@ -672,6 +699,19 @@ def iterations(outline, facade, height, mix, programs=None, street=None, sizes=N
                 for fill in (False, True):
                     for sf in (False, True):
                         p = build_through(outline, facade, st, height, mix, la, fill, sf, sizes, v.get("kind", "through"))
+                        tried += 1
+                        if not p["units"]:
+                            continue
+                        m = plan2.metrics(p, mix)
+                        sc = score(p, m)
+                        if name not in best or sc > best[name][0]:
+                            best[name] = (sc, p, m)
+            continue
+        if v.get("doors"):
+            for D in DOOR_DEPTHS:
+                for fill in (False, True):
+                    for sf in (False, True):
+                        p = build_doors(outline, facade, st, height, mix, D, fill, sf, sizes)
                         tried += 1
                         if not p["units"]:
                             continue

@@ -18,6 +18,7 @@ IAAC asks us to declare every AI tool we use. Add one row each time.
 | 2026-11-04 | Bars | Claude | 3D city colours on site-daylight-update: NOMAD answer per building from the daylight class (zone answer as fallback) and PGM typology per building from data/basemap.json zones labelled by the census shops, computed in the page without rebuilding the tiles | Checked in headless Chrome on 6 central tiles (8,417 buildings): both modes coloured; reviewed by Bars |
 | 2026-11-05 | Bhavini | Claude | Website: App / Research layout, workflow order, City in 3D first, 3D clicks linked to Find your shop, percentage weights, plan AI engine; merged with Bars's daylight update. Lab book E33 |  |
 | 2026-11-05 | Bhavini | Claude | Website v41: selected building in 3D (see-through neon), checks open their law in the rulebook, laws list with the open law lit and + dropdowns, Saved and For the city closed with + / -, The laws after step 2, metro base map (amb_base.py), Sources extended |  |
+| 2026-11-05 | Bhavini | Claude | E34 space optimisation: eval_space.py, room placer and connection table (placed_plans.py), homes with their own street door, efficiency figure on the site; website v43 with scrolling columns. City rerun with the new engine still running: city counts are from the old engine |  |
 
 ## Sources, tools and licences
 

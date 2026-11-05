@@ -280,7 +280,7 @@
     "About 30 shops cannot hold even one home: too small, too narrow, or too little façade.",
     "The audit found and fixed: stale plan readings, a memory leak in Rhino, pictures not embedded in the 3dm, experiments that could drift from their pictures, a silent scale guess and the wall band covering complex plans (docs/audit_2026-10-28.md)."
    ],
-   "decision": "This is what we show. Next: new windows in blind walls (cadastre data), Bars's daylight analysis, and IFC / glTF export of the Stage 7 models.",
+   "decision": "This is what we show. Next: new windows in blind walls (cadastre data), the daylight analysis, and IFC / glTF export of the Stage 7 models.",
    "figures": [
     [
      "e10_board_plan_drawing.png",
@@ -519,7 +519,7 @@
    "id": "E20",
    "date": "2026-10-29",
    "stage": "5",
-   "title": "Bars's daylight model on Barcelona's real empty shops",
+   "title": "the daylight model on Barcelona's real empty shops",
    "question": "How much daylight do the real empty shops get, and how deep is the liveable part?",
    "did": [
     "Took Bars's Experiment 1 unchanged (iaac-maai/nomad: 50 Ladybug/Honeybee daylight simulations, XGBoost, his features and assumptions).",
@@ -531,7 +531,7 @@
     "Most ground floors are darker than the 5.5 m light band assumed: daylight, not the rules, limits liveable depth.",
     "Daylight is not a legal threshold in Decret 141/2012 (that is window area >= 1/8), so it is used as a liveability signal, not a fail."
    ],
-   "decision": "Show Bars's prediction with every real shop (map card, Design homes, Grasshopper component 7) and use DF < 1 % as 'not liveable' in the avoid answer. More simulations at wider ranges would make it firmer.",
+   "decision": "Show the prediction with every real shop (map card, Design homes, Grasshopper component 7) and use DF < 1 % as 'not liveable' in the avoid answer. More simulations at wider ranges would make it firmer.",
    "figures": []
   },
   {
@@ -541,7 +541,7 @@
    "title": "'Avoid' as an answer: which shops should not become homes",
    "question": "Can NOMAD tell a city where NOT to convert?",
    "did": [
-    "Gave each of the 6,149 empty premises the first answer that applies: not allowed (zone), not liveable (no home fits, or dark by Bars's model), keep it a shop (retail within 100 m in the city's lowest 10 %, a NOMAD design choice), candidate, or not modelled.",
+    "Gave each of the 6,149 empty premises the first answer that applies: not allowed (zone), not liveable (no home fits, or dark by the daylight model), keep it a shop (retail within 100 m in the city's lowest 10 %, a NOMAD design choice), candidate, or not modelled.",
     "Shops nearby counted from the 61,875 active premises of the 2024 census."
    ],
    "result": "896 candidates, 714 not liveable, 565 keep it a shop (4 or fewer shops within 100 m; city median 16), 306 not allowed, 3,668 not modelled yet (mostly shared ground floors).",
@@ -561,7 +561,7 @@
     "Rebuilt NOMAD.gh as 10 components (read plan, shop, zoning, flats asked, flat sizes, check + layouts, daylight, 3D preview, make, this file), each with at most 6 inputs; objects pass between them in a wrapper.",
     "Verified in Rhino with a Barcelona address (Valencia 640)."
    ],
-   "result": "10 components, 0 errors; the report shows zoning, Bars's daylight (DF 3.3 %), the before / after verdict and every rule card.",
+   "result": "10 components, 0 errors; the report shows zoning, the daylight (DF 3.3 %), the before / after verdict and every rule card.",
    "learned": [
     "Grasshopper splits a Python dict into its keys on a wire: whole objects must travel wrapped."
    ],
@@ -830,7 +830,7 @@
    "title": "The 29 October crits: real daylight, liveable zones, temporary homes, a city view, the metropolitan area, precedents",
    "question": "What did the three critics ask for that NOMAD still did not do, and can it do it now?",
    "did": [
-    "Real daylight in the check (critic B, 'people don't need to live in a jail'): the generator and the final check now use Bars's predicted lit depth for each shop (DF >= 2 %, E20), or 5,5 m labelled as an assumption where there is none. A living room or bedroom passes only with at least half its floor within that depth (NOMAD liveability, not law).",
+    "Real daylight in the check (critic B, 'people don't need to live in a jail'): the generator and the final check now use the predicted lit depth for each shop (DF >= 2 %, E20), or 5,5 m labelled as an assumption where there is none. A living room or bedroom passes only with at least half its floor within that depth (NOMAD liveability, not law).",
     "Liveable zones ('blue spots'): the website draws the floor in lit / service / dark bands in the first tile of every design ('As it is: where light reaches').",
     "Temporary / emergency homes (critics A and C): read the law first. 'Allotjament temporal de protecció' is only allowed on public land for facilities (TRLU art. 34.5 quater), not in a private shop. The route that fits a shop is shared-space housing (Llei 18/2007 art. 3.p and 18 bis, DL 50/2020, DT 10a, Circular 8 AHC): a private space of at least 24 m² plus shared rooms of at least 6 m² per home (6 m², 2,45 m circle, lit). In Barcelona the private space plus its share of the shared rooms must reach 40 m² (MPGM 2004 DA1 2.a with art. 18 bis.2, the stricter reading). Density may be exceeded for homes for groups needing social attention (MPGM 2004 DA2). src/generate/shared.py: small studios, the best-lit ones become shared living rooms and kitchens until every home has its proportional share. Website: 'Kind of homes' in step 2.",
     "For the city (critic A: policy makers): src/check/city_runs.py ran NOMAD on all 1,694 clean empty shops and all 1,206 warehouses, commercial and office buildings not in use by the census hint. Website section 'For the city': the homes the city needs, then the fewest places that reach it, by district, and what to avoid (not allowed, not liveable, keep it a shop, no legal home fits).",
@@ -869,7 +869,7 @@
     "AI library: 5,760 street-flat slots (one-sided and through flats, 4,5-12 m wide, 6-10 m deep, 0-3 bedrooms, 5 entrance positions); the plans that pass every check join the street library as 'NOMAD AI'.",
     "Also fixed: plan3 now drops a plan before ranking it when it would fail the flat checks (useful area, daylight depth, window share), so a plan that cannot pass no longer takes a slot from one that can."
    ],
-   "result": "On the 1,496 held-out flats: 70 % of pixels right, mIoU 0,57; 4 % of the drawn plans pass every check with straight walls (23 % with stepped walls, which were rejected). AI library: 227 plans from 5,760 slots. 40 real shops with Bars's daylight: 48 legal homes in 22 shops before; 52 in 25 with the ranking fix; 57 in 28 with the AI plans (36 AI flats used); median floor left unused per shop 134 -> 127 -> 101 m².",
+   "result": "On the 1,496 held-out flats: 70 % of pixels right, mIoU 0,57; 4 % of the drawn plans pass every check with straight walls (23 % with stepped walls, which were rejected). AI library: 227 plans from 5,760 slots. 40 real shops with the daylight: 48 legal homes in 22 shops before; 52 in 25 with the ranking fix; 57 in 28 with the AI plans (36 AI flats used); median floor left unused per shop 134 -> 127 -> 101 m².",
    "learned": [
     "The AI fills gaps the real plans leave (sizes and entrance positions no real plan has), so more of each shop becomes homes.",
     "Straight walls matter more than quantity: most raw AI pictures need cleaning, and only clean ones are kept.",
@@ -888,6 +888,35 @@
     [
      "e33_ai_shop.png",
      "Real shops with AI flats among the real ones."
+    ]
+   ]
+  },
+  {
+   "id": "E34",
+   "date": "2026-11-05",
+   "stage": "6",
+   "title": "Space optimisation: a room placer, and flats with their own street door",
+   "question": "How much of the floor the law lets us reach do NOMAD's layouts really use, and what stops them using more?",
+   "did": [
+    "New measure (src/generate/eval_space.py), on the same 40 real shops as E33 with the new daylight data: reachable floor = inside the shop and within 9 m of a street facade, because Decret 141/2012 Annex 1 3.6.2 (facade >= S/9) caps the depth of a flat lit from one facade at 9 m. Efficiency = floor of the passing flats / reachable floor.",
+    "Law read first: 3.9.1 asks natural light of the common spaces and bedrooms. Bath, hall and storage may stand in the dark back; the kitchen stays open to the living room (3.7.3: opening >= 3,50 m2).",
+    "Gaps along the facade filled with generated plans: +2 homes only, so gaps were not the main cause.",
+    "Connection table from 15,545 real plans (results/library/connections.json) and a room placer (src/library/placed_plans.py): narrow flats drawn from rules, then the same checks and furniture as a real plan: 374 plans pass.",
+    "Diagnosis (src/generate/diag_shops.py): a shop 21 m long and 6-7 m deep got no homes, because every layout needed a shared hall behind the flats. New strategy: homes with their own street door (plan3.build_doors), no lobby and no hall.",
+    "A first run scored higher but filled deep flats with oversized kitchens and long halls. Kitchen and hall depth capped (3,0 m and 2,6 m); the dark floor left behind them becomes storage."
+   ],
+   "result": "40 shops: 52 -> 70 homes (+35 %), still 24 shops with homes; floor used 2,953 -> 3,410 m2; 61 % -> 70 % of the reachable floor, 27 % -> 32 % of the whole floor. Rambla Badal 104: 9 -> 15 homes, all passing every rule.",
+   "learned": [
+    "The main waste was not the room packing but the shared hall: shallow shops had no depth left for it.",
+    "Most of a deep shop's floor is out of reach by law: only 45 % of the 40 shops' floor lies within 9 m of a street facade.",
+    "Scoring floor area alone rewards bad plans: the first run looked better while kitchens grew. Room mix must be read with the score.",
+    "The 16 shops still empty are real limits: under 6 m of front, 4-5 m deep, or as little as 1,3 m of daylight."
+   ],
+   "decision": "Keep: placed plans in the library, marked 'NOMAD placed', and own-street-door homes as a new option. The website shows efficiency on the reachable floor. To confirm: no rule found forbids a home's door opening directly on the street, but this needs an architect's check against Barcelona's ordinances. City counts (6,156 homes) still come from the old engine: rerun src/check/city_runs.py.",
+   "figures": [
+    [
+     "e34_doors.png",
+     "Rambla Badal 104: light zones, own street doors (15 homes), street passage, and block interior (9 homes)."
     ]
    ]
   }
