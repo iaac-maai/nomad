@@ -718,11 +718,11 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
   <a class="logo" href="#start">NOMAD<small>BARCELONA · IAAC MaAI</small></a>
   <div class="views" role="tablist" aria-label="Part of NOMAD"><button type="button" role="tab" class="vt" data-v="app" aria-selected="true">App</button><button type="button" role="tab" class="vt" data-v="research" aria-selected="false">Research</button></div>
   <nav class="main" id="mainnav" aria-label="Sections">
+    <a class="ptab" data-view="app" href="#city" data-t="nav_city">City in 3D</a>
     <a class="ptab" data-view="app" href="#check"><span class="sn">1</span>Your shop</a>
     <a class="ptab" data-view="app" href="#design"><span class="sn">2</span>Your homes</a>
     <a class="ptab" data-view="app" href="#saved"><span class="sn">3</span>Saved</a>
-    <div class="pgroup" data-view="app"><button type="button" class="ptab" aria-expanded="false" aria-haspopup="true">For the city<span class="car" aria-hidden="true">▾</span></button>
-      <div class="pmenu" hidden><a href="#policy">Where to start</a><a href="#city">City in 3D</a></div></div>
+    <a class="ptab" data-view="app" href="#policy">For the city</a>
     <a class="ptab" data-view="app" href="#rules">The laws</a>
     <a class="ptab" data-view="research" href="#steps">Workflow</a>
     <a class="ptab" data-view="research" href="#real">Results</a>
@@ -746,6 +746,20 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
   </div>
   <p class="hint2">Want to know how NOMAD works, and how we tested it? Open <a href="#steps">Research</a> at the top.</p>
 </div></section>
+<section class="sheet" id="city" data-view="app"><div class="wrap">
+  <p class="eyebrow">Barcelona · walk the streets</p>
+  <h2>Walk the streets and see every empty shop</h2>
+  <p class="lede">Every building in the city, raised from its Catastro footprint and floors. The ground floor of each empty shop is coloured by what its zone allows. Click a building to see its floors and use, and open its real façade in Street View.</p>
+  <div class="citybox panel">
+    <div class="cityrow"><div class="citystage" id="citystage"><canvas id="citycv" role="img" aria-label="3D view of Barcelona around the chosen shop, with buildings, trees, streets and shadows. The layer list beside it says what is shown."></canvas><div class="cityhud" id="cityhud">loading the city…</div></div>
+      <form class="citypanel" id="citypanel" onsubmit="return false"></form></div>
+    <div class="bar2"><button class="chip" id="cv-top">from above</button><button class="chip" id="cv-tilt">tilted</button><button class="chip" id="cv-street">street level</button>
+      <span class="hint2">Left drag: move · right drag or two fingers: turn · scroll: zoom</span></div>
+    <p class="vh-summary" id="citysum">What you see: Barcelona's buildings raised from the Catastro, coloured by their PGM zone; streets, paths, parks, rail and water from the zoning map; 222,617 trees; and the ground floor of each empty shop coloured by what its zone allows. Click a building for its details.</p>
+    <div class="note">Buildings: Catastro (heights estimated: 5 m ground floor + 3 m per upper floor). Roads, paths, parks, rail, water and zones: Mapa Urbanístic de Catalunya. Trees: Open Data BCN street, zone and park trees (CC BY 4.0). Sun: computed for Barcelona on the chosen date and time. Façade textures are not open data: the Street View link shows the real street.</div>
+  </div>
+</div></section>
+
 <section class="sheet" id="check" data-view="app"><div class="wrap">
   <p class="eyebrow">Step 1 · your shop</p>
   <h2>Find your shop</h2>
@@ -858,20 +872,6 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
     <label><input type="checkbox" value="commercial" checked> commercial buildings</label><label><input type="checkbox" value="office" checked> office buildings</label></div>
   <div id="pout" aria-live="polite"><p class="hint2">Loading NOMAD's city results…</p></div>
   <p class="note">Homes: the most legal homes NOMAD finds in each place (asked 2 x 1-bed + 1 x 2-bed, and "most homes"); warehouses at 6 m clear height (two levels). In use or not: the 2024 census of ground-floor premises, a hint, not proof. To build a list for the city, every place still needs its owner and a visit.</p>
-</div></section>
-
-<section class="sheet" id="city" data-view="app"><div class="wrap">
-  <p class="eyebrow">For the city · walk the streets</p>
-  <h2>Walk the streets and see every empty shop</h2>
-  <p class="lede">Every building in the city, raised from its Catastro footprint and floors. The ground floor of each empty shop is coloured by what its zone allows. Click a building to see its floors and use, and open its real façade in Street View.</p>
-  <div class="citybox panel">
-    <div class="cityrow"><div class="citystage" id="citystage"><canvas id="citycv" role="img" aria-label="3D view of Barcelona around the chosen shop, with buildings, trees, streets and shadows. The layer list beside it says what is shown."></canvas><div class="cityhud" id="cityhud">loading the city…</div></div>
-      <form class="citypanel" id="citypanel" onsubmit="return false"></form></div>
-    <div class="bar2"><button class="chip" id="cv-top">from above</button><button class="chip" id="cv-tilt">tilted</button><button class="chip" id="cv-street">street level</button>
-      <span class="hint2">Left drag: move · right drag or two fingers: turn · scroll: zoom</span></div>
-    <p class="vh-summary" id="citysum">What you see: Barcelona's buildings raised from the Catastro, coloured by their PGM zone; streets, paths, parks, rail and water from the zoning map; 222,617 trees; and the ground floor of each empty shop coloured by what its zone allows. Click a building for its details.</p>
-    <div class="note">Buildings: Catastro (heights estimated: 5 m ground floor + 3 m per upper floor). Roads, paths, parks, rail, water and zones: Mapa Urbanístic de Catalunya. Trees: Open Data BCN street, zone and park trees (CC BY 4.0). Sun: computed for Barcelona on the chosen date and time. Façade textures are not open data: the Street View link shows the real street.</div>
-  </div>
 </div></section>
 
 <section class="sheet" id="rules" data-view="app"><div class="wrap">
@@ -1081,6 +1081,7 @@ function drawTally() {
 }
 function show(r) {
   if (!r) return;
+  if (r.other) return showOther(r);
   sel = r; drawMap();
   const others = P.filter(x => x !== r && x.ref && x.ref === r.ref).length;
   $("#answer").innerHTML = `
@@ -1102,6 +1103,15 @@ function show(r) {
 }
 let syncDesign = false;
 function bldgBox(msg) { $("#bldgcol").innerHTML = msg ? `<p class="meta">${esc(msg)}</p>` : `<div class="bldg" id="bldg"></div>`; }
+
+function showOther(r) {                                         // a building clicked in 3D that is neither an empty premises nor an unused building
+  sel = r; drawMap();
+  $("#answer").innerHTML = `
+    <div><div class="addr">Catastro ${esc(r.ref)}</div><div class="meta">${esc(r.typology)} · ${esc(r.use)} · ${r.floors} floors${r.dwell ? " · " + r.dwell + " dwellings" : ""}</div></div>
+    <div class="next">This building is not in the 2024 census of empty premises, nor among the unused buildings, so NOMAD has no answer for it.</div>`;
+  bldgBox(""); showBuilding(r.ref, null);
+  if (syncDesign) { dShop = null; $("#dq").value = r.ref; $("#dshop").innerHTML = `<p>Catastro ${esc(r.ref)} is not an empty shop or an unused building. Pick another place.</p>`; }
+}
 
 function showWh(r) {                                           // a whole building: what NOMAD knows, and "design homes in it"
   sel = r; drawMap();
@@ -1331,7 +1341,7 @@ function initMap() {
   $("#zin").addEventListener("click", () => zoom(0.6));
   $("#zout").addEventListener("click", () => zoom(1.6));
   $("#zall").addEventListener("click", () => { Object.assign(view, home); drawMap(); });
-  $("#to3d").addEventListener("click", () => { const c = sel || { x: view.cx, y: view.cy }; cityFly(c.x, c.y, sel); location.hash = "city"; });
+  $("#to3d").addEventListener("click", () => { const c = sel || { x: view.cx, y: view.cy }; cityFly(c.x, c.y, sel && !sel.other ? sel : null); location.hash = "city"; });
   new ResizeObserver(drawMap).observe(cv);
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawMap);
 }
@@ -1360,7 +1370,7 @@ function drawMap() {
     const [px, py] = proj(sel.x, sel.y, W);
     g.lineWidth = 2.5 * dpr; g.strokeStyle = css("--m-ink"); g.fillStyle = css("--m-sheet");
     g.beginPath(); g.arc(px, py, 9 * dpr, 0, 7); g.fill(); g.stroke();
-    g.fillStyle = css(sel.housing === "YES" ? "--m-yes" : sel.housing === "CHECK" ? "--m-check" : "--m-no");
+    g.fillStyle = css(sel.other ? "--m-slate" : sel.housing === "YES" ? "--m-yes" : sel.housing === "CHECK" ? "--m-check" : "--m-no");
     g.beginPath(); g.arc(px, py, 5 * dpr, 0, 7); g.fill();
   }
 }
@@ -2346,11 +2356,20 @@ function initCity() {
     $("#cityhud").innerHTML = `<b>Catastro ${esc(ref)}</b><div class="meta">${esc((TYPO[typ] || TYPO[10])[0])} · ${esc(String(use).replace(/^[\d_]+/, "").replace(/_/g, " "))} · ${floors} floors${dwell ? " · " + dwell + " dwellings" : ""}</div>
       ${shops.length ? shops.slice(0, 3).map(p => `<div>${esc(p.street)} ${esc(p.num)}: empty, zone <span class="pill ${p.housing}">${WORD[p.housing]}</span></div>`).join("") : `<div class="hint2">No empty shop in the 2024 census.</div>`}
       ${st ? `<div>NOMAD: <span class="pill ${/ZONE/.test(st) ? "" : st}">${ANSKEY.find(([k]) => k === st)[1]}</span></div>` : ""}
-      ${shops.length ? `<div><button type="button" class="chip" id="hudopen">Plans, units and 3D of this building</button></div>` : ""}`;
-    const op = $("#hudopen");
-    if (op) op.addEventListener("click", () => { show(shops[0]); $("#check").scrollIntoView({ behavior: "smooth" }); });
+      <div id="hudwh"></div>`;
+    const jump = () => $("#hero3").scrollIntoView({ behavior: "smooth", block: "start" });   // the answer is in Find your shop
+    const tok = ++cityPick, far = p => Math.hypot(p.x - wx, p.y - wy), shop = shops.slice().sort((a, c) => far(a) - far(c))[0];
+    if (shop) { $("#q").value = shop.street + " " + shop.num; show(shop); jump(); return; }
+    loadWH().then(() => {
+      if (tok !== cityPick) return;                                     // another building was clicked meanwhile
+      const wh = WH.find(r => String(r.ref).slice(0, 14) === ref);
+      if (wh) { $("#hudwh").innerHTML = `<div>${esc(WHKIND[wh.kind])}: zone <span class="pill ${wh.housing}">${WORD[wh.housing]}</span></div>`; $("#q").value = wh.street ? wh.street + " " + wh.num : wh.ref; showWh(wh); jump(); return; }
+      $("#q").value = ref;
+      show({ other: true, ref, x: wx, y: wy, typology: (TYPO[typ] || TYPO[10])[0], use: String(use).replace(/^[\d_]+/, "").replace(/_/g, " "), floors, dwell }); jump();
+    }).catch(e => console.error("loadWH", e));
   });
 }
+let cityPick = 0;
 function buildPanel() {
   const today = new Date(), iso = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
   const lay = [["buildings", "buildings"], ["shops", "empty shops (ground floor)"], ["trees", "trees (222,617)"], ...Object.entries(GROUND).map(([k, [l]]) => [k, l]), ["zoning", "zoning tint: can it take housing?"]];
@@ -2362,7 +2381,7 @@ function buildPanel() {
       <div class="ckey" id="ckey"></div></fieldset>
     <fieldset><legend>Sun and shadows</legend>
       <label class="row"><span>Date</span><input type="date" id="sdate" value="${iso}"></label>
-      <label class="row"><span>Time <b id="stime-v"></b></span><input type="range" id="stime" min="5" max="22" step="0.25" value="${Math.min(19, Math.max(8, today.getHours() + today.getMinutes() / 60)).toFixed(2)}"></label>
+      <label class="row"><span>Time <b id="stime-v"></b></span><input type="range" id="stime" min="5" max="22" step="0.25" value="12.50"></label>
       <div class="presets"><button type="button" class="chip" data-p="06-21">21 June</button><button type="button" class="chip" data-p="12-21">21 Dec</button><button type="button" class="chip" data-p="03-20">21 March</button></div>
       <label><input type="checkbox" id="sshadow" checked>shadows</label><div class="hint2" id="sinfo"></div></fieldset>`;
   $("#citypanel").addEventListener("change", e => {

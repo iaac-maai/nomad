@@ -854,6 +854,42 @@
      "The metropolitan area: warehouses, commercial and office buildings with no homes, by what their zone allows."
     ]
    ]
+  },
+  {
+   "id": "E33",
+   "date": "2026-11-03",
+   "stage": "6",
+   "title": "NOMAD's own plan AI: trained on 15,545 real flats, every plan checked",
+   "question": "Can an AI trained on real plans draw flats that fit a shop better than stretching the few real plans that pass?",
+   "did": [
+    "Datasets searched (docs/plan_datasets_2026-11-03.md): Finch's library is not public; free to use: Swiss Dwellings and ResPlan (CC BY 4.0); RPLAN and LIFULL only on request for research. MSD's server was unreachable, and MSD is made from Swiss Dwellings anyway.",
+    "Training set (src/ai/plan_data.py): the 15,545 squared real flats of the plan library and their mirrors, 29,930 pictures at 0,25 m a pixel; the condition is the flat's rectangle, its window sides, the entrance and the number of bedrooms; the answer is a room type for every pixel.",
+    "Model (src/ai/train_plan.py, our own code): a U-Net with 4,3 million weights, trained 40 epochs (about 1 h) on the laptop's RTX 3060. 5 % of the flats were kept aside, never seen in training.",
+    "Picture to plan (src/ai/generate_plans.py): small blobs join their neighbour, walls are snapped to the plan's main wall lines (straight, orthogonal walls), every wall pixel joins a room (no dead area), doors are added as people walk (through a hall first, never through a bathroom), windows on the lit sides. Then the same checks as every real plan: plan graph, doors, turning circles, widths, daylight side, furniture, a kitchen and a bathroom, no room with more than 8 corners.",
+    "AI library: 5,760 street-flat slots (one-sided and through flats, 4,5-12 m wide, 6-10 m deep, 0-3 bedrooms, 5 entrance positions); the plans that pass every check join the street library as 'NOMAD AI'.",
+    "Also fixed: plan3 now drops a plan before ranking it when it would fail the flat checks (useful area, daylight depth, window share), so a plan that cannot pass no longer takes a slot from one that can."
+   ],
+   "result": "On the 1,496 held-out flats: 70 % of pixels right, mIoU 0,57; 4 % of the drawn plans pass every check with straight walls (23 % with stepped walls, which were rejected). AI library: 227 plans from 5,760 slots. 40 real shops with Bars's daylight: 48 legal homes in 22 shops before; 52 in 25 with the ranking fix; 57 in 28 with the AI plans (36 AI flats used); median floor left unused per shop 134 -> 127 -> 101 m².",
+   "learned": [
+    "The AI fills gaps the real plans leave (sizes and entrance positions no real plan has), so more of each shop becomes homes.",
+    "Straight walls matter more than quantity: most raw AI pictures need cleaning, and only clean ones are kept.",
+    "Studios and 1-beds are few in the training data (3,500 of 29,930), and 2-3 bed one-sided flats few in the AI library; RPLAN or LIFULL would add many."
+   ],
+   "decision": "Keep: AI plans in the library, marked 'NOMAD AI', only when they pass every check; the ranking fix for all plans. Next: request RPLAN / LIFULL, train longer, and a diffusion model for more variety.",
+   "figures": [
+    [
+     "e33_training.png",
+     "Training: pixels right and room overlap on flats the model never saw."
+    ],
+    [
+     "e33_ai_plans.png",
+     "Plans drawn by the AI for a rectangle, façade and entrance, cleaned to straight walls, furnished and passing every check."
+    ],
+    [
+     "e33_ai_shop.png",
+     "Real shops with AI flats among the real ones."
+    ]
+   ]
   }
  ]
 }

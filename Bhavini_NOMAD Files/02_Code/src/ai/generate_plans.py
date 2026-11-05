@@ -72,11 +72,40 @@ def _neighbour_label(comp, mask, labels):
     return np.bincount(vals).argmax()
 
 
+def _lines(change, gap=2, support=4):
+    """Wall lines along one axis: positions where the room type changes over >= `support` pixels (1 m), the strongest
+    one kept within `gap` pixels (0,5 m)."""
+    cand = sorted([(int(v), i) for i, v in enumerate(change) if v >= support], reverse=True)
+    keep = []
+    for v, i in cand:
+        if all(abs(i - j) > gap for j in keep):
+            keep.append(i)
+    return sorted(keep)
+
+
+def _straighten(cls):
+    """Straight, orthogonal walls: the flat is cut by its main wall lines into cells, each cell takes the room type most
+    of its pixels have (walls only where nothing else is)."""
+    d, w = cls.shape
+    xs = [0] + _lines([(cls[:, x - 1] != cls[:, x]).sum() for x in range(1, w)]) + [w]
+    xs = sorted(set([0] + [x + 1 for x in xs[1:-1]] + [w]))
+    ys = sorted(set([0] + [y + 1 for y in _lines([(cls[y - 1, :] != cls[y, :]).sum() for y in range(1, d)])] + [d]))
+    out = cls.copy()
+    for y0, y1 in zip(ys[:-1], ys[1:]):
+        for x0, x1 in zip(xs[:-1], xs[1:]):
+            cell = cls[y0:y1, x0:x1].ravel()
+            cnt = np.bincount(cell, minlength=len(CLASSES))
+            cnt[1] = 0 if cnt[2:].sum() else cnt[1]
+            out[y0:y1, x0:x1] = cnt.argmax()
+    return out
+
+
 def clean(prob, w, d):
     """Class probabilities (K, N, N) -> per-pixel room-component labels and their kinds, inside the w x d pixel rectangle."""
     cls = prob[:, :d, :w].argmax(0)
     cls = _majority(np.pad(cls, ((0, N - d), (0, N - w))), w, d)
     cls[cls == 0] = 1                                         # inside the flat nothing is outside
+    cls = _straighten(cls)
     labels = np.zeros_like(cls)
     kinds = {0: None}
     n = 0
@@ -127,13 +156,28 @@ def _shared(a, b):
 
 
 def vectorize(prob, c, ident="ai"):
-    """One picture + its condition row -> a library entry (src/library/build_library.py format) or None."""
-    W, D = float(c[0]), float(c[1])
-    w, d = int(round(W / PX)), int(round(D / PX))
-    W, D = w * PX, d * PX
+    """One picture + its condition row -> a library entry (src/library/build_library.py format) or None. A room that no
+    door can reach (it touches only bathrooms, or too little of anything) joins its neighbour, and the plan is redone."""
+    w, d = int(round(float(c[0]) / PX)), int(round(float(c[1]) / PX))
     labels, kinds = clean(prob, w, d)
-    if not kinds:
-        return None
+    for _ in range(4):
+        if not kinds:
+            return None
+        f, lost = _build(labels, kinds, c, w, d, ident)
+        if not lost:
+            return f
+        for u in lost:
+            mask = labels == u
+            nb = _neighbour_label(u, mask, labels)
+            if nb is None:
+                return None
+            labels[mask] = nb
+            kinds.pop(u, None)
+    return None
+
+
+def _build(labels, kinds, c, w, d, ident):
+    W, D = w * PX, d * PX
     comps = sorted(kinds)
     polys = dict((k, _poly(labels == k)) for k in comps)
     rooms, idx = [], {}
@@ -147,11 +191,11 @@ def vectorize(prob, c, ident="ai"):
         idx[k] = len(rooms)
         rooms.append({"kind": kinds[k], "pts": pts, "area": round(g.area, 2), "clear": round(F.clear_width(pts), 2)})
     if not any(r["kind"] == "living" for r in rooms):
-        return None
+        return None, []
     ex, ey = float(c[4]), float(c[5])
     e_lab = labels[min(d - 1, max(0, int(ey / PX))), min(w - 1, max(0, int(ex / PX)))]
     if e_lab not in idx:
-        return None
+        return None, []
     doors, edges = [], []
     kind_of = dict((k, kinds[k]) for k in idx)
     adj = {}
@@ -183,6 +227,9 @@ def vectorize(prob, c, ident="ai"):
         dw = 0.80 if s.length >= 1.0 else 0.70
         doors.append({"at": [round(m.x, 2), round(m.y, 2)], "w": dw})
         edges.append([idx[u], idx[v], dw])
+    lost = [k for k in idx if k not in reached]
+    if lost:
+        return None, lost
     side = min([("front", ey), ("back", D - ey), ("left", ex), ("right", W - ex)], key=lambda t: t[1])[0]
     ent = {"at": [round(min(max(ex, 0.0), W), 2), round(min(max(ey, 0.0), D), 2)], "w": 0.90, "side": side, "room": idx[e_lab]}
     lit = (["front"] if c[2] > 0.5 else []) + (["back"] if c[3] > 0.5 else [])
@@ -200,9 +247,9 @@ def vectorize(prob, c, ident="ai"):
                 windows.append({"at": [round((x0 + x1) / 2, 2), round(-0.1 if s_ == "front" else D + 0.1, 2)],
                                 "w": round(0.6 * (x1 - x0), 2), "side": s_})
     beds = sum(1 for r in rooms if r["kind"] in ("bed", "bed_main"))
-    return {"id": ident, "bedrooms": beds, "W": round(W, 2), "D": round(D, 2), "rooms": rooms, "doors": doors, "windows": windows,
+    return ({"id": ident, "bedrooms": beds, "W": round(W, 2), "D": round(D, 2), "rooms": rooms, "doors": doors, "windows": windows,
             "entrance": ent, "edges": edges, "lit": lit, "useful": round(sum(r["area"] for r in rooms), 1),
-            "source": "NOMAD AI", "W0": round(W, 2), "D0": round(D, 2)}
+            "source": "NOMAD AI", "W0": round(W, 2), "D0": round(D, 2)}, [])
 
 
 def check(f):
@@ -216,6 +263,12 @@ def check(f):
     bad += [x["text"] for x in fc if x["rule"] == "furniture" and not x["ok"] and not x["text"].startswith("living")]
     if cov < F.MIN_COVER:
         bad.append("rooms cover %.0f %% of the flat" % (100 * cov))
+    kinds = [r["kind"] for r in g["rooms"]]
+    for k in ("kitchen", "bath"):                            # Decret 141/2012 Annex 1 3.15.b and 3.15.c: every home has them
+        if k not in kinds:
+            bad.append("no %s" % k)
+    if any(len(r["pts"]) > 8 for r in g["rooms"]):          # straight walls: rectangles, L, T or U rooms only
+        bad.append("a room with more than 8 corners")
     return not bad, bad, g
 
 
@@ -248,7 +301,7 @@ def test():
     print(json.dumps(res, indent=1))
 
 
-def library(seeds=(0.35, 0.5, 0.65)):
+def library(seeds=(0.2, 0.35, 0.5, 0.65, 0.8)):
     """Street-flat slots: one-sided (lit front, door at the back) and through flats (lit front + back, door at a side)."""
     rows = []
     for beds in range(4):

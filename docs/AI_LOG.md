@@ -16,6 +16,7 @@ IAAC asks us to declare every AI tool we use. Add one row each time.
 | 2026-11-03 | Bars | Claude | 30 extra Grasshopper variants for narrow streets and deep shops, whole-Barcelona shop extraction and map, livability classes (36 m2 home in the daylit zone, Decret 141) | Lit depth checked on 5 real shops against Radiance: mean error 0.30 m |
 | 2026-11-04 | Bars | Claude | Website daylight update on branch site-daylight-update: new data file from exp1_daylight (80 Radiance simulations, EN 17037 thresholds, lit depth and classes for the 2024 census), 5 m + 3 m building heights in the 3D city, Exp 4 numbering in the docs, Sources table | Changes reviewed by Bars; lit-depth validation re-run (`predict_shops.py --compare`: mean error 0.30 m on 5 shops) |
 | 2026-11-04 | Bars | Claude | 3D city colours on site-daylight-update: NOMAD answer per building from the daylight class (zone answer as fallback) and PGM typology per building from data/basemap.json zones labelled by the census shops, computed in the page without rebuilding the tiles | Checked in headless Chrome on 6 central tiles (8,417 buildings): both modes coloured; reviewed by Bars |
+| 2026-11-05 | Bhavini | Claude | Website: App / Research layout, workflow order, City in 3D first, 3D clicks linked to Find your shop, percentage weights, plan AI engine; merged with Bars's daylight update. Lab book E33 |  |
 
 ## Sources, tools and licences
 
