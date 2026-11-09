@@ -1144,12 +1144,12 @@ function drawRules() {
   $("#golden").innerHTML = `<div><b class="num">${Math.round(100 * g.answer_accuracy)} %</b><span>of ${g.questions} golden questions answered right by NOMAD's code</span></div>
     <div><b class="num">${Math.round(100 * g.citation_accuracy_when_checked)} %</b><span>right article cited, when NOMAD checks the rule</span></div>
     <div><b class="num">${Math.round(100 * g["search_hit@5"])} %</b><span>keyword search finds the right article in its top 5</span></div>
-    <div><b class="num">${D.rules.filter(r => r.confidence === 1).length} / ${D.rules.length}</b><span>rule cards whose quote is found word for word</span></div>`;
+    <div><b class="num">${D.rules.filter(r => r.confidence === 1).length} / ${D.rules.length}</b><span>rule cards whose quote is checked against the official text</span></div>`;
   const val = r => r.unit === "ratio" ? (r.value === 0.125 ? "1/8" : r.value) : r.unit === "m per m2" ? "S/9" : `${String(r.value).replace(".", ",")} ${r.unit.replace("m2", "m²").replace(" per dwelling", "")}`;
   $("#rulegrid").innerHTML = D.rules.map(r => `<div class="rule panel">
       <div class="top"><span class="what">${esc(r.applies_to)}<br>${esc(r.parameter.replace(/_/g, " "))} ${esc(r.operator)}</span><span class="val num">${esc(val(r))}</span></div>
       <span class="src">${esc(r.source.norm)} · ${esc((r.source.article || "").replace(/\s+/g, " "))}</span>
-      <span class="chk ${r.confidence < 1 ? "review" : ""}">${r.confidence < 1 ? "to review against the PDF" : "quote found word for word"}</span>
+      <span class="chk ${r.confidence < 1 ? "review" : ""}">${r.confidence < 1 ? "to review against the PDF" : /^by eye/.test(r.checked || "") ? "checked by eye against the official scan" : "quote found word for word"}</span>
       ${r.quote ? `<details><summary>Read the law</summary><blockquote>${esc(r.quote.slice(0, 520))}${r.quote.length > 520 ? " …" : ""}</blockquote></details>` : ""}
       ${r.note ? `<span class="src">${esc(r.note)}</span>` : ""}</div>`).join("");
 }
