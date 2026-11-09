@@ -632,6 +632,8 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
 .answer details.more > summary { cursor: pointer; font-weight: 600; color: var(--slate) } .answer details.more[open] > summary { margin-bottom: 12px }
 @media (max-width: 760px) { .doors { grid-template-columns: 1fr } header.bar .wrap { grid-template-columns: auto auto } .views { grid-column: 1 / -1 } }
 .h2note { font-size: .55em; font-weight: 500; color: var(--slate); white-space: nowrap }
+.catnote { font-weight: 400; color: var(--slate); text-transform: none; letter-spacing: 0 }
+#pcat { max-width: 100%; min-width: 0; text-overflow: ellipsis }
 </style>
 
 <a class="skip" href="#main">Skip to content</a>
@@ -713,7 +715,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
     <label><input type="checkbox" value="shop" checked> empty shops</label><label><input type="checkbox" value="warehouse" checked> warehouses</label>
     <label><input type="checkbox" value="commercial" checked> commercial buildings</label><label><input type="checkbox" value="office" checked> office buildings</label></div>
   <div id="pout" aria-live="polite"><p class="hint2">Loading the city…</p></div>
-  <p class="note"><b>Candidate</b>: the zone allows homes and there is no avoid flag. <b>Risky</b>: the zone's own detailed plan decides, or "keep it a shop" (one of the 10 % of shops with the fewest shops within 100 m). <b>Zoning doesn't allow</b>: the zone takes no housing. Whole buildings have no street-life flag. In use or not: the 2024 census of ground-floor premises, a hint, not proof. Every place still needs its owner and a visit.</p>
+  <p class="note"><b>Candidate</b>: the zone allows homes and there is no avoid flag; daylight and the other checks are not done yet. <b>Risky</b>: the zone's own detailed plan decides, or "keep it a shop" (one of the 10 % of shops with the fewest shops within 100 m). <b>Zoning doesn't allow</b>: the zone takes no housing. Whole buildings have no street-life flag. In use or not: the 2024 census of ground-floor premises, a hint, not proof. Every place still needs its owner and a visit.</p>
 </div></section>
 
 <section class="sheet" id="city" data-view="app"><div class="wrap">
@@ -869,6 +871,8 @@ function valHtml(s) {
    the 10 % of shops with the fewest shops within 100 m, src/check/avoid.py) / zoning doesn't allow (zone NO) */
 const CATS = [["candidate", "--m-yes", "candidate"], ["risky", "--m-check", "risky"], ["nozone", "--m-no", "zoning doesn't allow"]];
 const CATN = Object.fromEntries(CATS.map(([k, , l]) => [k, l])), CATPILL = { candidate: "YES", risky: "CHECK", nozone: "NO" };
+const CAND_NOTE = "zoning allows it; daylight and other checks not done yet";             // shown next to every "candidate"
+const catLabel = k => esc(CATN[k]) + (k === "candidate" ? ` <small class="catnote">(${CAND_NOTE})</small>` : "");
 function quantile(xs, q) { const s = xs.slice().sort((a, b) => a - b), p = (s.length - 1) * q, i = Math.floor(p); return s[i] + (s[Math.min(i + 1, s.length - 1)] - s[i]) * (p - i); }
 function categorise() {
   const cut = quantile(P.filter(r => r.shops != null).map(r => +r.shops), 0.10);
@@ -876,7 +880,7 @@ function categorise() {
     const keep = r.shops != null && r.shops <= cut;
     r.cat = r.housing === "NO" ? "nozone" : r.housing === "CHECK" || keep ? "risky" : "candidate";
     r.catWhy = r.housing === "NO" ? "the zone takes no housing" : r.housing === "CHECK" ? "the zone's own detailed plan decides"
-      : keep ? `keep it a shop: only ${r.shops} shops within 100 m (lowest 10 % of the city)` : "the zone allows homes; no avoid flag";
+      : keep ? `keep it a shop: only ${r.shops} shops within 100 m (lowest 10 % of the city)` : `${CAND_NOTE}; no avoid flag`;
   });
 }
 const whCat = r => r.housing === "NO" ? "nozone" : r.housing === "CHECK" ? "risky" : "candidate";
@@ -1041,7 +1045,7 @@ function drawLegend() {
   }
   lg.innerHTML = mapMode === "zone"
     ? ["YES", "CHECK", "NO"].map(k => `<button type="button" data-k="${k}" aria-pressed="${layers[k]}"><i style="background:var(--m-${k === "YES" ? "yes" : k === "CHECK" ? "check" : "no"})"></i>${WORD[k].toLowerCase()}</button>`).join("")
-    : CATS.map(([k, c, l]) => `<button type="button" data-k="${k}" aria-pressed="${catLayers[k]}"><i style="background:var(${c})"></i>${l} (${fmt(P.filter(r => r.cat === k).length)})</button>`).join("");
+    : CATS.map(([k, c, l]) => `<button type="button" data-k="${k}" aria-pressed="${catLayers[k]}"><i style="background:var(${c})"></i>${catLabel(k)} (${fmt(P.filter(r => r.cat === k).length)})</button>`).join("");
 }
 function initMap() {
   const xs = P.map(r => r.x), ys = P.map(r => r.y);
@@ -1438,10 +1442,10 @@ function drawPolicy() {
   const tot = k => all.filter(x => x.cat === k).length;
   const list = all.filter(x => x.cat === policyCat).sort((a, b) => a.district.localeCompare(b.district) || a.name.localeCompare(b.name));
   const MAX = 200;
-  $("#pout").innerHTML = `<div class="src-table"><table><thead><tr><th>District</th>${CATS.map(([k, c, l]) => `<th><i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(${c})"></i> ${l}</th>`).join("")}<th>All</th></tr></thead><tbody>
+  $("#pout").innerHTML = `<div class="src-table"><table><thead><tr><th>District</th>${CATS.map(([k, c, l]) => `<th><i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(${c})"></i> ${catLabel(k)}</th>`).join("")}<th>All</th></tr></thead><tbody>
       ${Object.entries(byD).sort((a, b) => a[0].localeCompare(b[0])).map(([d, c]) => `<tr><td>${esc(d)}</td>${CATS.map(([k]) => `<td class="num">${fmt(c[k])}</td>`).join("")}<td class="num">${fmt(c.candidate + c.risky + c.nozone)}</td></tr>`).join("")}
       <tr><th>Barcelona</th>${CATS.map(([k]) => `<th class="num">${fmt(tot(k))}</th>`).join("")}<th class="num">${fmt(all.length)}</th></tr></tbody></table></div>
-    <div class="reqrow"><label for="pcat">List:</label><select id="pcat">${CATS.map(([k, , l]) => `<option value="${k}" ${k === policyCat ? "selected" : ""}>${l} (${fmt(tot(k))})</option>`).join("")}</select>
+    <div class="reqrow"><label for="pcat">List:</label><select id="pcat">${CATS.map(([k, , l]) => `<option value="${k}" ${k === policyCat ? "selected" : ""}>${l}${k === "candidate" ? ` (${CAND_NOTE})` : ""}: ${fmt(tot(k))}</option>`).join("")}</select>
       <span class="hint2">${list.length > MAX ? `the first ${MAX} of ${fmt(list.length)}, by district` : `${fmt(list.length)} places`}</span></div>
     <div class="src-table"><table><thead><tr><th>Place</th><th>Kind</th><th>District</th><th>Zone</th><th>Why</th><th></th></tr></thead><tbody>${list.slice(0, MAX).map((x, i) =>
       `<tr><td>${esc(x.name)}</td><td>${esc(KN[x.kind])}</td><td>${esc(x.district)}</td><td><span class="pill ${x.housing}">${esc(WORD[x.housing])}</span></td><td>${esc(x.why)}</td><td><button type="button" class="chip" data-pi="${i}">open</button></td></tr>`).join("")}</tbody></table></div>`;
@@ -1461,7 +1465,7 @@ const USES = [["1", "residential", "#DED3BD"], ["4_2", "retail", "#E2A35A"], ["4
   ["4_3", "public services", "#A98FCB"], ["", "other", "#C9C5BC"]];
 const NOMADC = { candidate: "#3F8F5A", risky: "#C98A2B", nozone: "#C4473A", "": "#CBC7BF" };
 const ZONEC = { YES: "#3F8F5A", CHECK: "#C98A2B", NO: "#C4473A" };                  // the ground-floor bands of the empty shops
-const ANSKEY = [["candidate", "candidate"], ["risky", "risky"], ["nozone", "zoning doesn't allow"], ["", "no empty shop"]];
+const ANSKEY = [["candidate", "candidate (zoning allows it; daylight and other checks not done yet)"], ["risky", "risky"], ["nozone", "zoning doesn't allow"], ["", "no empty shop"]];
 const GROUND = { road_main: ["main roads", "#8F969D"], road: ["streets", "#ABB0B5"], path: ["civic and pedestrian paths", "#D6C9B2"],
   park: ["parks and gardens", "#7DB463"], forest: ["forest", "#4E8C4A"], rail: ["railway", "#7E746D"], water: ["port and water", "#6FA6CF"],
   facility: ["facility ground", "#D9CCBD"] };
