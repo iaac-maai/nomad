@@ -159,14 +159,7 @@ h3 { font-size: 19px; line-height: 1.2 }
 .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 22px }
 .tabs button { font: 500 13px var(--mono); padding: 8px 12px; border: 1px solid var(--line); background: var(--sheet); color: var(--slate); cursor: pointer; text-align: left }
 .tabs button[aria-selected="true"] { border-color: var(--ink); color: var(--ink); box-shadow: inset 0 -3px 0 var(--terra) }
-.shophead { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: baseline; margin: 22px 0 14px }
-.shophead p { margin: 4px 0 0; color: var(--slate); font-size: 14px; max-width: 70ch }
 .plans { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px }
-.planc { padding: 10px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; text-align: left; font: inherit; color: inherit }
-.planc[aria-pressed="true"] { outline: 2px solid var(--terra); outline-offset: -2px }
-.planc img { width: 100%; aspect-ratio: 4 / 5; object-fit: contain; background: #fff }
-.planc .lab { font: 600 12.5px var(--mono); color: var(--slate) }
-.planc .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 13.5px }
 .detail { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 14px; margin-top: 14px }
 /* the workspace (after Finch 3D's layout): key figures left, the model centre, drawers right */
 .detail.ws { grid-template-columns: minmax(0, 250px) minmax(0, 1fr) minmax(0, 330px); align-items: start }
@@ -174,10 +167,6 @@ h3 { font-size: 19px; line-height: 1.2 }
 .ws-left { padding: 14px; display: grid; gap: 12px } .ws-right { display: grid; gap: 10px; grid-template-columns: minmax(0, 1fr) }
 .drawer { overflow: hidden } .drawer .cards li, .drawer .cards .v, .drawer .cards .c { overflow-wrap: anywhere; white-space: normal }
 .ws-left h4 { font: 600 12px var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--slate); margin: 0 }
-.kf { display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; font-size: 13px; margin: 0 } .kf dt { color: var(--slate) } .kf dd { margin: 0; font: 600 13px var(--mono); text-align: right }
-.ring { display: grid; grid-template-columns: 70px 1fr; gap: 10px; align-items: center } .ring svg { width: 70px; height: 70px }
-.ring ul { list-style: none; margin: 0; padding: 0; font-size: 12px } .ring li { display: flex; gap: 6px; align-items: center; justify-content: space-between }
-.ring li i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; flex: none } .ring li span { flex: 1 } .ring li b { font: 500 11.5px var(--mono) }
 .vlist { display: grid; gap: 5px } .vlist button { all: unset; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; padding: 7px 9px; border: 1px solid var(--line); background: var(--paper); font-size: 12.5px }
 .vlist button[aria-pressed="true"] { border-color: var(--terra); box-shadow: inset 3px 0 0 var(--terra) } .vlist button:focus-visible { outline: 2px solid var(--terra) }
 .vlist small { grid-column: 1 / -1; color: var(--muted); font-size: 11.5px }
@@ -241,16 +230,6 @@ footer .wrap { padding-block: 16px 22px; display: flex; justify-content: space-b
 .mapbox canvas { cursor: grab } .mapbox canvas:active { cursor: grabbing }
 
 /* design flow: three numbered steps (a real sequence) */
-.wiz { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 5fr); gap: 12px; align-items: start }
-.wstep { padding: 16px 18px; display: flex; flex-direction: column; gap: 12px }
-.wstep h3 { display: flex; align-items: center; gap: 10px; font-size: 18px }
-.wn { width: 28px; height: 28px; border-radius: 50%; background: var(--terra); color: var(--sheet); display: grid; place-items: center; font: 700 14px var(--display); flex: none }
-.wstep .search { margin-top: 0 }
-.wstep .search input { font-size: 15px; padding: 10px 12px }
-.shopcard { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: start; font-size: 13.5px }
-.shopcard svg { width: 120px; height: 120px; background: var(--sheet); border: 1px solid var(--line) }
-.shopcard .meta { font: 12px var(--mono); color: var(--muted) }
-.req { display: grid; gap: 10px }
 .reqtype { display: grid; grid-template-columns: 92px auto minmax(0, 1fr); gap: 10px; align-items: center; font-size: 13.5px }
 .reqtype b { font: 600 13px var(--mono) }
 .stepper { display: inline-flex; border: 1px solid var(--ink) }
@@ -266,39 +245,16 @@ footer .wrap { padding-block: 16px 22px; display: flex; justify-content: space-b
 .go { font: 700 15px var(--display); background: var(--terra); color: var(--sheet); border: 0; padding: 10px 18px; cursor: pointer; letter-spacing: .03em }
 .go:disabled { opacity: .55; cursor: wait }
 .dplans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px }
-.weights summary { cursor: pointer; font-weight: 600 }
-.weights .wrow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) 2.5em; gap: 8px; align-items: center; margin: 4px 0 }
-.weights output { font-family: var(--mono); text-align: right }
-.ownlist { display: grid; gap: 8px; margin-top: 6px }
 .ambgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 16px; align-items: start } .ambmap { width: 100%; height: auto; background: var(--sheet) }
 .ambgrid .src-table { max-height: 520px; overflow-y: auto } @media (max-width: 760px) { .ambgrid { grid-template-columns: 1fr } }
 .pbars { list-style: none; padding: 0; display: grid; gap: 4px } .pbars li { display: grid; grid-template-columns: minmax(0, 10em) minmax(0, 1fr) auto; gap: 8px; align-items: center }
 .pbars i { display: block; height: .8em; background: var(--yes, #3a9b5c); border-radius: 2px } .pbars small { white-space: nowrap }
 .swatch { display: inline-block; width: .9em; height: .9em; border: 1px solid var(--line, #ccc); vertical-align: -1px }
-.agent { margin: 14px 0 6px; padding: 12px; border: 1px solid var(--line, #d9d6cf); border-radius: 8px }
-.agent h4 { margin: 0 0 4px }
-.agentlog { display: grid; gap: 6px; max-height: 260px; overflow-y: auto; margin: 8px 0 }
-.agentlog:empty { display: none }
-.agentlog p { margin: 0; padding: 6px 9px; border-radius: 8px; white-space: pre-wrap; max-width: 92% }
-.agentlog .me { justify-self: end; background: #2C5D8F; color: #fff }
-.agentlog .bot { justify-self: start; background: rgba(127, 127, 127, .12) }
-.agentrow { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 6px; align-items: end }
-.agentrow textarea { width: 100%; box-sizing: border-box; font: inherit; padding: 6px 8px; resize: vertical }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0) }
 .ownplan { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px; align-items: center }
 .ownplan svg { width: 96px; height: 96px; background: var(--paper, #fff) }
 .ownplan span { display: grid; gap: 3px; justify-items: start }
 .ownplan small { color: var(--muted, #555) }
-.gal .galflat { border-top: 1px solid var(--line); padding: 8px 0 }
-.gal .galopts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin: 6px 0 }
-.gal .galopt { display: flex; flex-direction: column; gap: 3px; padding: 6px; border: 1px solid var(--line); background: var(--sheet); color: var(--ink); text-align: left; cursor: pointer; font: inherit; font-size: 12px }
-.gal .galopt[aria-pressed="true"] { border-color: var(--terra); box-shadow: 0 0 0 1px var(--terra) }
-.gal .galopt svg { width: 100%; aspect-ratio: 1; background: #F4F1EA }
-.gal .galopt small { color: var(--muted) }
-.gal .rscore { list-style: none; margin: 0; padding: 0; font-size: 12px }
-.gal .rscore li { display: grid; grid-template-columns: 6.5em minmax(0, 1fr) auto; gap: 6px; align-items: center; margin: 2px 0 }
-.gal .rscore i { display: block; height: 7px; border-radius: 2px }
-.gal .rscore small { color: var(--muted) }
 .dplan { padding: 8px; display: flex; flex-direction: column; gap: 6px; cursor: pointer; text-align: left; font: inherit; color: inherit; background: var(--sheet); border: 1px solid var(--line) }
 .dplan[aria-pressed="true"] { outline: 2px solid var(--terra); outline-offset: -2px }
 .dplan svg { width: 100%; aspect-ratio: 1 / 1; background: #fff }
@@ -337,16 +293,6 @@ footer .wrap { padding-block: 16px 22px; display: flex; justify-content: space-b
 .skip:focus { top: 8px }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0) }
 .vh-summary { font-size: 13px; color: var(--slate); margin: 8px 0 0 }
-.upload summary { cursor: pointer; font: 500 12.5px var(--mono); color: var(--terra-ink) }
-.upview svg { width: 100%; max-height: 360px; background: #fff; border: 1px solid var(--line); margin-top: 8px }
-.upview line.edge { cursor: pointer; stroke-linecap: round }
-.upview line.edge:focus-visible { outline: none; stroke: var(--terra); stroke-width: 9 }
-.simpleans { font: 700 19px/1.35 var(--display) }
-.simpleans:empty, .value:empty { display: none }
-.simpleans .why { display: block; font: 400 14px var(--body); color: var(--slate); margin-top: 6px }
-.value { border: 1px dashed var(--line); padding: 10px 12px; font-size: 13.5px; display: grid; gap: 6px }
-.value b { font-family: var(--display) }
-.value input { width: 90px; font: 13px var(--mono); padding: 3px 6px; border: 1px solid var(--ink); background: var(--sheet); color: var(--ink) }
 .savedlist { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-top: 18px }
 .saved { padding: 12px 14px; display: grid; gap: 6px; font-size: 13.5px }
 .saved label { display: flex; gap: 8px; align-items: center; font-weight: 600 }
@@ -425,7 +371,6 @@ input[type=range] { accent-color: #111211 }
 .step .n { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); font: 700 13px var(--mono) }
 .step:hover .n { background: var(--neon); color: #111211 }
 .step .exp { color: var(--ink) }
-.wn { display: inline-grid; place-items: center; width: 30px; height: 30px; border: 1.5px solid var(--ink); border-radius: 50%; background: transparent; color: var(--ink); font: 700 13px var(--mono) }
 .tally { background: var(--ink); border: 1.5px solid var(--ink); gap: 1.5px }
 .tally div { background: var(--sheet) }
 .tally b { font: 800 30px/1 var(--display); letter-spacing: -.03em }
@@ -435,8 +380,6 @@ input[type=range] { accent-color: #111211 }
 .vlist button[aria-pressed="true"] { background: var(--neon); color: #111211; box-shadow: none }
 .drawer > summary { font-weight: 700; font-size: 11.5px }
 .drawer > summary::after { color: var(--ink) }
-.agent { border: 1.5px solid var(--ink); border-radius: 0; background: var(--sheet) }
-.agentlog .me { background: var(--ink); color: var(--paper); border-radius: 0 } .agentlog .bot { background: var(--paper); border-radius: 0; border: 1px solid var(--line) }
 .pbars i { background: var(--neon); box-shadow: inset 0 0 0 1.5px var(--ink); border-radius: 0; height: 14px }
 .ambmap { background: var(--m-sheet) }
 .swatch { border-color: var(--ink) }
@@ -547,7 +490,6 @@ section.sheet > .wrap > h3 { margin: 48px 0 8px; font-size: 22px }
 .answer { margin-top: 24px; gap: 16px } .tally { margin-top: 24px; border-radius: var(--r); overflow: hidden }
 .hero { gap: 32px } .wiz, .detail, .plans, .rulegrid, .exps, .savedlist, .cityrow, .ws-right, .steps { gap: 16px }
 .detail, .detail.ws { margin-top: 16px }
-.wstep { gap: 16px } .wstep h3 { gap: 12px; font-size: 20px }
 .realgrid, .tally { gap: 1.5px } .realgrid { border-radius: var(--r); overflow: hidden; background: var(--ink); border: 1.5px solid var(--ink) }
 .realgrid div, .tally div { padding: 16px }
 .step { border-radius: var(--r); padding: 16px; gap: 8px }
@@ -575,7 +517,6 @@ section.sheet > .wrap > h3 { margin: 48px 0 8px; font-size: 22px }
   font: 600 12px/1.25 var(--mono); letter-spacing: .06em; text-transform: uppercase; box-shadow: none }
 .tabs button:hover, .mapmode .chip:hover { background: var(--paper); color: var(--ink) }
 .tabs button[aria-selected="true"], .mapmode .chip[aria-pressed="true"] { background: var(--neon); color: #111211 }
-.shophead { margin: 24px 0 16px }
 /* tables: caps headings, 13 px rows */
 table { font-size: 13px; background: var(--sheet) } .src-table { border: 1.5px solid var(--ink); border-radius: var(--r) }
 th { font-size: 11px; letter-spacing: .08em; padding: 12px 16px } td { padding: 10px 16px }
@@ -637,28 +578,11 @@ footer .wrap { padding-block: 24px }
 @media (max-width: 1100px) { .hero3 .mapbox { margin-top: 16px } }
 
 /* design homes: the three steps are three equal boxes (same top and bottom); rows inside line up on one left edge */
-.wiz { align-items: stretch }
-.wstep .reqrow { align-items: center }
-.wstep .reqrow > .hint2 { flex-basis: 100%; margin: 0 }
-.wstep .reqrow[role=radiogroup] { display: grid; gap: 8px; justify-items: start }
-.wstep .reqrow[role=radiogroup] > label { display: flex; gap: 8px; align-items: flex-start; line-height: 1.4 }
-.wstep .reqrow[role=radiogroup] > label input { margin: 3px 0 0; flex: none }
 input[type=radio], input[type=checkbox] { accent-color: var(--neon) }
 .reqtype { grid-template-columns: 96px auto minmax(0, 1fr) }
-.wstep .examples { align-items: center }
 
 /* design homes workspace: key figures | 3D | four detail tabs. The tabs' box is exactly as tall as the other two and scrolls inside */
 .detail.ws { grid-template-columns: minmax(0, 250px) minmax(0, 1fr) minmax(0, 400px); align-items: stretch }
-.ws-right { position: relative; display: block; min-height: 480px }
-.wsbox { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 8px }
-.wstabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; flex: none }
-.wstabs button { padding: 6px 4px; text-align: center; font-size: 11px; line-height: 1.25; white-space: normal }
-.wstabs button:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px }
-.wspane { flex: 1; min-height: 0; overflow: auto; padding: 16px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; scrollbar-gutter: stable }
-.wspane::-webkit-scrollbar { width: 8px } .wspane::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px } .wspane::-webkit-scrollbar-thumb:hover { background: var(--neon) }
-.wspane .cards { max-height: none; overflow: visible; padding: 0 }
-.wspane li, .wspane .v, .wspane .c { overflow-wrap: anywhere; white-space: normal }
-body.simple .wstabs button:not(:first-child) { display: none }
 @media (max-width: 1150px) { .detail.ws { grid-template-columns: minmax(0, 250px) minmax(0, 1fr) } .ws-right { grid-column: 1 / -1; display: block; height: 560px } }
 @media (max-width: 760px) { .detail.ws { grid-template-columns: minmax(0, 1fr) } }
 
@@ -674,12 +598,8 @@ body.simple .wstabs button:not(:first-child) { display: none }
 body.simple #book { display: block !important }
 
 /* weights: label and share on one line, the slider full width under it; one slider look for the whole site */
-.weights .wrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "l o" "r r"; gap: 4px 12px; align-items: baseline; margin: 12px 0 0 }
-.weights .wrow label { grid-area: l; font-size: 14px } .weights .wrow output { grid-area: o; font: 700 13px var(--mono); text-align: right; min-width: 4.5ch }
-.weights .wrow input[type=range] { grid-area: r; width: 100% }
 input[type=range] { accent-color: var(--neon); height: 24px; margin: 0; cursor: pointer }
 input[type=range]:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 6px }
-.weights > summary { padding: 4px 0 }
 
 /* ===== simple copy: App | Research, two doors, plain words; easier to read (brighter greys, 16 px text, sentence-case buttons) ===== */
 :root:not([data-theme="light"]) { --muted: #A9ABA5; --slate: #CFD1CA }
@@ -719,8 +639,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
   <div class="views" role="tablist" aria-label="Part of NOMAD"><button type="button" role="tab" class="vt" data-v="app" aria-selected="true">App</button><button type="button" role="tab" class="vt" data-v="research" aria-selected="false">Research</button></div>
   <nav class="main" id="mainnav" aria-label="Sections">
     <a class="ptab" data-view="app" href="#check"><span class="sn">1</span>Your shop</a>
-    <a class="ptab" data-view="app" href="#design"><span class="sn">2</span>Your homes</a>
-    <a class="ptab" data-view="app" href="#saved"><span class="sn">3</span>Saved</a>
+    <a class="ptab" data-view="app" href="#saved"><span class="sn">2</span>Saved</a>
     <div class="pgroup" data-view="app"><button type="button" class="ptab" aria-expanded="false" aria-haspopup="true">For the city<span class="car" aria-hidden="true">▾</span></button>
       <div class="pmenu" hidden><a href="#policy">Where to start</a><a href="#city">City in 3D</a></div></div>
     <a class="ptab" data-view="app" href="#rules">The laws</a>
@@ -739,9 +658,9 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
 <section class="sheet start" id="start" data-view="app"><div class="wrap">
   <p class="eyebrow">NOMAD · Barcelona</p>
   <h1>Can an empty shop become homes?</h1>
-  <p class="lede">NOMAD checks an empty ground floor against Barcelona's rules, draws the homes that fit and builds them in 3D. In a minute, in plain words.</p>
+  <p class="lede">NOMAD checks whether an empty ground floor stands in a zone where Barcelona allows homes, and shows the laws behind the answer. In a minute, in plain words.</p>
   <div class="doors">
-    <a class="door panel" href="#check"><span class="dk">For owners</span><b>I have a shop</b><span>Type its address. NOMAD says if homes are allowed, draws them, and gives you a report to take to an architect.</span><span class="dgo">Check my shop →</span></a>
+    <a class="door panel" href="#check"><span class="dk">For owners</span><b>I have a shop</b><span>Type its address. NOMAD says if the zone allows homes, shows the building, and gives you a report with the sources to take to an architect.</span><span class="dgo">Check my shop →</span></a>
     <a class="door panel" href="#policy"><span class="dk">For the city</span><b>I work for the city</b><span>See every empty shop and unused building, how many homes they could give, and which to start with.</span><span class="dgo">See the city →</span></a>
   </div>
   <p class="hint2">Want to know how NOMAD works, and how we tested it? Open <a href="#steps">Research</a> at the top.</p>
@@ -775,67 +694,6 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
       <p class="vh-summary" id="mapsum"></p>
       <div class="note">Scroll or use + and − to zoom, drag to move. Zones: Mapa Urbanístic de Catalunya (Generalitat). Premises: census of ground-floor premises 2024 (Ajuntament). Click a dot to check it.</div>
     </div>
-  </div>
-</div></section>
-
-<section class="sheet" id="design" data-view="app"><div class="wrap">
-  <p class="eyebrow">Step 2 · your homes</p>
-  <h2>What homes fit in your shop?</h2>
-  <p class="lede">Your shop from step 1 is already here. Say which flats you want, press <b>Make the layouts</b>, and NOMAD draws the homes, checks every rule and builds them in 3D.</p>
-  <ol class="wiz" id="wiz">
-    <li class="panel wstep" id="w1"><h3><span class="wn">1</span> Your shop</h3>
-      <div class="search"><label for="dq">An empty shop's address in Barcelona, or a cadastral reference</label>
-        <input id="dq" type="search" autocomplete="off" spellcheck="false" placeholder="Santaló 115"><ul class="sugg" id="dsugg" role="listbox" hidden></ul></div>
-      <div class="examples"><span data-t="or_test">Or a test shop:</span> <span id="dtest"></span></div>
-      <details class="upload" id="upbox"><summary data-t="upload_sum">Or upload a plan drawing of your shop</summary>
-        <div class="reqrow"><input type="file" id="upfile" accept="image/png,image/jpeg,image/webp" aria-label="Plan drawing (PNG or JPG)"></div>
-        <div id="upview" class="upview"></div>
-        <div class="reqrow" id="uprow" hidden><label for="upm" data-t="up_len">Length of the blue street façade (m)</label><input id="upm" type="number" min="1" max="200" step="0.1"><button type="button" class="chip" id="upuse" data-t="up_use">Use this plan</button><button type="button" class="chip" id="updraw" data-t="up_draw">Outline wrong? Draw it</button></div>
-        <p class="hint2" data-t="up_hint">NOMAD reads the outline from the dark lines of the drawing (the method that did best on 398 real scans). Click the outline's edges that face the street, then give the length of one of them.</p>
-      </details>
-      <div class="shopcard" id="dshop"></div></li>
-    <li class="panel wstep" id="w2"><h3><span class="wn">2</span> What you need</h3>
-      <div class="req" id="req"></div>
-      <div class="reqrow"><label for="hgt" id="hgtlab">Clear height of the shop (m)</label><input id="hgt" type="number" min="2" max="6" step="0.05" value="3.00"><span class="hint2">a shop conversion needs 2,40 m (Decret 141/2012, Annex 4 group C)</span></div>
-      <div class="reqrow" role="radiogroup" aria-label="Kind of homes"><span>Kind of homes:</span>
-        <label><input type="radio" name="scheme" value="" checked> full flats</label>
-        <label><input type="radio" name="scheme" value="shared"> shared-space homes: small private homes (24 m² and up) with shared living rooms and kitchens</label>
-        <span class="hint2">Shared-space homes ("allotjaments amb espais comuns complementaris", Llei 18/2007 art. 18 bis): a fast, small-home route for people who need a home now. The whole shop stays one property. In Barcelona each home needs 40 m² of private space plus its share of the shared rooms. Density may be exceeded for homes for groups needing social attention (MPGM 2004 DA2). "Temporary protection housing" is only allowed on public land for facilities, not in a private shop.</span></div>
-      <details class="weights" id="wts"><summary>What matters most (weights)</summary>
-        <p class="hint2">Like Finch's sliders: NOMAD tries many layouts and keeps, for each way of reaching the flats, the one that scores best. The four shares always add up to 100 %: raise one and the others make room.</p>
-        <div class="wrow"><label for="w-match">The flats I asked for</label><output for="w-match" id="wo-match">62 %</output><input type="range" id="w-match" min="0" max="100" step="1" value="62"></div>
-        <div class="wrow"><label for="w-passing">As many homes as fit</label><output for="w-passing" id="wo-passing">6 %</output><input type="range" id="w-passing" min="0" max="100" step="1" value="6"></div>
-        <div class="wrow"><label for="w-eff">Floor used by homes</label><output for="w-eff" id="wo-eff">19 %</output><input type="range" id="w-eff" min="0" max="100" step="1" value="19"></div>
-        <div class="wrow"><label for="w-plan">How well the real plans fit</label><output for="w-plan" id="wo-plan">13 %</output><input type="range" id="w-plan" min="0" max="100" step="1" value="13"></div>
-      </details>
-      <details class="weights" id="ownp"><summary>Your own plans</summary>
-        <p class="hint2">Add a flat plan you drew: a DXF (Rhino: File &gt; Export Selected) or JSON. Each room is a closed polyline on a layer named by its use (living, bedroom, kitchen, bath, hall, storage; or estar, dormitori, cuina, bany, rebedor). Doors and windows are lines across the opening, on layers "door" and "window". The flat's entrance door goes on "entrance", and rooms open to each other get a line on "open". NOMAD checks your plan like every real plan and furnishes it. If it passes, your layouts can use it, with its walls kept.</p>
-        <div class="reqrow"><label for="ownfile" class="chip">Add a plan (.dxf, .json)</label><input type="file" id="ownfile" accept=".dxf,.json" multiple hidden><span id="ownmsg" class="hint2" aria-live="polite"></span></div>
-        <div id="ownlist" class="ownlist"></div>
-      </details>
-      <div class="reqrow"><button class="go" id="go">Make the layouts</button><span id="status" class="hint2" aria-live="polite"></span></div></li>
-    <li class="panel wstep" id="w3"><h3><span class="wn">3</span> Your layouts</h3>
-      <div id="dres"><p class="hint2" data-t="res_hint">The shop as it is and its layouts appear here, one for each circulation strategy that adds homes: flats on both façades, a corridor to the block interior, or small flats filling the shop.</p></div>
-      <div id="dsimple" class="simpleans" aria-live="polite"></div>
-      <div id="dvalue" class="value"></div>
-      <div class="agent" id="agent" hidden>
-        <h4>Ask NOMAD</h4>
-        <p class="hint2">Ask for changes in plain words, for example "make it all 2-bedroom flats", "favour more homes", or "in every flat, use the plan that stretched least". NOMAD's assistant changes the request, makes the layouts and swaps plans for you. It runs on your own Claude account.</p>
-        <div class="agentlog" id="agentlog" aria-live="polite"></div>
-        <form class="agentrow" id="agentform"><label for="agentq" class="sr">Your request</label><textarea id="agentq" rows="2" placeholder="What should change?"></textarea>
-          <button class="go" id="agentgo" type="submit">Ask</button><button class="chip" id="agentstop" type="button" hidden>Stop</button></form>
-      </div>
-      <div class="reqrow" id="dacts" hidden><button type="button" class="chip" id="dsave" data-t="save">Save this shop</button><button type="button" class="chip" id="dpdf" data-t="report">Download the report (PDF)</button><span id="dactmsg" class="hint2" aria-live="polite"></span></div></li>
-  </ol>
-  <div class="detail ws" id="ddetail" hidden>
-    <aside class="ws-left panel" id="dkey" aria-label="Key figures of the selected layout"></aside>
-    <div class="viewer panel"><div class="fig" id="dviewfig"><b>FIG.4</b>&nbsp; 3D</div>
-      <div class="stage" id="dstage"><canvas id="dthree" role="img" aria-label="3D model of the selected layout. The plans and rule cards above give the same information as text."></canvas><span class="hint">drag to turn · scroll to zoom</span></div>
-      <div class="bar2"><span>Show:</span><button class="chip" id="dv-walls" aria-pressed="true">walls, doors, windows</button><button class="chip" id="dv-zone" aria-pressed="false">zoning (room blocks)</button></div></div>
-    <aside class="ws-right" aria-label="Details of the selected layout"><div class="wsbox">
-      <div class="tabs wstabs" role="tablist" aria-label="Details of the selected layout"><button type="button" role="tab" id="wt-0" aria-controls="wp-0" aria-selected="true" tabindex="0">Checks</button><button type="button" role="tab" id="wt-1" aria-controls="wp-1" aria-selected="false" tabindex="-1">Other plans</button><button type="button" role="tab" id="wt-2" aria-controls="wp-2" aria-selected="false" tabindex="-1">Compare</button></div>
-      <div class="wspane panel"><div role="tabpanel" id="wp-0" aria-labelledby="wt-0"><div class="cards" id="dcards"></div></div><div role="tabpanel" id="wp-1" aria-labelledby="wt-1" hidden><div id="dgal" class="gal"></div></div><div role="tabpanel" id="wp-2" aria-labelledby="wt-2" hidden><div id="dcmp"></div></div><div hidden><div id="dlaws" class="bk-marks"></div></div></div>
-    </div></aside>
   </div>
 </div></section>
 
@@ -878,7 +736,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
   <p class="eyebrow">The laws · for anyone who wants to read them</p>
   <h2>Every law NOMAD uses, in one book</h2>
   <div id="book">
-  <p class="lede">The original official PDFs from Spain, Catalonia, the metropolitan plan and Barcelona, compiled into one book with an index and page numbers. Pick a title in the index to open it. After you check a shop in <a href="#design">Design homes</a>, bookmarks appear for the laws that decided your answer, and the lines are highlighted where the page has text.</p>
+  <p class="lede">The original official PDFs from Spain, Catalonia, the metropolitan plan and Barcelona, compiled into one book with an index and page numbers. Pick a title in the index to open it. The list beside the book opens each rule NOMAD checks at its page; the lines are highlighted where the page has text.</p>
   <div class="bk">
     <aside class="bk-side panel" aria-label="Rules and index">
       <div class="bk-marks" id="bkmarks" aria-live="polite"></div>
@@ -1026,11 +884,10 @@ function valHtml(s) {
 
 function start() {
   P.forEach(r => { r.n = norm(r.street); });
-  for (const f of [drawTally, initMap, initSearch, drawSteps, drawRules, drawExps, initDesign, initCity, drawReal, initExtras, initBook, () => setShare("match", +$("#w-match").value), initNav, initCols, initWsTabs, initViews])
+  for (const f of [drawTally, initMap, initSearch, drawSteps, drawRules, drawExps, initCity, drawReal, initExtras, initBook, initNav, initCols, initViews])
     try { const r = f(); if (r && r.catch) r.catch(e => console.error(f.name, e)); } catch (e) { console.error(f.name, e); }   // one part failing (no WebGL, say) must not stop the rest
   const first = P.find(r => r.street === "VALÈNCIA" && r.num === "640") || P.find(r => r.housing === "YES");
   show(first);
-  syncDesign = true;                                                   // from now on, the shop you check is also the shop in Design homes
 }
 
 /* ---------- 1. address check ---------- */
@@ -1053,17 +910,15 @@ function show(r) {
         <dt>DAYLIGHT</dt><dd>${validated(r) ? esc(valHtml(validated(r))) : esc(DAYLIGHT_SOON)}</dd>
         ${r.shops != null ? `<dt>STREET LIFE</dt><dd>${r.shops} shops within 100 m <span class="meta">(city median 16)</span></dd>` : ""}
 </dl></details>
-    <div class="next">${r.housing === "YES" ? "Good news: the zone allows homes on this ground floor. Next, see which homes fit: your shop is already in step 2 below." :
-      r.housing === "CHECK" ? "Maybe: this zone has its own detailed plan, and that plan decides. Ask the Ajuntament, or see which homes would fit in step 2." :
+    <div class="next">${r.housing === "YES" ? "Good news: the zone allows homes on this ground floor. The rules inside the shop (Decret 141/2012) still decide how many homes fit: an architect checks them." :
+      r.housing === "CHECK" ? "Maybe: this zone has its own detailed plan, and that plan decides. Ask the Ajuntament." :
       "This zone does not take homes (a facility, a park, industry or a future street). Try another shop."}${others ? ` <span class="meta">${others} more empty premises share this cadastral reference.</span>` : ""}</div>`;
   bldgBox(r.ref ? "" : "This premises has no cadastral reference, so NOMAD has no building to draw.");
   if (r.ref) showBuilding(r.ref, r);
-  if (syncDesign) { $("#dq").value = `${r.street} ${r.num}`; pickRealShop(r); }
 }
-let syncDesign = false;
 function bldgBox(msg) { $("#bldgcol").innerHTML = msg ? `<p class="meta">${esc(msg)}</p>` : `<div class="bldg" id="bldg"></div>`; }
 
-function showWh(r) {                                           // a whole building: what NOMAD knows, and "design homes in it"
+function showWh(r) {                                           // a whole building: what NOMAD knows
   sel = r; drawMap();
   const where = r.street ? `${esc(r.street)} ${esc(r.num)}` : "Catastro " + esc(r.ref);
   $("#answer").innerHTML = `
@@ -1075,28 +930,9 @@ function showWh(r) {                                           // a whole buildi
         <dt>SIZE</dt><dd>${fmt(r.built_m2)} m² built · ${fmt(r.ground_m2)} m² ground floor · ${r.floors} storey${r.floors > 1 ? "s" : ""} · ${r.street_m} m on the street${r.open_m ? `, ${r.open_m} m on open ground` : ""}</dd>
         <dt>RULE</dt><dd>Decret 141/2012 Annex 4 Group B: total change of use of a building (Annex 1 with its building rules, patios -10 %, 2,40 m clear height)</dd>
 </dl>
-    <div class="next">${WH.shells[r.ref] ? `<button type="button" class="go" id="whgo">Design homes in this building</button>` :
-      r.housing === "NO" ? "This zone does not take housing (industry, a facility or a future street): NOMAD answers NO." : "NOMAD has no usable outline with a façade for this building."}</div>`;
-  const b = $("#whgo"); if (b) b.onclick = () => { pickWh(r); location.hash = "design"; };
+    <div class="next">${r.housing === "NO" ? "This zone does not take housing (industry, a facility or a future street): NOMAD answers NO." : r.housing === "CHECK" ? "Maybe: this zone has its own detailed plan, and that plan decides. Ask the Ajuntament." : "The zone allows homes. The whole building is a change of use (Decret 141/2012 Annex 4 Group B): an architect checks the building rules."}</div>`;
   bldgBox(""); showBuilding(r.ref, r);
-  if (syncDesign) {
-    $("#dq").value = r.street ? `${r.street} ${r.num}` : r.ref;
-    if (WH.shells[r.ref]) pickWh(r);
-    else { dShop = null; $("#dshop").innerHTML = `<p>${r.street ? esc(r.street) + " " + esc(r.num) : "Catastro " + esc(r.ref)}: NOMAD has no usable outline with a façade for this building. Pick another place.</p>`; }
-  }
 }
-function pickWh(r) {
-  const s = WH.shells[r.ref]; if (!s) return;
-  const wh = s.kind === "warehouse";
-  dShop = { outline: s.outline, facade: s.facade, street: s.street, height: wh ? 6.0 : 3.0, kind: s.kind, floors: s.floors, name: "BCN_" + r.ref,
-            source: `${r.street ? r.street + " " + r.num + ", " : ""}${WHKIND[s.kind]} (Catastro ${r.ref})`, zoning: { zone: r.zone, pgm_key: r.key, housing: r.housing, why: r.why } };
-  $("#hgt").value = dShop.height.toFixed(2);
-  $("#hgtlab").textContent = wh ? "Clear height inside the warehouse (m)" : "Height of one storey, floor to floor (m)";
-  shopCard(dShop, `<b>${r.street ? esc(r.street) + " " + esc(r.num) : "Catastro " + esc(r.ref)}</b><div class="meta">${esc(WHKIND[s.kind])} · Catastro ${esc(r.ref)}</div>
-    <div>${fmt(r.ground_m2)} m² a floor · ${s.floors} storey${s.floors > 1 ? "s" : ""} · <span class="pill ${r.housing}">${WORD[r.housing]}</span></div>
-    <div class="hint2">${wh ? "A warehouse with 5,10 m or more of clear height gets a mezzanine: two levels of homes (2,40 m each and a floor)." : "Every storey gets the same layout, with a stair and lift core."} Deep floors get patios cut through them. Whole building = Decret 141/2012 Annex 4 Group B.</div>`);
-}
-
 /* the building of the shop, from the Catastro (src/zoning/catastro_site.py): every floor's units where the Catastro has a
    floor-by-floor plan, else the building parts with their floors; drawn here as plans by floor and a 3D model */
 const BUNDLES = {};
@@ -1220,7 +1056,6 @@ async function loadWH() {
   if (WH) return WH;
   const j = await (await fetch("data/warehouses.json")).json();
   WH = j.rows.map(a => Object.fromEntries(j.cols.map((c, i) => [c, a[i]])));
-  WH.shells = j.shells;
   return WH;
 }
 function mapPts() { return mapMode === "wh" ? (WH || []) : mapMode === "plan" ? policySel : P; }
@@ -1338,89 +1173,6 @@ function drawSteps() {
     ["Fit the homes", `One layout per circulation strategy, each checked again; ${fmt(st.homes_most.new)} legal homes when as many as fit.`, "Exp 5", "#exp5", "#design"],
     ["Report", "Plans, 3D, verdict and articles on one sheet; IFC and glTF for BIM and the web.", "Exp 5", "#exp5", "#saved"]];
   $("#steplist").innerHTML = steps.map(([h, p, x, href, go], i) => `<div class="step"><div class="n">${i + 1}</div><h3><a class="sgo" href="${go}">${h}</a></h3><p>${esc(p)}</p>${x ? `<a class="exp" href="${href}">${x} →</a>` : `<a class="exp" href="${href}">open the map →</a>`}</div>`).join("");
-}
-
-/* ---------- 3. five shops ---------- */
-let cur = 0, curIt = 0, mode = "walls", three = null;
-function initShops() {
-  $("#tabs").innerHTML = D.demos.map((d, i) => `<button role="tab" aria-selected="${i === 0}" data-i="${i}">${esc(d.title)}</button>`).join("");
-  $("#tabs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) pickShop(+b.dataset.i); });
-  $("#v-walls").addEventListener("click", () => setMode("walls"));
-  $("#v-zone").addEventListener("click", () => setMode("zone"));
-  pickShop(0);
-}
-function pickShop(i) {
-  cur = i; const d = D.demos[i];
-  document.querySelectorAll("#tabs button").forEach(b => b.setAttribute("aria-selected", +b.dataset.i === i));
-  const best = d.iterations.reduce((a, b, k) => b.homes > d.iterations[a].homes ? k : a, 0);
-  $("#shophead").innerHTML = `<div><h3>${esc(d.title)}</h3><p>${esc(d.source)} · ${fmt(Math.round(d.shop_m2))} m² · asked: ${esc(d.mix)}</p></div>
-    <div>As it is: <span class="pill ${d.before.verdict}">${d.before.verdict}</span> <span class="num">${d.before.passing} of ${d.before.asked} flats pass</span></div>`;
-  const tiles = [{ label: "As it is", verdict: d.before.verdict, txt: `${d.before.passing} of ${d.before.asked} flats`, plan: d.before.plan }]
-    .concat(d.iterations.map(it => ({ label: it.label.replace("·", " ·"), verdict: it.verdict, txt: `${it.homes} home${it.homes === 1 ? "" : "s"}${it.patio ? " + patio" : ""}`, plan: it.plan })));
-  $("#plans").innerHTML = tiles.map((t, k) => `<button type="button" class="planc panel" data-k="${k}" aria-pressed="false">
-      <span class="lab">${esc(t.label)}</span>${t.plan ? `<img src="${t.plan}" alt="${esc(t.label)} plan" loading="lazy">` : ""}
-      <span class="row"><span class="pill ${t.verdict}">${t.verdict}</span><span class="num">${esc(t.txt)}</span></span></button>`).join("");
-  $("#plans").onclick = e => { const b = e.target.closest("button"); if (b) pickIt(+b.dataset.k); };
-  pickIt(d.iterations.length ? best + 1 : 0);
-}
-function pickIt(k) {
-  const d = D.demos[cur]; curIt = k;
-  document.querySelectorAll("#plans button").forEach(b => b.setAttribute("aria-pressed", +b.dataset.k === k));
-  const src = k === 0 ? d.before : d.iterations[k - 1];
-  const head = k === 0 ? "The shop as it is" : d.iterations[k - 1].label;
-  $("#cards").innerHTML = `<div class="fig"><b>FIG.3</b>&nbsp; rule cards · ${esc(head)}</div>
-    <ul>${src.cards.map(c => `<li><span class="mark ${c.ok ? "ok" : c.check ? "chk" : "bad"}" aria-label="${c.ok ? "passes" : "fails"}">${c.ok ? "✓" : c.check ? "?" : "✕"}</span>
-      <div><b>${esc(c.title)}</b> <span class="v">${esc(c.value)}${c.limit ? " · " + esc(c.limit) : ""}</span><div class="c">${esc(c.cite)}</div></div></li>`).join("")}</ul>
-    ${k > 0 && d.iterations[k - 1].interventions.length ? `<p class="note">Changes: ${esc(d.iterations[k - 1].interventions.join("; "))}</p>` : ""}`;
-  show3d();
-}
-function setMode(m) { mode = m; $("#v-walls").setAttribute("aria-pressed", m === "walls"); $("#v-zone").setAttribute("aria-pressed", m === "zone"); show3d(); }
-function show3d() {
-  const d = D.demos[cur], it = curIt > 0 ? d.iterations[curIt - 1] : null;
-  const still = $("#still"), cv = $("#three"), hint = $("#hint");
-  $("#ifc").textContent = it && it.ifc ? `IFC: ${it.ifc}` : "";
-  if (!it) {
-    $("#viewfig").innerHTML = `<b>FIG.2</b>&nbsp; the shop as it is: pick a layout to see it in 3D`;
-    still.src = d.before.plan || ""; still.hidden = !d.before.plan; cv.hidden = true; hint.hidden = true; return;
-  }
-  $("#viewfig").innerHTML = `<b>FIG.2</b>&nbsp; ${mode === "walls" ? "walls, doors and windows (glTF, from Rhino)" : "zoning: each room a block (Rhino)"} · ${esc(it.label)}`;
-  if (mode === "zone" || !it.glb || !window.THREE || !THREE.GLTFLoader) {
-    const img = mode === "zone" ? it.zoning3d : it.walls3d;
-    still.src = img || ""; still.hidden = !img; cv.hidden = true; hint.hidden = true;
-    return;
-  }
-  still.hidden = true; cv.hidden = false; hint.hidden = false;
-  loadGlb(it.glb);
-}
-function loadGlb(url) {
-  const cv = $("#three"), box = $("#stage");
-  if (!three) {
-    const r = makeRenderer({ canvas: cv, antialias: true, alpha: false }) || softModel(cv, box);   // no WebGL: the same model in SVG
-    r.setPixelRatio(Math.min(1.5, window.devicePixelRatio || 1));
-    const scene = new THREE.Scene(), sun = modelLook(scene, r);
-    const cam = new THREE.PerspectiveCamera(35, 1, 0.1, 2000);
-    const ctl = new THREE.OrbitControls(cam, r.domElement); ctl.enableDamping = true; ctl.addEventListener("change", () => { r.dirty = true; });
-    three = { r, scene, cam, ctl, group: null, cache: {}, sun };
-    const size = () => { const w = box.clientWidth, h = box.clientHeight; r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); };
-    new ResizeObserver(size).observe(box); size();
-    const vis = onScreen(box);
-    guardGL(cv, box, () => { const it = D.demos[cur].iterations[curIt - 1]; $("#still").src = it.walls3d; $("#still").hidden = false; cv.hidden = true; return true; });
-    (function loop() { if (vis()) { ctl.update(); if (!r.isSVG || r.dirty) { r.dirty = false; r.render(scene, cam); } } requestAnimationFrame(loop); })();
-  }
-  const place = g => {
-    if (three.group) three.scene.remove(three.group);
-    three.group = g; three.scene.add(g);
-    const b = new THREE.Box3().setFromObject(g), c = b.getCenter(new THREE.Vector3()), s = b.getSize(new THREE.Vector3()).length();
-    three.cam.position.set(c.x - s * 0.55, c.y + s * 0.75, c.z + s * 0.7);
-    three.ctl.target.copy(c); three.cam.near = s / 200; three.cam.far = s * 20; three.cam.updateProjectionMatrix();
-    aimSun(three.sun, c, s);
-    three.ctl.update(); three.r.render(three.scene, three.cam);   // aim and draw now, even before the view scrolls into sight
-  };
-  if (three.cache[url]) return place(three.cache[url]);
-  new THREE.GLTFLoader().load(url, gl => {
-    restyle(gl.scene);
-    three.cache[url] = gl.scene; place(gl.scene);
-  }, undefined, () => { const it = D.demos[cur].iterations[curIt - 1]; $("#still").src = it.walls3d; $("#still").hidden = false; $("#three").hidden = true; });
 }
 
 /* ---------- 4. rules + golden set ---------- */
@@ -1645,9 +1397,7 @@ function restyle(root) {                                        // walls warm gr
     if (!glass) o.add(new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry, 30), EDGE));
   });
 }
-/* ---------- shared: E05 room colours, UTM 31N -> latitude/longitude (for Street View links) ---------- */
-const ROOMC = { living: "#F09F26", bed_main: "#8078DE", bed: "#B0A8ED", kitchen: "#FAC775", bath: "#85B8EB", hall: "#CCCCCC", storage: "#B5B0A5" };
-const FAILC = "#E34A4A", SHAREDC = "#9ED3A6";   // plans, map and 3D keep their own colours (not the site's neon look)
+/* ---------- shared: UTM 31N -> latitude/longitude (for Street View links) ---------- */
 function utmToLatLng(x, y) {                                    // ETRS89 / UTM zone 31N (EPSG:25831)
   const a = 6378137, f = 1 / 298.257222101, e2 = f * (2 - f), k0 = 0.9996, ep2 = e2 / (1 - e2);
   const M = y / k0, mu = M / (a * (1 - e2 / 4 - 3 * e2 * e2 / 64 - 5 * e2 ** 3 / 256));
@@ -1660,31 +1410,7 @@ function utmToLatLng(x, y) {                                    // ETRS89 / UTM 
   return [lat * 180 / Math.PI, lng * 180 / Math.PI];
 }
 
-/* plans as SVG (local metres, y up) */
-function planSvg(shop, plan, opt = {}) {
-  const pts = shop.outline, xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
-  const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys), s = Math.max(x1 - x0, y1 - y0) || 1, pad = s * 0.06;
-  const P = q => q.map(p => `${(p[0] - x0 + pad).toFixed(2)},${(y1 - p[1] + pad).toFixed(2)}`).join(" ");
-  let g = `<polygon points="${P(pts)}" fill="#F4F1EA" stroke="#1F1F1F" stroke-width="${s / 160}"/>`;
-  if (opt.daylight && opt.daylight.cells) {                  // the liveable spots: lit (rooms can go), service, dark
-    const BAND = { l: "#FFE7A3", s: "#EEF0EC", d: "#AEBBCB" };
-    opt.daylight.cells.forEach(c => g += `<rect x="${(c[0] - x0 + pad).toFixed(2)}" y="${(y1 - c[3] + pad).toFixed(2)}" width="${(c[2] - c[0]).toFixed(2)}" height="${(c[3] - c[1]).toFixed(2)}" fill="${BAND[c[4]]}"/>`);
-  }
-  if (plan) {
-    (plan.patios || []).forEach(q => g += `<polygon points="${P(q)}" fill="#C4E0F4"/>`);
-    (plan.corridors || []).forEach(q => g += `<polygon points="${P(q)}" fill="#DEDEDA"/>`);
-    (plan.cores || []).forEach(q => g += `<polygon points="${P(q)}" fill="#7d838c" stroke="#1F1F1F" stroke-width="${s / 300}"><title>core: stair (two 1,00 m flights) and lift</title></polygon>`);
-    (plan.existing || []).forEach(q => g += `<polygon points="${P(q)}" fill="#5b5f66" stroke="#1F1F1F" stroke-width="${s / 300}"><title>the building's existing portal / stair (Catastro)</title></polygon>`);
-    plan.units.forEach(u => u.rooms.forEach(r => g += `<polygon points="${P(r.pts)}" fill="${!(r.ok && u.ok !== false) ? FAILC : u.shared ? SHAREDC : ROOMC[r.kind] || "#ccc"}" fill-opacity=".82" stroke="#fff" stroke-width="${s / 300}"><title>${esc(r.name)} ${r.area || ""} m²${r.why ? " · " + esc(r.why) : ""}</title></polygon>`));
-    plan.units.forEach(u => (u.swings || []).forEach(q => g += `<polyline points="${P(q)}" fill="none" stroke="#1F1F1F" stroke-width="${s / 420}"/>`));
-    plan.units.forEach(u => (u.furniture || []).forEach(q => g += furnSvg(q, P, s / 520)));
-  }
-  (shop.street || shop.facade || []).forEach(([a, b]) => g += `<line x1="${a[0] - x0 + pad}" y1="${y1 - a[1] + pad}" x2="${b[0] - x0 + pad}" y2="${y1 - b[1] + pad}" stroke="#2C5D8F" stroke-width="${s / 55}" stroke-linecap="round"/>`);
-  const W = s + 2 * pad;
-  return `<svg viewBox="0 0 ${W.toFixed(2)} ${W.toFixed(2)}" role="img" aria-label="${esc(opt.label || "plan")}">${g}</svg>`;
-}
-
-/* a small three.js viewer: walls model from prisms, or zoning blocks from rooms */
+/* a small three.js viewer: the building of a shop, floor by floor */
 function miniViewer(canvas, box) {
   const r = makeRenderer({ canvas, antialias: true }) || softModel(canvas, box);
   r.setPixelRatio(Math.min(1.5, window.devicePixelRatio || 1));
@@ -1721,334 +1447,6 @@ function miniViewer(canvas, box) {
     }
   };
 }
-const zoneSolids = plan => {
-  const out = [];
-  (plan.patios || []).forEach(q => out.push({ pts: q, z0: 0, h: 0.03, rgb: [196, 224, 244] }));
-  (plan.corridors || []).forEach(q => out.push({ pts: q, z0: 0, h: 0.04, rgb: [222, 222, 218] }));
-  plan.units.forEach(u => u.rooms.forEach(r => {
-    const hex = (r.ok && u.ok !== false ? ROOMC[r.kind] : FAILC) || "#CCCCCC";
-    out.push({ pts: r.pts, z0: 0, h: r.kind === "hall" ? 0.08 : 2.7, rgb: [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16)) });
-  }));
-  return out;
-};
-const wallSolids = prisms => prisms.map(p => ({ pts: p.pts, z0: p.z0, h: p.h, rgb: p.rgb, alpha: p.kind === "window" ? 0.55 : 1 }));
-
-/* ---------- design flow: your shop -> what you need -> layouts + 3D (NOMAD's Python in a worker) ---------- */
-let worker = null, jobs = {}, jobN = 0, programs = null, shells = null, dShop = null, dRes = null, dSel = 1, dMode = "walls", dView = null;
-function nomad(request) {
-  if (!worker) {
-    worker = new Worker("py/worker.js");
-    worker.onmessage = e => { const j = jobs[e.data.id]; if (!j) return; delete jobs[e.data.id]; e.data.error ? j.no(new Error(e.data.error)) : j.yes(e.data.result); };
-    worker.onerror = e => Object.values(jobs).forEach(j => j.no(new Error(e.message || "the Python engine did not start")));
-  }
-  return new Promise((yes, no) => { const id = ++jobN; jobs[id] = { yes, no }; worker.postMessage({ id, request }); });
-}
-const TYPES = [["studio", "Studio"], ["1bed", "1 bedroom"], ["2bed", "2 bedrooms"], ["3bed", "3 bedrooms"]];
-const want = { studio: 0, "1bed": 2, "2bed": 1, "3bed": 0 }, sizes = {};
-async function initDesign() {
-  try { programs = (await (await fetch("data/room_programs.json")).json()).programs; } catch (e) { programs = null; }
-  TYPES.forEach(([k]) => { sizes[k] = programs && programs[k] ? Math.round(programs[k].useful_m2.median) : 50; });
-  $("#req").innerHTML = TYPES.map(([k, l]) => `<div class="reqtype"><b>${l}</b>
-      <span class="stepper"><button type="button" data-k="${k}" data-d="-1" aria-label="fewer ${l}">−</button><output id="n-${k}">${want[k]}</output><button type="button" data-k="${k}" data-d="1" aria-label="more ${l}">+</button></span>
-      <span class="size"><input type="range" id="s-${k}" min="${k === "studio" ? 30 : 36}" max="${k === "studio" ? 60 : k === "1bed" ? 80 : k === "2bed" ? 110 : 140}" step="1" value="${sizes[k]}" aria-label="${l} size in m²"><span id="sv-${k}">${sizes[k]} m²</span></span></div>`).join("") +
-    `<p class="hint2">Sizes are useful floor area per flat. Barcelona's minimum is 40 m² (MPGM 2004); the defaults are the median of 13,444 real flats that pass every rule.</p>`;
-  $("#req").addEventListener("click", e => { const b = e.target.closest("button[data-k]"); if (!b) return; const k = b.dataset.k; want[k] = Math.max(0, Math.min(12, want[k] + +b.dataset.d)); $("#n-" + k).textContent = want[k]; });
-  $("#req").addEventListener("input", e => { const m = e.target.id.match(/^s-(.+)$/); if (!m) return; sizes[m[1]] = +e.target.value; $("#sv-" + m[1]).textContent = e.target.value + " m²"; });
-  $("#dtest").innerHTML = D.demos.map((d, i) => `<button class="chip" data-demo="${i}">${esc(d.title.split(":")[0])}</button>`).join("");
-  $("#dtest").addEventListener("click", e => { const b = e.target.closest("button"); if (b) pickDemoShop(+b.dataset.demo); });
-  const q = $("#dq"), ul = $("#dsugg");
-  q.addEventListener("input", () => {
-    const t = norm(q.value); if (t.length < 2) { ul.hidden = true; return; }
-    const parts = t.split(" "), num = parts.find(p => /^\d+$/.test(p)), street = parts.filter(p => !/^\d+$/.test(p)).join(" ");
-    let m = P.filter(r => (r.ref && norm(r.ref).startsWith(t.replace(/\s/g, ""))) || ((!street || r.n.includes(street)) && (!num || r.num.startsWith(num))));
-    m = m.slice(0, 8);
-    ul.innerHTML = m.map(r => `<li><button type="button" data-i="${P.indexOf(r)}"><span>${esc(r.street)} ${esc(r.num)}</span><small>${esc(r.barri)}</small></button></li>`).join(""); ul.hidden = !m.length;
-  });
-  ul.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; ul.hidden = true; const r = P[+b.dataset.i]; q.value = r.street + " " + r.num; pickRealShop(r); });
-  $("#go").addEventListener("click", makeLayouts);
-  $("#ownfile").addEventListener("change", addOwnPlans); drawOwn(); startAgent(); initPolicy();
-  document.querySelectorAll("#wts input[type=range]").forEach(i => i.addEventListener("input", () => setShare(i.id.slice(2), +i.value)));
-  $("#dv-walls").addEventListener("click", () => { dMode = "walls"; drawDesignDetail(); });
-  $("#dv-zone").addEventListener("click", () => { dMode = "zone"; drawDesignDetail(); });
-  pickDemoShop(0);
-}
-function shopCard(shop, lines) {
-  $("#dshop").innerHTML = `${planSvg(shop, null, { label: "outline of the shop" })}<div>${lines}</div>`;
-}
-function pickDemoShop(i) {
-  const d = D.demos[i], src = d.source;
-  fetch(`data/demo_shops.json`).then(r => r.ok ? r.json() : null).then(all => {
-    const s = all && all[d.id];
-    if (!s) return;
-    dShop = { outline: s.outline, facade: s.facade, street: s.facade, height: s.height, name: d.id, source: src };
-    $("#hgtlab").textContent = "Clear height of the shop (m)";
-    $("#hgt").value = s.height.toFixed(2);
-    shopCard(dShop, `<b>${esc(d.title)}</b><div class="meta">${esc(src)}</div><div>${fmt(Math.round(d.shop_m2))} m² · test shop (Swiss Dwellings)</div>`);
-  });
-}
-async function pickRealShop(r) {
-  if (!shells) { $("#dshop").innerHTML = `<p class="hint2">Loading the Catastro outlines…</p>`; shells = await (await fetch("data/shells.json")).json(); }
-  const ref = (r.ref || "").slice(0, 14), s = shells[ref];
-  if (!s) { $("#dshop").innerHTML = `<p>${esc(r.street)} ${esc(r.num)}: this premises was left out when the data was cleaned (its door is far from its building's façade, or the building is a whole block). Try another address.</p>`; dShop = null; return; }
-  $("#hgtlab").textContent = "Clear height of the shop (m)";
-  dShop = { outline: s.outline, facade: s.facade, street: s.street, existing: s.existing, height: +$("#hgt").value || 3, name: "BCN_" + ref, source: `${r.street} ${r.num}, ${r.barri} (Catastro ${ref})`,
-            zoning: { zone: r.zone, pgm_key: r.key, housing: r.housing, why: r.why }, prem: r };
-  const area = Math.abs(s.outline.reduce((a, p, i) => { const q = s.outline[(i + 1) % s.outline.length]; return a + p[0] * q[1] - q[0] * p[1]; }, 0) / 2);
-  shopCard(dShop, `<b>${esc(r.street)} ${esc(r.num)}</b><div class="meta">${esc(r.barri)} · Catastro ${esc(ref)}</div>
-    <div>${fmt(Math.round(area))} m² ground floor · ${s.floors} floors · <span class="pill ${r.housing}">${WORD[r.housing]}</span></div>
-    ${s.shared ? `<div class="hint2">Other premises share this ground floor: the outline is the whole floor. The Catastro CAT file would cut out this shop.</div>` : ""}
-    ${r.dl ? `<div>Daylight: ${dlHtml(r.dl)}<div class="hint2">${dlThreshold()}. ${dlClasses()}. ${dlNote()} From the street width and the building opposite.</div></div>` : ""}
-    ${r.ans ? `<div class="hint2">NOMAD's city answer: <b>${esc(r.ans)}</b> (${esc(r.awhy)}).</div>` : ""}
-    <div class="hint2">Blue: street façade. Height is not in the Catastro: set it in step 2.</div>`);
-}
-async function makeLayouts() {
-  if (!dShop) { $("#status").textContent = "Pick a shop in step 1 first."; return; }
-  const mix = Object.fromEntries(Object.entries(want).filter(([, v]) => v > 0));
-  if (!Object.keys(mix).length) { $("#status").textContent = "Ask for at least one flat."; return; }
-  const go = $("#go"); go.disabled = true;
-  const t0 = performance.now();
-  $("#status").textContent = worker ? "NOMAD is drawing the layouts…" : "Starting NOMAD's Python (about 10 s the first time)…";
-  try {
-    const shop = { ...dShop, height: +$("#hgt").value || dShop.height };
-    const used = Object.fromEntries(Object.keys(mix).map(k => [k, sizes[k]]));
-    const wv = engineW;
-    const weights = { match: wv("match"), passing: wv("passing"), eff: wv("eff"), plan: wv("plan") / 100 };
-    dRes = await nomad({ shop: { outline: shop.outline, facade: shop.facade, height: shop.height, name: shop.name, source: shop.source,
-                                 ...(shop.prem && shop.prem.lit != null ? { lit_depth: shop.prem.lit } : {}),
-                                 ...(document.querySelector('input[name="scheme"]:checked')?.value ? { scheme: "shared" } : {}),
-                                 ...(shop.street ? { street: shop.street } : {}), ...(shop.existing ? { existing: shop.existing } : {}), ...(shop.kind ? { kind: shop.kind, floors: shop.floors } : {}), ...(shop.zoning ? { zoning: shop.zoning } : {}) },
-                         mix, sizes: used, programs, weights, own: ownPlans.map(p => p.entry) });
-    dRes.shopDrawn = shop; dSel = 1;
-    $("#status").textContent = `Done in ${((performance.now() - t0) / 1000).toFixed(1)} s.`;
-    drawDesign();
-  } catch (e) {
-    $("#status").textContent = "NOMAD could not run here: " + e.message.slice(-300); console.error(e.message);
-  } finally { go.disabled = false; }
-}
-/* your own plans (src/library/own_plans.py): read and checked in the worker, kept in this browser, used by the layouts */
-let ownPlans = [];
-try { ownPlans = JSON.parse(localStorage.getItem("nomad-own") || "[]"); } catch (e) {}
-function saveOwn() { try { localStorage.setItem("nomad-own", JSON.stringify(ownPlans)); } catch (e) {} }
-function drawOwn() {
-  const box = $("#ownlist"); if (!box) return;
-  box.innerHTML = ownPlans.map((p, i) => `<div class="ownplan">${unitSvg(p.draw.rooms, [], p.draw.furniture)}<span><b>${esc(p.name)}</b><small>${esc(p.message)}</small>
-    <button type="button" class="chip" data-i="${i}">Remove</button></span></div>`).join("");
-  box.onclick = e => { const b = e.target.closest("button[data-i]"); if (!b) return; ownPlans.splice(+b.dataset.i, 1); saveOwn(); drawOwn(); };
-}
-async function addOwnPlans(e) {
-  const files = [...e.target.files]; if (!files.length) return;
-  const msg = $("#ownmsg");
-  msg.textContent = worker ? "Checking your plan…" : "Starting NOMAD's Python (about 10 s the first time)…";
-  try {
-    const plans = await Promise.all(files.map(async f => ({ name: f.name.replace(/\.[^.]+$/, ""), text: await f.text() })));
-    const r = await nomad({ add_plans: plans });
-    const out = [];
-    r.plans.forEach(p => {
-      if (p.entry) { ownPlans = ownPlans.filter(o => o.entry.id !== p.entry.id).concat([{ name: p.name, entry: p.entry, message: p.message, draw: p.draw }]); out.push(`${p.name}: ${p.message}`); }
-      else out.push(`${p.name}: ${p.message}`);
-    });
-    saveOwn(); drawOwn();
-    msg.textContent = out.join(" · ") + (ownPlans.length ? " Make the layouts again to use it." : "");
-  } catch (err) { msg.textContent = "Could not read the plan: " + err.message.slice(-200); }
-  e.target.value = "";
-}
-function drawDesign() {
-  const R = dRes, s = R.shopDrawn;
-  const tiles = [{ label: "As it is: where light reaches", verdict: R.before.verdict, txt: `${R.before.passing} of ${R.before.asked} flats pass`, plan: null, daylight: R.before.daylight }]
-    .concat(R.iterations.map(it => ({ label: it.label.replace("·", " ·"), verdict: it.verdict, txt: `${it.homes} home${it.homes === 1 ? "" : "s"}${it.plan.levels > 1 ? ` on ${it.plan.levels} levels` : ""}`, plan: it.plan, daylight: it.daylight })));
-  const ld = R.before.daylight && R.before.daylight.lit_depth;
-  $("#dres").innerHTML = `<p class="hint2">Asked: ${esc(R.mix)} · shop ${fmt(Math.round(R.shop.area))} m², ${R.shop.facade_m} m of façade with light.
-    Where light reaches: <span class="swatch" style="background:#FFE7A3"></span> lit, up to ${ld ? ld.toFixed(1) : "?"} m from a window (${s.prem && s.prem.lit != null ? "Bars's daylight model for this shop" : "assumed: no daylight prediction here"}): living rooms and bedrooms go here ·
-    <span class="swatch" style="background:#EEF0EC"></span> kitchen, bath, hall · <span class="swatch" style="background:#AEBBCB"></span> dark: not for homes. A living room or bedroom must have half its floor in the lit part.</p>
-    <div class="dplans">${tiles.map((t, k) => `<button type="button" class="dplan" data-k="${k}" aria-pressed="${k === dSel}">
-      <span class="fig">${esc(t.label)}</span>${planSvg(s, t.plan, { label: t.label, daylight: t.daylight })}<span class="row"><span class="pill ${t.verdict}">${t.verdict}</span><span class="num">${esc(t.txt)}</span></span></button>`).join("")}</div>`;
-  $("#dres").querySelector(".dplans").onclick = e => { const b = e.target.closest("button"); if (b) { dSel = +b.dataset.k; drawDesign(); } };
-  $("#ddetail").hidden = false;
-  drawDesignDetail();
-  renderExtras();
-  try { bookMarks(); const m = $("#bkmarks"); if (m && $("#dlaws")) $("#dlaws").innerHTML = m.innerHTML; } catch (e) { console.error(e); }
-}
-const RINGC = [["living", ["living"], "#F09F26"], ["bedrooms", ["bed_main", "bed"], "#8078DE"], ["kitchen and bath", ["kitchen", "bath"], "#85B8EB"],
-  ["hall", ["hall"], "#CCCCCC"]];
-function polyArea(pts) { return Math.abs(pts.reduce((a, p, i) => { const q = pts[(i + 1) % pts.length]; return a + p[0] * q[1] - q[0] * p[1]; }, 0) / 2); }
-function layoutFigures(src, R) {                                  // the numbers a decision is made on, for one option
-  const units = src.plan.units || [], rooms = units.flatMap(u => u.rooms);
-  const by = RINGC.map(([l, kinds, c]) => [l, rooms.filter(r => kinds.includes(r.kind)).reduce((a, r) => a + (r.area || polyArea(r.pts)), 0), c]);
-  const used = by.reduce((a, x) => a + x[1], 0), shop = R.shop.area;
-  return { homes: src.homes != null ? src.homes : units.length, passing: units.filter(u => u.ok).length, units: units.length,
-           used, shop, by: by.concat([["not used", Math.max(0, shop - used), "var(--line)"]]), verdict: src.verdict };
-}
-function ringSvg(by) {
-  const tot = by.reduce((a, x) => a + x[1], 0) || 1; let a0 = -Math.PI / 2;
-  const arcs = by.filter(x => x[1] > 0).map(([l, v, c]) => { const a1 = a0 + 2 * Math.PI * v / tot, big = a1 - a0 > Math.PI ? 1 : 0;
-    const P = a => [46 + 40 * Math.cos(a), 46 + 40 * Math.sin(a)], [x0, y0] = P(a0), [x1, y1] = P(a1);
-    const d = (a1 - a0) > 6.28 ? `M46 6 A40 40 0 1 1 45.99 6` : `M${x0.toFixed(2)} ${y0.toFixed(2)} A40 40 0 ${big} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`;
-    a0 = a1; return `<path d="${d}" fill="none" stroke="${c}" stroke-width="14"><title>${esc(l)}: ${Math.round(v)} m²</title></path>`; }).join("");
-  return `<svg viewBox="0 0 92 92" role="img" aria-label="Floor area by room type: ${esc(by.map(x => x[0] + " " + Math.round(x[1]) + " m²").join(", "))}">${arcs}</svg>`;
-}
-function drawWorkspace() {
-  const R = dRes, opts = [{ label: "As it is", ...R.before, homes: R.before.passing }].concat(R.iterations);
-  const src = opts[dSel], f = layoutFigures(src, R), asked = R.before.asked;
-  const prem = R.shopDrawn.prem;
-  $("#dkey").innerHTML = `<div><h4>Selected</h4><div style="margin-top:6px"><span class="pill ${f.verdict}">${f.verdict}</span> <b>${esc(src.label)}</b></div></div>
-    <div><h4>Key figures</h4><dl class="kf" style="margin-top:6px">
-      <dt>homes</dt><dd>${f.homes}${dSel ? ` of ${asked} asked` : ""}</dd>
-      <dt>match to your request</dt><dd>${asked ? Math.round(100 * Math.min(f.homes, asked) / asked) : 0} %</dd>
-      <dt>flats passing every rule</dt><dd>${f.passing} / ${f.units}</dd>
-      <dt>floor used by homes</dt><dd>${fmt(Math.round(f.used))} of ${fmt(Math.round(f.shop))} m²</dd>
-      <dt>façade with light</dt><dd>${R.shop.facade_m} m</dd>
-      ${prem && prem.dl ? `<dt>daylight (Bars's model)</dt><dd>${DLC[prem.dl.cls][0]}</dd><dt>target DF ${dec(DL.thresholds.D_target_pct)} % reaches</dt><dd>${dec(prem.dl.lit, 1)} m in</dd>` : ""}
-    </dl></div>
-    <div><h4>Room mix</h4><div class="ring" style="margin-top:6px">${ringSvg(f.by)}<ul>${f.by.map(([l, v, c]) => `<li><i style="background:${c}"></i><span>${esc(l)}</span><b>${Math.round(v)} m²</b></li>`).join("")}</ul></div></div>
-    <div><h4>Options</h4><div class="vlist" style="margin-top:6px">${opts.map((o, k) => { const g = layoutFigures(o, R);
-      return `<button type="button" data-k="${k}" aria-pressed="${k === dSel}"><b>${esc(o.label)}</b><span class="pill ${g.verdict}">${g.verdict}</span><small>${g.homes} home${g.homes === 1 ? "" : "s"} · ${fmt(Math.round(g.used))} m² used · ${g.passing}/${g.units} flats pass</small></button>`; }).join("")}</div></div>`;
-  $("#dkey").querySelector(".vlist").onclick = e => { const b = e.target.closest("button"); if (b) { dSel = +b.dataset.k; drawDesign(); } };
-  // compare drawer: every option side by side, the best in each row marked
-  const F = opts.map(o => layoutFigures(o, R)), rows = [["homes", g => g.homes, 1], ["flats passing", g => g.passing, 1], ["m² used", g => Math.round(g.used), 1],
-    ["share of shop used", g => Math.round(100 * g.used / (g.shop || 1)), 1, " %"]];
-  $("#dcmp").innerHTML = `<table class="cmp"><thead><tr><th></th>${opts.map((o, k) => `<th>${k === 0 ? "as is" : k}</th>`).join("")}</tr></thead><tbody>${rows.map(([l, fn, dir, u]) => {
-    const v = F.map(fn), best = Math.max(...v); return `<tr><td>${l}</td>${v.map(x => `<td class="${x === best && x > 0 ? "best" : ""}">${fmt(x)}${u || ""}</td>`).join("")}</tr>`; }).join("")}
-    <tr><td>verdict</td>${F.map(g => `<td class="vd ${g.verdict}">${g.verdict}</td>`).join("")}</tr></tbody></table>
-    <p class="hint2">Each layout is one way of reaching the flats (see its name). Bold: the best in each row.</p>`;
-  drawGallery();
-  // laws drawer: the same bookmarks as the rulebook, opening its page
-  const m = $("#bkmarks");
-  $("#dlaws").innerHTML = m ? m.innerHTML : "";
-  $("#dlaws").onclick = e => { const b = e.target.closest(".bk-mark"); if (!b) return; const src2 = $(`#bkmarks .bk-mark[data-i="${b.dataset.i}"]`); if (src2) src2.click(); };
-}
-const FURN = { bed_double: "double bed", bed_single: "single bed", wardrobe: "wardrobe (law: 3.10.1)", worktop: "worktop, sink and cooker (law: 3.15.c)",
-  fridge: "fridge", wc: "WC (law: 3.15.b)", basin: "basin (law: 3.15.b)", shower: "shower (law: 3.15.b)", washer: "washing machine (law: 3.15.d)", sofa: "sofa", table: "dining table with chairs" };
-function furnSvg(q, P, sw) {                                    // a piece of furniture: white with a thin line, as architects draw it
-  return `<polygon points="${P(q.pts)}" fill="#fff" fill-opacity=".92" stroke="#1F1F1F" stroke-width="${sw}"><title>${esc(FURN[q.kind] || q.kind)}</title></polygon>`;
-}
-function unitSvg(rooms, swings, furniture) {                  // one flat's plan, scaled to its own box
-  const pts = rooms.flatMap(r => r.pts), xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
-  const x0 = Math.min(...xs), y1 = Math.max(...ys), s = Math.max(Math.max(...xs) - x0, y1 - Math.min(...ys)) || 1, pad = s * 0.05;
-  const P = q => q.map(p => `${(p[0] - x0 + pad).toFixed(2)},${(y1 - p[1] + pad).toFixed(2)}`).join(" ");
-  return `<svg viewBox="0 0 ${(s + 2 * pad).toFixed(2)} ${(s + 2 * pad).toFixed(2)}" role="img" aria-label="plan of this option">${rooms.map(r =>
-    `<polygon points="${P(r.pts)}" fill="${ROOMC[r.kind] || "#ccc"}" stroke="#fff" stroke-width="${s / 200}"/>`).join("")}${(swings || []).map(q =>
-    `<polyline points="${P(q)}" fill="none" stroke="#1F1F1F" stroke-width="${s / 300}"/>`).join("")}${(furniture || []).map(q => furnSvg(q, P, s / 400)).join("")}</svg>`;
-}
-function drawGallery() {                                       // Finch's ranked gallery: the real plans that fit each flat
-  const box = $("#dgal");
-  if (!box) return;
-  const it = dSel === 0 ? null : dRes.iterations[dSel - 1];
-  const units = it ? it.plan.units.filter(u => u.options && u.options.length) : [];
-  if (!units.length) { box.innerHTML = `<p class="hint2">Pick a layout: each flat then shows the real plans (Swiss Dwellings, ResPlan) that fit its space, best first.</p>`; return; }
-  box.innerHTML = units.map((u, i) => {
-    const cur = u.lib ? String(u.lib.id) : "";
-    return `<div class="galflat"><b>Flat ${i + 1} · ${esc(u.type)}</b>
-      <div class="galopts">${u.options.map((o, k) => `<button type="button" class="galopt" data-u="${it.plan.units.indexOf(u)}" data-k="${k}" aria-pressed="${String(o.lib.id) === cur}">
-        ${unitSvg(o.rooms, o.swings, o.furniture)}<span><b>${o.lib.score}</b> fit · ${Math.round(100 * o.lib.adaptivity)} % stretched</span>
-        <small>${esc(o.lib.source || "")} ${esc(String(o.lib.id))}${o.lib.doors_widened ? ` · ${o.lib.doors_widened} door${o.lib.doors_widened > 1 ? "s" : ""} widened` : ""}${o.ok ? "" : " · fails: " + esc(o.fails.join(", "))}</small></button>`).join("")}</div>
-      <ul class="rscore">${(u.room_scores || []).filter(r => r.kind !== "storage").map(r => `<li><span>${esc(r.kind.replace("_", " "))}</span><i style="width:${r.score}%;background:${r.score >= 80 ? "var(--yes)" : r.score >= 60 ? "var(--check)" : "var(--no)"}"></i><small>${r.area} m² · ${r.clear} m clear · ${r.score}</small></li>`).join("")}</ul></div>`;
-  }).join("") + `<p class="hint2">Room scores: 100 = as wide as the median real room of its kind, 60 = as narrow as the 10 % narrowest (lab book E24). Pick another plan to swap it in.</p>`;
-  box.onclick = e => {
-    const b = e.target.closest(".galopt"); if (!b) return;
-    const u = it.plan.units[+b.dataset.u], o = u.options[+b.dataset.k];
-    swapOption(it, u, o);
-    drawDesign();
-  };
-}
-function swapOption(it, u, o) {                               // put another real plan in a flat (gallery and agent)
-  Object.assign(u, { rooms: o.rooms, swings: o.swings, furniture: o.furniture, lib: o.lib, ok: o.ok, room_scores: o.room_scores, area: o.area });
-  it.swapped = true;
-}
-
-/* Ask NOMAD: a chat agent for bulk edits (like Finch's Archie). It runs on the viewer's own Claude account (the page's
-   `sample` capability) and can only use the tools below: change the request, make the layouts, pick one, swap plans. */
-let agentTurns = [], agentAbort = null;
-function agentState() {
-  const it = dRes && dSel > 0 ? dRes.iterations[dSel - 1] : null;
-  const wv = id => +($("#w-" + id) || { value: 0 }).value;   // shares in %
-  return {
-    shop: dShop ? { name: dShop.name, height_m: +$("#hgt").value } : "no shop picked yet (step 1)",
-    asked: { ...want }, sizes_m2: { ...sizes }, weights: { match: wv("match"), passing: wv("passing"), eff: wv("eff"), plan: wv("plan") },
-    own_plans: ownPlans.map(p => p.name),
-    layouts: dRes ? dRes.iterations.map((x, i) => ({ layout: i + 1, label: x.label, homes: x.homes, verdict: x.verdict })) : "not made yet",
-    selected_layout: dRes ? dSel : null,
-    flats: it ? it.plan.units.map((u, i) => ({ flat: i + 1, type: u.type, m2: u.area, legal: u.ok, plan: u.lib ? `${u.lib.source} ${u.lib.id}` : "",
-      fit: u.lib && u.lib.score, stretched_pct: u.lib && Math.round(100 * u.lib.adaptivity),
-      options: (u.options || []).map((o, k) => ({ option: k + 1, fit: o.lib.score, stretched_pct: Math.round(100 * o.lib.adaptivity), m2: o.area, legal: o.ok, plan: `${o.lib.source} ${o.lib.id}` })) })) : []
-  };
-}
-const AGENT_TOOLS = [
-  { name: "set_request", description: "Change what the user asks for: the number of flats of each type, target sizes in m2, the weights (shares in %, the four add up to 100) and the shop's clear height. Only the fields given change. Returns the new request. Make the layouts afterwards to see the effect.",
-    inputSchema: { type: "object", properties: {
-      mix: { type: "object", description: "flats wanted per type, 0-12", properties: { studio: { type: "integer" }, "1bed": { type: "integer" }, "2bed": { type: "integer" }, "3bed": { type: "integer" } } },
-      sizes_m2: { type: "object", description: "target useful area per type, m2", properties: { studio: { type: "number" }, "1bed": { type: "number" }, "2bed": { type: "number" }, "3bed": { type: "number" } } },
-      weights: { type: "object", description: "match = the flats asked for, passing = as many homes as fit, eff = floor used by homes, plan = how well real plans fit", properties: { match: { type: "number" }, passing: { type: "number" }, eff: { type: "number" }, plan: { type: "number" } } },
-      height_m: { type: "number" } } },
-    execute(a) {
-      Object.entries(a.mix || {}).forEach(([k, v]) => { if (k in want) { want[k] = Math.max(0, Math.min(12, Math.round(+v || 0))); const o = $("#n-" + k); if (o) o.textContent = want[k]; } });
-      Object.entries(a.sizes_m2 || {}).forEach(([k, v]) => { if (k in want) { const el = $("#s-" + k); if (+v > 0) { sizes[k] = +v; if (el) { el.value = +v; el.dispatchEvent(new Event("input", { bubbles: true })); } } } });
-      Object.entries(a.weights || {}).forEach(([k, v]) => { if (WK.includes(k)) setShare(k, +v || 0); });
-      if (+a.height_m > 0) $("#hgt").value = (+a.height_m).toFixed(2);
-      const st = agentState(); return { asked: st.asked, sizes_m2: st.sizes_m2, weights: st.weights, height_m: st.shop.height_m };
-    } },
-  { name: "make_layouts", description: "Run NOMAD on the shop with the current request (takes a few seconds). Returns the layouts (homes and verdict each) and the flats of the selected one.",
-    async execute() {
-      if (!dShop) throw new Error("no shop is picked: the user must pick one in step 1");
-      await makeLayouts(); if (!dRes) throw new Error($("#status").textContent || "the layouts could not be made");
-      const st = agentState(); return { layouts: st.layouts, selected_layout: st.selected_layout, flats: st.flats };
-    } },
-  { name: "select_layout", description: "Show one layout (1 = the first). Returns its flats with their plan options.",
-    inputSchema: { type: "object", properties: { layout: { type: "integer" } }, required: ["layout"] },
-    execute(a) {
-      const k = Math.round(+a.layout); if (!dRes || k < 1 || k > dRes.iterations.length) throw new Error("no such layout");
-      dSel = k; drawDesign(); return { selected_layout: k, flats: agentState().flats };
-    } },
-  { name: "swap_plans", description: "Bulk edit: in the selected layout, put another real plan in some or all flats. pick: best_fit, least_stretched, largest, smallest, or option (with option = its number). flats: flat numbers (empty = all); type: only flats of this type. Only legal options are used. Returns what changed.",
-    inputSchema: { type: "object", properties: { pick: { type: "string", enum: ["best_fit", "least_stretched", "largest", "smallest", "option"] }, option: { type: "integer" },
-      flats: { type: "array", items: { type: "integer" } }, type: { type: "string", enum: ["studio", "1bed", "2bed", "3bed"] } }, required: ["pick"] },
-    execute(a) {
-      const it = dRes && dSel > 0 ? dRes.iterations[dSel - 1] : null; if (!it) throw new Error("make the layouts first");
-      const which = new Set((a.flats || []).map(Number)), out = [];
-      it.plan.units.forEach((u, i) => {
-        if ((which.size && !which.has(i + 1)) || (a.type && u.type !== a.type) || !(u.options || []).length) return;
-        const ok = u.options.filter(o => o.ok);
-        const by = { best_fit: o => -o.lib.score, least_stretched: o => o.lib.adaptivity, largest: o => -(o.area || 0), smallest: o => o.area || 0 }[a.pick];
-        const o = a.pick === "option" ? u.options[Math.round(+a.option) - 1] : (by ? ok.slice().sort((x, y) => by(x) - by(y))[0] : null);
-        if (!o || !o.ok) { out.push({ flat: i + 1, changed: false, why: "no legal option of that kind" }); return; }
-        const was = u.lib ? `${u.lib.source} ${u.lib.id}` : "";
-        swapOption(it, u, o); out.push({ flat: i + 1, changed: was !== `${o.lib.source} ${o.lib.id}`, plan: `${o.lib.source} ${o.lib.id}`, fit: o.lib.score, m2: o.area });
-      });
-      drawDesign(); return out;
-    } }
-];
-const AGENT_RULES = `You are NOMAD's assistant on a website that checks whether an empty Barcelona ground-floor shop can become homes and designs them from real flat plans (Swiss Dwellings, ResPlan, or the user's own), checked against Decret 141/2012, CTE and the PGM.
-Use the tools to do what the user asks: change the request (set_request), then make_layouts, then pick a layout or swap plans in bulk. Do not invent laws, numbers or plans; only report what the tools return.
-Answer in the user's language, in 1-3 short, plain sentences: what you changed and the result (homes, verdict).`;
-async function askAgent(e) {
-  e.preventDefault();
-  const q = $("#agentq").value.trim(); if (!q || agentAbort) return;
-  const sample = await window.claude?.use?.("sample"); if (!sample) { $("#agent").hidden = true; return; }
-  const log = $("#agentlog"), me = document.createElement("p"), bot = document.createElement("p");
-  me.className = "me"; me.textContent = q; bot.className = "bot"; bot.textContent = "…"; log.append(me, bot); log.scrollTop = log.scrollHeight;
-  $("#agentq").value = ""; $("#agentgo").disabled = true; $("#agentstop").hidden = false;
-  agentAbort = new AbortController();
-  const input = agentTurns.slice(-6).concat([{ role: "user", content: `${AGENT_RULES}\n\nThe page now: ${JSON.stringify(agentState())}\n\nThe user asks: ${q}` }]);
-  try {
-    const r = await sample(input, { tools: AGENT_TOOLS, modelTier: "quick", signal: agentAbort.signal, onText: ({ text }) => { bot.textContent = text; log.scrollTop = log.scrollHeight; } });
-    bot.textContent = r.text; agentTurns.push({ role: "user", content: q }, { role: "assistant", content: r.text });
-  } catch (err) {
-    const msg = { not_granted: "Ask NOMAD needs your permission to use Claude.", rate_limited: "Too many requests: try again in a minute.", cancelled: "Stopped.",
-      tools_unavailable: "Ask NOMAD cannot change the page in this view." }[err && err.code];
-    bot.textContent = (err && err.text ? err.text + "\n" : "") + (msg || "NOMAD's assistant could not answer: " + (err && err.message || err));
-    if (err && (err.code === "not_granted" || err.code === "tools_unavailable")) $("#agentform").hidden = true;
-  } finally { agentAbort = null; $("#agentgo").disabled = false; $("#agentstop").hidden = true; }
-}
-async function startAgent() {
-  try {
-    const sample = await window.claude?.use?.("sample"); if (!sample) return;
-    const lim = await sample.limits(); if (!lim || !lim.tools) return;
-    $("#agent").hidden = false;
-    $("#agentform").addEventListener("submit", askAgent);
-    $("#agentq").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("#agentform").requestSubmit(); } });
-    $("#agentstop").addEventListener("click", () => agentAbort && agentAbort.abort());
-  } catch (e) { /* no assistant in this view */ }
-}
-
 /* ---------- for the city: target homes -> the fewest places that reach it, and what to avoid (src/check/city_runs.py) ---------- */
 let CITYH = null;
 async function initPolicy() {
@@ -2127,22 +1525,6 @@ function drawPolicy() {
     const x = pick[+b.dataset.pi]; if (!x) return;
     if (x.kind === "shop") { show(x.src); location.hash = "check"; } else { showWh(x.src); location.hash = "check"; }
   };
-}
-
-function drawDesignDetail() {
-  if (!dRes) return;
-  try { drawWorkspace(); } catch (e) { console.error(e); }
-  $("#dv-walls").setAttribute("aria-pressed", dMode === "walls"); $("#dv-zone").setAttribute("aria-pressed", dMode === "zone");
-  const src = dSel === 0 ? dRes.before : dRes.iterations[dSel - 1];
-  const head = dSel === 0 ? "the shop as it is" : src.label;
-  $("#dcards").innerHTML = `<div class="fig"><b>FIG.5</b>&nbsp; rule cards · ${esc(head)}</div><ul>${src.cards.map(c => `<li><span class="mark ${c.ok ? "ok" : c.check ? "chk" : "bad"}">${c.ok ? "✓" : c.check ? "?" : "✕"}</span><div><b>${esc(c.title)}</b> <span class="v">${esc(c.value)}${c.limit ? " · " + esc(c.limit) : ""}</span><div class="c">${esc(c.cite)}</div></div></li>`).join("")}</ul>
-    ${src.plan.interventions && src.plan.interventions.length ? `<p class="note">Changes: ${esc(src.plan.interventions.join("; "))}</p>` : ""}`;
-  if (!window.THREE || document.body.classList.contains("simple")) return;
-  if (!dView) { try { dView = miniViewer($("#dthree"), $("#dstage")); } catch (e) { $("#dviewfig").textContent = NO_GL_MSG + " The plans and rule cards above are complete."; return; } }
-  const it = dSel === 0 ? null : dRes.iterations[dSel - 1];
-  $("#dviewfig").innerHTML = `<b>FIG.4</b>&nbsp; ${it ? (dMode === "walls" ? "walls, doors and windows" : "zoning: each room a block") + " · " + esc(it.label) : "pick a layout to see it in 3D"}`;
-  if (it && it.swapped && dMode === "walls") $("#dviewfig").innerHTML += " · <span class=\"hint2\">you swapped a plan: showing its room blocks (Make the layouts again for walls)</span>";
-  dView.show(it ? (dMode === "walls" && !it.swapped ? wallSolids(it.prisms) : zoneSolids(it.plan)) : [{ pts: dRes.shopDrawn.outline, z0: 0, h: 0.15, rgb: [245, 245, 243] }]);
 }
 
 /* ---------- the 3D city: Catastro buildings in 1 km tiles, MUC ground layers, Open Data BCN trees, the sun of any date ---------- */
@@ -2504,45 +1886,21 @@ function drawReal() {
 /* ---------- languages: English, Català, Español ---------- */
 const I18N = {
   en: { nav_flow: "Workflow", g_find: "Find & check", g_design: "Design", g_report: "Report", g_evid: "Evidence", g_rules: "Rules", g_how: "How it works", nav_check: "Check an address", nav_design: "Design homes", nav_saved: "Saved", nav_city: "City in 3D", nav_real: "Real shops",
-    or_test: "Or a test shop:", upload_sum: "Or upload a plan drawing of your shop", up_len: "Length of the blue street façade (m)", up_use: "Use this plan", up_draw: "Outline wrong? Draw it", up_drawhint: "Click each corner of the shop. Click the big blue dot to close the outline.",
-    up_hint: "NOMAD reads the outline from the dark lines of the drawing (the method that did best on 398 real scans). Click the outline's edges that face the street, then give the length of one of them.",
-    res_hint: "The shop as it is and its layouts appear here, one for each circulation strategy that adds homes: flats on both façades, a corridor to the block interior, or small flats filling the shop.",
     save: "Save this shop", report: "Download the report (PDF)", saved_eb: "Step 3 · keep and share", saved_h: "Saved shops, side by side",
     saved_lede: "Every shop you save keeps your requirements and NOMAD's answer. Tick two or more to compare them. Only you can see your saved shops.",
     YES: "Homes allowed", CHECK: "Maybe: the local plan decides", NO: "Homes not allowed", simple: "Simple view", expert: "Full view",
-    s_yes: (n, a) => `Yes: ${n} home${n === 1 ? "" : "s"} fit in ${a} and pass every rule.`,
-    s_partly: (n, k, a) => `Partly: ${n} home${n === 1 ? "" : "s"} fit in ${a}; ${k} of the flats you asked for do not.`,
-    s_no: a => `No: ${a} cannot become homes as it is.`, s_why: "Why:", law_show: "Show the law", law_hide: "Hide the law",
-    v_title: "Rough value", v_price: "Asking price nearby (2018, ground-floor flats)", v_homes: "Homes", v_value: "Value of the homes",
-    v_cost: "Your cost of the works (€ per m²)", v_margin: "Value minus works", v_note: "2018 asking prices of ground-floor flats within 800 m (idealista18, ODbL). Not today's market: a first order of magnitude.",
     no_saved: "Nothing saved yet. Make the layouts for a shop and press “Save this shop”.", compare: "Compare", saved_ok: "Saved.", saved_local: "Saved in this browser only.",
     rep_ok: "Report ready.", rep_no: "This view cannot save files.", del: "Remove" },
   ca: { nav_flow: "Procés", g_find: "Troba i comprova", g_design: "Disseny", g_report: "Informe", g_evid: "Proves", g_rules: "Normes", g_how: "Com funciona", nav_check: "Consulta una adreça", nav_design: "Dissenya habitatges", nav_saved: "Desats", nav_city: "Ciutat en 3D", nav_real: "Locals reals",
-    or_test: "O un local de prova:", upload_sum: "O puja un plànol del teu local", up_len: "Longitud de la façana al carrer, en blau (m)", up_use: "Fes servir aquest plànol", up_draw: "Contorn erroni? Dibuixa'l", up_drawhint: "Fes clic a cada cantonada del local. Fes clic al punt blau gran per tancar el contorn.",
-    up_hint: "NOMAD llegeix el contorn a partir de les línies fosques del plànol (el mètode que va funcionar millor en 398 plànols escanejats reals). Clica els costats del contorn que donen al carrer i indica la longitud d'un d'ells.",
-    res_hint: "Aquí apareixen el local tal com és i les seves distribucions, una per cada manera d'arribar als habitatges que n'afegeix: pisos a les dues façanes, un passadís cap a l'interior d'illa o pisos petits que omplen el local.",
     save: "Desa aquest local", report: "Descarrega l'informe (PDF)", saved_eb: "Pas 8 · informe · els teus locals", saved_h: "Locals desats, un al costat de l'altre",
     saved_lede: "Cada local que desis guarda les teves necessitats i la resposta de NOMAD. Marca'n dos o més per comparar-los. Només tu veus els teus locals desats.",
     YES: "Habitatge admès", CHECK: "Cal revisar el pla de la zona", NO: "No admès", simple: "Vista senzilla", expert: "Vista completa",
-    s_yes: (n, a) => `Sí: hi caben ${n} habitatge${n === 1 ? "" : "s"} a ${a} i compleixen totes les normes.`,
-    s_partly: (n, k, a) => `En part: hi caben ${n} habitatge${n === 1 ? "" : "s"} a ${a}; ${k} dels pisos que demanes no.`,
-    s_no: a => `No: ${a} no es pot convertir en habitatges tal com és.`, s_why: "Per què:", law_show: "Mostra la norma", law_hide: "Amaga la norma",
-    v_title: "Valor aproximat", v_price: "Preu demanat a prop (2018, pisos en planta baixa)", v_homes: "Habitatges", v_value: "Valor dels habitatges",
-    v_cost: "El teu cost d'obra (€ per m²)", v_margin: "Valor menys obra", v_note: "Preus demanats el 2018 per pisos en planta baixa a menys de 800 m (idealista18, ODbL). No és el mercat d'avui: un primer ordre de magnitud.",
     no_saved: "Encara no has desat res. Fes les distribucions d'un local i prem «Desa aquest local».", compare: "Compara", saved_ok: "Desat.", saved_local: "Desat només en aquest navegador.",
     rep_ok: "Informe preparat.", rep_no: "Aquesta vista no pot desar fitxers.", del: "Esborra" },
   es: { nav_flow: "Proceso", g_find: "Encuentra y comprueba", g_design: "Diseño", g_report: "Informe", g_evid: "Pruebas", g_rules: "Normas", g_how: "Cómo funciona", nav_check: "Consulta una dirección", nav_design: "Diseña viviendas", nav_saved: "Guardados", nav_city: "Ciudad en 3D", nav_real: "Locales reales",
-    or_test: "O un local de prueba:", upload_sum: "O sube un plano de tu local", up_len: "Longitud de la fachada a la calle, en azul (m)", up_use: "Usar este plano", up_draw: "¿Contorno erróneo? Dibújalo", up_drawhint: "Haz clic en cada esquina del local. Haz clic en el punto azul grande para cerrar el contorno.",
-    up_hint: "NOMAD lee el contorno a partir de las líneas oscuras del plano (el método que mejor funcionó en 398 planos escaneados reales). Haz clic en los lados del contorno que dan a la calle e indica la longitud de uno de ellos.",
-    res_hint: "Aquí aparecen el local tal como está y sus distribuciones, una por cada forma de llegar a las viviendas que añade alguna: pisos en las dos fachadas, un pasillo hacia el interior de manzana o pisos pequeños que llenan el local.",
     save: "Guardar este local", report: "Descargar el informe (PDF)", saved_eb: "Paso 8 · informe · tus locales", saved_h: "Locales guardados, uno al lado del otro",
     saved_lede: "Cada local que guardes conserva tus necesidades y la respuesta de NOMAD. Marca dos o más para compararlos. Solo tú ves tus locales guardados.",
     YES: "Vivienda admitida", CHECK: "Hay que revisar el plan de la zona", NO: "No admitida", simple: "Vista sencilla", expert: "Vista completa",
-    s_yes: (n, a) => `Sí: caben ${n} vivienda${n === 1 ? "" : "s"} en ${a} y cumplen todas las normas.`,
-    s_partly: (n, k, a) => `En parte: caben ${n} vivienda${n === 1 ? "" : "s"} en ${a}; ${k} de los pisos que pides no.`,
-    s_no: a => `No: ${a} no puede convertirse en viviendas tal como está.`, s_why: "Por qué:", law_show: "Mostrar la norma", law_hide: "Ocultar la norma",
-    v_title: "Valor aproximado", v_price: "Precio pedido cerca (2018, pisos en planta baja)", v_homes: "Viviendas", v_value: "Valor de las viviendas",
-    v_cost: "Tu coste de obra (€ por m²)", v_margin: "Valor menos obra", v_note: "Precios pedidos en 2018 por pisos en planta baja a menos de 800 m (idealista18, ODbL). No es el mercado de hoy: un primer orden de magnitud.",
     no_saved: "Aún no has guardado nada. Haz las distribuciones de un local y pulsa «Guardar este local».", compare: "Comparar", saved_ok: "Guardado.", saved_local: "Guardado solo en este navegador.",
     rep_ok: "Informe listo.", rep_no: "Esta vista no puede guardar archivos.", del: "Borrar" }
 };
@@ -2554,7 +1912,6 @@ function applyLang() {
   ["YES", "CHECK", "NO"].forEach(k => { WORD[k] = T(k); });
   $("#mode").textContent = document.body.classList.contains("simple") ? T("expert") : T("simple");
   if (sel) show(sel);
-  if (dRes) drawDesign();
   drawSaved();
 }
 /* the header's pill tabs (after SimiStar): groups open a small menu; the tab of the section on screen is lit */
@@ -2597,15 +1954,6 @@ function initCols() {
     h.addEventListener("dblclick", () => { set(DEF); try { localStorage.removeItem("nomad-cols2"); } catch (e) {} dispatchEvent(new Event("resize")); });
   });
 }
-/* the layout's details: four tabs side by side, one open at a time, in a box as tall as the plan and the 3D (it scrolls inside) */
-function initWsTabs() {
-  const tabs = [...document.querySelectorAll(".wstabs [role=tab]")];
-  const pick = i => tabs.forEach((t, j) => { const on = i === j; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1; $("#wp-" + j).hidden = !on; if (on) $(".wspane").scrollTop = 0; });
-  tabs.forEach((t, i) => {
-    t.addEventListener("click", () => pick(i));
-    t.addEventListener("keydown", e => { const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0; if (!d) return; e.preventDefault(); const j = (i + d + tabs.length) % tabs.length; pick(j); tabs[j].focus(); });
-  });
-}
 /* step 4: the rule cards and the rulebook are two tabs of one section */
 function ruleTab(k) { setView("app"); }          // the rulebook lives in the app; the rule cards in Research
 /* App | Research: one page, two views. A link to a section of the other view switches to it */
@@ -2626,19 +1974,6 @@ function initViews() {
   const t = location.hash && document.querySelector(location.hash), sec = t && t.closest("section[data-view]");
   if (sec && sec.dataset.view !== "app") { setView(sec.dataset.view); t.scrollIntoView(); }
 }
-/* the weights as shares of 100 %. The engine keeps its old scale (shares x 0.16: the old 10 / 1 / 3 / 2 = 62 / 6 / 19 / 13 %) */
-const WK = ["match", "passing", "eff", "plan"];
-function setShare(k, v) {
-  const els = Object.fromEntries(WK.map(x => [x, $("#w-" + x)]));
-  v = Math.max(0, Math.min(100, Math.round(v)));
-  const rest = WK.filter(x => x !== k), was = rest.map(x => +els[x].value), sum = was.reduce((a, b) => a + b, 0);
-  const raw = rest.map((x, i) => (100 - v) * (sum ? was[i] / sum : 1 / rest.length));
-  const out = raw.map(Math.floor); let left = 100 - v - out.reduce((a, b) => a + b, 0);
-  raw.map((r, i) => [r - out[i], i]).sort((p, q) => q[0] - p[0]).forEach(([, i]) => { if (left > 0) { out[i]++; left--; } });
-  els[k].value = v; rest.forEach((x, i) => { els[x].value = out[i]; });
-  WK.forEach(x => { $("#wo-" + x).textContent = els[x].value + " %"; els[x].style.setProperty("--p", els[x].value + "%"); });
-}
-const engineW = k => +($("#w-" + k) || { value: 0 }).value * 0.16;
 function initExtras() {
   try { LANG = localStorage.getItem("nomad-lang") || (navigator.language || "en").slice(0, 2); } catch (e) {}
   if (!I18N[LANG]) LANG = "en";
@@ -2650,8 +1985,7 @@ function initExtras() {
     const on = !document.body.classList.contains("simple"); document.body.classList.toggle("simple", on); $("#mode").setAttribute("aria-pressed", on);
     try { localStorage.setItem("nomad-simple", on ? "1" : "0"); } catch (e) {} applyLang();
   });
-  initUpload(); initSaved();
-  $("#dsave").addEventListener("click", saveShop); $("#dpdf").addEventListener("click", makeReport);
+  initSaved();
   const z = D.experiments.zoning;
   $("#mapsum").textContent = `Summary: of ${fmt(z.empty_premises)} empty ground-floor premises, ${fmt(z.housing.YES)} stand in a zone that admits housing, ${fmt(z.housing.CHECK)} depend on their zone's plan and ${fmt(z.housing.NO)} cannot take housing. In the Eixample, ${fmt(z.eixample.housing.YES)} of ${fmt(z.eixample.empty)}.`;
   applyLang();
@@ -2701,21 +2035,9 @@ function bookMarks() {
   if (!BK.anchors) return;
   const A = BK.anchors, el = $("#bkmarks");
   let marks, head;
-  if (typeof dRes !== "undefined" && dRes && dRes.iterations) {
-    const b = bestLayout(), seen = {};
-    const cards = [...(dRes.before.cards || []).filter(c => c.title === "Zoning"), ...b.cards];
-    cards.forEach(c => (CARD_ANCHORS[c.title] || []).forEach(k => {
-      if (!A[k]) return;
-      const m = seen[k] || (seen[k] = { a: A[k], ok: true });
-      m.ok = m.ok && c.ok;
-    }));
-    if (b.patio || (b.interventions || []).length) ["patio", "corridor"].forEach(k => { if (A[k] && !seen[k]) seen[k] = { a: A[k], ok: true }; });
-    if (A.guide) seen.guide = { a: A.guide, ok: null };
-    marks = Object.values(seen).sort((x, y) => ((x.ok === false) ? 0 : 1) - ((y.ok === false) ? 0 : 1) || x.a.page - y.a.page);
-    head = `<h3>Laws for your project</h3><p>${esc(dRes.shopDrawn.source.split(" (")[0])} · layout ${esc(b.label)}. Red: a rule this layout does not meet. Click to open the page; the lines are highlighted where the page has text.</p>`;
-  } else {
+  {
     marks = Object.values(A).map(a => ({ a, ok: null })).sort((x, y) => x.a.page - y.a.page);
-    head = `<h3>The rules NOMAD checks</h3><p>Check a shop in Design homes and this list becomes the laws of your project.</p>`;
+    head = `<h3>The rules NOMAD checks</h3><p>Click a rule to open its page in the book.</p>`;
   }
   el.innerHTML = head + marks.map((m, i) => `<button type="button" class="bk-mark" data-i="${i}">${m.ok === null ? "" : `<span class="pill ${m.ok ? "YES" : "NO"}">${m.ok ? "OK" : "FAILS"}</span>`}<span>${esc(m.a.name)} <small style="color:var(--muted)">· ${esc(m.a.doc)}</small></span><span class="pg">p. ${m.a.page}</span></button>`).join("");
   el.onclick = e => { const b = e.target.closest(".bk-mark"); if (!b) return; const m = marks[+b.dataset.i]; BK.hl = m.a; bookGo(m.a.page, true); };
@@ -2792,138 +2114,6 @@ function bookTurn(dir) {                                         // the page tur
   BK.at = next; $("#bkpage").value = next;
   requestAnimationFrame(() => requestAnimationFrame(() => { leaf.style.transform = `rotateY(${dir > 0 ? -180 : 180}deg)`; }));
   setTimeout(() => { leaf.remove(); BK.busy = false; bookShow(); }, 580);
-}
-
-/* ---------- the plain answer for an owner, value, save and report (after the layouts) ---------- */
-function bestLayout() { return dRes.iterations.reduce((a, b) => (b.homes > a.homes || (b.homes === a.homes && b.verdict === "YES")) ? b : a); }
-function renderExtras() {
-  const R = dRes, name = R.shopDrawn.source.split(" (")[0].split(",")[0], b = bestLayout(), asked = R.before.asked;
-  const s = b.homes === 0 ? T("s_no")(name) : (b.verdict === "YES" ? T("s_yes")(b.homes, name) : T("s_partly")(b.homes, Math.max(0, asked - (R.iterations[0].homes || 0)), name));
-  const fails = R.before.cards.filter(c => !c.ok).slice(0, 2).map(c => `${c.title}: ${c.value}`).join("; ");
-  $("#dsimple").innerHTML = `${esc(s)}${fails ? `<span class="why">${esc(T("s_why"))} ${esc(fails)}</span>` : ""}<span class="why"><button type="button" class="chip" id="lawbtn">${esc(T("law_show"))}</button></span>`;
-  $("#lawbtn").onclick = () => { const c = $("#dcards"); const open = !c.classList.contains("open"); c.classList.toggle("open", open); $("#lawbtn").textContent = T(open ? "law_hide" : "law_show"); };
-  const prem = R.shopDrawn.prem, price = prem && (prem.eurg || prem.eur);
-  if (price) {
-    const area = b.plan.units.reduce((a, u) => a + (u.area || 0), 0), value = area * price;
-    let cost = 0; try { cost = +localStorage.getItem("nomad-cost") || 0; } catch (e) {}
-    $("#dvalue").innerHTML = `<b>${esc(T("v_title"))}</b>
-      <div>${esc(T("v_price"))}: <b class="num">${fmt(price)} €/m²</b></div>
-      <div>${esc(T("v_homes"))}: ${b.homes} · ${fmt(Math.round(area))} m² · ${esc(T("v_value"))}: <b class="num">${fmt(Math.round(value / 1000) * 1000)} €</b></div>
-      <div><label for="vcost">${esc(T("v_cost"))}</label> <input id="vcost" type="number" min="0" step="50" value="${cost || ""}" placeholder="1200"> <span id="vmargin"></span></div>
-      <div class="hint2">${esc(T("v_note"))}</div>`;
-    const upd = () => { const c = +$("#vcost").value || 0; try { localStorage.setItem("nomad-cost", String(c)); } catch (e) {}
-      $("#vmargin").textContent = c ? `${T("v_margin")}: ${fmt(Math.round((value - c * R.shop.area) / 1000) * 1000)} €` : ""; };
-    $("#vcost").oninput = upd; upd();
-  } else $("#dvalue").innerHTML = "";
-  $("#dacts").hidden = false;
-}
-
-/* ---------- upload a plan: the dark-line reader, in the browser ---------- */
-let upPoly = null, upFac = new Set(), upScale = null;
-function initUpload() {
-  $("#upfile").addEventListener("change", e => { const f = e.target.files[0]; if (f) readPlanImage(f); });
-  $("#upuse").addEventListener("click", useUploaded);
-  $("#updraw").addEventListener("click", startDraw);
-}
-function readPlanImage(file) {
-  const img = new Image();
-  img.onload = () => {
-    const S = Math.min(1, 900 / Math.max(img.width, img.height)), W = Math.round(img.width * S), H = Math.round(img.height * S);
-    const c = document.createElement("canvas"); c.width = W; c.height = H; const g = c.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0, 0, W, H); g.drawImage(img, 0, 0, W, H);
-    const px = g.getImageData(0, 0, W, H).data, dark = new Uint8Array(W * H);
-    for (let i = 0; i < W * H; i++) dark[i] = (0.3 * px[4 * i] + 0.59 * px[4 * i + 1] + 0.11 * px[4 * i + 2]) < 110 ? 1 : 0;
-    let poly = null, bestA = 0;
-    for (const k of [2, 4, 7, 11, 16, 22]) {                 // close door gaps more and more; keep the largest closed shop
-      const wall = dilate(dark, W, H, k), out = new Uint8Array(W * H), st = [];
-      for (let x = 0; x < W; x++) { st.push(x, (H - 1) * W + x); } for (let y = 0; y < H; y++) { st.push(y * W, y * W + W - 1); }
-      while (st.length) { const i = st.pop(); if (out[i] || wall[i]) continue; out[i] = 1; const x = i % W, y = (i / W) | 0;
-        if (x > 0) st.push(i - 1); if (x < W - 1) st.push(i + 1); if (y > 0) st.push(i - W); if (y < H - 1) st.push(i + W); }
-      const inner = erode(out.map(v => v ? 0 : 1), W, H, k);
-      let a = 0; for (let i = 0; i < W * H; i++) a += inner[i];
-      if (a < 0.03 * W * H || a > 0.92 * W * H) continue;      // nothing closed, or the drawing's own frame
-      const p = traceLargest(inner, W, H);
-      if (!p || p.length < 4) continue;
-      const pa = Math.abs(p.reduce((s, q, i) => { const r = p[(i + 1) % p.length]; return s + q[0] * r[1] - r[0] * q[1]; }, 0) / 2);
-      if (pa > bestA) { bestA = pa; poly = p; }
-    }
-    if (!poly) { upDraw = []; upView(c.toDataURL("image/jpeg", 0.8), W, H); $("#uprow").hidden = false; return; }   // nothing closed: let the user click the corners
-    upPoly = rdp(poly, Math.max(2, 0.006 * perimeter(poly))); upFac = new Set();
-    let best = 0; upPoly.forEach((p, i) => { const q = upPoly[(i + 1) % upPoly.length]; if (Math.hypot(q[0] - p[0], q[1] - p[1]) > Math.hypot(upPoly[(best + 1) % upPoly.length][0] - upPoly[best][0], upPoly[(best + 1) % upPoly.length][1] - upPoly[best][1])) best = i; });
-    upFac.add(best);
-    upView(c.toDataURL("image/jpeg", 0.8), W, H);
-  };
-  img.src = URL.createObjectURL(file);
-}
-function dilate(m, W, H, k) { const a = new Uint8Array(W * H), b = new Uint8Array(W * H);
-  for (let y = 0; y < H; y++) { let run = -1e9; for (let x = 0; x < W; x++) { if (m[y * W + x]) run = x; if (x - run <= k) a[y * W + x] = 1; } run = 1e9; for (let x = W - 1; x >= 0; x--) { if (m[y * W + x]) run = x; if (run - x <= k) a[y * W + x] = 1; } }
-  for (let x = 0; x < W; x++) { let run = -1e9; for (let y = 0; y < H; y++) { if (a[y * W + x]) run = y; if (y - run <= k) b[y * W + x] = 1; } run = 1e9; for (let y = H - 1; y >= 0; y--) { if (a[y * W + x]) run = y; if (run - y <= k) b[y * W + x] = 1; } }
-  return b; }
-function erode(m, W, H, k) { const inv = m.map(v => v ? 0 : 1), d = dilate(inv, W, H, k); return d.map(v => v ? 0 : 1); }
-function traceLargest(m, W, H) {                               // the largest blob's outer boundary (Moore neighbour tracing)
-  const lab = new Int32Array(W * H), sizes = [0]; let n = 0;
-  for (let i = 0; i < W * H; i++) if (m[i] && !lab[i]) { n++; let c = 0; const st = [i]; lab[i] = n;
-    while (st.length) { const j = st.pop(); c++; const x = j % W, y = (j / W) | 0; for (const q of [j - 1, j + 1, j - W, j + W]) { const qx = q % W, qy = (q / W) | 0; if (q >= 0 && q < W * H && Math.abs(qx - x) + Math.abs(qy - y) === 1 && m[q] && !lab[q]) { lab[q] = n; st.push(q); } } }
-    sizes.push(c); }
-  if (!n) return null;
-  let L = 1; for (let i = 2; i <= n; i++) if (sizes[i] > sizes[L]) L = i;
-  let s0 = -1; for (let i = 0; i < W * H; i++) if (lab[i] === L) { s0 = i; break; }
-  // marching squares along the blob's edge: vertex (x, y) sits between pixels (x-1, y-1) (x, y-1) (x-1, y) (x, y)
-  const inL = (a, b) => a >= 0 && b >= 0 && a < W && b < H && lab[b * W + a] === L;
-  const x0 = s0 % W, y0 = (s0 / W) | 0, pts = [];
-  let x = x0, y = y0, px = 0, py = 0, guard = 0;
-  do {
-    const st = (inL(x - 1, y - 1) ? 1 : 0) | (inL(x, y - 1) ? 2 : 0) | (inL(x - 1, y) ? 4 : 0) | (inL(x, y) ? 8 : 0);
-    let dx = 0, dy = 0;
-    if (st === 1 || st === 5 || st === 13) dy = -1;
-    else if (st === 8 || st === 10 || st === 11) dy = 1;
-    else if (st === 4 || st === 12 || st === 14) dx = -1;
-    else if (st === 2 || st === 3 || st === 7) dx = 1;
-    else if (st === 6) { if (py === -1) dx = -1; else dx = 1; }
-    else if (st === 9) { if (px === 1) dy = -1; else dy = 1; }
-    else break;
-    if (dx !== px || dy !== py) pts.push([x, y]);               // keep the corners only
-    x += dx; y += dy; px = dx; py = dy;
-  } while ((x !== x0 || y !== y0) && ++guard < 400000);
-  return pts;
-}
-function perimeter(p) { let s = 0; for (let i = 0; i < p.length; i++) { const q = p[(i + 1) % p.length]; s += Math.hypot(q[0] - p[i][0], q[1] - p[i][1]); } return s; }
-function rdp(pts, eps) {
-  const f = (a, b) => { let dm = 0, im = 0; const [x1, y1] = pts[a], [x2, y2] = pts[b], L = Math.hypot(x2 - x1, y2 - y1) || 1;
-    for (let i = a + 1; i < b; i++) { const d = Math.abs((y2 - y1) * pts[i][0] - (x2 - x1) * pts[i][1] + x2 * y1 - y2 * x1) / L; if (d > dm) { dm = d; im = i; } }
-    return dm > eps ? f(a, im).slice(0, -1).concat(f(im, b)) : [pts[a], pts[b]]; };
-  const half = Math.floor(pts.length / 2), out = f(0, half).slice(0, -1).concat(f(half, pts.length - 1));
-  return out.slice(0, -1);
-}
-let upImg = null, upDraw = null;                              // upDraw = the corners clicked so far, when the user draws the outline
-function upView(src, W, H) {
-  upImg = [src, W, H];
-  if (upDraw) {
-    const pl = upDraw.map(p => p.join(",")).join(" "), r = Math.max(4, W / 120);
-    $("#upview").innerHTML = `<svg viewBox="0 0 ${W} ${H}" style="cursor:crosshair"><image href="${src}" width="${W}" height="${H}" opacity=".55"/><polyline points="${pl}" fill="none" stroke="#C4473A" stroke-width="4"/>${upDraw.map((p, i) => `<circle cx="${p[0]}" cy="${p[1]}" r="${i ? r * .7 : r * 1.4}" fill="${i ? "#C4473A" : "#2C5D8F"}"/>`).join("")}</svg><p class="hint2" data-t="up_drawhint">${T("up_drawhint")}</p>`;
-    const svg = $("#upview").querySelector("svg");
-    svg.onclick = e => { const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY; const q = pt.matrixTransform(svg.getScreenCTM().inverse());
-      if (upDraw.length >= 3 && Math.hypot(q.x - upDraw[0][0], q.y - upDraw[0][1]) < r * 3) { upPoly = upDraw; upDraw = null; upFac = new Set([0]); }
-      else upDraw.push([Math.round(q.x), Math.round(q.y)]);
-      upView(src, W, H); };
-    return;
-  }
-  const lines = upPoly.map((p, i) => { const q = upPoly[(i + 1) % upPoly.length]; return `<line class="edge" data-i="${i}" x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}" stroke="${upFac.has(i) ? "#2C5D8F" : "#C4473A"}" stroke-width="${upFac.has(i) ? 7 : 4}" tabindex="0" role="button" aria-pressed="${upFac.has(i)}" aria-label="edge ${i + 1}${upFac.has(i) ? ", street façade" : ""}"><title>edge ${i + 1}: click to mark it as street façade</title></line>`; }).join("");
-  $("#upview").innerHTML = `<svg viewBox="0 0 ${W} ${H}"><image href="${src}" width="${W}" height="${H}" opacity=".55"/>${lines}</svg>`;
-  const flip = l => { const i = +l.dataset.i; upFac.has(i) ? upFac.delete(i) : upFac.add(i); upView(src, W, H); const n = $(`#upview line[data-i="${i}"]`); if (n) n.focus(); };
-  $("#upview").querySelector("svg").onclick = e => { const l = e.target.closest("line"); if (l) flip(l); };
-  $("#upview").querySelector("svg").onkeydown = e => { const l = e.target.closest("line"); if (l && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); flip(l); } };
-  $("#uprow").hidden = false;
-}
-function startDraw() { if (!upImg) return; upDraw = []; upView(...upImg); }
-function useUploaded() {
-  const m = +$("#upm").value; if (!upPoly || !m || !upFac.size) { $("#status").textContent = "Mark the street façade and give its length."; return; }
-  const edges = [...upFac].map(i => [upPoly[i], upPoly[(i + 1) % upPoly.length]]), longest = Math.max(...edges.map(([a, b]) => Math.hypot(b[0] - a[0], b[1] - a[1])));
-  const k = m / longest, H = Math.max(...upPoly.map(p => p[1]));
-  const T2 = p => [+(p[0] * k).toFixed(2), +((H - p[1]) * k).toFixed(2)];
-  dShop = { outline: upPoly.map(T2), facade: edges.map(([a, b]) => [T2(a), T2(b)]), height: +$("#hgt").value || 3, name: "uploaded plan", source: "your plan drawing" };
-  dShop.street = dShop.facade;
-  const area = Math.abs(dShop.outline.reduce((a, p, i) => { const q = dShop.outline[(i + 1) % dShop.outline.length]; return a + p[0] * q[1] - q[0] * p[1]; }, 0) / 2);
-  shopCard(dShop, `<b>Your plan</b><div>${fmt(Math.round(area))} m² · ${edges.length} street façade edge${edges.length === 1 ? "" : "s"}</div><div class="hint2">Scale from the façade you gave: ${m} m.</div>`);
 }
 
 /* ---------- saved shops: private per person (db), or this browser when db is not available ---------- */
