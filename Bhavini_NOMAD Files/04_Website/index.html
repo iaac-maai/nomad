@@ -654,7 +654,8 @@ input[type=radio], input[type=checkbox] { accent-color: var(--neon) }
 .wstabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; flex: none }
 .wstabs button { padding: 6px 4px; text-align: center; font-size: 11px; line-height: 1.25; white-space: normal }
 .wstabs button:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px }
-.wspane { flex: 1; min-height: 0; overflow-y: auto; padding: 16px; scrollbar-gutter: stable }
+.wspane { flex: 1; min-height: 0; overflow: auto; padding: 16px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; scrollbar-gutter: stable }
+.wspane::-webkit-scrollbar { width: 8px } .wspane::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px } .wspane::-webkit-scrollbar-thumb:hover { background: var(--neon) }
 .wspane .cards { max-height: none; overflow: visible; padding: 0 }
 .wspane li, .wspane .v, .wspane .c { overflow-wrap: anywhere; white-space: normal }
 body.simple .wstabs button:not(:first-child) { display: none }
@@ -733,11 +734,6 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
 .coll { flex: none; width: 40px; height: 40px; display: grid; place-items: center; padding: 0; border: 1.5px solid var(--ink); border-radius: var(--r-sm); background: transparent; color: var(--ink); font: 600 22px/1 var(--mono); cursor: pointer; transition: background .12s }
 .coll:hover { background: var(--pink) } .coll:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px }
 .collbody > .src-table, .collbody > .reqrow:first-of-type { margin-top: 32px }
-
-/* design homes: the 3D box sets the height; Selected and the tabs end with it and scroll inside, with a bar you can see */
-.ws-left { contain: size; overflow-y: auto; align-content: start; scrollbar-gutter: stable }
-.ws-left, .wspane { scrollbar-width: auto; scrollbar-color: var(--muted) rgba(255,255,255,.07) }
-@media (max-width: 760px) { .ws-left { contain: none; overflow: visible } }
 </style>
 
 <a class="skip" href="#main">Skip to content</a>
@@ -923,7 +919,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
   <p class="eyebrow">For the city · where to start</p>
   <div class="collhead"><h2>Where can the city find homes?</h2><button type="button" class="coll" aria-expanded="false" aria-controls="policy-body" aria-label="Open this section">+</button></div>
   <div class="collbody" id="policy-body" hidden>
-  <p class="lede">Every empty shop and every unused warehouse, commercial or office building in Barcelona was run through NOMAD: zoning, daylight (where a prediction exists), real plans, every rule. Set how many homes the city needs. NOMAD picks the fewest places that reach it and lists the ones to avoid.</p>
+  <p class="lede">Every empty shop and every unused warehouse, commercial or office building in Barcelona was run through NOMAD: zoning, daylight (Bars's model where it exists), real plans, every rule. Set how many homes the city needs. NOMAD picks the fewest places that reach it and lists the ones to avoid.</p>
   <div class="reqrow"><label for="pneed">Homes the city needs</label><input id="pneed" type="number" min="1" step="50" value="1000">
     <label><input type="checkbox" id="pcheck"> also where the zone's own plan decides (to confirm)</label></div>
   <div class="reqrow" id="pkinds"><span>Use:</span>
@@ -1001,7 +997,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
       <tr><td>Real plan scans</td><td>CubiCasa5K, test split only (<a href="https://zenodo.org/records/2613548" target="_blank" rel="noopener">Zenodo</a>)</td><td>CC BY-NC-SA 4.0 · non-commercial use only</td></tr>
       <tr><td>Plan reader model</td><td>floorplan-to-3d (Yytsi), trained on CubiCasa5K</td><td>MIT</td></tr>
       <tr><td>3D export</td><td>IfcOpenShell; trimesh</td><td>LGPL-3.0; MIT</td></tr>
-      <tr><td>Daylight (Exp 4)</td><td>Ladybug Tools + Radiance, XGBoost; team experiment (folder exp1_daylight)</td><td>AGPL-3.0 (Ladybug), Apache-2.0</td></tr>
+      <tr><td>Daylight (Exp 4)</td><td>Ladybug Tools + Radiance, XGBoost; team experiment (Bars, folder exp1_daylight)</td><td>AGPL-3.0 (Ladybug), Apache-2.0</td></tr>
       <tr><td>Daylight method</td><td>EN 17037 (daylight in buildings): target and minimum daylight factor for Barcelona</td><td>European standard, method cited</td></tr>
       <tr><td>Weather file</td><td>Barcelona TMYx (ESP_CT_Barcelona.081800_TMYx.epw), <a href="https://climate.onebuilding.org" target="_blank" rel="noopener">climate.onebuilding.org</a></td><td>to check</td></tr>
       <tr><td>Rule cards (Exp 3)</td><td>open-notebook (vector search) and Gemini 3.5 Flash Lite (drafting)</td><td>MIT (open-notebook); Gemini: Google API terms</td></tr>
@@ -1049,7 +1045,7 @@ Promise.all(["data/nomad.json", "data/premises.json", "data/basemap.json"].map(u
   .then(([d, p, b, dl]) => { D = d; P = p.rows.map(r => Object.fromEntries(p.cols.map((c, i) => [c, r[i]]))); B = b; DL = dl; attachDaylight(); rescoreAnswers(); start(); })
   .catch(e => { $("#answer").innerHTML = `<p>The data did not load (${esc(e.message)}). Reload the page.</p>`; });
 
-/* ---------- daylight, Exp 4 (the daylight model, folder exp1_daylight): data/daylight.json, built by 02_Code/src/app/daylight_site.py
+/* ---------- daylight, Exp 4 (Bars's model, folder exp1_daylight): data/daylight.json, built by 02_Code/src/app/daylight_site.py
    from exp1_daylight/shops_bcn_pred.csv and daylight_thresholds.json. Replaces the old per-shop df / lit of premises.json. ---------- */
 const DLC = { L: ["livable", "YES"], C: ["needs a change", "CHECK"], N: ["not livable", "NO"] };
 const dec = (x, k = 2) => Number(x).toFixed(k).replace(".", ",");
@@ -1073,10 +1069,10 @@ function rescoreAnswers() {
   P.forEach(r => {
     if (!r.dl) return;
     r.ans0 = r.ans;
-    const d = r.dl, h = r.homes, day = `daylight: ${DLC[d.cls][0]}, ${dec(d.lit, 1)} m daylit`;
+    const d = r.dl, h = r.homes, day = `daylight: ${DLC[d.cls][0]}, ${dec(d.lit, 1)} m daylit (Bars's model, Exp 4)`;
     if (r.housing === "NO") return;                              // not allowed: unchanged
     if (r.ans === "not liveable" && /^no home that passes/.test(r.awhy || "")) return;   // the rules, not daylight: unchanged
-    if (d.cls === "N") { r.ans = "not liveable"; r.awhy = `dark: the daylit zone is only ${dec(d.lit, 1)} m deep, under ${dec(DL.classes.room_min_m, 1)} m`; }
+    if (d.cls === "N") { r.ans = "not liveable"; r.awhy = `dark: the daylit zone is only ${dec(d.lit, 1)} m deep, under ${dec(DL.classes.room_min_m, 1)} m (Bars's model, Exp 4)`; }
     else if (r.shops <= cut) { r.ans = "keep it a shop"; r.awhy = `only ${r.shops} shops within 100 m (lowest 10 % of the city)`; }
     else if (h != null) { r.ans = "candidate"; r.awhy = `${h} home${h === 1 ? "" : "s"} fit; ${day}`; }
     else { r.ans = "not modelled"; r.awhy = `zone and street allow it; no clean outline yet (shared ground floor or no street façade); ${day}`; }
@@ -1092,7 +1088,7 @@ function dlClasses() {
 }
 function dlNote() {
   const v = DL.validation;
-  return `the daylight model (Exp 4): ${DL.simulations} Radiance simulations + ${esc(DL.model)}; lit depth checked on ${v.shops} real shops against Radiance, mean error ${dec(v.lit_depth_mae_m)} m. Floor height and windows assumed.`;
+  return `Bars's model (Exp 4): ${DL.simulations} Radiance simulations + ${esc(DL.model)}; lit depth checked on ${v.shops} real shops against Radiance, mean error ${dec(v.lit_depth_mae_m)} m. Floor height and windows assumed.`;
 }
 function dlHtml(d) {                                             // one shop's daylight, in words
   return `<span class="pill ${DLC[d.cls][1]}">${DLC[d.cls][0]}</span> ${dec(d.lit, 1)} m of floor in from the window reach the target (${Math.round(100 * d.share)} % of the floor)`
@@ -1553,7 +1549,7 @@ function drawExps() {
       l: "The golden set found real bugs: shop conversions need 2,40 m (Annex 4 group C), not 2,50 m, and 8 shops had been thrown out for it." },
     { id: "exp4", tag: "EXP 4 · STEP 5 · TEAM", h: "Can AI predict daylight without a simulation?",
       p: DL ? `${DL.simulations} shop variants simulated in Radiance (Ladybug/Honeybee); ${DL.model} learns the daylight and how many metres of floor reach the ${DL.thresholds.method} target for Barcelona (daylight factor ${dec(DL.thresholds.D_target_pct)} %, minimum ${dec(DL.thresholds.D_minimum_pct)} %, from the TMYx weather file). Then all ${fmt(DL.counts.shops)} empty shops of the 2024 census, in ${DL.counts.districts} districts, predicted in seconds: ${fmt(DL.counts.livable)} livable, ${fmt(DL.counts.needs_change)} need a change, ${fmt(DL.counts.not_livable)} not livable (${dlClasses()}). Lit depth checked on ${DL.validation.shops} real shops against Radiance: mean error ${dec(DL.validation.lit_depth_mae_m)} m. Floor height and windows assumed.`
-         : "the daylight results did not load.",
+         : "Bars's daylight results did not load.",
       chart: `<div class="fig">R² of the first 50 simulations (mean daylight factor)</div>` + bars([["XGBoost", 0.80, C("--blue")], ["rule of thumb", 0.65, C("--muted")]], 1, " R²"),
       l: "The model starts from the rule of thumb and corrects it with the number of lit façades and the window size." },
     { id: "exp5", tag: "EXP 5 · STEPS 6-8", h: "Can NOMAD check a shop, fit legal homes and build them in 3D?",
@@ -1941,7 +1937,7 @@ function drawDesign() {
     .concat(R.iterations.map(it => ({ label: it.label.replace("·", " ·"), verdict: it.verdict, txt: `${it.homes} home${it.homes === 1 ? "" : "s"}${it.plan.levels > 1 ? ` on ${it.plan.levels} levels` : ""}`, plan: it.plan, daylight: it.daylight })));
   const ld = R.before.daylight && R.before.daylight.lit_depth;
   $("#dres").innerHTML = `<p class="hint2">Asked: ${esc(R.mix)} · shop ${fmt(Math.round(R.shop.area))} m², ${R.shop.facade_m} m of façade with light.
-    Where light reaches: <span class="swatch" style="background:#FFE7A3"></span> lit, up to ${ld ? ld.toFixed(1) : "?"} m from a window (${s.prem && s.prem.lit != null ? "the daylight model for this shop" : "assumed: no daylight prediction here"}): living rooms and bedrooms go here ·
+    Where light reaches: <span class="swatch" style="background:#FFE7A3"></span> lit, up to ${ld ? ld.toFixed(1) : "?"} m from a window (${s.prem && s.prem.lit != null ? "Bars's daylight model for this shop" : "assumed: no daylight prediction here"}): living rooms and bedrooms go here ·
     <span class="swatch" style="background:#EEF0EC"></span> kitchen, bath, hall · <span class="swatch" style="background:#AEBBCB"></span> dark: not for homes. A living room or bedroom must have half its floor in the lit part.</p>
     <div class="dplans">${tiles.map((t, k) => `<button type="button" class="dplan" data-k="${k}" aria-pressed="${k === dSel}">
       <span class="fig">${esc(t.label)}</span>${planSvg(s, t.plan, { label: t.label, daylight: t.daylight })}<span class="row"><span class="pill ${t.verdict}">${t.verdict}</span><span class="num">${esc(t.txt)}</span></span></button>`).join("")}</div>`;
@@ -1954,15 +1950,6 @@ function drawDesign() {
 const RINGC = [["living", ["living"], "#F09F26"], ["bedrooms", ["bed_main", "bed"], "#8078DE"], ["kitchen and bath", ["kitchen", "bath"], "#85B8EB"],
   ["hall", ["hall"], "#CCCCCC"]];
 function polyArea(pts) { return Math.abs(pts.reduce((a, p, i) => { const q = pts[(i + 1) % pts.length]; return a + p[0] * q[1] - q[0] * p[1]; }, 0) / 2); }
-/* the floor the law lets a flat reach: inside the shop and within 9 m of a street facade (Decret 141/2012 Annex 1 3.6.2: facade >= S/9) */
-function reachArea(shop) {
-  const o = shop.outline || [], st = shop.street || shop.facade || [], x = o.map(p => p[0]), y = o.map(p => p[1]), g = 0.5; let n = 0;
-  const seg = (px, py, a, b) => { const dx = b[0] - a[0], dy = b[1] - a[1], t = Math.max(0, Math.min(1, ((px - a[0]) * dx + (py - a[1]) * dy) / (dx * dx + dy * dy || 1))); return Math.hypot(px - a[0] - t * dx, py - a[1] - t * dy); };
-  const inside = (px, py) => { let c = false; for (let i = 0, j = o.length - 1; i < o.length; j = i++) if ((o[i][1] > py) !== (o[j][1] > py) && px < (o[j][0] - o[i][0]) * (py - o[i][1]) / (o[j][1] - o[i][1]) + o[i][0]) c = !c; return c; };
-  for (let px = Math.min(...x) + g / 2; px < Math.max(...x); px += g) for (let py = Math.min(...y) + g / 2; py < Math.max(...y); py += g)
-    if (inside(px, py) && st.some(q => seg(px, py, q[0], q[1]) <= 9)) n++;
-  return n * g * g;
-}
 function layoutFigures(src, R) {                                  // the numbers a decision is made on, for one option
   const units = src.plan.units || [], rooms = units.flatMap(u => u.rooms);
   const by = RINGC.map(([l, kinds, c]) => [l, rooms.filter(r => kinds.includes(r.kind)).reduce((a, r) => a + (r.area || polyArea(r.pts)), 0), c]);
@@ -1988,9 +1975,8 @@ function drawWorkspace() {
       <dt>match to your request</dt><dd>${asked ? Math.round(100 * Math.min(f.homes, asked) / asked) : 0} %</dd>
       <dt>flats passing every rule</dt><dd>${f.passing} / ${f.units}</dd>
       <dt>floor used by homes</dt><dd>${fmt(Math.round(f.used))} of ${fmt(Math.round(f.shop))} m²</dd>
-      ${(() => { const c = R.shopDrawn && R.shopDrawn.outline ? (R.reach = R.reach || reachArea(R.shopDrawn)) : 0; return c && !(R.shopDrawn.floors > 1) ? `<dt title="Floor within 9 m of a street facade: a flat lit from one facade cannot go deeper (Decret 141/2012 Annex 1 3.6.2)">efficiency, on the floor the law can reach</dt><dd>${Math.min(100, Math.round(100 * f.used / c))} % of ${fmt(Math.round(c))} m²</dd>` : ""; })()}
       <dt>façade with light</dt><dd>${R.shop.facade_m} m</dd>
-      ${prem && prem.dl ? `<dt>daylight</dt><dd>${DLC[prem.dl.cls][0]}</dd><dt>target DF ${dec(DL.thresholds.D_target_pct)} % reaches</dt><dd>${dec(prem.dl.lit, 1)} m in</dd>` : ""}
+      ${prem && prem.dl ? `<dt>daylight (Bars's model)</dt><dd>${DLC[prem.dl.cls][0]}</dd><dt>target DF ${dec(DL.thresholds.D_target_pct)} % reaches</dt><dd>${dec(prem.dl.lit, 1)} m in</dd>` : ""}
     </dl></div>
     <div><h4>Room mix</h4><div class="ring" style="margin-top:6px">${ringSvg(f.by)}<ul>${f.by.map(([l, v, c]) => `<li><i style="background:${c}"></i><span>${esc(l)}</span><b>${Math.round(v)} m²</b></li>`).join("")}</ul></div></div>
     <div><h4>Options</h4><div class="vlist" style="margin-top:6px">${opts.map((o, k) => { const g = layoutFigures(o, R);
@@ -2316,7 +2302,7 @@ function buildingTypo(ref, x, y) {
   if (t === undefined) { t = Z.byRef.get(ref); if (t === undefined) { const p = Z.at(x, y); t = p ? p.typ : 10; } Z.ref.set(ref, t); }
   return t;
 }
-/* NOMAD's answer per building (cadastral ref, first 14 characters): the daylight class of its empty shops (the daylight model,
+/* NOMAD's answer per building (cadastral ref, first 14 characters): the daylight class of its empty shops (Bars's model,
    r.dl.cls), L = livable, C = needs a change, N = not livable; a zone that takes no housing is "zone does not allow homes"
    whatever the daylight. A shop without a daylight match falls back to the zone answer of city.index.shops: NO is "zone
    does not allow homes", YES or CHECK is "zone only". With several shops the best answer wins. */

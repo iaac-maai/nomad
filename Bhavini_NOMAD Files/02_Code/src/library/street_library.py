@@ -23,16 +23,13 @@ def main():
     own = ROOT / "results" / "library" / "library_own.json"                          # your own plans (src/library/own_plans.py)
     if own.exists():
         lib += json.load(open(own))
-    pl = ROOT / "results" / "library" / "library_placed.json"                        # NOMAD's room placer (src/library/placed_plans.py)
-    if pl.exists() and "--no-placed" not in sys.argv:
-        lib += json.load(open(pl, encoding="utf-8"))
     ai = ROOT / "results" / "library" / "library_ai.json"                            # NOMAD's plan AI (src/ai/generate_plans.py)
     if ai.exists() and "--no-ai" not in sys.argv:
         lib += json.load(open(ai))
     out = []
     for f in lib:
         side = (f.get("entrance") or {}).get("side")
-        one = f["lit"] == ["front"] and side in ("back", "left", "right", "front")   # lit from the street, door behind (front: own street door)
+        one = f["lit"] == ["front"] and side in ("back", "left", "right")            # lit from the street, door behind
         through = sorted(f["lit"]) == ["back", "front"] and side in ("left", "right")  # street + block interior, door at the side
         if not (one or through):
             continue

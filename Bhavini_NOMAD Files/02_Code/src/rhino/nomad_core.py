@@ -207,7 +207,7 @@ def run_story(shop, mix, lit_depth=flags.LIT_DEPTH, programs=None):
     programs: room sizes (default: learned from real flats); layout.with_targets gives the user's flat sizes."""
     progs = programs or data()["programs"]
     o, f, h = shop["outline"], shop["facade"], shop["height"]
-    lit_depth = shop.get("lit_depth") or lit_depth          # the daylight prediction for this shop when there is one
+    lit_depth = shop.get("lit_depth") or lit_depth          # Bars's prediction for this shop when there is one
     cell = 0.25 if flags.area(o) < 400 else 0.5
     def check(plan, label, m):
         res = flags.analyse(o, f, h, plan, lit_depth=lit_depth, cell=cell, zoning=shop.get("zoning"))

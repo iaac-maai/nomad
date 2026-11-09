@@ -37,7 +37,6 @@ WALL_GAP = 0.35
 MAX_STRETCH = (0.80, 1.30)          # a plan is only stretched between 80 % and 130 % of its own size on each axis
 SHOW = 75.0
 GEN_STRETCH = (0.65, 1.60)          # a generated plan: a real plan's room graph re-proportioned further, only when no real plan fits
-GAP_KS = (0.7, 0.8, 0.9, 1.1, 1.25, 1.4)   # widths tried in the gaps real plans leave (plan3._row), as shares of the real widths
 SHOW_GEN = 55.0
 MIN_COVER = 0.82                    # rooms cover at least 82 % of the flat's rectangle (the rest is walls; no dead corners)
 
