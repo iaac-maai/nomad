@@ -1,82 +1,22 @@
-"""Nomad - Stage 8: the data behind the NOMAD website (site/), gathered from NOMAD's own result files, nothing typed in.
+"""Nomad - the data behind the NOMAD website, gathered from NOMAD's own result files, nothing typed in.
 
-Writes site/data/nomad.json (pipeline, experiments, demo shops, rule cards, golden set, real shops), site/data/premises.json
-(every empty ground-floor premises with its zone and answer), site/data/basemap.json (Barcelona's zones, merged and
-simplified to 3 m), the 3D city (site/data/city, from the Catastro), the browser engine (site/py: NOMAD's Python for
-Pyodide) and the real-shop outlines, and copies the demo pictures (smaller) and 3D models to site/img and site/models.
-The page itself is site/index.html. Run after the stages:  .venv/Scripts/python src/app/build_site.py
+Writes site/data/nomad.json (rule cards, experiments, golden set), site/data/premises.json (every empty ground-floor
+premises with its zone and street life), site/data/basemap.json (Barcelona's zones, merged and simplified to 3 m) and
+the 3D city (site/data/city, from the Catastro). The layout engine's data (demo shops, real-shop runs, Pyodide engine)
+was parked on 9 Nov 2026: see PARKED.md and the branch parked/before-cleanup.
+Run after the stages:  .venv/Scripts/python src/app/build_site.py
 """
 import csv, json, shutil
 from pathlib import Path
-from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[2]
 SITE = ROOT / "site"
 R = ROOT / "results"
-# titles: {passing} {asked} = the shop as it is, {most} = most homes over the iterations (filled from the recipe)
-DEMOS = [("D1_shop_146519_YES", "A shop that already works"),
-         ("D2_warehouse_154822_patio", "A deep warehouse: {passing} of {asked} homes fit, the back has no façade"),
-         ("D3_large_shop_152418", "A large shop: {passing} homes as asked, {most} at most"), ("D0_plan_drawing_145057", "A plan drawing read by NOMAD"),
-         ("D4_warehouse_154608_NO", "A narrow warehouse that cannot be housing")]
+
 
 
 def j(p):
     return json.load(open(p, encoding="utf-8"))
-
-
-def small(src, dst, w=900):
-    """Copy a picture at most w px wide, as an optimised PNG."""
-    if not Path(src).exists():
-        return None
-    im = Image.open(src).convert("RGB")
-    if im.width > w:
-        im = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
-    dst.parent.mkdir(parents=True, exist_ok=True)
-    im.quantize(colors=192, method=Image.Quantize.MEDIANCUT).save(dst, optimize=True)
-    return dst.relative_to(SITE).as_posix()
-
-
-def card(c):
-    return {"title": c["title"], "ok": bool(c["ok"]), "check": bool(c.get("check")), "value": c["value"],
-            "limit": c.get("limit", ""), "cite": c["cite"], "scope": c["scope"]}
-
-
-def demos():
-    out = []
-    for name, blurb in DEMOS:
-        p = R / "sheets" / "recipes" / (name + ".json")
-        if not p.exists():
-            continue
-        c = j(p)["case"]
-        b = c["before"]["res"]
-        title = blurb.format(passing=b["flats_passing"], asked=b["flats_asked"],
-                             most=max([it["homes"] for it in c["iterations"]] or [b["flats_passing"]]))
-        d = {"id": name, "title": title, "mix": c["mix_text"], "shop_m2": b["shop_m2"], "source": c["shop"]["source"],
-             "before": {"verdict": b["verdict"], "passing": b["flats_passing"], "asked": b["flats_asked"],
-                        "cards": [card(x) for x in b["cards"]],
-                        "plan": small(R / "figures" / (name + "_p0_plan.png"), SITE / "img" / (name + "_p0.png"))},
-             "iterations": []}
-        for k, it in enumerate(c["iterations"], 1):
-            r = it["res"]
-            glb = R / "model3d" / ("%s_it%d.glb" % (name, k))
-            web = SITE / "models" / (glb.stem + ".gltf.json")       # the web host serves .json, not .glb:
-            if glb.exists():                                          # the same glTF, geometry embedded as JSON
-                import trimesh
-                from trimesh.exchange.gltf import export_gltf
-                web.parent.mkdir(parents=True, exist_ok=True)
-                files = export_gltf(trimesh.load(glb), embed_buffers=True)
-                web.write_bytes(files["model.gltf"])
-            d["iterations"].append({
-                "label": it["label"], "homes": it["homes"], "verdict": r["verdict"], "mix": r.get("mix_text", ""),
-                "patio": bool(it["plan"].get("patios")), "interventions": it["plan"].get("interventions", []),
-                "cards": [card(x) for x in r["cards"]],
-                "plan": small(R / "figures" / ("%s_p%d_plan.png" % (name, k)), SITE / "img" / ("%s_p%d.png" % (name, k))),
-                "zoning3d": small(R / "sheets" / ("%s_3d_%d.png" % (name, k)), SITE / "img" / ("%s_z%d.png" % (name, k)), 700),
-                "walls3d": small(R / "sheets" / ("%s_walls_%d.png" % (name, k)), SITE / "img" / ("%s_w%d.png" % (name, k)), 700),
-                "glb": ("models/" + web.name) if glb.exists() else None,
-                "ifc": glb.with_suffix(".ifc").name if glb.with_suffix(".ifc").exists() else None})
-        out.append(d)
-    return out
 
 
 def premises():
@@ -157,11 +97,7 @@ def city(tile=1000.0):
         order = {"YES": 3, "CHECK": 2, "NO": 1}
         if order.get(r["housing"], 0) > order.get(status.get(ref, ["", 0])[0], 0):
             status[ref] = [r["housing"], 0]
-    rp = R / "real_shops" / "nomad_results.csv"
-    if rp.exists():
-        for r in csv.DictReader(open(rp, encoding="utf-8")):
-            if r["as_is"] != "ERROR":
-                status[r["ref"]] = [r["after"], int(r["most_homes"] or 0)]      # NOMAD's own answer replaces the zone's
+    # (until 9 Nov 2026 the layout engine's answer and home count replaced the zone's here: parked, see PARKED.md)
     tiles = {}
     for ref, b in B.items():
         for p in b["parts"]:
@@ -267,51 +203,6 @@ def city(tile=1000.0):
                                                                          (out / "layers.json").stat().st_size / 1e6))
 
 
-def engine():
-    """The browser engine: NOMAD's own Python files as text (site/py/src/*.txt, run by site/py/worker.js in Pyodide),
-    Python's standard library as base64 JSON (the host serves no .zip), the learned room sizes, and the outlines of the
-    clean real shops (src/building/clean_real_shops.py) that the requirements form can load by address."""
-    import base64
-    src = SITE / "py" / "src"
-    src.mkdir(parents=True, exist_ok=True)
-    for f in ("src/generate/layout.py", "src/generate/better.py", "src/generate/plan2.py", "src/generate/library_fit.py",
-              "src/generate/furnish.py", "src/library/own_plans.py", "src/generate/building.py", "src/generate/shared.py",
-              "src/generate/plan3.py", "src/check/flags.py", "src/rhino/nomad_core.py",
-              "src/rhino/nomad_model.py", "src/model3d/prisms.py", "src/app/nomad_web.py"):
-        (src / (Path(f).stem + ".txt")).write_text((ROOT / f).read_text(encoding="utf-8"), encoding="utf-8")
-    shutil.copy2(ROOT / "src" / "generate" / "library_street.json", src / "library_street.json")   # the real-flat library (plan3)
-    z = SITE / "py" / "python_stdlib.zip"
-    if z.exists():
-        json.dump({"b64": base64.b64encode(z.read_bytes()).decode()}, open(SITE / "py" / "python_stdlib.json", "w"))
-    shutil.copy2(R / "generation" / "room_programs.json", SITE / "data" / "room_programs.json")
-    S = j(R / "real_shops" / "shells.json")
-    keep = {r["ref14"]: r for r in csv.DictReader(open(R / "real_shops" / "clean_shops.csv", encoding="utf-8")) if r["kept"] == "True"}
-    out = {ref: dict({"outline": s["outline"], "facade": s["facade"], "street": s["street"], "floors": s["floors"],
-                      "shared": s["premises_in_building"] > 1, "label": keep[ref]["label"]},
-                     **({"existing": s["existing"]} if s.get("existing") else {}))          # the building's portal / stair
-           for ref, s in S.items() if ref in keep}
-    json.dump(out, open(SITE / "data" / "shells.json", "w", encoding="utf-8"), separators=(",", ":"))
-    demo = {}
-    for name, _ in DEMOS:                                      # the five test shops, for the design form
-        p = R / "sheets" / "recipes" / (name + ".json")
-        if p.exists():
-            sh = j(p)["case"]["shop"]
-            demo[name] = {"outline": sh["outline"], "facade": sh["facade"], "height": sh["height"]}
-    json.dump(demo, open(SITE / "data" / "demo_shops.json", "w", encoding="utf-8"), separators=(",", ":"))
-    print("engine: %d modules, %d real shop outlines, %d test shops" % (len(list(src.glob("*.txt"))), len(out), len(demo)))
-
-
-def real():
-    """The real-shop analysis (src/building/run_real_shops.py) for the page: totals, by district, every shop's answer."""
-    p = R / "real_shops" / "summary_nomad.json"
-    if not p.exists():
-        return None
-    rows = list(csv.DictReader(open(R / "real_shops" / "nomad_results.csv", encoding="utf-8")))
-    return {"summary": j(p), "cleaning": j(R / "real_shops" / "cleaning_report.json"), "buildings": j(R / "real_shops" / "summary.json"),
-            "shops": [[r["ref"], r["address"], r["barri"], r["district"], r["ground_m2"], r["street_facade_m"], r["as_is"],
-                       r["after"], r["after_passing"], r["most_homes"]] for r in rows if r["as_is"] != "ERROR"]}
-
-
 def experiments():
     ev = j(R / "plan_reading" / "eval_summary.json")["scale given"]
     race = {}
@@ -321,27 +212,22 @@ def experiments():
     for f in (R / "plan_reading" / "compare").glob("test_plans_cubicasa__*.json"):
         s = j(f)["scale given"]
         scans[f.stem.split("__")[1]] = {"median_iou": s["median_iou"], "area10": s["area_within_10pct"], "plans": s["plans"]}
-    it = j(R / "generation" / "iterations_summary.json")
     head = {r["metric"]: float(r["value"]) for r in csv.DictReader(open(R / "dashboard" / "dashboard_data" / "headline.csv", encoding="utf-8"))}
     return {"reader": {"median_iou": ev["median_iou"], "area10": ev["area_within_10pct"], "race_messy": race, "real_scans": scans},
             "zoning": j(R / "zoning" / "summary.json"),
             "rules": {"pieces": int(head["rulebook_pieces"]), "norms": int(head["norms"]), "flats_all_pass": head["flats_all_pass"]},
-            "check": {"verdicts": it["stage5_flags_as_it_is"], "iterations": it["iterations"],
-                      "strategies": j(R / "generation" / "compare_v2.json")},     # old vs new iterations (lab book E23)
-            "golden": j(R / "eval" / "golden_summary.json"),
-            "golden_rows": list(csv.DictReader(open(R / "eval" / "golden_scores.csv", encoding="utf-8")))}
+            "golden": j(R / "eval" / "golden_summary.json")}
 
 
 def main():
     (SITE / "data").mkdir(parents=True, exist_ok=True)
-    data = {"demos": demos(), "rules": j(ROOT / "rules" / "rules.json"), "experiments": experiments(), "real": real()}
+    data = {"rules": j(ROOT / "rules" / "rules.json"), "experiments": experiments()}
     json.dump(data, open(SITE / "data" / "nomad.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     json.dump(premises(), open(SITE / "data" / "premises.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     json.dump(basemap(), open(SITE / "data" / "basemap.json", "w", encoding="utf-8"), separators=(",", ":"))
-    engine()
     city()
     tot = sum(f.stat().st_size for f in SITE.rglob("*") if f.is_file())
-    print("site data: %d demos, %d rules, %.1f MB in site/" % (len(data["demos"]), len(data["rules"]), tot / 1e6))
+    print("site data: %d rules, %.1f MB in site/" % (len(data["rules"]), tot / 1e6))
 
 
 if __name__ == "__main__":
