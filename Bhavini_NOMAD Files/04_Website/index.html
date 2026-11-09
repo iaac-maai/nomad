@@ -806,7 +806,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
     <thead><tr><th>What</th><th>Source</th><th>Licence</th></tr></thead>
     <tbody>
       <tr><td>Empty ground-floor premises, 2024</td><td><a href="https://opendata-ajuntament.barcelona.cat/data/dataset/cens-locals-planta-baixa-act-economica" target="_blank" rel="noopener">Cens de locals en planta baixa 2024</a>, Ajuntament de Barcelona, Open Data BCN (CC BY 4.0)</td><td>CC BY 4.0</td></tr>
-      <tr><td>Buildings (footprints, floors, units)</td><td>Catastro (Dirección General del Catastro) via hypercadaster_ES</td><td>EUPL-1.2 (hypercadaster_ES); Catastro data: reuse with attribution</td></tr>
+      <tr><td>Buildings (footprints, floors)</td><td>Catastro (Dirección General del Catastro) via hypercadaster_ES</td><td>EUPL-1.2 (hypercadaster_ES); Catastro data: reuse with attribution</td></tr>
       <tr><td>Zoning (qualificació)</td><td>Mapa Urbanístic de Catalunya, Departament de Territori, Generalitat de Catalunya (<a href="https://territori.gencat.cat/ca/06_territori_i_urbanisme/observatori_territori/mapa_urbanistic_de_catalunya/" target="_blank" rel="noopener">MUC</a>), January 2023</td><td>Generalitat open data, attribution</td></tr>
       <tr><td>Housing rules</td><td>Decret 141/2012 (DOGC 6245), CTE (BOE-A-2006-5515), PGM art. 225 (MPGM 1999), MPGM 2004 (Barcelona), Ajuntament guide on change of use (2025): 2,470 pieces from 22 norms</td><td>Official texts, cited by article</td></tr>
       <tr><td>Test shops and flats</td><td>Swiss Dwellings v3.0.0 (46,937 flats, 341 commercial units), <a href="https://zenodo.org/record/7788422" target="_blank" rel="noopener">Zenodo</a></td><td>CC BY 4.0</td></tr>
@@ -821,7 +821,6 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
       <tr><td>AI assistant and code help</td><td>Claude (Anthropic): the "Ask NOMAD" assistant and help writing the code</td><td>Anthropic terms of use</td></tr>
       <tr><td>Base map (data/basemap.json)</td><td>Barcelona's zones from the Mapa Urbanístic de Catalunya (MUC, muc_qualificacio_bcn.geojson), merged and simplified (02_Code/src/app/build_site.py)</td><td>Generalitat open data, attribution</td></tr>
       <tr><td>Metropolitan area, 36 towns (data/amb.json)</td><td>Catastro INSPIRE Buildings (one file per town) and MUC zoning served by the Diputació de Barcelona (02_Code/src/zoning/amb.py)</td><td>Catastro data: reuse with attribution; MUC: Generalitat open data, attribution; Diputació service: to check</td></tr>
-      <tr><td>Price estimates</td><td>idealista18 dataset (2018 asking prices)</td><td>ODbL</td></tr>
       <tr><td>Trees in the 3D city</td><td>Open Data BCN street, zone and park trees</td><td>CC BY 4.0</td></tr>
       <tr><td>3D viewer</td><td>three.js 0.147</td><td>MIT</td></tr>
       <tr><td>Rulebook viewer</td><td>PDF.js 3.11</td><td>Apache-2.0</td></tr>
@@ -937,18 +936,10 @@ function showWh(r) {                                           // a whole buildi
     <div class="next">${r.housing === "NO" ? "This zone does not take housing (industry, a facility or a future street): NOMAD answers NO." : r.housing === "CHECK" ? "Maybe: this zone has its own detailed plan, and that plan decides. Ask the Ajuntament." : "The zone allows homes. The whole building is a change of use (Decret 141/2012 Annex 4 Group B): an architect checks the building rules."}</div>`;
   bldgBox(""); showBuilding(r.ref, r);
 }
-/* the building of the shop, from the Catastro (src/zoning/catastro_site.py): every floor's units where the Catastro has a
-   floor-by-floor plan, else the building parts with their floors; drawn here as plans by floor and a 3D model */
+/* the building of the shop, from the Catastro (INSPIRE building parts, src/zoning/catastro_site.py): its outline on
+   each floor, from the building parts and their number of floors, drawn as plans by floor and a 3D model. The
+   floor-by-floor units of the Catastro's Visor 3D were removed (not open data). */
 const BUNDLES = {};
-const UNIT_KIND = [                                                  // [test, name, rgb]: the E05 room colours
-  [u => u.code === "COMUN" || /comun/i.test(u.use), "common parts", [204, 204, 204]],
-  [u => /^V/.test(u.code) || /vivienda/i.test(u.use), "home", [176, 168, 237]],
-  [u => /^A/.test(u.code) || /aparcamiento|almac|trastero/i.test(u.use), "parking / storage", [133, 184, 235]],
-  [u => /^O/.test(u.code) || /oficina/i.test(u.use), "office", [250, 199, 117]],
-  [u => /^I/.test(u.code) || /industri/i.test(u.use), "industry", [180, 170, 150]],
-  [u => /^C/.test(u.code) || /comercio|local/i.test(u.use), "shop / premises", [240, 159, 38]],
-  [u => true, "other", [226, 222, 213]]];
-const unitKind = u => UNIT_KIND.find(k => k[0](u));
 const floorName = k => k === 0 ? "ground" : k < 0 ? `basement ${-k}` : `floor ${k}`;
 let bView = null;
 async function showBuilding(ref, prem) {
@@ -961,56 +952,32 @@ async function showBuilding(ref, prem) {
     b = (await BUNDLES[key])[ref];
   } catch (e) { b = null; }
   if ($("#bldg") !== box) return;                                     // another shop was picked meanwhile
-  if (!b) { box.innerHTML = `<p class="meta">NOMAD holds no Catastro building for this premises.</p>`; return; }
-  // floors: [{k, units: [{use, code, m2, pts}]}], from the units or from the building parts' outlines
-  const floors = b.source === "units" ? b.floors :
-    (() => { const up = Math.max(1, ...b.parts.map(p => p.up)), down = Math.max(0, ...b.parts.map(p => p.down)), out = [];
-      for (let k = -down; k < up; k++) out.push({ k, units: b.parts.filter(p => k >= 0 ? p.up > k : p.down >= -k).map(p => ({ use: "", code: "", m2: null, pts: p.pts })) });
-      return out.filter(f => f.units.length); })();
-  const segDist = (p, a, c) => { const dx = c[0] - a[0], dy = c[1] - a[1], t = Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / (dx * dx + dy * dy || 1)));
-    return Math.hypot(p[0] - a[0] - t * dx, p[1] - a[1] - t * dy); };
-  const door = prem && b.origin ? [prem.x - b.origin[0], prem.y - b.origin[1]] : null;
-  let mine = null;                                                     // the premises' own unit (as src/building/catastro_shops.py)
-  if (door && b.source === "units") {
-    const g = (floors.find(f => f.k === 0) || { units: [] }).units.filter(u => !["common parts", "home", "parking / storage"].includes(unitKind(u)[1]));
-    const d = u => Math.min(...u.pts.slice(1).map((q, i) => segDist(door, u.pts[i], q)));
-    mine = g.sort((a, c) => d(a) - d(c))[0] || null;
-    if (mine && d(mine) > 8) mine = null;
-  }
-  const above = floors.filter(f => f.k >= 0).length, below = floors.length - above;
+  if (!b || !b.parts) { box.innerHTML = `<p class="meta">NOMAD holds no Catastro building outline for this premises. See the building in <a href="#city">City in 3D</a>.</p>`; return; }
+  const up = Math.max(1, ...b.parts.map(p => p.up)), down = Math.max(0, ...b.parts.map(p => p.down)), floors = [];
+  for (let k = -down; k < up; k++) floors.push({ k, parts: b.parts.filter(p => k >= 0 ? p.up > k : p.down >= -k) });
+  const fl = floors.filter(f => f.parts.length);
+  const above = fl.filter(f => f.k >= 0).length, below = fl.length - above;
   const head = [b.use && `${esc(b.use)} building`, `${above} floor${above === 1 ? "" : "s"} above ground${below ? `, ${below} below` : ""}`,
-    b.dwellings ? `${b.dwellings} home${b.dwellings === 1 ? "" : "s"}` : "", b.units_n ? `${b.units_n} units in the Catastro` : ""].filter(Boolean).join(" · ")
-    + (mine ? `. This premises: the ground-floor ${esc(mine.use.toLowerCase() || "unit")} of ${mine.m2} m², outlined.` : "");
+    b.dwellings ? `${b.dwellings} home${b.dwellings === 1 ? "" : "s"}` : "", b.units_n ? `${b.units_n} units in the Catastro` : ""].filter(Boolean).join(" · ");
   box.innerHTML = `<p class="bhead">${head}</p>
-    <div class="bfloors" role="group" aria-label="Floor">${floors.map(f => `<button type="button" class="chip" data-k="${f.k}" aria-pressed="false">${floorName(f.k)}</button>`).join("")}</div>
-    <div class="bgrid"><div><div class="bplan"></div><div class="bunits"></div></div>
+    <div class="bfloors" role="group" aria-label="Floor">${fl.map(f => `<button type="button" class="chip" data-k="${f.k}" aria-pressed="false">${floorName(f.k)}</button>`).join("")}</div>
+    <div class="bgrid"><div><div class="bplan"></div></div>
       <div class="bstage"><canvas aria-label="3D model of the building, floor by floor. The plan beside it gives the same information."></canvas><span class="hint">drag to turn · scroll to zoom</span></div></div>
-    <p class="meta">${b.source === "units" ? "Every unit as the Catastro records it (use and built area, m²); floors drawn 3 m apart." :
-      "The Catastro has no floor-by-floor plan of this building: its outline on each floor, from the building parts and their number of floors."} Source: Dirección General del Catastro.</p>`;
-  const pts = floors.flatMap(f => f.units.flatMap(u => u.pts)), xs = pts.map(q => q[0]), ys = pts.map(q => q[1]);
+    <p class="meta">The building's outline on each floor, from the Catastro building parts and their number of floors; floors drawn 3 m apart. Source: Dirección General del Catastro.</p>`;
+  const pts = fl.flatMap(f => f.parts.flatMap(p => p.pts)), xs = pts.map(q => q[0]), ys = pts.map(q => q[1]);
   const x0 = Math.min(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys), w = Math.max(...xs) - x0, h = y1 - y0, pad = 0.04 * Math.max(w, h);
-  const solids = sel => floors.flatMap(f => f.units.map(u => ({ pts: u.pts.map(q => [q[0] - x0, q[1] - y0]), z0: f.k * 3, h: 2.9,
-    rgb: u === mine ? [192, 112, 79] : b.source === "units" ? unitKind(u)[2] : [226, 222, 213], alpha: f.k === sel || u === mine ? 1 : 0.28 })));
+  const solids = s => fl.flatMap(f => f.parts.map(p => ({ pts: p.pts.map(q => [q[0] - x0, q[1] - y0]), z0: f.k * 3, h: 2.9, rgb: [226, 222, 213], alpha: f.k === s ? 1 : 0.28 })));
   const drawFloor = k => {
-    const f = floors.find(q => q.k === k) || floors[0];
+    const f = fl.find(q => q.k === k) || fl[0];
     box.querySelectorAll(".bfloors .chip").forEach(c => c.setAttribute("aria-pressed", String(+c.dataset.k === f.k)));
-    const poly = u => { const kd = unitKind(u);
-      return `<polygon${u === mine ? ' class="mine"' : ""} points="${u.pts.map(q => `${(q[0] - x0).toFixed(1)},${(y1 - q[1]).toFixed(1)}`).join(" ")}" fill="${b.source === "units" ? `rgb(${kd[2].join(",")})` : "#FBFAF7"}"><title>${b.source === "units" ? `${esc(u.use || kd[1])} · ${u.m2} m²` : floorName(f.k)}</title></polygon>`; };
-    const label = u => { if (!u.m2 || u.m2 < 25) return "";
-      const c = u.pts.reduce((a, q) => [a[0] + q[0] / u.pts.length, a[1] + q[1] / u.pts.length], [0, 0]);
-      return `<text x="${(c[0] - x0).toFixed(1)}" y="${(y1 - c[1]).toFixed(1)}" font-size="${(Math.max(w, h) / 24).toFixed(2)}">${u.m2}</text>`; };
-    box.querySelector(".bplan").innerHTML = `<svg viewBox="${-pad} ${-pad} ${w + 2 * pad} ${h + 2 * pad}" role="img" aria-label="Plan of the ${floorName(f.k)}">${f.units.map(poly).join("")}${f.units.map(label).join("")}</svg>`;
-    if (b.source === "units") {
-      const kinds = {};
-      f.units.forEach(u => { const kd = unitKind(u), e = kinds[kd[1]] = kinds[kd[1]] || { rgb: kd[2], n: 0, m2: 0 }; e.n++; e.m2 += u.m2 || 0; });
-      box.querySelector(".bunits").innerHTML = `<ul>${Object.entries(kinds).map(([n, v]) => `<li><i style="background:rgb(${v.rgb.join(",")})"></i>${n === "common parts" ? n : `${v.n} × ${esc(n)}`} · ${Math.round(v.m2)} m²</li>`).join("")}</ul>`;
-    } else box.querySelector(".bunits").innerHTML = "";
+    const poly = p => `<polygon points="${p.pts.map(q => `${(q[0] - x0).toFixed(1)},${(y1 - q[1]).toFixed(1)}`).join(" ")}" fill="#FBFAF7"><title>${floorName(f.k)}</title></polygon>`;
+    box.querySelector(".bplan").innerHTML = `<svg viewBox="${-pad} ${-pad} ${w + 2 * pad} ${h + 2 * pad}" role="img" aria-label="Plan of the ${floorName(f.k)}">${f.parts.map(poly).join("")}</svg>`;
     if (bView) bView.show(solids(f.k));
   };
   box.querySelector(".bfloors").addEventListener("click", e => { const c = e.target.closest(".chip"); if (c) drawFloor(+c.dataset.k); });
   try { bView = miniViewer(box.querySelector("canvas"), box.querySelector(".bstage")); }
   catch (e) { bView = null; box.querySelector(".bstage").innerHTML = `<p class="meta">${NO_GL_MSG}</p>`; }
-  drawFloor(floors.some(f => f.k === 0) ? 0 : floors[0].k);
+  drawFloor(fl.some(f => f.k === 0) ? 0 : fl[0].k);
 }
 function initSearch() {
   const q = $("#q"), ul = $("#sugg");

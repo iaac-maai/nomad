@@ -1,45 +1,19 @@
-"""Nomad - the building of every empty premises, for the website (step 3 card: plans by floor, units, 3D).
+"""Nomad - the building of every empty premises, for the website (Find your shop: plans by floor and 3D).
 
-Per parcel (14-character cadastral reference of the census premises):
-  units     buildings with a Catastro floor-by-floor plan (data/barcelona/catastro/floors, src/zoning/catastro_plans.py):
-            every unit of every floor (use, built m², outline)
-  building  the others: the building parts with their floors above and below ground (Catastro INSPIRE buildings,
-            data/barcelona/catastro/buildings.json.gz, src/building/catastro_buildings.py); no units inside
+Per parcel (14-character cadastral reference of the census premises): the building parts with their floors above
+and below ground (Catastro INSPIRE buildings, data/barcelona/catastro/buildings.json.gz, src/building/catastro_buildings.py).
+The floor-by-floor units of the Catastro Visor 3D (src/zoning/catastro_plans.py) were removed on 9 Nov 2026: not open data.
 Coordinates in metres from the building's south-west corner, "origin" (EPSG:25831), 0,1 m.
 Out: site/data/catastro/b_<first two characters of ref>.json ({ref: building}), 100 files
 Run: .venv/Scripts/python src/zoning/catastro_site.py
 """
 import gzip, json
 from pathlib import Path
-from pyproj import Transformer
 
 ROOT = Path(__file__).resolve().parents[2]
-FLOORS = ROOT / "data" / "barcelona" / "catastro" / "floors"
 OUT = ROOT / "site" / "data" / "catastro"
-TO_UTM = Transformer.from_crs("EPSG:4326", "EPSG:25831", always_xy=True)
 USE = {"1_residential": "housing", "2_agriculture": "agriculture", "3_industrial": "industry", "4_1_office": "offices",
        "4_2_retail": "retail", "4_3_publicServices": "public services"}
-
-
-def rings_of(geo):
-    if geo["type"] == "Polygon":
-        return [geo["coordinates"][0]]
-    if geo["type"] == "MultiPolygon":
-        return [p[0] for p in geo["coordinates"]]
-    return []
-
-
-def from_units(g):
-    floors = {}
-    for f in g.get("features") or []:
-        p = f["properties"]
-        for ring in rings_of(f["geometry"]):
-            k = int(p.get("Planta") or 0)
-            name = (p.get("NomPlanta") or "").replace(u"�TIC", u"ÀTIC").replace(u"�tic", u"Àtic").replace(u"�", u"")
-            fl = floors.setdefault(k, {"k": k, "name": name, "units": []})   # the Catastro sends "Àtic" garbled for some floors
-            fl["units"].append({"use": p.get("Descripcion") or "", "code": p.get("Uso") or "", "m2": p.get("Superficie"),
-                                "pts": [list(TO_UTM.transform(x, y)) for x, y in ring]})
-    return [floors[k] for k in sorted(floors)]
 
 
 def local(pts_lists, x0, y0):
@@ -55,20 +29,7 @@ def main():
         b = B.get(ref)
         info = {"ref": ref, "use": USE.get((b or {}).get("use"), (b or {}).get("use") or ""),
                 "dwellings": int(float((b or {}).get("dwellings") or 0)), "units_n": int(float((b or {}).get("units") or 0))}
-        f = FLOORS / (ref + ".json")
-        if f.exists():
-            g = json.load(open(f, encoding="utf-8"))
-            floors = from_units(g)
-            allp = [q for fl in floors for u in fl["units"] for q in u["pts"]]
-            if not allp:
-                continue
-            x0, y0 = min(q[0] for q in allp), min(q[1] for q in allp)
-            for fl in floors:
-                for u in fl["units"]:
-                    u["pts"] = local([u["pts"]], x0, y0)[0]
-            out = dict(info, source="units", origin=[round(x0, 1), round(y0, 1)], address=g["localizacion"].get("Direccion1", ""), floors=floors,
-                       units_n=info["units_n"] or sum(1 for fl in floors for u in fl["units"] if u["code"] != "COMUN"))
-        elif b:
+        if b:                                                       # Visor 3D floor-by-floor units removed (not open data)
             parts = [{"up": p.get("up") or 0, "down": p.get("down") or 0, "rings": [r[0] for r in p["poly"]]} for p in b["parts"]]
             allp = [q for p in parts for r in p["rings"] for q in r]
             if not allp:

@@ -81,29 +81,20 @@ def demos():
 
 def premises():
     rows = []
-    val = {}
-    vp = R / "value" / "premises_value.csv"                  # src/app/value.py (idealista18 2018 asking prices, ODbL)
-    if vp.exists():
-        for v in csv.DictReader(open(vp, encoding="utf-8")):
-            val[v["ID_Global"]] = (v["eur_m2_500m"], v["eur_m2_ground_800m"])
     av = {}
-    ap = R / "avoid" / "avoid.csv"                            # src/check/avoid.py (avoid answers, Bars's daylight, shops nearby)
+    ap = R / "avoid" / "avoid.csv"                            # src/check/avoid.py: shops within 100 m (street life)
     if ap.exists():
         for v in csv.DictReader(open(ap, encoding="utf-8")):
             av[v["ID_Global"]] = v
-    num = lambda x, k=1: round(float(x), k) if x not in ("", None) else None
     with open(R / "zoning" / "empty_premises_zoning.csv", encoding="utf-8") as f:
         for r in csv.DictReader(f):
-            v = val.get(r["ID_Global"], ("", ""))
             a = av.get(r["ID_Global"], {})
             rows.append([round(float(r["X_UTM_ETRS89"])), round(float(r["Y_UTM_ETRS89"])), r["Nom_Via"],
                          str(r["Num_Policia_Inicial"]).split(".")[0], r["Nom_Barri"], r["Nom_Districte"], r["Referencia_Cadastral"],
                          r["zone"], r["pgm_key"], r["housing"], r["why"], r["Nom_Activitat"].replace("Locals buits en ", ""),
-                         int(float(v[0])) if v[0] else None, int(float(v[1])) if v[1] else None,
-                         a.get("answer"), a.get("why"), num(a.get("daylight_df")), num(a.get("lit_depth_m")),
-                         int(a["retail_100m"]) if a.get("retail_100m") else None, int(float(a["homes"])) if a.get("homes") else None])
-    return {"cols": ["x", "y", "street", "num", "barri", "district", "ref", "zone", "key", "housing", "why", "offer", "eur", "eurg",
-                     "ans", "awhy", "df", "lit", "shops", "homes"], "rows": rows}
+                         int(a["retail_100m"]) if a.get("retail_100m") else None])
+    # no prices (idealista18 removed), no daylight prediction (Exp 4 dropped), no home counts (layouts parked)
+    return {"cols": ["x", "y", "street", "num", "barri", "district", "ref", "zone", "key", "housing", "why", "offer", "shops"], "rows": rows}
 
 
 def basemap():
