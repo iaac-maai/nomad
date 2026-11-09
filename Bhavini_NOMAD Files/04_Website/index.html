@@ -711,29 +711,6 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
 .answer .next { border-top: 0; padding-top: 0; font-size: 16px; color: var(--ink) }
 .answer details.more > summary { cursor: pointer; font-weight: 600; color: var(--slate) } .answer details.more[open] > summary { margin-bottom: 12px }
 @media (max-width: 760px) { .doors { grid-template-columns: 1fr } header.bar .wrap { grid-template-columns: auto auto } .views { grid-column: 1 / -1 } }
-
-/* a check that leads to its law in the rulebook */
-.cards li[data-law] { cursor: pointer; border-radius: var(--r-sm); transition: background .12s }
-.cards li[data-law]:hover, .cards li[data-law]:focus-visible { background: var(--pink); outline: none }
-.lawgo { color: var(--ink); font-weight: 600; white-space: nowrap }
-
-/* the rules list: the open law is lit; each law can be read here */
-.bk-item { position: relative; margin: 0 0 6px }
-.bk-item .bk-mark { margin: 0; padding-right: 44px }
-.bk-mark small { color: var(--muted) }
-.bk-more { position: absolute; top: 6px; right: 6px; width: 28px; height: 28px; display: grid; place-items: center; padding: 0; border: 1.5px solid var(--ink); border-radius: var(--r-sm); background: transparent; color: var(--ink); font: 600 16px/1 var(--mono); cursor: pointer }
-.bk-more:hover { background: var(--pink) }
-.bk-text { padding: 10px 12px 12px; border: 1.5px solid var(--line); border-top: 0; border-radius: 0 0 var(--r-sm) var(--r-sm); font-size: 13px; line-height: 1.5; color: var(--slate) }
-.bk-text p { margin: 0; font-size: 13px; color: var(--slate) }
-.bk-item.on .bk-mark { background: var(--neon); border-color: var(--neon); color: #111211 }
-.bk-item.on .bk-mark small, .bk-item.on .bk-mark .pg { color: #3B3D3A }
-.bk-item.on .bk-more { color: #111211; border-color: #111211 }
-.bk-item.on .bk-more:hover { background: rgba(17,18,17,.12) }
-/* sections that start closed */
-.collhead { display: flex; align-items: center; justify-content: space-between; gap: 24px }
-.coll { flex: none; width: 40px; height: 40px; display: grid; place-items: center; padding: 0; border: 1.5px solid var(--ink); border-radius: var(--r-sm); background: transparent; color: var(--ink); font: 600 22px/1 var(--mono); cursor: pointer; transition: background .12s }
-.coll:hover { background: var(--pink) } .coll:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px }
-.collbody > .src-table, .collbody > .reqrow:first-of-type { margin-top: 32px }
 </style>
 
 <a class="skip" href="#main">Skip to content</a>
@@ -744,9 +721,9 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
     <a class="ptab" data-view="app" href="#city" data-t="nav_city">City in 3D</a>
     <a class="ptab" data-view="app" href="#check"><span class="sn">1</span>Your shop</a>
     <a class="ptab" data-view="app" href="#design"><span class="sn">2</span>Your homes</a>
-    <a class="ptab" data-view="app" href="#rules">The laws</a>
     <a class="ptab" data-view="app" href="#saved"><span class="sn">3</span>Saved</a>
     <a class="ptab" data-view="app" href="#policy">For the city</a>
+    <a class="ptab" data-view="app" href="#rules">The laws</a>
     <a class="ptab" data-view="research" href="#steps">Workflow</a>
     <a class="ptab" data-view="research" href="#real">Results</a>
     <a class="ptab" data-view="research" href="#rulecards">Rule cards</a>
@@ -876,6 +853,27 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
   </div>
 </div></section>
 
+<section class="sheet" id="saved" data-view="app"><div class="wrap">
+  <p class="eyebrow" data-t="saved_eb">Step 3 · keep and share</p>
+  <h2 data-t="saved_h">Saved shops, side by side</h2>
+  <p class="lede" data-t="saved_lede">Every shop you save keeps your requirements and NOMAD's answer. Tick two or more to compare them. Only you can see your saved shops.</p>
+  <div id="savedlist" class="savedlist"></div>
+  <div class="src-table"><table id="compare"></table></div>
+</div></section>
+
+<section class="sheet" id="policy" data-view="app"><div class="wrap">
+  <p class="eyebrow">For the city · where to start</p>
+  <h2>Where can the city find homes?</h2>
+  <p class="lede">Every empty shop and every unused warehouse, commercial or office building in Barcelona was run through NOMAD: zoning, daylight (Bars's model where it exists), real plans, every rule. Set how many homes the city needs. NOMAD picks the fewest places that reach it and lists the ones to avoid.</p>
+  <div class="reqrow"><label for="pneed">Homes the city needs</label><input id="pneed" type="number" min="1" step="50" value="1000">
+    <label><input type="checkbox" id="pcheck"> also where the zone's own plan decides (to confirm)</label></div>
+  <div class="reqrow" id="pkinds"><span>Use:</span>
+    <label><input type="checkbox" value="shop" checked> empty shops</label><label><input type="checkbox" value="warehouse" checked> warehouses</label>
+    <label><input type="checkbox" value="commercial" checked> commercial buildings</label><label><input type="checkbox" value="office" checked> office buildings</label></div>
+  <div id="pout" aria-live="polite"><p class="hint2">Loading NOMAD's city results…</p></div>
+  <p class="note">Homes: the most legal homes NOMAD finds in each place (asked 2 x 1-bed + 1 x 2-bed, and "most homes"); warehouses at 6 m clear height (two levels). In use or not: the 2024 census of ground-floor premises, a hint, not proof. To build a list for the city, every place still needs its owner and a visit.</p>
+</div></section>
+
 <section class="sheet" id="rules" data-view="app"><div class="wrap">
   <p class="eyebrow">The laws · for anyone who wants to read them</p>
   <h2>Every law NOMAD uses, in one book</h2>
@@ -902,31 +900,6 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
   </div>
   </div>
   <p class="hint2" id="bknote">Click a page or its curling corner to turn it, or use the arrow keys. The pages are the official documents; NOMAD only added the index, the dividers and the page numbers.</p>
-  </div>
-</div></section>
-
-<section class="sheet" id="saved" data-view="app"><div class="wrap">
-  <p class="eyebrow" data-t="saved_eb">Step 3 · keep and share</p>
-  <div class="collhead"><h2 data-t="saved_h">Saved shops, side by side</h2><button type="button" class="coll" aria-expanded="false" aria-controls="saved-body" aria-label="Open this section">+</button></div>
-  <div class="collbody" id="saved-body" hidden>
-  <p class="lede" data-t="saved_lede">Every shop you save keeps your requirements and NOMAD's answer. Tick two or more to compare them. Only you can see your saved shops.</p>
-  <div id="savedlist" class="savedlist"></div>
-  <div class="src-table"><table id="compare"></table></div>
-  </div>
-</div></section>
-
-<section class="sheet" id="policy" data-view="app"><div class="wrap">
-  <p class="eyebrow">For the city · where to start</p>
-  <div class="collhead"><h2>Where can the city find homes?</h2><button type="button" class="coll" aria-expanded="false" aria-controls="policy-body" aria-label="Open this section">+</button></div>
-  <div class="collbody" id="policy-body" hidden>
-  <p class="lede">Every empty shop and every unused warehouse, commercial or office building in Barcelona was run through NOMAD: zoning, daylight (Bars's model where it exists), real plans, every rule. Set how many homes the city needs. NOMAD picks the fewest places that reach it and lists the ones to avoid.</p>
-  <div class="reqrow"><label for="pneed">Homes the city needs</label><input id="pneed" type="number" min="1" step="50" value="1000">
-    <label><input type="checkbox" id="pcheck"> also where the zone's own plan decides (to confirm)</label></div>
-  <div class="reqrow" id="pkinds"><span>Use:</span>
-    <label><input type="checkbox" value="shop" checked> empty shops</label><label><input type="checkbox" value="warehouse" checked> warehouses</label>
-    <label><input type="checkbox" value="commercial" checked> commercial buildings</label><label><input type="checkbox" value="office" checked> office buildings</label></div>
-  <div id="pout" aria-live="polite"><p class="hint2">Loading NOMAD's city results…</p></div>
-  <p class="note">Homes: the most legal homes NOMAD finds in each place (asked 2 x 1-bed + 1 x 2-bed, and "most homes"); warehouses at 6 m clear height (two levels). In use or not: the 2024 census of ground-floor premises, a hint, not proof. To build a list for the city, every place still needs its owner and a visit.</p>
   </div>
 </div></section>
 
@@ -1003,10 +976,6 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
       <tr><td>Rule cards (Exp 3)</td><td>open-notebook (vector search) and Gemini 3.5 Flash Lite (drafting)</td><td>MIT (open-notebook); Gemini: Google API terms</td></tr>
       <tr><td>AI assistant and code help</td><td>Claude (Anthropic): the "Ask NOMAD" assistant and help writing the code</td><td>Anthropic terms of use</td></tr>
       <tr><td>Base map (data/basemap.json)</td><td>Barcelona's zones from the Mapa Urbanístic de Catalunya (MUC, muc_qualificacio_bcn.geojson), merged and simplified (02_Code/src/app/build_site.py)</td><td>Generalitat open data, attribution</td></tr>
-      <tr><td>Plan AI (Exp E33)</td><td>NOMAD's own U-Net, trained on the plan library made from Swiss Dwellings and ResPlan; PyTorch</td><td>CC BY 4.0 (data); BSD-style (PyTorch)</td></tr>
-      <tr><td>Floor-by-floor units of a building</td><td>Sede Electrónica del Catastro, Visor 3D</td><td>Download and private use, source cited; check before public use</td></tr>
-      <tr><td>Geometry and reading scans</td><td>shapely; Tesseract OCR</td><td>BSD-3-Clause; Apache-2.0</td></tr>
-      <tr><td>Metropolitan base map (data/amb_base.json)</td><td>Zones and town outlines from the Mapa Urbanístic de Catalunya (MUC), merged and simplified (02_Code/src/zoning/amb_base.py)</td><td>Generalitat open data, attribution</td></tr>
       <tr><td>Metropolitan area, 36 towns (data/amb.json)</td><td>Catastro INSPIRE Buildings (one file per town) and MUC zoning served by the Diputació de Barcelona (02_Code/src/zoning/amb.py)</td><td>Catastro data: reuse with attribution; MUC: Generalitat open data, attribution; Diputació service: to check</td></tr>
       <tr><td>Price estimates</td><td>idealista18 dataset (2018 asking prices)</td><td>ODbL</td></tr>
       <tr><td>Trees in the 3D city</td><td>Open Data BCN street, zone and park trees</td><td>CC BY 4.0</td></tr>
@@ -1097,7 +1066,7 @@ function dlHtml(d) {                                             // one shop's d
 
 function start() {
   P.forEach(r => { r.n = norm(r.street); });
-  for (const f of [drawTally, initMap, initSearch, drawSteps, drawRules, drawExps, initDesign, initCity, drawReal, initExtras, initBook, () => setShare("match", +$("#w-match").value), initNav, initCols, initWsTabs, initViews, initColl])
+  for (const f of [drawTally, initMap, initSearch, drawSteps, drawRules, drawExps, initDesign, initCity, drawReal, initExtras, initBook, () => setShare("match", +$("#w-match").value), initNav, initCols, initWsTabs, initViews])
     try { const r = f(); if (r && r.catch) r.catch(e => console.error(f.name, e)); } catch (e) { console.error(f.name, e); }   // one part failing (no WebGL, say) must not stop the rest
   const first = P.find(r => r.street === "VALÈNCIA" && r.num === "640") || P.find(r => r.housing === "YES");
   show(first);
@@ -1113,7 +1082,7 @@ function drawTally() {
 function show(r) {
   if (!r) return;
   if (r.other) return showOther(r);
-  sel = r; drawMap(); cityMark((r.ref || "").slice(0, 14));
+  sel = r; drawMap();
   const others = P.filter(x => x !== r && x.ref && x.ref === r.ref).length;
   $("#answer").innerHTML = `
     <div><div class="addr">${esc(r.street)} ${esc(r.num)}</div><div class="meta">${esc(r.barri)} · ${esc(r.district)} · empty, ${esc(r.offer)}${r.ref ? " · ref. " + esc(r.ref) : ""}</div></div>
@@ -1136,7 +1105,7 @@ let syncDesign = false;
 function bldgBox(msg) { $("#bldgcol").innerHTML = msg ? `<p class="meta">${esc(msg)}</p>` : `<div class="bldg" id="bldg"></div>`; }
 
 function showOther(r) {                                         // a building clicked in 3D that is neither an empty premises nor an unused building
-  sel = r; drawMap(); cityMark(r.ref);
+  sel = r; drawMap();
   $("#answer").innerHTML = `
     <div><div class="addr">Catastro ${esc(r.ref)}</div><div class="meta">${esc(r.typology)} · ${esc(r.use)} · ${r.floors} floors${r.dwell ? " · " + r.dwell + " dwellings" : ""}</div></div>
     <div class="next">This building is not in the 2024 census of empty premises, nor among the unused buildings, so NOMAD has no answer for it.</div>`;
@@ -1145,7 +1114,7 @@ function showOther(r) {                                         // a building cl
 }
 
 function showWh(r) {                                           // a whole building: what NOMAD knows, and "design homes in it"
-  sel = r; drawMap(); cityMark(String(r.ref || "").slice(0, 14));
+  sel = r; drawMap();
   const where = r.street ? `${esc(r.street)} ${esc(r.num)}` : "Catastro " + esc(r.ref);
   $("#answer").innerHTML = `
     <div><div class="addr">${where}</div><div class="meta">${esc(WHKIND[r.kind])}${r.barri ? " · " + esc(r.barri) : ""}${r.district ? " · " + esc(r.district) : ""} · ref. ${esc(r.ref)}</div></div>
@@ -2155,18 +2124,12 @@ function policyPlaces() {
   return out;
 }
 async function drawAMB() {
-  let A, G; try { [A, G] = await Promise.all(["data/amb.json", "data/amb_base.json"].map(u => fetch(u).then(r => r.json()))); } catch (e) { return; }
-  const all = ["res", "other", "green"].flatMap(k => G[k]).flat();
-  const xs = A.pts.map(p => p[0]).concat(all.map(p => p[0])), ys = A.pts.map(p => p[1]).concat(all.map(p => p[1]));
-  const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys), sc = 900 / Math.max(x1 - x0, y1 - y0);
-  const path = rs => rs.map(r => "M" + r.map(p => `${((p[0] - x0) * sc + 5).toFixed(1)} ${((y1 - p[1]) * sc + 5).toFixed(1)}`).join("L") + "Z").join("");
-  const big = A.towns.slice().sort((a, b) => b.buildings - a.buildings).slice(0, 14).map(t => t.town);
-  const base = [["other", "--map-other"], ["res", "--map-res"], ["green", "--map-green"]].map(([k, c]) => `<path d="${path(G[k])}" fill="var(${c})" fill-rule="evenodd"/>`).join("") +
-    `<path d="${path(G.towns.flatMap(t => t.rings))}" fill="none" stroke="var(--m-slate)" stroke-width=".5" stroke-opacity=".6"/>`;
-  const names = G.towns.filter(t => big.includes(t.town)).map(t => `<text x="${((t.x - x0) * sc + 5).toFixed(1)}" y="${((y1 - t.y) * sc + 5).toFixed(1)}" text-anchor="middle" fill="var(--m-ink)" stroke="var(--m-sheet)" stroke-width="2.5" paint-order="stroke" style="font:600 10px var(--body)">${esc(t.town)}</text>`).join("");
+  let A; try { A = await (await fetch("data/amb.json")).json(); } catch (e) { return; }
+  const xs = A.pts.map(p => p[0]), ys = A.pts.map(p => p[1]);
+  const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys), sc = 600 / Math.max(x1 - x0, y1 - y0);
   const col = { Y: "var(--m-yes)", C: "var(--m-check)" };
-  const svg = `<svg viewBox="0 0 ${Math.round((x1 - x0) * sc) + 10} ${Math.round((y1 - y0) * sc) + 10}" class="ambmap" role="img" aria-label="Map of the metropolitan area: buildings with no homes where the zone admits housing (green) or its plan decides (amber)">${base}${A.pts.map(p =>
-    `<circle cx="${((p[0] - x0) * sc + 5).toFixed(1)}" cy="${((y1 - p[1]) * sc + 5).toFixed(1)}" r="1.7" fill="${col[p[3]]}"/>`).join("")}${names}</svg>`;
+  const svg = `<svg viewBox="0 0 ${Math.round((x1 - x0) * sc) + 10} ${Math.round((y1 - y0) * sc) + 10}" class="ambmap" role="img" aria-label="Map of the metropolitan area: buildings with no homes where the zone admits housing (green) or its plan decides (amber)">${A.pts.map(p =>
+    `<circle cx="${((p[0] - x0) * sc + 5).toFixed(1)}" cy="${((y1 - p[1]) * sc + 5).toFixed(1)}" r="1.6" fill="${col[p[3]]}"/>`).join("")}</svg>`;
   const T = A.towns.slice().sort((a, b) => (b.zone_yes + b.zone_check) - (a.zone_yes + a.zone_check));
   const sum = k => fmt(A.towns.reduce((a, t) => a + t[k], 0));
   $("#amb").innerHTML = `<div class="ambgrid">${svg}<div class="src-table"><table><thead><tr><th>Town</th><th>Buildings</th><th>No homes: warehouses · commercial · offices</th><th>Zone admits housing</th><th>Plan decides</th></tr></thead><tbody>
@@ -2220,7 +2183,7 @@ function drawDesignDetail() {
   $("#dv-walls").setAttribute("aria-pressed", dMode === "walls"); $("#dv-zone").setAttribute("aria-pressed", dMode === "zone");
   const src = dSel === 0 ? dRes.before : dRes.iterations[dSel - 1];
   const head = dSel === 0 ? "the shop as it is" : src.label;
-  $("#dcards").innerHTML = `<div class="fig"><b>FIG.5</b>&nbsp; rule cards · ${esc(head)}</div><ul>${src.cards.map(c => `<li${cardLaw(c) ? ` data-law="${cardLaw(c)}" role="button" tabindex="0" title="Open this law in the rulebook"` : ""}><span class="mark ${c.ok ? "ok" : c.check ? "chk" : "bad"}">${c.ok ? "✓" : c.check ? "?" : "✕"}</span><div><b>${esc(c.title)}</b> <span class="v">${esc(c.value)}${c.limit ? " · " + esc(c.limit) : ""}</span><div class="c">${esc(c.cite)}${cardLaw(c) ? ' <span class="lawgo">→ rulebook</span>' : ""}</div></div></li>`).join("")}</ul>
+  $("#dcards").innerHTML = `<div class="fig"><b>FIG.5</b>&nbsp; rule cards · ${esc(head)}</div><ul>${src.cards.map(c => `<li><span class="mark ${c.ok ? "ok" : c.check ? "chk" : "bad"}">${c.ok ? "✓" : c.check ? "?" : "✕"}</span><div><b>${esc(c.title)}</b> <span class="v">${esc(c.value)}${c.limit ? " · " + esc(c.limit) : ""}</span><div class="c">${esc(c.cite)}</div></div></li>`).join("")}</ul>
     ${src.plan.interventions && src.plan.interventions.length ? `<p class="note">Changes: ${esc(src.plan.interventions.join("; "))}</p>` : ""}`;
   if (!window.THREE || document.body.classList.contains("simple")) return;
   if (!dView) { try { dView = miniViewer($("#dthree"), $("#dstage")); } catch (e) { $("#dviewfig").textContent = NO_GL_MSG + " The plans and rule cards above are complete."; return; } }
@@ -2394,8 +2357,8 @@ function initCity() {
       ${shops.length ? shops.slice(0, 3).map(p => `<div>${esc(p.street)} ${esc(p.num)}: empty, zone <span class="pill ${p.housing}">${WORD[p.housing]}</span></div>`).join("") : `<div class="hint2">No empty shop in the 2024 census.</div>`}
       ${st ? `<div>NOMAD: <span class="pill ${/ZONE/.test(st) ? "" : st}">${ANSKEY.find(([k]) => k === st)[1]}</span></div>` : ""}
       <div id="hudwh"></div>`;
-    const tok = ++cityPick, jump = () => setTimeout(() => { if (tok === cityPick) $("#hero3").scrollIntoView({ behavior: "smooth", block: "start" }); }, 900);   // see the yellow first; the answer is in Find your shop
-    const far = p => Math.hypot(p.x - wx, p.y - wy), shop = shops.slice().sort((a, c) => far(a) - far(c))[0];
+    const jump = () => $("#hero3").scrollIntoView({ behavior: "smooth", block: "start" });   // the answer is in Find your shop
+    const tok = ++cityPick, far = p => Math.hypot(p.x - wx, p.y - wy), shop = shops.slice().sort((a, c) => far(a) - far(c))[0];
     if (shop) { $("#q").value = shop.street + " " + shop.num; show(shop); jump(); return; }
     loadWH().then(() => {
       if (tok !== cityPick) return;                                     // another building was clicked meanwhile
@@ -2500,30 +2463,13 @@ function loadNear() {
     const key = i + "_" + j, mx = (i + 0.5) * T, my = (j + 0.5) * T, d = Math.hypot(mx - tx, my - ty);
     if (d < reach && !city.tiles[key] && !city.loading[key]) {
       city.loading[key] = true;
-      fetch(`data/city/t_${key}.json`).then(x => x.json()).then(data => { city.tiles[key] = buildTile(data); delete city.loading[key]; applyLayers(); if (city.mark) cityMark(city.mark); }).catch(() => { delete city.loading[key]; });
+      fetch(`data/city/t_${key}.json`).then(x => x.json()).then(data => { city.tiles[key] = buildTile(data); delete city.loading[key]; applyLayers(); }).catch(() => { delete city.loading[key]; });
     } else if (d > reach + 1800 && city.tiles[key]) {
       const t = city.tiles[key]; city.scene.remove(t.mesh); t.mesh.geometry.dispose(); t.trees.forEach(m => city.scene.remove(m)); delete city.tiles[key];
     }
   }
   const n = Object.keys(city.tiles).length;
   if (n && $("#cityhud").textContent.startsWith("loading")) $("#cityhud").innerHTML = `<b>Barcelona</b><div class="meta">${n} km² loaded · click a building</div>`;
-}
-function cityMark(ref) {                                         // ref = the 14-character Catastro reference, "" clears
-  if (!city) return;
-  city.mark = ref;
-  (city.markObj || []).forEach(o => { city.scene.remove(o); o.geometry.dispose(); o.material.dispose(); }); city.markObj = [];
-  if (!ref) return;
-  const pts = [];
-  Object.values(city.tiles).forEach(t => {
-    const b = t.data.b.findIndex(m => m[0] === ref); if (b < 0) return;
-    const pos = t.mesh.geometry.attributes.position.array;
-    t.triPart.forEach((part, tri) => { if (t.data.bid[part] === b) for (let i = 0; i < 9; i++) pts.push(pos[tri * 9 + i]); });
-  });
-  if (!pts.length) return;                                       // its tile is not loaded yet: tiles call this again when they arrive
-  const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(pts, 3)); g.computeVertexNormals();
-  const fill = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: 0xE5FF00, transparent: true, opacity: 0.4, depthWrite: false, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }));
-  const line = new THREE.LineSegments(new THREE.EdgesGeometry(g, 30), new THREE.LineBasicMaterial({ color: 0xE5FF00 }));
-  city.scene.add(fill, line); city.markObj = [fill, line];
 }
 function buildTile(data) {
   const raw = Uint8Array.from(atob(data.xy), c => c.charCodeAt(0)), xy = new Int16Array(raw.buffer);
@@ -2751,14 +2697,6 @@ function setShare(k, v) {
   WK.forEach(x => { $("#wo-" + x).textContent = els[x].value + " %"; els[x].style.setProperty("--p", els[x].value + "%"); });
 }
 const engineW = k => +($("#w-" + k) || { value: 0 }).value * 0.16;
-/* sections that start closed: + opens them, − closes them; a link that leads to one opens it */
-function collSet(b, open) { b.setAttribute("aria-expanded", open); b.setAttribute("aria-label", open ? "Close this section" : "Open this section"); b.textContent = open ? "−" : "+"; $("#" + b.getAttribute("aria-controls")).hidden = !open; }
-function initColl() {
-  document.querySelectorAll(".coll").forEach(b => b.addEventListener("click", () => collSet(b, b.getAttribute("aria-expanded") !== "true")));
-  const go = h => { const b = h && $(`${h} .coll`); if (b) collSet(b, true); };
-  document.addEventListener("click", e => { const a = e.target.closest('a[href="#saved"], a[href="#policy"]'); if (a) go(a.getAttribute("href")); }, true);
-  if (location.hash === "#saved" || location.hash === "#policy") go(location.hash);
-}
 function initExtras() {
   try { LANG = localStorage.getItem("nomad-lang") || (navigator.language || "en").slice(0, 2); } catch (e) {}
   if (!I18N[LANG]) LANG = "en";
@@ -2783,17 +2721,7 @@ const BK = { idx: null, anchors: null, pdfs: {}, at: 1, hl: null, busy: false };
 const CARD_ANCHORS = { "Zoning": ["zoning"], "Clear height": ["height", "height_rule"], "Height, wet rooms": ["height_rule"],
   "Façade with windows": ["useful_bcn", "facade"], "Façade": ["facade"], "Number of flats": ["density"], "Useful area": ["useful", "useful_bcn"],
   "Bedrooms": ["bedroom"], "Living room": ["living"], "Living room on the façade": ["living"], "Windows": ["windows"],
-  "Hall width": ["hall"], "Bathroom": ["bath"], "Façade on the street or block interior": ["facade"], "Escape route": ["escape"],
-  door_entry: ["door_entry"], door_inner: ["door_inner"], door_circle: ["hall"], hall_width: ["hall"], turning: ["turning"], fixtures_circle: ["turning"],
-  facade_room: ["facade"], living_circle: ["living"], kitchen_width: ["kitchen"], kitchen_equip: ["equipment"], bath_equip: ["equipment"], laundry: ["equipment"],
-  wardrobe: ["storage"], bed_square: ["bedroom"] };
-const cardLaw = c => (CARD_ANCHORS[c.title] || []).find(k => BK.anchors && BK.anchors[k]) || (CARD_ANCHORS[c.title] || [])[0] || "";
-function openLaw(k) { const a = BK.anchors && BK.anchors[k]; if (a) { BK.hl = a; bookGo(a.page, true); lawOn(true); } }   // same as a click on the list beside the rulebook
-function lawOn(reveal) {                                        // the law open in the book is lit in the list beside it
-  const k = BK.hl && BK.hl.key; document.querySelectorAll("#bkmarks .bk-item").forEach(i => i.classList.toggle("on", i.dataset.k === k));
-  const it = reveal && $("#bkmarks .bk-item.on"), side = $(".bk-side");
-  if (it) side.scrollTop += it.getBoundingClientRect().top - side.getBoundingClientRect().top - 12;
-}
+  "Hall width": ["hall"], "Bathroom": ["bath"] };
 function bkOne() { return window.matchMedia("(max-width: 860px)").matches; }
 async function initBook() {
   if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
@@ -2808,8 +2736,6 @@ async function initBook() {
   $("#bkprev").addEventListener("click", () => bookTurn(-1));
   $("#bknext").addEventListener("click", () => bookTurn(1));
   $("#bkpage").addEventListener("change", e => { BK.hl = null; bookGo(+e.target.value); });
-  $("#dcards").addEventListener("click", e => { const l = e.target.closest("[data-law]"); if (l) openLaw(l.dataset.law); });
-  $("#dcards").addEventListener("keydown", e => { const l = e.target.closest("[data-law]"); if (l && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openLaw(l.dataset.law); } });
   $("#fbfull").addEventListener("click", () => { const f = $("#fb"); if (document.fullscreenElement) document.exitFullscreen(); else if (f.requestFullscreen) f.requestFullscreen(); });
   document.addEventListener("fullscreenchange", () => { if (BK.shown) bookShow(); });
   $("#bkstage").addEventListener("keydown", e => { if (e.key === "ArrowRight") { e.preventDefault(); bookTurn(1); } if (e.key === "ArrowLeft") { e.preventDefault(); bookTurn(-1); } });
@@ -2849,12 +2775,8 @@ function bookMarks() {
     marks = Object.values(A).map(a => ({ a, ok: null })).sort((x, y) => x.a.page - y.a.page);
     head = `<h3>The rules NOMAD checks</h3><p>Check a shop in Design homes and this list becomes the laws of your project.</p>`;
   }
-  el.innerHTML = head + marks.map((m, i) => `<div class="bk-item" data-k="${esc(m.a.key)}"><button type="button" class="bk-mark" data-i="${i}">${m.ok === null ? "" : `<span class="pill ${m.ok ? "YES" : "NO"}">${m.ok ? "OK" : "FAILS"}</span>`}<span>${esc(m.a.name)} <small>· ${esc(m.a.doc)}</small></span><span class="pg">p. ${m.a.page}</span></button><button type="button" class="bk-more" aria-expanded="false" aria-label="Read this rule here">+</button><div class="bk-text" hidden>${m.a.text ? `<p>${esc(m.a.text)}</p>` : `<p>This page of the book is a scan, so its text cannot be shown here. Click the rule to read it in the book.</p>`}</div></div>`).join("");
-  el.onclick = e => {
-    const more = e.target.closest(".bk-more");
-    if (more) { const open = more.getAttribute("aria-expanded") !== "true"; more.setAttribute("aria-expanded", open); more.textContent = open ? "−" : "+"; more.nextElementSibling.hidden = !open; return; }
-    const b = e.target.closest(".bk-mark"); if (!b) return; const m = marks[+b.dataset.i]; BK.hl = m.a; bookGo(m.a.page, true); lawOn(true); };
-  lawOn();
+  el.innerHTML = head + marks.map((m, i) => `<button type="button" class="bk-mark" data-i="${i}">${m.ok === null ? "" : `<span class="pill ${m.ok ? "YES" : "NO"}">${m.ok ? "OK" : "FAILS"}</span>`}<span>${esc(m.a.name)} <small style="color:var(--muted)">· ${esc(m.a.doc)}</small></span><span class="pg">p. ${m.a.page}</span></button>`).join("");
+  el.onclick = e => { const b = e.target.closest(".bk-mark"); if (!b) return; const m = marks[+b.dataset.i]; BK.hl = m.a; bookGo(m.a.page, true); };
 
 }
 function bookPart(n) { return BK.idx.parts.find(p => n >= p.first_page && n <= p.last_page); }
@@ -2887,7 +2809,6 @@ async function bookRender(n, slot) {
         width: ((r[2] - r[0]) / a.page_size[0] * 100) + "%", height: ((r[3] - r[1]) / a.page_size[1] * 100) + "%" });
       box.appendChild(d);
     });
-    if (a && a.page === n && !(a.rects && a.rects.length)) { const d = document.createElement("div"); d.className = "bk-hl"; Object.assign(d.style, { inset: "0", background: "none", outlineWidth: "5px" }); box.appendChild(d); }   // a scanned page: frame the whole page
     if (BK.at !== n && !bookSpread(BK.at).includes(n)) return;  // the reader moved on while this page was loading
     slot.innerHTML = ""; slot.appendChild(box);
   } catch (e) { slot.innerHTML = `<span class="wait">page ${n} did not load</span>`; console.error(e); }
@@ -2895,7 +2816,6 @@ async function bookRender(n, slot) {
 async function bookShow() {
   if (!BK.idx || !window.pdfjsLib) return;
   const sp = $("#bkspread"), pages = bookSpread(BK.at);
-  lawOn();
   sp.classList.toggle("one", pages.length === 1);
   sp.innerHTML = pages.map((p, i) => `<div class="bk-pg ${pages.length === 1 ? "r" : (i ? "r" : "l")} ${p ? "" : "blank"}" data-p="${p || ""}"></div>`).join("");
   $("#bkpage").value = BK.at;
