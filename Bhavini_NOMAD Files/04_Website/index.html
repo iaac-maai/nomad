@@ -631,6 +631,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
 .answer .next { border-top: 0; padding-top: 0; font-size: 16px; color: var(--ink) }
 .answer details.more > summary { cursor: pointer; font-weight: 600; color: var(--slate) } .answer details.more[open] > summary { margin-bottom: 12px }
 @media (max-width: 760px) { .doors { grid-template-columns: 1fr } header.bar .wrap { grid-template-columns: auto auto } .views { grid-column: 1 / -1 } }
+.h2note { font-size: .55em; font-weight: 500; color: var(--slate); white-space: nowrap }
 </style>
 
 <a class="skip" href="#main">Skip to content</a>
@@ -717,7 +718,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
 
 <section class="sheet" id="city" data-view="app"><div class="wrap">
   <p class="eyebrow">For the city · walk the streets</p>
-  <h2>Walk the streets and see every empty shop</h2>
+  <h2>Walk the streets and see every empty shop <span class="h2note">· estimated heights, for context only</span></h2>
   <p class="lede">Every building in the city, raised from its Catastro footprint and floors. The ground floor of each empty shop is coloured by what its zone allows. Click a building to see its floors and use, and open its real façade in Street View.</p>
   <div class="citybox panel">
     <div class="cityrow"><div class="citystage" id="citystage"><canvas id="citycv" role="img" aria-label="3D view of Barcelona around the chosen shop, with buildings, trees, streets and shadows. The layer list beside it says what is shown."></canvas><div class="cityhud" id="cityhud">loading the city…</div></div>
