@@ -970,7 +970,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
       <tr><td>Real plan scans</td><td>CubiCasa5K, test split only (<a href="https://zenodo.org/records/2613548" target="_blank" rel="noopener">Zenodo</a>)</td><td>CC BY-NC-SA 4.0 · non-commercial use only</td></tr>
       <tr><td>Plan reader model</td><td>floorplan-to-3d (Yytsi), trained on CubiCasa5K</td><td>MIT</td></tr>
       <tr><td>3D export</td><td>IfcOpenShell; trimesh</td><td>LGPL-3.0; MIT</td></tr>
-      <tr><td>Daylight (Exp 4)</td><td>Ladybug Tools + Radiance, XGBoost; team experiment (Bars, folder exp1_daylight)</td><td>AGPL-3.0 (Ladybug), Apache-2.0</td></tr>
+      <tr><td>Daylight, validated examples (Exp 4)</td><td>Ladybug Tools + Radiance: 5 empty shops simulated by Bars (exp1_daylight/results_shops.csv, tools/daylight_validated.py). The XGBoost prediction model was dropped.</td><td>AGPL-3.0 (Ladybug Tools)</td></tr>
       <tr><td>Daylight method</td><td>EN 17037 (daylight in buildings): target and minimum daylight factor for Barcelona</td><td>European standard, method cited</td></tr>
       <tr><td>Weather file</td><td>Barcelona TMYx (ESP_CT_Barcelona.081800_TMYx.epw), <a href="https://climate.onebuilding.org" target="_blank" rel="noopener">climate.onebuilding.org</a></td><td>to check</td></tr>
       <tr><td>Rule cards (Exp 3)</td><td>open-notebook (vector search) and Gemini 3.5 Flash Lite (drafting)</td><td>MIT (open-notebook); Gemini: Google API terms</td></tr>
@@ -1007,61 +1007,21 @@ const fmt = n => Number(n).toLocaleString("en-US");
 const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const norm = s => String(s || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toUpperCase().replace(/\s+/g, " ").trim();
 const WORD = { YES: "Homes allowed", CHECK: "Maybe: the local plan decides", NO: "Homes not allowed" };   // changed by applyLang
-let D, P, B, DL = null;
+let D, P, B, VAL = null;
 
 Promise.all(["data/nomad.json", "data/premises.json", "data/basemap.json"].map(u => fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); }))
-    .concat([fetch("data/daylight.json").then(r => r.ok ? r.json() : null).catch(() => null)]))
-  .then(([d, p, b, dl]) => { D = d; P = p.rows.map(r => Object.fromEntries(p.cols.map((c, i) => [c, r[i]]))); B = b; DL = dl; attachDaylight(); rescoreAnswers(); start(); })
+    .concat([fetch("data/daylight_validated.json").then(r => r.ok ? r.json() : null).catch(() => null)]))
+  .then(([d, p, b, v]) => { D = d; P = p.rows.map(r => Object.fromEntries(p.cols.map((c, i) => [c, r[i]]))); B = b; VAL = v; start(); })
   .catch(e => { $("#answer").innerHTML = `<p>The data did not load (${esc(e.message)}). Reload the page.</p>`; });
 
-/* ---------- daylight, Exp 4 (Bars's model, folder exp1_daylight): data/daylight.json, built by 02_Code/src/app/daylight_site.py
-   from exp1_daylight/shops_bcn_pred.csv and daylight_thresholds.json. Replaces the old per-shop df / lit of premises.json. ---------- */
-const DLC = { L: ["livable", "YES"], C: ["needs a change", "CHECK"], N: ["not livable", "NO"] };
+/* ---------- daylight: the per-shop prediction model (Exp 4, XGBoost) was tried and dropped. Per-shop daylight will come
+   from a grid simulation. Until then only the 5 shops simulated in Radiance are shown, as validated examples
+   (data/daylight_validated.json, built by tools/daylight_validated.py from exp1_daylight/results_shops.csv). ---------- */
+const DAYLIGHT_SOON = "daylight: per-shop grid simulation, coming";
 const dec = (x, k = 2) => Number(x).toFixed(k).replace(".", ",");
-function attachDaylight() {
-  P.forEach(r => {
-    r.df = null; r.lit = null; r.dl = null;                     // the old model's numbers are out of date
-    const list = DL && DL.shops[`${(r.ref || "").slice(0, 14)}|${r.street} ${r.num}`];
-    if (!list) return;
-    let best = list[0];
-    if (list.length > 1) { const [la, lo] = utmToLatLng(r.x, r.y); best = list.reduce((a, q) => ((q[0] - lo) ** 2 + (q[1] - la) ** 2 < (a[0] - lo) ** 2 + (a[1] - la) ** 2 ? q : a)); }
-    r.dl = { lit: best[2], share: best[3], cls: best[4], check: best[5] };
-    r.lit = best[2];                                            // the layouts use the new lit depth
-  });
-}
-/* the map's answer (src/check/avoid.py, same order of reasons) for every shop with a match in daylight.json:
-   dark now means the new "not livable" class. Shops without a match keep premises.json's answer. */
-function quantile(xs, q) { const s = xs.slice().sort((a, b) => a - b), p = (s.length - 1) * q, i = Math.floor(p); return s[i] + (s[Math.min(i + 1, s.length - 1)] - s[i]) * (p - i); }
-function rescoreAnswers() {
-  if (!DL) return;
-  const cut = quantile(P.map(r => +r.shops || 0), 0.10);      // avoid.py: retail within 100 m, lowest 10 % of the city
-  P.forEach(r => {
-    if (!r.dl) return;
-    r.ans0 = r.ans;
-    const d = r.dl, h = r.homes, day = `daylight: ${DLC[d.cls][0]}, ${dec(d.lit, 1)} m daylit (Bars's model, Exp 4)`;
-    if (r.housing === "NO") return;                              // not allowed: unchanged
-    if (r.ans === "not liveable" && /^no home that passes/.test(r.awhy || "")) return;   // the rules, not daylight: unchanged
-    if (d.cls === "N") { r.ans = "not liveable"; r.awhy = `dark: the daylit zone is only ${dec(d.lit, 1)} m deep, under ${dec(DL.classes.room_min_m, 1)} m (Bars's model, Exp 4)`; }
-    else if (r.shops <= cut) { r.ans = "keep it a shop"; r.awhy = `only ${r.shops} shops within 100 m (lowest 10 % of the city)`; }
-    else if (h != null) { r.ans = "candidate"; r.awhy = `${h} home${h === 1 ? "" : "s"} fit; ${day}`; }
-    else { r.ans = "not modelled"; r.awhy = `zone and street allow it; no clean outline yet (shared ground floor or no street façade); ${day}`; }
-  });
-}
-function dlThreshold() {
-  const t = DL.thresholds;
-  return `${t.method} target for Barcelona: daylight factor ${dec(t.D_target_pct)} % (minimum ${dec(t.D_minimum_pct)} %), from the ${esc(t.weather)} weather file`;
-}
-function dlClasses() {
-  const c = DL.classes;
-  return `livable = a ${c.home_min_m2} m² home fits in the daylit zone (Decret 141 minimum dwelling); needs a change = daylit zone at least ${dec(c.room_min_m, 1)} m deep; not livable = less`;
-}
-function dlNote() {
-  const v = DL.validation;
-  return `Bars's model (Exp 4): ${DL.simulations} Radiance simulations + ${esc(DL.model)}; lit depth checked on ${v.shops} real shops against Radiance, mean error ${dec(v.lit_depth_mae_m)} m. Floor height and windows assumed.`;
-}
-function dlHtml(d) {                                             // one shop's daylight, in words
-  return `<span class="pill ${DLC[d.cls][1]}">${DLC[d.cls][0]}</span> ${dec(d.lit, 1)} m of floor in from the window reach the target (${Math.round(100 * d.share)} % of the floor)`
-    + (d.check ? ` · <b>check the street width by hand</b>` : "");
+const validated = r => VAL && VAL.shops.find(s => s.address === `${r.street} ${r.num}`);
+function valHtml(s) {
+  return `validated example (Radiance, ${s.sensors} sensors): mean daylight factor ${dec(s.mean_df_pct)} %; the ${VAL.method} target of ${dec(VAL.target_pct)} % reaches ${dec(s.lit_depth_m, 1)} m into a ${dec(s.depth_m, 1)} m deep shop`;
 }
 
 function start() {
@@ -1090,7 +1050,7 @@ function show(r) {
         <dt>WHY</dt><dd>${esc(r.why)}</dd>
         <dt>RULE</dt><dd>PGM art. 225.7 (MPGM 1999): housing on the ground floor in zones built along street lines</dd>
         ${r.ans ? `<dt>NOMAD</dt><dd><b>${esc(r.ans)}</b>: ${esc(r.awhy)}</dd>` : ""}
-        ${r.dl ? `<dt>DAYLIGHT</dt><dd>${dlHtml(r.dl)} <span class="meta">(${dlThreshold()}; ${dlClasses()}. ${dlNote()})</span></dd>` : ""}
+        <dt>DAYLIGHT</dt><dd>${validated(r) ? esc(valHtml(validated(r))) : esc(DAYLIGHT_SOON)}</dd>
         ${r.shops != null ? `<dt>STREET LIFE</dt><dd>${r.shops} shops within 100 m <span class="meta">(city median 16)</span></dd>` : ""}
 </dl></details>
     <div class="next">${r.housing === "YES" ? "Good news: the zone allows homes on this ground floor. Next, see which homes fit: your shop is already in step 2 below." :
@@ -1373,7 +1333,7 @@ function drawSteps() {
     ["Read the building", `A plan drawing becomes an outline and a street façade; the Catastro gives the building.`, "Exp 1", "#exp1", "#check"],
     ["Check zoning", `${Math.round(100 * z.housing.YES / z.empty_premises)} % of empty shops stand in a zone that admits housing.`, "Exp 2", "#exp2", "#check"],
     ["Extract the rules", `${fmt(e.rules.pieces)} pieces of ${e.rules.norms} norms in one rulebook; ${D.rules.length} rule cards.`, "Exp 3", "#exp3", "#rules"],
-    ["Predict daylight", "An AI model trained on Radiance simulations predicts daylight in seconds.", "Exp 4", "#exp4", "#check"],
+    ["Daylight", "Per-shop grid simulation, coming. Five shops simulated in Radiance are shown as validated examples.", "Exp 4", "#exp4", "#exp4"],
     ["Check the shop", `Every rule with its article: ${v.YES} YES, ${v.PARTLY} PARTLY, ${v.NO} NO over ${n} shops.`, "Exp 5", "#exp5", "#design"],
     ["Fit the homes", `One layout per circulation strategy, each checked again; ${fmt(st.homes_most.new)} legal homes when as many as fit.`, "Exp 5", "#exp5", "#design"],
     ["Report", "Plans, 3D, verdict and articles on one sheet; IFC and glTF for BIM and the web.", "Exp 5", "#exp5", "#saved"]];
@@ -1506,11 +1466,13 @@ function drawExps() {
       p: `Team experiment: vector search raised fully correct rule cards from 4 to 8 of 10. NOMAD's own ${D.rules.length} rule cards were then tested against a golden set: ${e.golden.questions} questions, ${pct(e.golden.answer_accuracy)} % right after the fixes it found.`,
       chart: bars([["before the fixes", 75, C("--muted")], ["after", pct(e.golden.answer_accuracy), C("--yes")]], 100, " %"),
       l: "The golden set found real bugs: shop conversions need 2,40 m (Annex 4 group C), not 2,50 m, and 8 shops had been thrown out for it." },
-    { id: "exp4", tag: "EXP 4 · STEP 5 · TEAM", h: "Can AI predict daylight without a simulation?",
-      p: DL ? `${DL.simulations} shop variants simulated in Radiance (Ladybug/Honeybee); ${DL.model} learns the daylight and how many metres of floor reach the ${DL.thresholds.method} target for Barcelona (daylight factor ${dec(DL.thresholds.D_target_pct)} %, minimum ${dec(DL.thresholds.D_minimum_pct)} %, from the TMYx weather file). Then all ${fmt(DL.counts.shops)} empty shops of the 2024 census, in ${DL.counts.districts} districts, predicted in seconds: ${fmt(DL.counts.livable)} livable, ${fmt(DL.counts.needs_change)} need a change, ${fmt(DL.counts.not_livable)} not livable (${dlClasses()}). Lit depth checked on ${DL.validation.shops} real shops against Radiance: mean error ${dec(DL.validation.lit_depth_mae_m)} m. Floor height and windows assumed.`
-         : "Bars's daylight results did not load.",
-      chart: `<div class="fig">R² of the first 50 simulations (mean daylight factor)</div>` + bars([["XGBoost", 0.80, C("--blue")], ["rule of thumb", 0.65, C("--muted")]], 1, " R²"),
-      l: "The model starts from the rule of thumb and corrects it with the number of lit façades and the window size." },
+    { id: "exp4", tag: "EXP 4 · STEP 5 · TEAM", h: "Daylight prediction model (XGBoost)",
+      p: "Tried, dropped, replaced by grid simulation.",
+      chart: VAL ? `<div class="fig">validated examples: ${VAL.shops.length} shops simulated in Radiance (${esc(VAL.method)} target ${dec(VAL.target_pct)} %, ${esc(VAL.weather)})</div>
+        <div class="src-table"><table><thead><tr><th>Shop</th><th>Depth</th><th>Mean daylight factor</th><th>Target reaches</th></tr></thead><tbody>${VAL.shops.map(s =>
+          `<tr><td>${esc(s.address)}</td><td class="num">${dec(s.depth_m, 1)} m</td><td class="num">${dec(s.mean_df_pct)} %</td><td class="num">${dec(s.lit_depth_m, 1)} m</td></tr>`).join("")}</tbody></table></div>
+        <p class="hint2">${esc(VAL.assumed)}.</p>` : "",
+      l: "Per-shop daylight needs a simulation of each shop, not a prediction. Until it runs, NOMAD shows no daylight class." },
     { id: "exp5", tag: "EXP 5 · STEPS 6-8", h: "Can NOMAD check a shop, fit legal homes and build them in 3D?",
       p: `${n} shops asking for two one-bedroom flats and one two-bedroom flat: ${v.YES} YES, ${v.PARTLY} PARTLY, ${v.NO} NO. Layouts as circulation strategies: ${fmt(st.homes_as_asked.new)} homes as asked and ${fmt(st.homes_most.new)} at most (the old patio layouts: ${fmt(st.homes_most.old)}, but ${fmt(st.old_most_patio_only_flats)} of those flats were lit only by a patio, which is not their façade). Every layout is built in Rhino and exported as IFC.`,
       chart: bars([["as asked", st.homes_as_asked.new, C("--muted")], ["most homes", st.homes_most.new, C("--terra")], ["old, patios", st.homes_most.old, C("--slate")]], st.homes_most.old * 1.15),
@@ -2263,8 +2225,7 @@ let CITYANS = null;
 function answerIndex() {
   if (CITYANS) return CITYANS;
   const rank = { NOZONE: -1, NO: 0, ZONE: 1, PARTLY: 2, YES: 3 }, m = new Map(), put = (ref, a) => { const o = m.get(ref); if (o === undefined || rank[a] > rank[o]) m.set(ref, a); };
-  P.forEach(r => { if (r.ref && r.dl) put(r.ref.slice(0, 14), r.housing === "NO" ? "NOZONE" : { L: "YES", C: "PARTLY", N: "NO" }[r.dl.cls] || "ZONE"); });
-  const lit = new Set(m.keys());
+  const lit = new Set();
   ((city && city.index && city.index.shops) || []).forEach(s => {
     const ref = s[5]; if (!ref || lit.has(ref)) return;
     const a = s[4] === "NO" ? "NOZONE" : s[4] === "YES" || s[4] === "CHECK" ? "ZONE" : null;

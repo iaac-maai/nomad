@@ -22,7 +22,7 @@ line(sys.prefix != sys.base_prefix, "running inside the .venv",
 
 for mod, pip_name in [("requests", "requests"), ("dotenv", "python-dotenv"), ("pypdf", "pypdf"),
                       ("pandas", "pandas"), ("numpy", "numpy"), ("sklearn", "scikit-learn"),
-                      ("xgboost", "xgboost"), ("matplotlib", "matplotlib")]:
+                      ("matplotlib", "matplotlib")]:
     try:
         importlib.import_module(mod)
         line(True, "package " + pip_name)

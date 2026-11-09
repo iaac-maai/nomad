@@ -1,0 +1,50 @@
+{
+ "about": "5 empty shops simulated in Radiance (Ladybug/Honeybee) by Bars, exp1_daylight/results_shops.csv. Built by tools/daylight_validated.py. No prediction model.",
+ "method": "EN 17037",
+ "weather": "ESP_CT_Barcelona.081800_TMYx.epw",
+ "target_pct": 2.04,
+ "minimum_pct": 0.68,
+ "assumed": "floor height 4,0 m, window-to-wall ratio 0,6, window head 3,9 m (exp1_daylight)",
+ "shops": [
+  {
+   "address": "FLORIDABLANCA 118",
+   "depth_m": 21.97,
+   "width_m": 6.73,
+   "mean_df_pct": 0.526,
+   "sensors": 126,
+   "lit_depth_m": 0.52
+  },
+  {
+   "address": "ARAGÓ 477",
+   "depth_m": 24.98,
+   "width_m": 11.91,
+   "mean_df_pct": 1.062,
+   "sensors": 264,
+   "lit_depth_m": 2.6
+  },
+  {
+   "address": "ROCAFORT 108",
+   "depth_m": 20.14,
+   "width_m": 5.9,
+   "mean_df_pct": 1.165,
+   "sensors": 100,
+   "lit_depth_m": 2.52
+  },
+  {
+   "address": "CASANOVA 167",
+   "depth_m": 20.29,
+   "width_m": 9.0,
+   "mean_df_pct": 1.546,
+   "sensors": 180,
+   "lit_depth_m": 3.55
+  },
+  {
+   "address": "ROCAFORT 194",
+   "depth_m": 9.27,
+   "width_m": 6.54,
+   "mean_df_pct": 3.554,
+   "sensors": 54,
+   "lit_depth_m": 3.6
+  }
+ ]
+}

@@ -18,7 +18,7 @@ a mezzanine) that makes it legal under Decret 141/2012, the CTE and Barcelona ru
 
 ## Folders
 - `exp2_rules/` — experiment 2: draft rule cards with an LLM and score them against gold cards.
-- `exp1_daylight/` — Exp 4 (folder exp1_daylight): daylight-factor dataset from Ladybug/Honeybee + XGBoost.
+- `exp1_daylight/` — Exp 4 (folder exp1_daylight): daylight-factor simulations from Ladybug/Honeybee (the XGBoost predictor was dropped).
 - `data/regulations/` — regulation PDFs (public law texts).
 - `outputs/` — results (CSV, PNG, Markdown summaries).
 - `docs/AI_LOG.md` — every AI tool use (IAAC rule).
@@ -46,5 +46,4 @@ Ratios are decimals (1/8 -> 0.125). Quotes are copied word for word in the origi
 3. Exp 4 (folder exp1_daylight), daylight:
    - `python exp1_daylight/make_variants.py` (50 shop variants)
    - Rhino 8 + `exp1_daylight/daylight_v0.3dm` + `daylight_v0.gh`, both toggles True, animate the slider 0-49
-   - `python exp1_daylight/train_daylight.py` (XGBoost R2 0.80 vs rule 0.65)
 - Shop conversions fall under Decret 141/2012 Annex 4, Group C (minimum ceiling height 2.40 m).
