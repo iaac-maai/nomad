@@ -336,7 +336,7 @@
    "norm": "CTE-DB-SUA",
    "article": "Anejo A Terminología (parte 1/6)",
    "block_id": "AnejoA/p1",
-   "url": "https://www.codigotecnico.org/pdf/Documentos/SUA/DBSUA.pdf#page=35"
+   "url": "https://www.codigotecnico.org/pdf/Documentos/SUA/DBSUA.pdf#page=36"
   },
   "quote": "Anchura libre de paso ≥ 0,80 m medida en el marco y aportada por no más de una hoja.",
   "used_by": "src/rhino/nomad_model.py DOOR_W (Stage 7.2)",
