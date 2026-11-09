@@ -644,7 +644,6 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
       <div class="pmenu" hidden><a href="#policy">Where to start</a><a href="#city">City in 3D</a></div></div>
     <a class="ptab" data-view="app" href="#rules">The laws</a>
     <a class="ptab" data-view="research" href="#steps">Workflow</a>
-    <a class="ptab" data-view="research" href="#real">Results</a>
     <a class="ptab" data-view="research" href="#rulecards">Rule cards</a>
     <a class="ptab" data-view="research" href="#experiments">Experiments</a>
     <a class="ptab" data-view="research" href="#precedents">Precedents</a>
@@ -661,7 +660,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
   <p class="lede">NOMAD checks whether an empty ground floor stands in a zone where Barcelona allows homes, and shows the laws behind the answer. In a minute, in plain words.</p>
   <div class="doors">
     <a class="door panel" href="#check"><span class="dk">For owners</span><b>I have a shop</b><span>Type its address. NOMAD says if the zone allows homes, shows the building, and gives you a report with the sources to take to an architect.</span><span class="dgo">Check my shop →</span></a>
-    <a class="door panel" href="#policy"><span class="dk">For the city</span><b>I work for the city</b><span>See every empty shop and unused building, how many homes they could give, and which to start with.</span><span class="dgo">See the city →</span></a>
+    <a class="door panel" href="#policy"><span class="dk">For the city</span><b>I work for the city</b><span>See every empty shop and unused building, sorted into candidate, risky and zoning doesn't allow, district by district.</span><span class="dgo">See the city →</span></a>
   </div>
   <p class="hint2">Want to know how NOMAD works, and how we tested it? Open <a href="#steps">Research</a> at the top.</p>
 </div></section>
@@ -688,7 +687,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
   <div class="mapbox panel">
       <div class="fig"><b>FIG.1</b>&nbsp; every empty ground-floor premises, by what its zone allows</div>
       <canvas id="map" width="900" height="900" aria-label="Map of Barcelona with every empty ground-floor premises coloured by zoning answer. Click a dot to check it."></canvas>
-      <div class="mapmode" role="group" aria-label="Colour the map by"><button type="button" class="chip" data-mm="zone" aria-pressed="true">What the zone allows</button><button type="button" class="chip" data-mm="ans" aria-pressed="false">NOMAD's answer, with "avoid"</button><button type="button" class="chip" data-mm="wh" aria-pressed="false">Empty warehouses and commercial buildings</button></div>
+      <div class="mapmode" role="group" aria-label="Colour the map by"><button type="button" class="chip" data-mm="zone" aria-pressed="true">What the zone allows</button><button type="button" class="chip" data-mm="cat" aria-pressed="false">NOMAD's category</button><button type="button" class="chip" data-mm="wh" aria-pressed="false">Empty warehouses and commercial buildings</button></div>
       <div class="legend" id="legend"></div>
       <div class="mapctl"><button class="chip" id="zin" aria-label="Zoom in">+</button><button class="chip" id="zout" aria-label="Zoom out">−</button><button class="chip" id="zall">whole city</button><button class="chip" id="to3d">see this place in 3D</button></div>
       <p class="vh-summary" id="mapsum"></p>
@@ -698,24 +697,22 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
 </div></section>
 
 <section class="sheet" id="saved" data-view="app"><div class="wrap">
-  <p class="eyebrow" data-t="saved_eb">Step 3 · keep and share</p>
+  <p class="eyebrow" data-t="saved_eb">Step 2 · keep and share</p>
   <h2 data-t="saved_h">Saved shops, side by side</h2>
-  <p class="lede" data-t="saved_lede">Every shop you save keeps your requirements and NOMAD's answer. Tick two or more to compare them. Only you can see your saved shops.</p>
+  <p class="lede" data-t="saved_lede">Every shop you save keeps NOMAD's zoning answer and its sources. Tick two or more to compare them. Only you can see your saved shops.</p>
   <div id="savedlist" class="savedlist"></div>
   <div class="src-table"><table id="compare"></table></div>
 </div></section>
 
 <section class="sheet" id="policy" data-view="app"><div class="wrap">
   <p class="eyebrow">For the city · where to start</p>
-  <h2>Where can the city find homes?</h2>
-  <p class="lede">Every empty shop and every unused warehouse, commercial or office building in Barcelona was run through NOMAD: zoning, daylight (Bars's model where it exists), real plans, every rule. Set how many homes the city needs. NOMAD picks the fewest places that reach it and lists the ones to avoid.</p>
-  <div class="reqrow"><label for="pneed">Homes the city needs</label><input id="pneed" type="number" min="1" step="50" value="1000">
-    <label><input type="checkbox" id="pcheck"> also where the zone's own plan decides (to confirm)</label></div>
+  <h2>Where can the city start?</h2>
+  <p class="lede">Every empty shop of the 2024 census and every unused warehouse, commercial or office building, sorted into three categories by what its zone allows and by street life. NOMAD gives no home counts here: how many homes fit needs a design and an architect.</p>
   <div class="reqrow" id="pkinds"><span>Use:</span>
     <label><input type="checkbox" value="shop" checked> empty shops</label><label><input type="checkbox" value="warehouse" checked> warehouses</label>
     <label><input type="checkbox" value="commercial" checked> commercial buildings</label><label><input type="checkbox" value="office" checked> office buildings</label></div>
-  <div id="pout" aria-live="polite"><p class="hint2">Loading NOMAD's city results…</p></div>
-  <p class="note">Homes: the most legal homes NOMAD finds in each place (asked 2 x 1-bed + 1 x 2-bed, and "most homes"); warehouses at 6 m clear height (two levels). In use or not: the 2024 census of ground-floor premises, a hint, not proof. To build a list for the city, every place still needs its owner and a visit.</p>
+  <div id="pout" aria-live="polite"><p class="hint2">Loading the city…</p></div>
+  <p class="note"><b>Candidate</b>: the zone allows homes and there is no avoid flag. <b>Risky</b>: the zone's own detailed plan decides, or "keep it a shop" (one of the 10 % of shops with the fewest shops within 100 m). <b>Zoning doesn't allow</b>: the zone takes no housing. Whole buildings have no street-life flag. In use or not: the 2024 census of ground-floor premises, a hint, not proof. Every place still needs its owner and a visit.</p>
 </div></section>
 
 <section class="sheet" id="city" data-view="app"><div class="wrap">
@@ -763,20 +760,9 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
 
 <section class="sheet" id="steps" data-view="research"><div class="wrap">
   <p class="eyebrow">Research · the workflow</p>
-  <h2>From an empty shop to legal homes in 8 steps</h2>
+  <h2>From an empty shop to a first answer in 7 steps</h2>
   <p class="lede">Each step runs on real data, and this page follows them in order: pick a step to jump to it. Five experiments test the steps, each against a simple method or on real cases. Everything runs inside one Rhino + Grasshopper file.</p>
   <div class="steps" id="steplist"></div>
-</div></section>
-
-<section class="sheet" id="real" data-view="research"><div class="wrap">
-  <p class="eyebrow">Results · NOMAD on Barcelona's real empty shops</p>
-  <h2>What the real shops can become</h2>
-  <p class="lede" id="reallede"></p>
-  <div class="realgrid" id="realgrid"></div>
-  <div class="src-table"><table id="realtable"></table></div>
-  <h3>Beyond Barcelona: the metropolitan area (36 towns)</h3>
-  <p class="hint2">Warehouses, commercial and office buildings with no homes in every AMB town (Catastro), by what their zone allows (MUC zoning of the Generalitat). Outside Barcelona there is no census of empty premises, so in use or not is unknown.</p>
-  <div id="amb"></div>
 </div></section>
 
 <section class="sheet" id="rulecards" data-view="research"><div class="wrap">
@@ -790,7 +776,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
 </div></section>
 
 <section class="sheet" id="experiments" data-view="research"><div class="wrap">
-  <p class="eyebrow">Evidence · five experiments, in workflow order</p>
+  <p class="eyebrow">Evidence · the experiments, in workflow order</p>
   <h2>What we tested, and what we learned</h2>
   <div class="exps" id="exps"></div>
 </div></section>
@@ -882,9 +868,26 @@ function valHtml(s) {
   return `validated example (Radiance, ${s.sensors} sensors): mean daylight factor ${dec(s.mean_df_pct)} %; the ${VAL.method} target of ${dec(VAL.target_pct)} % reaches ${dec(s.lit_depth_m, 1)} m into a ${dec(s.depth_m, 1)} m deep shop`;
 }
 
+/* NOMAD's category for each place: candidate (zone YES, no avoid flag) / risky (zone CHECK, or "keep it a shop":
+   the 10 % of shops with the fewest shops within 100 m, src/check/avoid.py) / zoning doesn't allow (zone NO) */
+const CATS = [["candidate", "--m-yes", "candidate"], ["risky", "--m-check", "risky"], ["nozone", "--m-no", "zoning doesn't allow"]];
+const CATN = Object.fromEntries(CATS.map(([k, , l]) => [k, l])), CATPILL = { candidate: "YES", risky: "CHECK", nozone: "NO" };
+function quantile(xs, q) { const s = xs.slice().sort((a, b) => a - b), p = (s.length - 1) * q, i = Math.floor(p); return s[i] + (s[Math.min(i + 1, s.length - 1)] - s[i]) * (p - i); }
+function categorise() {
+  const cut = quantile(P.filter(r => r.shops != null).map(r => +r.shops), 0.10);
+  P.forEach(r => {
+    const keep = r.shops != null && r.shops <= cut;
+    r.cat = r.housing === "NO" ? "nozone" : r.housing === "CHECK" || keep ? "risky" : "candidate";
+    r.catWhy = r.housing === "NO" ? "the zone takes no housing" : r.housing === "CHECK" ? "the zone's own detailed plan decides"
+      : keep ? `keep it a shop: only ${r.shops} shops within 100 m (lowest 10 % of the city)` : "the zone allows homes; no avoid flag";
+  });
+}
+const whCat = r => r.housing === "NO" ? "nozone" : r.housing === "CHECK" ? "risky" : "candidate";
+
 function start() {
   P.forEach(r => { r.n = norm(r.street); });
-  for (const f of [drawTally, initMap, initSearch, drawSteps, drawRules, drawExps, initCity, drawReal, initExtras, initBook, initNav, initCols, initViews])
+  categorise();
+  for (const f of [drawTally, initMap, initSearch, drawSteps, drawRules, drawExps, initCity, initPolicy, initExtras, initBook, initNav, initCols, initViews])
     try { const r = f(); if (r && r.catch) r.catch(e => console.error(f.name, e)); } catch (e) { console.error(f.name, e); }   // one part failing (no WebGL, say) must not stop the rest
   const first = P.find(r => r.street === "VALÈNCIA" && r.num === "640") || P.find(r => r.housing === "YES");
   show(first);
@@ -906,13 +909,14 @@ function show(r) {
     <details class="more"><summary>Show the details</summary><dl><dt>ZONE</dt><dd>${esc(r.zone)}${r.key ? ` <span class="num">(PGM key ${esc(r.key)})</span>` : ""}</dd>
         <dt>WHY</dt><dd>${esc(r.why)}</dd>
         <dt>RULE</dt><dd>PGM art. 225.7 (MPGM 1999): housing on the ground floor in zones built along street lines</dd>
-        ${r.ans ? `<dt>NOMAD</dt><dd><b>${esc(r.ans)}</b>: ${esc(r.awhy)}</dd>` : ""}
+        <dt>NOMAD</dt><dd><span class="pill ${CATPILL[r.cat]}">${esc(CATN[r.cat])}</span> ${esc(r.catWhy)}</dd>
         <dt>DAYLIGHT</dt><dd>${validated(r) ? esc(valHtml(validated(r))) : esc(DAYLIGHT_SOON)}</dd>
         ${r.shops != null ? `<dt>STREET LIFE</dt><dd>${r.shops} shops within 100 m <span class="meta">(city median 16)</span></dd>` : ""}
 </dl></details>
     <div class="next">${r.housing === "YES" ? "Good news: the zone allows homes on this ground floor. The rules inside the shop (Decret 141/2012) still decide how many homes fit: an architect checks them." :
       r.housing === "CHECK" ? "Maybe: this zone has its own detailed plan, and that plan decides. Ask the Ajuntament." :
-      "This zone does not take homes (a facility, a park, industry or a future street). Try another shop."}${others ? ` <span class="meta">${others} more empty premises share this cadastral reference.</span>` : ""}</div>`;
+      "This zone does not take homes (a facility, a park, industry or a future street). Try another shop."}${others ? ` <span class="meta">${others} more empty premises share this cadastral reference.</span>` : ""}</div>
+    <div class="reqrow"><button type="button" class="chip" data-act="save" data-t="save">${esc(T("save"))}</button><button type="button" class="chip" data-act="pdf" data-t="report">${esc(T("report"))}</button><span id="dactmsg" class="hint2" aria-live="polite"></span></div>`;
   bldgBox(r.ref ? "" : "This premises has no cadastral reference, so NOMAD has no building to draw.");
   if (r.ref) showBuilding(r.ref, r);
 }
@@ -1045,10 +1049,7 @@ function initSearch() {
 
 /* map: Barcelona's zones (merged, 3 m) and every premises as a dot */
 let sel = null, view = null, layers = { YES: true, CHECK: true, NO: true }, mapMode = "zone";
-// NOMAD's answer for each empty shop (src/check/avoid.py): the first reason that applies
-const ANS = [["candidate", "--m-yes", "candidate: homes fit, daylight not dark"], ["not liveable", "--m-no", "avoid: not liveable"],
-  ["keep it a shop", "--m-blue", "avoid: keep it a shop"], ["not allowed", "--m-slate", "avoid: zone does not allow it"], ["not modelled", "--m-line", "not modelled yet"]];
-const ansLayers = Object.fromEntries(ANS.map(([k]) => [k, true]));
+const catLayers = Object.fromEntries(CATS.map(([k]) => [k, true]));
 /* whole buildings (src/zoning/warehouses.py): warehouses, commercial and office buildings with no homes */
 let WH = null, whLayers = { YES: true, CHECK: true, NO: false }, whKinds = { warehouse: true, commercial: true, office: true }, whUnused = true;
 const WHKIND = { warehouse: "warehouse (nau)", commercial: "commercial building", office: "office building" };
@@ -1058,16 +1059,14 @@ async function loadWH() {
   WH = j.rows.map(a => Object.fromEntries(j.cols.map((c, i) => [c, a[i]])));
   return WH;
 }
-function mapPts() { return mapMode === "wh" ? (WH || []) : mapMode === "plan" ? policySel : P; }
-function dotKey(r) { return mapMode === "ans" ? (r.ans || "not modelled") : r.housing; }
+function mapPts() { return mapMode === "wh" ? (WH || []) : P; }
+function dotKey(r) { return mapMode === "cat" ? r.cat : r.housing; }
 function dotOn(r) {
-  if (mapMode === "plan") return true;
   if (mapMode === "wh") return whLayers[r.housing] && whKinds[r.kind] && (!whUnused || r.status !== "active business");
-  return mapMode === "zone" ? layers[r.housing] : ansLayers[dotKey(r)];
+  return mapMode === "zone" ? layers[r.housing] : catLayers[dotKey(r)];
 }
 function drawLegend() {
   const lg = $("#legend");
-  if (mapMode === "plan") { lg.innerHTML = `<span class="hint2">${fmt(policySel.length)} places chosen for ${fmt(policySel.reduce((a, x) => a + x.homes, 0))} homes (For the city)</span>`; return; }
   if (mapMode === "wh") {
     const n = k => fmt((WH || []).filter(r => r.housing === k && whKinds[r.kind] && (!whUnused || r.status !== "active business")).length);
     lg.innerHTML = ["YES", "CHECK", "NO"].map(k => `<button type="button" data-k="${k}" aria-pressed="${whLayers[k]}"><i style="background:var(--m-${k === "YES" ? "yes" : k === "CHECK" ? "check" : "no"})"></i>${WORD[k].toLowerCase()} (${n(k)})</button>`).join("")
@@ -1077,7 +1076,7 @@ function drawLegend() {
   }
   lg.innerHTML = mapMode === "zone"
     ? ["YES", "CHECK", "NO"].map(k => `<button type="button" data-k="${k}" aria-pressed="${layers[k]}"><i style="background:var(--m-${k === "YES" ? "yes" : k === "CHECK" ? "check" : "no"})"></i>${WORD[k].toLowerCase()}</button>`).join("")
-    : ANS.map(([k, c, l]) => `<button type="button" data-k="${k}" aria-pressed="${ansLayers[k]}"><i style="background:var(${c})"></i>${l} (${fmt(P.filter(r => (r.ans || "not modelled") === k).length)})</button>`).join("");
+    : CATS.map(([k, c, l]) => `<button type="button" data-k="${k}" aria-pressed="${catLayers[k]}"><i style="background:var(${c})"></i>${l} (${fmt(P.filter(r => r.cat === k).length)})</button>`).join("");
 }
 function initMap() {
   const xs = P.map(r => r.x), ys = P.map(r => r.y);
@@ -1093,7 +1092,7 @@ function initMap() {
       else whLayers[b.dataset.k] = !whLayers[b.dataset.k];
       drawLegend(); drawMap(); return;
     }
-    const L = mapMode === "zone" ? layers : ansLayers;
+    const L = mapMode === "zone" ? layers : catLayers;
     L[b.dataset.k] = !L[b.dataset.k]; b.setAttribute("aria-pressed", L[b.dataset.k]); drawMap(); });
   document.querySelectorAll("[data-mm]").forEach(b => b.addEventListener("click", async () => { mapMode = b.dataset.mm;
     document.querySelectorAll("[data-mm]").forEach(x => x.setAttribute("aria-pressed", x === b));
@@ -1121,7 +1120,7 @@ function initMap() {
     const [mx, my] = at(e);
     let best = null, bd = 1e9;
     mapPts().forEach(r => { if (!dotOn(r)) return; const [px, py] = proj(r.x, r.y, 1); const d = (px - mx) ** 2 + (py - my) ** 2; if (d < bd) { bd = d; best = r; } });
-    if (best && Math.sqrt(bd) < 0.03) { if (mapMode === "plan") { best.kind === "shop" ? show(best.src) : showWh(best.src); } else if (mapMode === "wh") showWh(best); else { show(best); $("#q").value = best.street + " " + best.num; } }
+    if (best && Math.sqrt(bd) < 0.03) { if (mapMode === "wh") showWh(best); else { show(best); $("#q").value = best.street + " " + best.num; } }
   });
   $("#zin").addEventListener("click", () => zoom(0.6));
   $("#zout").addEventListener("click", () => zoom(1.6));
@@ -1143,9 +1142,9 @@ function drawMap() {
     g.fillStyle = css(col); g.fill("evenodd");
   }
   const r0 = Math.max(1.4, W / 520) * Math.min(3, Math.pow((view.s0 || view.s) / view.s, 0.4));
-  const groups = mapMode !== "ans" ? [["NO", "--m-no"], ["CHECK", "--m-check"], ["YES", "--m-yes"]] : [...ANS].reverse().map(([k, c]) => [k, c]);
+  const groups = mapMode !== "cat" ? [["NO", "--m-no"], ["CHECK", "--m-check"], ["YES", "--m-yes"]] : [...CATS].reverse().map(([k, c]) => [k, c]);
   for (const [k, col] of groups) {
-    if (mapMode !== "wh" && !(mapMode === "zone" ? layers : ansLayers)[k]) continue;
+    if (mapMode !== "wh" && !(mapMode === "zone" ? layers : catLayers)[k]) continue;
     g.fillStyle = css(col);
     g.beginPath();
     mapPts().forEach(r => { if (dotKey(r) !== k || (mapMode === "wh" && !dotOn(r))) return; const [px, py] = proj(r.x, r.y, W); g.moveTo(px + r0, py); g.arc(px, py, (k === "YES" || k === "candidate") ? r0 : r0 * 1.25, 0, 7); });
@@ -1162,17 +1161,16 @@ function drawMap() {
 
 /* ---------- 2. steps ---------- */
 function drawSteps() {
-  const e = D.experiments, z = e.zoning, v = e.check.verdicts, st = e.check.strategies.test, n = (v.YES || 0) + (v.PARTLY || 0) + (v.NO || 0);
+  const e = D.experiments, z = e.zoning, n = k => fmt(P.filter(r => r.cat === k).length);
   const steps = [
     ["Find empty shops", `${fmt(z.empty_premises)} empty ground-floor premises in the city's 2024 census.`, "", "#check", "#check"],
-    ["Read the building", `A plan drawing becomes an outline and a street façade; the Catastro gives the building.`, "Exp 1", "#exp1", "#check"],
+    ["Read the building", "The Catastro gives each shop's building: its outline and floors. Reading a plan drawing was tested in Exp 1.", "Exp 1", "#exp1", "#check"],
     ["Check zoning", `${Math.round(100 * z.housing.YES / z.empty_premises)} % of empty shops stand in a zone that admits housing.`, "Exp 2", "#exp2", "#check"],
     ["Extract the rules", `${fmt(e.rules.pieces)} pieces of ${e.rules.norms} norms in one rulebook; ${D.rules.length} rule cards.`, "Exp 3", "#exp3", "#rules"],
     ["Daylight", "Per-shop grid simulation, coming. Five shops simulated in Radiance are shown as validated examples.", "Exp 4", "#exp4", "#exp4"],
-    ["Check the shop", `Every rule with its article: ${v.YES} YES, ${v.PARTLY} PARTLY, ${v.NO} NO over ${n} shops.`, "Exp 5", "#exp5", "#design"],
-    ["Fit the homes", `One layout per circulation strategy, each checked again; ${fmt(st.homes_most.new)} legal homes when as many as fit.`, "Exp 5", "#exp5", "#design"],
-    ["Report", "Plans, 3D, verdict and articles on one sheet; IFC and glTF for BIM and the web.", "Exp 5", "#exp5", "#saved"]];
-  $("#steplist").innerHTML = steps.map(([h, p, x, href, go], i) => `<div class="step"><div class="n">${i + 1}</div><h3><a class="sgo" href="${go}">${h}</a></h3><p>${esc(p)}</p>${x ? `<a class="exp" href="${href}">${x} →</a>` : `<a class="exp" href="${href}">open the map →</a>`}</div>`).join("");
+    ["Sort the city", `${n("candidate")} candidates, ${n("risky")} risky, ${n("nozone")} where zoning doesn't allow homes.`, "", "#policy", "#policy"],
+    ["Report", "The zoning answer, its rule and its sources on one sheet, for the owner and the architect.", "", "#saved", "#saved"]];
+  $("#steplist").innerHTML = steps.map(([h, p, x, href, go], i) => `<div class="step"><div class="n">${i + 1}</div><h3><a class="sgo" href="${go}">${h}</a></h3><p>${esc(p)}</p>${x ? `<a class="exp" href="${href}">${x} →</a>` : `<a class="exp" href="${href}">open it →</a>`}</div>`).join("");
 }
 
 /* ---------- 4. rules + golden set ---------- */
@@ -1199,7 +1197,7 @@ function bars(rows, max, unit = "") {
       return `<text x="${lw - 8}" y="${i * h + 17}" text-anchor="end">${esc(l)}</text><rect x="${lw}" y="${i * h + 5}" width="${bw}" height="16" fill="${col}"/><text class="val" x="${lw + bw + 6}" y="${i * h + 17}">${v}${unit}</text>`; }).join("") + `</svg>`;
 }
 function drawExps() {
-  const e = D.experiments, z = e.zoning, v = e.check.verdicts, st = e.check.strategies.test, n = (v.YES || 0) + (v.PARTLY || 0) + (v.NO || 0);
+  const e = D.experiments, z = e.zoning;
   const C = k => css(k), rd = e.reader, sc = rd.real_scans || {}, race = rd.race_messy || {};
   const pct = x => Math.round(100 * x);
   const scanRows = [["ours (AI + lines)", "f3d"], ["dark lines only", "dark"], ["AI model only", "f3d_only"], ["MitUNet (GitHub)", "mitunet"]].filter(([, k]) => sc[k]);
@@ -1225,10 +1223,9 @@ function drawExps() {
           `<tr><td>${esc(s.address)}</td><td class="num">${dec(s.depth_m, 1)} m</td><td class="num">${dec(s.mean_df_pct)} %</td><td class="num">${dec(s.lit_depth_m, 1)} m</td></tr>`).join("")}</tbody></table></div>
         <p class="hint2">${esc(VAL.assumed)}.</p>` : "",
       l: "Per-shop daylight needs a simulation of each shop, not a prediction. Until it runs, NOMAD shows no daylight class." },
-    { id: "exp5", tag: "EXP 5 · STEPS 6-8", h: "Can NOMAD check a shop, fit legal homes and build them in 3D?",
-      p: `${n} shops asking for two one-bedroom flats and one two-bedroom flat: ${v.YES} YES, ${v.PARTLY} PARTLY, ${v.NO} NO. Layouts as circulation strategies: ${fmt(st.homes_as_asked.new)} homes as asked and ${fmt(st.homes_most.new)} at most (the old patio layouts: ${fmt(st.homes_most.old)}, but ${fmt(st.old_most_patio_only_flats)} of those flats were lit only by a patio, which is not their façade). Every layout is built in Rhino and exported as IFC.`,
-      chart: bars([["as asked", st.homes_as_asked.new, C("--muted")], ["most homes", st.homes_most.new, C("--terra")], ["old, patios", st.homes_most.old, C("--slate")]], st.homes_most.old * 1.15),
-      l: "Façade is the limit: a flat may be at most about 9-10 m deep (façade ≥ S/9), so homes come from a second façade or the block interior, not from patios." }];
+    { id: "exp5", tag: "EXP 5 · TEAM", h: "Layouts and home counts from the footprint",
+      p: "Parked together with Your homes (see PARKED.md): the home counts are not shown until an architect has checked them on real shops.",
+      chart: "", l: "A count of homes is a design result, not a zoning answer." }];
   $("#exps").innerHTML = X.map(x => `<article class="exp panel" id="${x.id}"><span class="tag">${x.tag}</span><h3>${x.h}</h3><p>${esc(x.p)}</p>${x.chart}<p class="learned"><b>Learned:</b> ${esc(x.l)}</p></article>`).join("");
 }
 
@@ -1447,44 +1444,20 @@ function miniViewer(canvas, box) {
     }
   };
 }
-/* ---------- for the city: target homes -> the fewest places that reach it, and what to avoid (src/check/city_runs.py) ---------- */
-let CITYH = null;
+/* ---------- for the city: every place in one of three categories, counted by district, and the list ---------- */
 async function initPolicy() {
-  try { CITYH = await (await fetch("data/city_homes.json")).json(); } catch (e) { $("#pout").innerHTML = `<p class="hint2">NOMAD's city results are not available.</p>`; return; }
-  await loadWH();
-  drawAMB();
-  ["#pneed", "#pcheck"].forEach(q => $(q).addEventListener("input", drawPolicy));
+  try { await loadWH(); } catch (e) { WH = []; }
   $("#pkinds").addEventListener("change", drawPolicy);
   drawPolicy();
 }
 function policyPlaces() {
-  const out = [], seen = new Set();
-  P.forEach(r => {                                                 // empty shops: one per cadastral reference
-    const ref = (r.ref || "").slice(0, 14); if (!ref || seen.has(ref)) return; seen.add(ref);
-    const h = CITYH[ref + "|shop"];
-    out.push({ kind: "shop", ref, x: r.x, y: r.y, housing: r.housing, homes: h ? h[0] : 0, levels: 1, run: !!h, avoid: ["not liveable", "keep it a shop", "not allowed"].includes(r.ans) ? r.ans : "",
-               name: `${r.street} ${r.num}`, district: r.district || "", why: r.awhy || "", src: r });
-  });
+  const out = P.map(r => ({ kind: "shop", ref: r.ref, x: r.x, y: r.y, housing: r.housing, cat: r.cat, why: r.catWhy, name: `${r.street} ${r.num}`, district: r.district || "", src: r }));
   (WH || []).forEach(r => {
     if (r.status === "active business") return;
-    const h = CITYH[r.ref + "|" + r.kind];
-    out.push({ kind: r.kind, ref: r.ref, x: r.x, y: r.y, housing: r.housing, homes: h ? h[0] : 0, levels: h ? h[1] : 1, run: !!h, avoid: r.housing === "NO" ? "not allowed" : "",
-               name: r.street ? `${r.street} ${r.num}` : "Catastro " + r.ref, district: r.district || nearDistrict(r.x, r.y), why: r.why, src: r });
+    out.push({ kind: r.kind, ref: r.ref, x: r.x, y: r.y, housing: r.housing, cat: whCat(r), why: r.why, name: r.street ? `${r.street} ${r.num}` : "Catastro " + r.ref,
+               district: r.district || nearDistrict(r.x, r.y), src: r });
   });
   return out;
-}
-async function drawAMB() {
-  let A; try { A = await (await fetch("data/amb.json")).json(); } catch (e) { return; }
-  const xs = A.pts.map(p => p[0]), ys = A.pts.map(p => p[1]);
-  const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys), sc = 600 / Math.max(x1 - x0, y1 - y0);
-  const col = { Y: "var(--m-yes)", C: "var(--m-check)" };
-  const svg = `<svg viewBox="0 0 ${Math.round((x1 - x0) * sc) + 10} ${Math.round((y1 - y0) * sc) + 10}" class="ambmap" role="img" aria-label="Map of the metropolitan area: buildings with no homes where the zone admits housing (green) or its plan decides (amber)">${A.pts.map(p =>
-    `<circle cx="${((p[0] - x0) * sc + 5).toFixed(1)}" cy="${((y1 - p[1]) * sc + 5).toFixed(1)}" r="1.6" fill="${col[p[3]]}"/>`).join("")}</svg>`;
-  const T = A.towns.slice().sort((a, b) => (b.zone_yes + b.zone_check) - (a.zone_yes + a.zone_check));
-  const sum = k => fmt(A.towns.reduce((a, t) => a + t[k], 0));
-  $("#amb").innerHTML = `<div class="ambgrid">${svg}<div class="src-table"><table><thead><tr><th>Town</th><th>Buildings</th><th>No homes: warehouses · commercial · offices</th><th>Zone admits housing</th><th>Plan decides</th></tr></thead><tbody>
-    <tr><td><b>All 36</b></td><td><b>${sum("buildings")}</b></td><td><b>${sum("no_homes_warehouse")} · ${sum("no_homes_commercial")} · ${sum("no_homes_office")}</b></td><td><b>${sum("zone_yes")}</b></td><td><b>${sum("zone_check")}</b></td></tr>
-    ${T.map(t => `<tr><td>${esc(t.town)}</td><td>${fmt(t.buildings)}</td><td>${t.no_homes_warehouse} · ${t.no_homes_commercial} · ${t.no_homes_office}</td><td>${t.zone_yes}</td><td>${t.zone_check}</td></tr>`).join("")}</tbody></table></div></div>`;
 }
 let DGRID = null;
 function nearDistrict(x, y) {                                     // a building with no census address: the district of the nearest premises
@@ -1494,36 +1467,28 @@ function nearDistrict(x, y) {                                     // a building 
     const d = (r.x - x) ** 2 + (r.y - y) ** 2; if (d < bd) { bd = d; best = r; } });
   return best ? best.district : "";
 }
-let policySel = [];
+let policyCat = "candidate";
 function drawPolicy() {
-  if (!CITYH || !WH) return;
-  const need = Math.max(1, +$("#pneed").value || 1), check = $("#pcheck").checked;
   const kinds = new Set([...document.querySelectorAll("#pkinds input:checked")].map(i => i.value));
   const all = policyPlaces().filter(x => kinds.has(x.kind));
-  const ok = all.filter(x => !x.avoid && x.homes > 0 && (x.housing === "YES" || (check && x.housing === "CHECK")));
-  ok.sort((a, b) => b.homes - a.homes);
-  const pick = []; let sum = 0;
-  for (const x of ok) { if (sum >= need) break; pick.push(x); sum += x.homes; }
-  policySel = pick;
-  const avoid = {}; all.filter(x => x.avoid).forEach(x => avoid[x.avoid] = (avoid[x.avoid] || 0) + 1);
-  const dark = all.filter(x => x.run && !x.avoid && x.homes === 0 && x.housing !== "NO").length;
-  const byD = {}; pick.forEach(x => { const d = x.district || "unknown"; byD[d] = byD[d] || [0, 0]; byD[d][0]++; byD[d][1] += x.homes; });
-  const KN = { shop: "shops", warehouse: "warehouses", commercial: "commercial buildings", office: "office buildings" };
-  const byK = {}; pick.forEach(x => byK[x.kind] = (byK[x.kind] || 0) + 1);
-  const total = ok.reduce((a, x) => a + x.homes, 0), maxD = Math.max(1, ...Object.values(byD).map(v => v[1]));
-  $("#pout").innerHTML = `<div class="tally"><div><b class="num">${fmt(Math.min(sum, need))}</b><span>of ${fmt(need)} homes${sum < need ? " (all NOMAD can find)" : ""}</span></div>
-      <div><b class="num">${fmt(pick.length)}</b><span>places to convert: ${Object.entries(byK).map(([k, n]) => `${n} ${KN[k]}`).join(", ") || "none"}</span></div>
-      <div><b class="num">${fmt(total)}</b><span>legal homes in all usable places</span></div></div>
-    <h4>Where (by district)</h4><ul class="pbars">${Object.entries(byD).sort((a, b) => b[1][1] - a[1][1]).map(([d, v]) => `<li><span>${esc(d)}</span><i style="width:${Math.round(100 * v[1] / maxD)}%"></i><small>${v[1]} homes in ${v[0]} places</small></li>`).join("")}</ul>
-    <h4>Avoid</h4><p>${Object.entries(avoid).map(([k, n]) => `<b>${fmt(n)}</b> ${esc(k)}`).join(" · ") || "nothing"} · <b>${fmt(dark)}</b> where no legal home fits (too narrow, too deep or too dark).</p>
-    <h4>The first places</h4><div class="src-table"><table><thead><tr><th>Place</th><th>Kind</th><th>District</th><th>Homes</th><th></th></tr></thead><tbody>${pick.slice(0, 25).map((x, i) =>
-      `<tr><td>${esc(x.name)}</td><td>${esc(x.kind)}</td><td>${esc(x.district)}</td><td>${x.homes}${x.levels > 1 ? ` (${x.levels} levels)` : ""}</td><td><button type="button" class="chip" data-pi="${i}">open</button></td></tr>`).join("")}</tbody></table></div>
-    <div class="reqrow"><button type="button" class="chip" id="pmap">Show them on the map</button></div>`;
-  $("#pout").onclick = async e => {
-    const b = e.target.closest("button"); if (!b) return;
-    if (b.id === "pmap") { mapMode = "plan"; document.querySelectorAll("[data-mm]").forEach(x => x.setAttribute("aria-pressed", "false")); drawLegend(); drawMap(); location.hash = "check"; return; }
-    const x = pick[+b.dataset.pi]; if (!x) return;
-    if (x.kind === "shop") { show(x.src); location.hash = "check"; } else { showWh(x.src); location.hash = "check"; }
+  const KN = { shop: "empty shop", warehouse: "warehouse", commercial: "commercial building", office: "office building" };
+  const byD = {};
+  all.forEach(x => { const d = x.district || "no district (far from every census shop)"; const c = byD[d] = byD[d] || { candidate: 0, risky: 0, nozone: 0 }; c[x.cat]++; });
+  const tot = k => all.filter(x => x.cat === k).length;
+  const list = all.filter(x => x.cat === policyCat).sort((a, b) => a.district.localeCompare(b.district) || a.name.localeCompare(b.name));
+  const MAX = 200;
+  $("#pout").innerHTML = `<div class="src-table"><table><thead><tr><th>District</th>${CATS.map(([k, c, l]) => `<th><i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(${c})"></i> ${l}</th>`).join("")}<th>All</th></tr></thead><tbody>
+      ${Object.entries(byD).sort((a, b) => a[0].localeCompare(b[0])).map(([d, c]) => `<tr><td>${esc(d)}</td>${CATS.map(([k]) => `<td class="num">${fmt(c[k])}</td>`).join("")}<td class="num">${fmt(c.candidate + c.risky + c.nozone)}</td></tr>`).join("")}
+      <tr><th>Barcelona</th>${CATS.map(([k]) => `<th class="num">${fmt(tot(k))}</th>`).join("")}<th class="num">${fmt(all.length)}</th></tr></tbody></table></div>
+    <div class="reqrow"><label for="pcat">List:</label><select id="pcat">${CATS.map(([k, , l]) => `<option value="${k}" ${k === policyCat ? "selected" : ""}>${l} (${fmt(tot(k))})</option>`).join("")}</select>
+      <span class="hint2">${list.length > MAX ? `the first ${MAX} of ${fmt(list.length)}, by district` : `${fmt(list.length)} places`}</span></div>
+    <div class="src-table"><table><thead><tr><th>Place</th><th>Kind</th><th>District</th><th>Zone</th><th>Why</th><th></th></tr></thead><tbody>${list.slice(0, MAX).map((x, i) =>
+      `<tr><td>${esc(x.name)}</td><td>${esc(KN[x.kind])}</td><td>${esc(x.district)}</td><td><span class="pill ${x.housing}">${esc(WORD[x.housing])}</span></td><td>${esc(x.why)}</td><td><button type="button" class="chip" data-pi="${i}">open</button></td></tr>`).join("")}</tbody></table></div>`;
+  $("#pcat").onchange = e => { policyCat = e.target.value; drawPolicy(); };
+  $("#pout").onclick = e => {
+    const b = e.target.closest("[data-pi]"); if (!b) return;
+    const x = list[+b.dataset.pi]; if (!x) return;
+    x.kind === "shop" ? show(x.src) : showWh(x.src); location.hash = "check";
   };
 }
 
@@ -1533,8 +1498,9 @@ const TYPO = [["old town (12)", "#B9785C"], ["Eixample type (13a)", "#D2A957"], 
   ["industrial", "#8E8A84"], ["facility or system", "#B4A6CF"], ["other", "#C9C5BC"]];
 const USES = [["1", "residential", "#DED3BD"], ["4_2", "retail", "#E2A35A"], ["4_1", "office", "#7FA4CC"], ["3", "industrial", "#97928A"],
   ["4_3", "public services", "#A98FCB"], ["", "other", "#C9C5BC"]];
-const NOMADC = { YES: "#3F8F5A", PARTLY: "#C98A2B", CHECK: "#C98A2B", NO: "#C4473A", ZONE: "#7E9CB0", NOZONE: "#4A4F55", "": "#CBC7BF" };   // NOZONE = the 2D map's --m-slate
-const ANSKEY = [["YES", "livable"], ["PARTLY", "needs a change"], ["NO", "not livable"], ["ZONE", "zone only"], ["NOZONE", "zone does not allow homes"], ["", "no empty shop"]];
+const NOMADC = { candidate: "#3F8F5A", risky: "#C98A2B", nozone: "#C4473A", "": "#CBC7BF" };
+const ZONEC = { YES: "#3F8F5A", CHECK: "#C98A2B", NO: "#C4473A" };                  // the ground-floor bands of the empty shops
+const ANSKEY = [["candidate", "candidate"], ["risky", "risky"], ["nozone", "zoning doesn't allow"], ["", "no empty shop"]];
 const GROUND = { road_main: ["main roads", "#8F969D"], road: ["streets", "#ABB0B5"], path: ["civic and pedestrian paths", "#D6C9B2"],
   park: ["parks and gardens", "#7DB463"], forest: ["forest", "#4E8C4A"], rail: ["railway", "#7E746D"], water: ["port and water", "#6FA6CF"],
   facility: ["facility ground", "#D9CCBD"] };
@@ -1599,18 +1565,17 @@ function buildingTypo(ref, x, y) {
   if (t === undefined) { t = Z.byRef.get(ref); if (t === undefined) { const p = Z.at(x, y); t = p ? p.typ : 10; } Z.ref.set(ref, t); }
   return t;
 }
-/* NOMAD's answer per building (cadastral ref, first 14 characters): the daylight class of its empty shops (Bars's model,
-   r.dl.cls), L = livable, C = needs a change, N = not livable; a zone that takes no housing is "zone does not allow homes"
-   whatever the daylight. A shop without a daylight match falls back to the zone answer of city.index.shops: NO is "zone
-   does not allow homes", YES or CHECK is "zone only". With several shops the best answer wins. */
+/* NOMAD's category per building (cadastral ref, first 14 characters), from its empty shops; with several shops the best
+   category wins. A census shop of the city index without a premises match falls back to its zone answer. */
 let CITYANS = null;
 function answerIndex() {
   if (CITYANS) return CITYANS;
-  const rank = { NOZONE: -1, NO: 0, ZONE: 1, PARTLY: 2, YES: 3 }, m = new Map(), put = (ref, a) => { const o = m.get(ref); if (o === undefined || rank[a] > rank[o]) m.set(ref, a); };
-  const lit = new Set();
+  const rank = { nozone: 0, risky: 1, candidate: 2 }, m = new Map(), put = (ref, a) => { const o = m.get(ref); if (o === undefined || rank[a] > rank[o]) m.set(ref, a); };
+  P.forEach(r => { if (r.ref) put(r.ref.slice(0, 14), r.cat); });
+  const seen = new Set(m.keys());
   ((city && city.index && city.index.shops) || []).forEach(s => {
-    const ref = s[5]; if (!ref || lit.has(ref)) return;
-    const a = s[4] === "NO" ? "NOZONE" : s[4] === "YES" || s[4] === "CHECK" ? "ZONE" : null;
+    const ref = s[5]; if (!ref || seen.has(ref)) return;
+    const a = s[4] === "NO" ? "nozone" : s[4] === "CHECK" ? "risky" : s[4] === "YES" ? "candidate" : null;
     if (a) put(ref, a);
   });
   if (city && city.index) CITYANS = m;                               // the zone answers arrive with the index: cache only then
@@ -1688,8 +1653,8 @@ function initCity() {
     const wx = hit.point.x + city.cx, wy = -hit.point.z + city.cy;
     $("#cityhud").innerHTML = `<b>Catastro ${esc(ref)}</b><div class="meta">${esc((TYPO[typ] || TYPO[10])[0])} · ${esc(String(use).replace(/^[\d_]+/, "").replace(/_/g, " "))} · ${floors} floors${dwell ? " · " + dwell + " dwellings" : ""}</div>
       ${shops.length ? shops.slice(0, 3).map(p => `<div>${esc(p.street)} ${esc(p.num)}: empty, zone <span class="pill ${p.housing}">${WORD[p.housing]}</span></div>`).join("") : `<div class="hint2">No empty shop in the 2024 census.</div>`}
-      ${st ? `<div>NOMAD: <span class="pill ${/ZONE/.test(st) ? "" : st}">${ANSKEY.find(([k]) => k === st)[1]}</span></div>` : ""}
-      ${shops.length ? `<div><button type="button" class="chip" id="hudopen">Plans, units and 3D of this building</button></div>` : ""}`;
+      ${st ? `<div>NOMAD: <span class="pill ${CATPILL[st]}">${ANSKEY.find(([k]) => k === st)[1]}</span></div>` : ""}
+      ${shops.length ? `<div><button type="button" class="chip" id="hudopen">Open this building in Find your shop</button></div>` : ""}`;
     const op = $("#hudopen");
     if (op) op.addEventListener("click", () => { show(shops[0]); $("#check").scrollIntoView({ behavior: "smooth" }); });
   });
@@ -1701,7 +1666,7 @@ function buildPanel() {
   $("#citypanel").innerHTML = `
     <fieldset><legend>Layers</legend>${lay.map(([k, l]) => `<label><input type="checkbox" data-l="${k}" ${city.show[k] ? "checked" : ""}>${l}</label>`).join("")}</fieldset>
     <fieldset><legend>Colour the buildings by</legend>
-      ${[["typology", "NOMAD typology (PGM zone)"], ["use", "use (Catastro)"], ["nomad", "NOMAD answer for empty shops"], ["height", "height"]].map(([k, l]) => `<label><input type="radio" name="cmode" value="${k}" ${k === cityMode ? "checked" : ""}>${l}</label>`).join("")}
+      ${[["typology", "NOMAD typology (PGM zone)"], ["use", "use (Catastro)"], ["nomad", "NOMAD category of empty shops"], ["height", "height"]].map(([k, l]) => `<label><input type="radio" name="cmode" value="${k}" ${k === cityMode ? "checked" : ""}>${l}</label>`).join("")}
       <div class="ckey" id="ckey"></div></fieldset>
     <fieldset><legend>Sun and shadows</legend>
       <label class="row"><span>Date</span><input type="date" id="sdate" value="${iso}"></label>
@@ -1862,46 +1827,30 @@ function addShopBands() {
       pos.push(A[0], 0.2, A[1], Bp[0], 0.2, Bp[1], Bp[0], h, Bp[1], A[0], 0.2, A[1], Bp[0], h, Bp[1], A[0], h, A[1]);
     });
     const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3)); g.computeVertexNormals();
-    const m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: new THREE.Color(NOMADC[ans]), side: THREE.DoubleSide }));
+    const m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: new THREE.Color(ZONEC[ans]), side: THREE.DoubleSide }));
     city.scene.add(m); city.shopMeshes.push(m);
   }
-}
-
-/* ---------- part 2: NOMAD on the real shops ---------- */
-function drawReal() {
-  const R = D.real;
-  if (!R) { $("#reallede").textContent = "The run on the real shops is still computing; this section fills in when it finishes."; return; }
-  const s = R.summary, c = R.cleaning, b = R.buildings, a = s.as_is, f = s.after_smallest_change;
-  $("#reallede").textContent = `The ${fmt(b.empty_premises)} empty premises of the 2024 census were matched to their Catastro building (${fmt(b.matched_to_a_building)}), cleaned (${fmt(c.kept)} kept; ${fmt(c.shops_in - c.kept)} removed as data errors), and NOMAD ran on the ${fmt(s.shops)} that are alone in their building, in a zone that admits housing, with at least 40 m² and 3 m of façade. Each was asked for two one-bedroom flats and one two-bedroom flat, and for as many homes as fit.`;
-  $("#realgrid").innerHTML = [
-    [fmt(s.shops), "real shops checked by NOMAD"],
-    [`${a.YES || 0} / ${a.PARTLY || 0} / ${a.NO || 0}`, "YES / PARTLY / NO as they are"],
-    [`${f.YES || 0} / ${f.PARTLY || 0} / ${f.NO || 0}`, "after the smallest change (corridor, second façade)"],
-    [fmt(s.most_homes), "homes when as many as fit"],
-    [fmt(s.shops_with_a_home), "shops that hold at least one home"]].map(([v, l]) => `<div><b class="num">${v}</b><span>${l}</span></div>`).join("");
-  const top = R.shops.slice().sort((x, y) => +y[9] - +x[9]).slice(0, 25);
-  $("#realtable").innerHTML = `<thead><tr><th>Address</th><th>Barri</th><th>Ground m²</th><th>Street façade m</th><th>As it is</th><th>After</th><th>Most homes</th></tr></thead><tbody>${top.map(r => `<tr><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td class="num">${fmt(Math.round(+r[4]))}</td><td class="num">${r[5]}</td><td><span class="pill ${r[6]}">${r[6]}</span></td><td><span class="pill ${r[7]}">${r[7]}</span></td><td class="num">${r[9]}</td></tr>`).join("")}</tbody>`;
 }
 
 /* ---------- languages: English, Català, Español ---------- */
 const I18N = {
   en: { nav_flow: "Workflow", g_find: "Find & check", g_design: "Design", g_report: "Report", g_evid: "Evidence", g_rules: "Rules", g_how: "How it works", nav_check: "Check an address", nav_design: "Design homes", nav_saved: "Saved", nav_city: "City in 3D", nav_real: "Real shops",
-    save: "Save this shop", report: "Download the report (PDF)", saved_eb: "Step 3 · keep and share", saved_h: "Saved shops, side by side",
-    saved_lede: "Every shop you save keeps your requirements and NOMAD's answer. Tick two or more to compare them. Only you can see your saved shops.",
+    save: "Save this shop", report: "Download the report (PDF)", saved_eb: "Step 2 · keep and share", saved_h: "Saved shops, side by side",
+    saved_lede: "Every shop you save keeps NOMAD's zoning answer and its sources. Tick two or more to compare them. Only you can see your saved shops.",
     YES: "Homes allowed", CHECK: "Maybe: the local plan decides", NO: "Homes not allowed", simple: "Simple view", expert: "Full view",
-    no_saved: "Nothing saved yet. Make the layouts for a shop and press “Save this shop”.", compare: "Compare", saved_ok: "Saved.", saved_local: "Saved in this browser only.",
+    no_saved: "Nothing saved yet. Check a shop in step 1 and press “Save this shop”.", compare: "Compare", saved_ok: "Saved.", saved_local: "Saved in this browser only.",
     rep_ok: "Report ready.", rep_no: "This view cannot save files.", del: "Remove" },
   ca: { nav_flow: "Procés", g_find: "Troba i comprova", g_design: "Disseny", g_report: "Informe", g_evid: "Proves", g_rules: "Normes", g_how: "Com funciona", nav_check: "Consulta una adreça", nav_design: "Dissenya habitatges", nav_saved: "Desats", nav_city: "Ciutat en 3D", nav_real: "Locals reals",
-    save: "Desa aquest local", report: "Descarrega l'informe (PDF)", saved_eb: "Pas 8 · informe · els teus locals", saved_h: "Locals desats, un al costat de l'altre",
-    saved_lede: "Cada local que desis guarda les teves necessitats i la resposta de NOMAD. Marca'n dos o més per comparar-los. Només tu veus els teus locals desats.",
+    save: "Desa aquest local", report: "Descarrega l'informe (PDF)", saved_eb: "Pas 2 · desa i comparteix", saved_h: "Locals desats, un al costat de l'altre",
+    saved_lede: "Cada local que desis guarda la resposta urbanística de NOMAD i les seves fonts. Marca'n dos o més per comparar-los. Només tu veus els teus locals desats.",
     YES: "Habitatge admès", CHECK: "Cal revisar el pla de la zona", NO: "No admès", simple: "Vista senzilla", expert: "Vista completa",
-    no_saved: "Encara no has desat res. Fes les distribucions d'un local i prem «Desa aquest local».", compare: "Compara", saved_ok: "Desat.", saved_local: "Desat només en aquest navegador.",
+    no_saved: "Encara no has desat res. Consulta un local al pas 1 i prem «Desa aquest local».", compare: "Compara", saved_ok: "Desat.", saved_local: "Desat només en aquest navegador.",
     rep_ok: "Informe preparat.", rep_no: "Aquesta vista no pot desar fitxers.", del: "Esborra" },
   es: { nav_flow: "Proceso", g_find: "Encuentra y comprueba", g_design: "Diseño", g_report: "Informe", g_evid: "Pruebas", g_rules: "Normas", g_how: "Cómo funciona", nav_check: "Consulta una dirección", nav_design: "Diseña viviendas", nav_saved: "Guardados", nav_city: "Ciudad en 3D", nav_real: "Locales reales",
-    save: "Guardar este local", report: "Descargar el informe (PDF)", saved_eb: "Paso 8 · informe · tus locales", saved_h: "Locales guardados, uno al lado del otro",
-    saved_lede: "Cada local que guardes conserva tus necesidades y la respuesta de NOMAD. Marca dos o más para compararlos. Solo tú ves tus locales guardados.",
+    save: "Guardar este local", report: "Descargar el informe (PDF)", saved_eb: "Paso 2 · guarda y comparte", saved_h: "Locales guardados, uno al lado del otro",
+    saved_lede: "Cada local que guardes conserva la respuesta urbanística de NOMAD y sus fuentes. Marca dos o más para compararlos. Solo tú ves tus locales guardados.",
     YES: "Vivienda admitida", CHECK: "Hay que revisar el plan de la zona", NO: "No admitida", simple: "Vista sencilla", expert: "Vista completa",
-    no_saved: "Aún no has guardado nada. Haz las distribuciones de un local y pulsa «Guardar este local».", compare: "Comparar", saved_ok: "Guardado.", saved_local: "Guardado solo en este navegador.",
+    no_saved: "Aún no has guardado nada. Consulta un local en el paso 1 y pulsa «Guardar este local».", compare: "Comparar", saved_ok: "Guardado.", saved_local: "Guardado solo en este navegador.",
     rep_ok: "Informe listo.", rep_no: "Esta vista no puede guardar archivos.", del: "Borrar" }
 };
 let LANG = "en";
@@ -1986,6 +1935,7 @@ function initExtras() {
     try { localStorage.setItem("nomad-simple", on ? "1" : "0"); } catch (e) {} applyLang();
   });
   initSaved();
+  $("#answer").addEventListener("click", e => { const b = e.target.closest("[data-act]"); if (!b) return; b.dataset.act === "save" ? saveShop() : makeReport(); });
   const z = D.experiments.zoning;
   $("#mapsum").textContent = `Summary: of ${fmt(z.empty_premises)} empty ground-floor premises, ${fmt(z.housing.YES)} stand in a zone that admits housing, ${fmt(z.housing.CHECK)} depend on their zone's plan and ${fmt(z.housing.NO)} cannot take housing. In the Eixample, ${fmt(z.eixample.housing.YES)} of ${fmt(z.eixample.empty)}.`;
   applyLang();
@@ -2128,11 +2078,17 @@ async function initSaved() {
   try { savedRows = JSON.parse(localStorage.getItem("nomad-saved") || "[]"); } catch (e) { savedRows = []; }
   drawSaved();
 }
+const SOURCES = ["Zoning: Mapa Urbanístic de Catalunya (MUC), Generalitat de Catalunya, January 2023 (open data, attribution)",
+  "Rule: PGM art. 225.7 (MPGM 1999): housing on the ground floor in zones built along street lines (rulebook, MPGM 1999 art. 225)",
+  "Empty premises: Cens de locals en planta baixa 2024, Ajuntament de Barcelona, Open Data BCN (CC BY 4.0)",
+  "Building: Dirección General del Catastro (reuse with attribution)"];
+function shopRow(r) {
+  return { name: `${r.street} ${r.num}`, ref: r.ref || "", barri: r.barri || "", district: r.district || "", zone: r.zone || "", key: r.key || "",
+           housing: r.housing, why: r.why || "", cat: r.cat, catWhy: r.catWhy, shops: r.shops, sources: SOURCES, savedAt: new Date().toISOString() };
+}
 async function saveShop() {
-  if (!dRes) return;
-  const R = dRes, row = { name: R.shopDrawn.source.split(" (")[0], asked: R.mix, area: Math.round(R.shop.area), facade: R.shop.facade_m,
-    asIs: R.before.verdict, layouts: R.iterations.map(i => ({ label: i.label, homes: i.homes, verdict: i.verdict })),
-    zone: R.shopDrawn.zoning ? R.shopDrawn.zoning.housing : "", price: (R.shopDrawn.prem && (R.shopDrawn.prem.eurg || R.shopDrawn.prem.eur)) || null, savedAt: new Date().toISOString() };
+  if (!sel || sel.kind) return;                                   // whole buildings are not saved
+  const row = shopRow(sel);
   try {
     if (store) { await store.doc().set(row); $("#dactmsg").textContent = T("saved_ok"); return; }
   } catch (e) {}
@@ -2147,8 +2103,8 @@ function drawSaved() {
   const L = $("#savedlist"); if (!L) return;
   if (!savedRows.length) { L.innerHTML = `<p class="hint2">${esc(T("no_saved"))}</p>`; $("#compare").innerHTML = ""; return; }
   L.innerHTML = savedRows.map(r => `<div class="saved panel"><label><input type="checkbox" data-id="${esc(r.id)}" ${picked.has(r.id) ? "checked" : ""}>${esc(r.name)}</label>
-      <span class="hint2">${esc(r.asked)} · ${r.area} m² · ${new Date(r.savedAt).toLocaleDateString()}</span>
-      <span>As it is: <span class="pill ${r.asIs}">${r.asIs}</span> · up to ${Math.max(...r.layouts.map(l => l.homes))} homes</span>
+      <span class="hint2">${esc(r.district || "")} · ${new Date(r.savedAt).toLocaleDateString()}</span>
+      <span>${r.housing ? `<span class="pill ${r.housing}">${esc(WORD[r.housing] || r.housing)}</span>` : ""} ${r.cat ? esc(CATN[r.cat] || r.cat) : ""}</span>
       <button type="button" class="chip" data-del="${esc(r.id)}">${esc(T("del"))}</button></div>`).join("");
   L.onchange = e => { const id = e.target.dataset.id; if (!id) return; e.target.checked ? picked.add(id) : picked.delete(id); drawCompare(); };
   L.onclick = e => { const b = e.target.closest("[data-del]"); if (b) removeSaved(b.dataset.del); };
@@ -2159,36 +2115,33 @@ function drawCompare() {
   if (rows.length < 2) { $("#compare").innerHTML = ""; return; }
   const line = (h, f) => `<tr><th>${h}</th>${rows.map(r => `<td>${f(r)}</td>`).join("")}</tr>`;
   $("#compare").innerHTML = `<thead><tr><th></th>${rows.map(r => `<th>${esc(r.name)}</th>`).join("")}</tr></thead><tbody>
-    ${line("asked", r => esc(r.asked))}${line("shop m²", r => r.area)}${line("façade m", r => r.facade)}
-    ${line("zone", r => r.zone ? `<span class="pill ${r.zone}">${r.zone}</span>` : "—")}${line("as it is", r => `<span class="pill ${r.asIs}">${r.asIs}</span>`)}
-    ${[0, 1, 2].map(k => line(rows[0].layouts[k] ? esc(rows[0].layouts[k].label) : "", r => r.layouts[k] ? `${r.layouts[k].homes} · <span class="pill ${r.layouts[k].verdict}">${r.layouts[k].verdict}</span>` : "")).join("")}
-    ${line("€/m² nearby (2018)", r => r.price ? fmt(r.price) : "—")}</tbody>`;
+    ${line("district", r => esc(r.district || "—"))}${line("zone", r => esc(r.zone || "—") + (r.key ? ` <span class="num">(${esc(r.key)})</span>` : ""))}
+    ${line("zoning answer", r => r.housing ? `<span class="pill ${r.housing}">${esc(WORD[r.housing] || r.housing)}</span>` : "—")}${line("why", r => esc(r.why || "—"))}
+    ${line("category", r => r.cat ? `${esc(CATN[r.cat] || r.cat)}: ${esc(r.catWhy || "")}` : "—")}${line("shops within 100 m", r => r.shops != null ? r.shops : "—")}</tbody>`;
 }
 
 /* ---------- the report: a PDF made in the page, offered through the viewer's save prompt ---------- */
 async function makeReport() {
-  if (!dRes || !window.jspdf) return;
+  if (!sel || sel.kind || !window.jspdf) return;
+  const r = sel, row = shopRow(r), { jsPDF } = window.jspdf, doc = new jsPDF({ unit: "mm", format: "a4" });
+  let y = 18;
+  const put = (t, size = 10, style = "normal", font = "helvetica") => { doc.setFont(font, style); doc.setFontSize(size);
+    const L = doc.splitTextToSize(t, 180); if (y + L.length * size * 0.45 > 280) { doc.addPage(); y = 18; } doc.text(L, 15, y); y += L.length * size * 0.45 + 3; };
+  put("NOMAD report", 18, "bold", "courier");
+  put(`${row.name} · ${row.barri} · ${row.district}${row.ref ? " · Catastro " + row.ref : ""}`, 10);
+  put(`Zoning answer: ${WORD[r.housing]}`, 13, "bold");
+  put(`Zone: ${row.zone}${row.key ? " (PGM key " + row.key + ")" : ""}`);
+  put(`Why: ${row.why}`);
+  put(`NOMAD category: ${CATN[r.cat]} (${row.catWhy})`);
+  put(DAYLIGHT_SOON[0].toUpperCase() + DAYLIGHT_SOON.slice(1) + ".");
+  put("Sources", 12, "bold", "courier");
+  SOURCES.forEach(s => put("· " + s, 9.5));
+  put("NOMAD (IAAC MaAI 2026-27) is a research prototype: a first check of the zoning, not a licence. The rules inside the shop (Decret 141/2012) still decide how many homes fit: a project needs an architect and the Ajuntament's approval.", 8, "italic");
+  const name = "NOMAD report " + row.name.replace(/[^\w\- ]/g, "") + ".pdf";
   const dl = await window.claude?.use?.("downloads");
-  if (!dl) { $("#dactmsg").textContent = T("rep_no"); return; }
-  const { jsPDF } = window.jspdf, doc = new jsPDF({ unit: "mm", format: "a4" }), R = dRes, b = bestLayout();
-  const svgPng = async svg => { const img = new Image(); img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg.replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ')); await img.decode();
-    const c = document.createElement("canvas"); c.width = c.height = 900; const g = c.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0, 0, 900, 900); g.drawImage(img, 0, 0, 900, 900); return c.toDataURL("image/jpeg", 0.85); };
-  doc.setFont("courier", "bold"); doc.setFontSize(18); doc.text("NOMAD report", 15, 18);
-  doc.setFont("helvetica", "normal"); doc.setFontSize(10);
-  doc.text(doc.splitTextToSize(`${R.shopDrawn.source} · shop ${Math.round(R.shop.area)} m² · façade ${R.shop.facade_m} m · asked ${R.mix}`, 180), 15, 26);
-  doc.setFontSize(12); doc.text(doc.splitTextToSize($("#dsimple").innerText.split("\n")[0] || "", 180), 15, 36);
-  const imgs = [await svgPng(planSvg(R.shopDrawn, R.before.plan)), ...await Promise.all(R.iterations.map(it => svgPng(planSvg(R.shopDrawn, it.plan))))];
-  const labels = ["as it is: " + R.before.verdict].concat(R.iterations.map(it => `${it.label}: ${it.homes} homes, ${it.verdict}`));
-  imgs.forEach((src, i) => { const x = 15 + (i % 2) * 92, y = 46 + Math.floor(i / 2) * 92; doc.addImage(src, "JPEG", x, y, 86, 80); doc.setFontSize(9); doc.text(labels[i], x, y + 84); });
-  doc.addPage(); doc.setFont("courier", "bold"); doc.setFontSize(13); doc.text("Rule cards · " + b.label, 15, 18);
-  doc.setFont("helvetica", "normal"); doc.setFontSize(9.5);
-  let y = 26;
-  for (const c of b.cards) { const t = doc.splitTextToSize(`${c.ok ? "OK  " : "FAIL"}  ${c.title}: ${c.value}${c.limit ? " (" + c.limit + ")" : ""} — ${c.cite}`, 180); if (y + t.length * 5 > 285) { doc.addPage(); y = 18; } doc.text(t, 15, y); y += t.length * 5 + 2; }
-  if (dView && b.prisms && !dView.r.isSVG) { dView.show(wallSolids(b.prisms)); await new Promise(r => setTimeout(r, 400)); dView.r.render(dView.scene, dView.cam);
-    doc.addPage(); doc.setFont("courier", "bold"); doc.text("3D · walls, doors and windows", 15, 18); doc.addImage(dView.r.domElement.toDataURL("image/jpeg", 0.85), "JPEG", 15, 24, 180, 120); drawDesignDetail(); }
-  doc.setFont("helvetica", "italic"); doc.setFontSize(8);
-  doc.text(doc.splitTextToSize("NOMAD (IAAC MaAI 2026-27) is a research prototype: a first check, not a licence. Rules: Decret 141/2012, CTE, PGM, MPGM 2004, Ajuntament de Barcelona. Zoning: MUC (Generalitat).", 180), 15, 285);
-  try { await dl.save({ filename: "NOMAD report " + R.shopDrawn.source.split(" (")[0].replace(/[^\w\- ]/g, "") + ".pdf", data: doc.output("blob") }); $("#dactmsg").textContent = T("rep_ok"); }
-  catch (e) { $("#dactmsg").textContent = e && e.code === "declined" ? "" : T("rep_no"); }
+  try {
+    if (dl) await dl.save({ filename: name, data: doc.output("blob") }); else doc.save(name);
+    $("#dactmsg").textContent = T("rep_ok");
+  } catch (e) { $("#dactmsg").textContent = e && e.code === "declined" ? "" : T("rep_no"); }
 }
 </script>
