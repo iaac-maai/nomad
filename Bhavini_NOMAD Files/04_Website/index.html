@@ -811,22 +811,19 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
       <tr><td>Zoning (qualificació)</td><td>Mapa Urbanístic de Catalunya, Departament de Territori, Generalitat de Catalunya (<a href="https://territori.gencat.cat/ca/06_territori_i_urbanisme/observatori_territori/mapa_urbanistic_de_catalunya/" target="_blank" rel="noopener">MUC</a>), January 2023</td><td>Generalitat open data, attribution</td></tr>
       <tr><td>Housing rules</td><td>Decret 141/2012 (DOGC 6245), CTE (BOE-A-2006-5515), PGM art. 225 (MPGM 1999), MPGM 2004 (Barcelona), Ajuntament guide on change of use (2025): 2,470 pieces from 22 norms</td><td>Official texts, cited by article</td></tr>
       <tr><td>Test shops and flats</td><td>Swiss Dwellings v3.0.0 (46,937 flats, 341 commercial units), <a href="https://zenodo.org/record/7788422" target="_blank" rel="noopener">Zenodo</a></td><td>CC BY 4.0</td></tr>
-      <tr><td>Real flat plans</td><td>ResPlan (<a href="https://github.com/m-agour/ResPlan" target="_blank" rel="noopener">GitHub</a>)</td><td>CC BY 4.0 (data); MIT (code)</td></tr>
-      <tr><td>Real plan scans</td><td>CubiCasa5K, test split only (<a href="https://zenodo.org/records/2613548" target="_blank" rel="noopener">Zenodo</a>)</td><td>CC BY-NC-SA 4.0 · non-commercial use only</td></tr>
+      <tr><td>Real plan scans</td><td>CubiCasa5K, test split only (<a href="https://zenodo.org/records/2613548" target="_blank" rel="noopener">Zenodo</a>)</td><td>CC BY-NC-SA 4.0 · <b>not for commercial use</b></td></tr>
       <tr><td>Plan reader model</td><td>floorplan-to-3d (Yytsi), trained on CubiCasa5K</td><td>MIT</td></tr>
-      <tr><td>3D export</td><td>IfcOpenShell; trimesh</td><td>LGPL-3.0; MIT</td></tr>
       <tr><td>Daylight, validated examples (Exp 4)</td><td>Ladybug Tools + Radiance: 5 empty shops simulated by Bars (exp1_daylight/results_shops.csv, tools/daylight_validated.py). The XGBoost prediction model was dropped.</td><td>AGPL-3.0 (Ladybug Tools)</td></tr>
       <tr><td>Daylight method</td><td>EN 17037 (daylight in buildings): target and minimum daylight factor for Barcelona</td><td>European standard, method cited</td></tr>
-      <tr><td>Weather file</td><td>Barcelona TMYx (ESP_CT_Barcelona.081800_TMYx.epw), <a href="https://climate.onebuilding.org" target="_blank" rel="noopener">climate.onebuilding.org</a></td><td>to check</td></tr>
-      <tr><td>Rule cards (Exp 3)</td><td>open-notebook (vector search) and Gemini 3.5 Flash Lite (drafting)</td><td>MIT (open-notebook); Gemini: Google API terms</td></tr>
-      <tr><td>AI assistant and code help</td><td>Claude (Anthropic): the "Ask NOMAD" assistant and help writing the code</td><td>Anthropic terms of use</td></tr>
+      <tr><td>Weather file</td><td>Barcelona TMYx (ESP_CT_Barcelona.081800_TMYx.epw), <a href="https://climate.onebuilding.org" target="_blank" rel="noopener">climate.onebuilding.org</a> (Lawrie and Crawley, "Development of Global Typical Meteorological Years (TMYx)")</td><td>No licence stated on the site (checked 9 Nov 2026); cited as the site asks. The file is used for the EN 17037 thresholds and is not redistributed (not in the repo).</td></tr>
+      <tr><td>Rule cards (Exp 3)</td><td>open-notebook (vector search) and Gemini 3.5 Flash Lite, model <code>gemini-3.5-flash-lite</code> (drafting; set as GEMINI_MODEL in .env, logged in outputs/*/drafts.jsonl)</td><td>MIT (open-notebook); Gemini: Google API terms</td></tr>
+      <tr><td>Code help</td><td>Claude (Anthropic): help writing the code (see docs/AI_LOG.md)</td><td>Anthropic terms of use</td></tr>
       <tr><td>Base map (data/basemap.json)</td><td>Barcelona's zones from the Mapa Urbanístic de Catalunya (MUC, muc_qualificacio_bcn.geojson), merged and simplified (02_Code/src/app/build_site.py)</td><td>Generalitat open data, attribution</td></tr>
-      <tr><td>Metropolitan area, 36 towns (data/amb.json)</td><td>Catastro INSPIRE Buildings (one file per town) and MUC zoning served by the Diputació de Barcelona (02_Code/src/zoning/amb.py)</td><td>Catastro data: reuse with attribution; MUC: Generalitat open data, attribution; Diputació service: to check</td></tr>
+      <tr><td>OCR of PGM/RPUC legal texts for the rulebook</td><td>Tesseract OCR (Catalan + Spanish; 02_Code/src/collect/ocr_pgm.py)</td><td>Apache-2.0</td></tr>
       <tr><td>Trees in the 3D city</td><td>Open Data BCN street, zone and park trees</td><td>CC BY 4.0</td></tr>
       <tr><td>3D viewer</td><td>three.js 0.147</td><td>MIT</td></tr>
       <tr><td>Rulebook viewer</td><td>PDF.js 3.11</td><td>Apache-2.0</td></tr>
       <tr><td>PDF report</td><td>jsPDF 2.5</td><td>MIT</td></tr>
-      <tr><td>Python in the browser</td><td>Pyodide</td><td>MPL-2.0</td></tr>
       <tr><td>Fonts</td><td>Inter, Inter Tight, JetBrains Mono</td><td>SIL OFL 1.1</td></tr>
     </tbody>
   </table></div>
