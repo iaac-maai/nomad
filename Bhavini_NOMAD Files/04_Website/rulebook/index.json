@@ -1,6 +1,6 @@
 {
  "title": "NOMAD rulebook",
- "pages": 1408,
+ "pages": 1409,
  "levels": [
   {
    "id": "national",
@@ -161,7 +161,7 @@
    "plain": "The Catalan Right to Housing Act: quality of dwellings, empty homes, social housing.",
    "url": "https://portaljuridic.gencat.cat/eli/es-ct/l/2007/12/28/18",
    "scan": false,
-   "pages": 135,
+   "pages": 136,
    "start": 678
   },
   {
@@ -172,7 +172,7 @@
    "url": "https://portaljuridic.gencat.cat/eli/es-ct/dl/2020/12/09/50",
    "scan": false,
    "pages": 11,
-   "start": 813
+   "start": 814
   },
   {
    "level": "catalonia",
@@ -182,7 +182,7 @@
    "url": "https://portaljuridic.gencat.cat/eli/es-ct/dlg/2010/08/03/1",
    "scan": false,
    "pages": 203,
-   "start": 824
+   "start": 825
   },
   {
    "level": "pgm",
@@ -192,7 +192,7 @@
    "url": "https://planejamenturbanisme.territori.gencat.cat/rpucportal/#/consulta/detallExpedient/96749",
    "scan": true,
    "pages": 11,
-   "start": 1028
+   "start": 1029
   },
   {
    "level": "pgm",
@@ -202,7 +202,7 @@
    "url": "https://planejamenturbanisme.territori.gencat.cat/rpucportal/#/consulta/detallExpedient/215050",
    "scan": true,
    "pages": 25,
-   "start": 1039
+   "start": 1040
   },
   {
    "level": "pgm",
@@ -212,7 +212,7 @@
    "url": "https://planejamenturbanisme.territori.gencat.cat/rpucportal/#/consulta/detallExpedient/283290",
    "scan": true,
    "pages": 210,
-   "start": 1064
+   "start": 1065
   },
   {
    "level": "pgm",
@@ -222,7 +222,7 @@
    "url": "https://planejamenturbanisme.territori.gencat.cat/rpucportal/#/consulta/detallExpedient/283290",
    "scan": false,
    "pages": 2,
-   "start": 1274
+   "start": 1275
   },
   {
    "level": "pgm",
@@ -232,7 +232,7 @@
    "url": "https://www.amb.cat/web/territori/gestio-i-organitzacio/numamb",
    "scan": false,
    "pages": 105,
-   "start": 1276
+   "start": 1277
   },
   {
    "level": "pgm",
@@ -242,7 +242,7 @@
    "url": "https://www.amb.cat/web/territori/gestio-i-organitzacio/numamb",
    "scan": false,
    "pages": 18,
-   "start": 1381
+   "start": 1382
   },
   {
    "level": "barcelona",
@@ -252,7 +252,7 @@
    "url": "https://ajuntament.barcelona.cat/urbanisme-accio-climatica-mobilitat-pla-barris-serveis-urbans/sites/default/files/2025-03/InforUrb_Canvi-us-habitatge.pdf",
    "scan": false,
    "pages": 9,
-   "start": 1400
+   "start": 1401
   }
  ],
  "parts": [
@@ -373,95 +373,95 @@
    "doc": "Llei 18/2007",
    "file": "parts/14.pdf",
    "first_page": 678,
-   "last_page": 812,
+   "last_page": 813,
    "mb": 0.53
   },
   {
    "level": "catalonia",
    "doc": "DL 50/2020",
    "file": "parts/15.pdf",
-   "first_page": 813,
-   "last_page": 823,
+   "first_page": 814,
+   "last_page": 824,
    "mb": 0.1
   },
   {
    "level": "catalonia",
    "doc": "TRLU",
    "file": "parts/16.pdf",
-   "first_page": 824,
-   "last_page": 1026,
+   "first_page": 825,
+   "last_page": 1027,
    "mb": 0.75
   },
   {
    "level": "pgm",
    "doc": "MPGM 1999 art. 225",
    "file": "parts/17.pdf",
-   "first_page": 1027,
-   "last_page": 1038,
-   "mb": 0.85
+   "first_page": 1028,
+   "last_page": 1039,
+   "mb": 0.74
   },
   {
    "level": "pgm",
    "doc": "MPGM 2004",
    "file": "parts/18.pdf",
-   "first_page": 1039,
-   "last_page": 1063,
-   "mb": 1.89
+   "first_page": 1040,
+   "last_page": 1064,
+   "mb": 1.61
   },
   {
    "level": "pgm",
    "doc": "MPGM B1600",
    "file": "parts/19.pdf",
-   "first_page": 1064,
-   "last_page": 1133,
-   "mb": 10.34
+   "first_page": 1065,
+   "last_page": 1134,
+   "mb": 8.96
   },
   {
    "level": "pgm",
    "doc": "MPGM B1600",
    "file": "parts/20.pdf",
-   "first_page": 1134,
-   "last_page": 1203,
-   "mb": 8.29
+   "first_page": 1135,
+   "last_page": 1204,
+   "mb": 7.13
   },
   {
    "level": "pgm",
    "doc": "MPGM B1600",
    "file": "parts/21.pdf",
-   "first_page": 1204,
-   "last_page": 1273,
-   "mb": 8.23
+   "first_page": 1205,
+   "last_page": 1274,
+   "mb": 6.98
   },
   {
    "level": "pgm",
    "doc": "B1600 ruling",
    "file": "parts/22.pdf",
-   "first_page": 1274,
-   "last_page": 1275,
+   "first_page": 1275,
+   "last_page": 1276,
    "mb": 0.13
   },
   {
    "level": "pgm",
    "doc": "OME",
    "file": "parts/23.pdf",
-   "first_page": 1276,
-   "last_page": 1380,
+   "first_page": 1277,
+   "last_page": 1381,
    "mb": 7.86
   },
   {
    "level": "pgm",
    "doc": "OM rehabilitació",
    "file": "parts/24.pdf",
-   "first_page": 1381,
-   "last_page": 1398,
+   "first_page": 1382,
+   "last_page": 1399,
    "mb": 4.73
   },
   {
    "level": "barcelona",
    "doc": "Guia canvi d'ús",
    "file": "parts/25.pdf",
-   "first_page": 1399,
-   "last_page": 1408,
+   "first_page": 1400,
+   "last_page": 1409,
    "mb": 0.54
   }
  ]

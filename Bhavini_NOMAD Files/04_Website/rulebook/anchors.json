@@ -3,7 +3,7 @@
   "key": "zoning",
   "name": "Can a ground floor be housing here (PGM art. 225.7)",
   "doc": "MPGM 1999 art. 225",
-  "page": 1028,
+  "page": 1029,
   "phrase": "planta baixa",
   "rects": [],
   "page_size": [
@@ -72,7 +72,7 @@
   "key": "useful_bcn",
   "name": "Barcelona: minimum dwelling size and façade",
   "doc": "MPGM 2004",
-  "page": 1049,
+  "page": 1050,
   "phrase": "40 m",
   "rects": [],
   "page_size": [
@@ -84,7 +84,7 @@
   "key": "density",
   "name": "Barcelona: one dwelling per 80 m² built",
   "doc": "MPGM 2004",
-  "page": 1043,
+  "page": 1044,
   "phrase": "80 m",
   "rects": [],
   "page_size": [
@@ -352,7 +352,7 @@
   "key": "guide",
   "name": "What Barcelona checks for a shop-to-home change",
   "doc": "Guia canvi d'ús",
-  "page": 1400,
+  "page": 1401,
   "phrase": "canvi d'ús",
   "rects": [],
   "page_size": [
