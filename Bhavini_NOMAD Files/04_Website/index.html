@@ -1138,13 +1138,9 @@ function drawSteps() {
   $("#steplist").innerHTML = steps.map(([h, p, x, href, go], i) => `<div class="step"><div class="n">${i + 1}</div><h3><a class="sgo" href="${go}">${h}</a></h3><p>${esc(p)}</p>${x ? `<a class="exp" href="${href}">${x} →</a>` : `<a class="exp" href="${href}">open it →</a>`}</div>`).join("");
 }
 
-/* ---------- 4. rules + golden set ---------- */
+/* ---------- 4. rules. (The golden-set score measured the parked layout engine's code: removed with it, see CLEANUP.md) ---------- */
 function drawRules() {
-  const g = D.experiments.golden;
-  $("#golden").innerHTML = `<div><b class="num">${Math.round(100 * g.answer_accuracy)} %</b><span>of ${g.questions} golden questions answered right by NOMAD's code</span></div>
-    <div><b class="num">${Math.round(100 * g.citation_accuracy_when_checked)} %</b><span>right article cited, when NOMAD checks the rule</span></div>
-    <div><b class="num">${Math.round(100 * g["search_hit@5"])} %</b><span>keyword search finds the right article in its top 5</span></div>
-    <div><b class="num">${D.rules.filter(r => r.confidence === 1).length} / ${D.rules.length}</b><span>rule cards whose quote is checked against the official text</span></div>`;
+  $("#golden").innerHTML = `<div><b class="num">${D.rules.filter(r => r.confidence === 1).length} / ${D.rules.length}</b><span>cards checked against the official text</span></div>`;
   const val = r => r.unit === "ratio" ? (r.value === 0.125 ? "1/8" : r.value) : r.unit === "m per m2" ? "S/9" : `${String(r.value).replace(".", ",")} ${r.unit.replace("m2", "m²").replace(" per dwelling", "")}`;
   $("#rulegrid").innerHTML = D.rules.map(r => `<div class="rule panel">
       <div class="top"><span class="what">${esc(r.applies_to)}<br>${esc(r.parameter.replace(/_/g, " "))} ${esc(r.operator)}</span><span class="val num">${esc(val(r))}</span></div>
@@ -1178,8 +1174,8 @@ function drawExps() {
       chart: bars([["admitted", z.housing.YES, C("--yes")], ["check the plan", z.housing.CHECK, C("--check")], ["not admitted", z.housing.NO, C("--no")]], z.empty_premises),
       l: "Zoning is rarely the problem in the dense city: the rules inside the shop decide." },
     { id: "exp3", tag: "EXP 3 · STEP 4", h: "Can AI read Decret 141 and write the rules correctly?",
-      p: `Team experiment: vector search raised fully correct rule cards from 4 to 8 of 10. NOMAD's own ${D.rules.length} rule cards were then tested against a golden set: ${e.golden.questions} questions, ${pct(e.golden.answer_accuracy)} % right after the fixes it found.`,
-      chart: bars([["before the fixes", 75, C("--muted")], ["after", pct(e.golden.answer_accuracy), C("--yes")]], 100, " %"),
+      p: `Team experiment: vector search raised fully correct rule cards from 4 to 8 of 10. NOMAD's own ${D.rules.length} rule cards were then checked against the official texts (docs/LAW_TEXT_CHECK.md).`,
+      chart: `<div class="fig">fully correct rule cards, of 10</div>` + bars([["keyword search", 4, C("--muted")], ["vector search", 8, C("--yes")]], 10),
       l: "The golden set found real bugs: shop conversions need 2,40 m (Annex 4 group C), not 2,50 m, and 8 shops had been thrown out for it." },
     { id: "exp4", tag: "EXP 4 · STEP 5 · TEAM", h: "Daylight prediction model (XGBoost)",
       p: "Tried, dropped, replaced by grid simulation.",

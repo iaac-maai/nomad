@@ -49,6 +49,10 @@ The rulebook flipbook, the 16 rule cards and their source sentences, the precede
 - **c) 18 bis** — see section 2 and PARKED.md.
 - **d) AI log.** Bhavini's rows marked. The model the code calls is `gemini-3.5-flash-lite` (GEMINI_MODEL in `.env`;
   150 of the 155 logged drafts), so "Gemini 3.5 Flash Lite" was right; the exact id is now in the log and Sources.
+- **Golden-set score removed (10 Nov, option B).** The score (16 questions, "100 % answered right by NOMAD's code")
+  was computed by `run_golden.py` on the layout engine's code, which is parked, so main cannot reproduce it. The score
+  boxes and the Exp 3 "after the fixes" chart were removed; the Rule cards page keeps "16 / 16 cards checked against
+  the official text". The score comes back with the engine (PARKED.md).
 - **e) Sources.** Tesseract: "OCR of PGM/RPUC legal texts for the rulebook". CubiCasa5K: not for commercial use.
   The weather file (TMYx, climate.onebuilding.org): checked, no licence stated, cited as the site asks, not
   redistributed. The metropolitan "to check" row went with the Results section. No row is left "to check".
@@ -82,8 +86,6 @@ Every file was sorted into used by the site / experiment / dead (approved on 10 
 - **Phone width:** the rulebook's "previous page" arrow sticks out by 2 px at 390 px wide (it did before the cleanup too).
 - **Llei 18/2007** has a newer consolidated version (10 Nov 2026, 136 pages instead of 135), so the book grew by one
   page and the later bookmarks moved by one; `get_rulebook.py` handles this, but the book changes when a law changes.
-- **The golden-set score** on the Rule cards page (5 Nov) was computed by `run_golden.py` on the layout engine's code,
-  which is now parked: it cannot be recomputed from main until the engine returns or the check is rewritten.
 - **Rebuilding the data** needs the raw data (`02_Code/data`, not in git, on the machine that built it). `avoid.py` still
   computes daylight and layout answers that the site no longer reads; only its street-life count is used.
 - **The scanned PGM pages** have no OCR text in the book unless `ocr_pgm.py` (Tesseract) is run first.
