@@ -1990,7 +1990,13 @@ async function bookRender(n, slot) {
     });
     if (BK.at !== n && !bookSpread(BK.at).includes(n)) return;  // the reader moved on while this page was loading
     slot.innerHTML = ""; slot.appendChild(box);
-  } catch (e) { slot.innerHTML = `<span class="wait">page ${n} did not load</span>`; console.error(e); }
+  } catch (e) {
+    if (e && e.name === "MissingPDFException") {                  // the law PDFs are downloaded, not in git (tools/get_rulebook.py)
+      slot.innerHTML = `<span class="wait">The pages of the laws are not on this computer yet. Run <code>python serve.py</code> with pymupdf installed (or <code>python tools/get_rulebook.py</code>). The index and the rules still work.</span>`;
+      return;
+    }
+    slot.innerHTML = `<span class="wait">page ${n} did not load</span>`; console.error(e);
+  }
 }
 async function bookShow() {
   if (!BK.idx || !window.pdfjsLib) return;
