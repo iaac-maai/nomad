@@ -47,6 +47,3 @@ Every repo, dataset and library we use, with its licence.
 - Source: Sede Electrónica del Catastro, Visor 3D (per-floor unit polygons from FXCC sketches), read by src/zoning/catastro_plans.py.
 - Terms (Sede aviso legal): the licence for its contents is limited to download and private use, contents kept intact, source cited (Ley 37/2007). We cite "Dirección General del Catastro" under every plan.
 - OK for the master project and our private website. Before sharing the site publicly or using it in a product, check Catastro's reuse licence for this data (the Visor 3D is not an official download service).
-
-## NOMAD plan AI (src/ai, added 2026-11-03)
-- Training data: the plan library built from Swiss Dwellings v3.0.0 (CC BY 4.0) and ResPlan (CC BY 4.0, github.com/m-agour/ResPlan); attribution kept. Model code is our own (PyTorch, BSD-style licence); no third-party model code or weights used. GSDiff (GPL-3.0) and DiffPlanner (no licence) were read as reference only.

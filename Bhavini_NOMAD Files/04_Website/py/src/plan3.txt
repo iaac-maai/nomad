@@ -114,33 +114,10 @@ def fits(t, W, D, target=None, mode="hall", gen=True):
     return _FIT[gk]
 
 
-def _flat_ok(g, through):
-    """The flat checks of _check that depend on the plan alone, before it is ranked: useful area, daylight depth of the
-    living room and bedrooms, window share (1/8 of the floor)."""
-    if sum(r["area"] for r in g["rooms"]) < USEFUL_MIN[0] - 1e-6:
-        return False
-    D = g["D"]
-    for r in g["rooms"]:
-        if r["kind"] not in ("living", "bed_main", "bed"):
-            continue
-        ls = _lit_share(r["pts"], D, through)
-        if ls is not None and ls < LIT_SHARE - 1e-6:
-            return False
-        front = 0.0
-        for a, b in zip(r["pts"], r["pts"][1:] + r["pts"][:1]):
-            if (a[1] <= 0.3 and b[1] <= 0.3) or (through and a[1] >= D - 0.3 and b[1] >= D - 0.3):
-                front += abs(b[0] - a[0])
-        if layout.WINDOW_SHARE * front * layout.WINDOW_H / max(r["area"], 0.1) < 1.0 / 8.0:
-            return False
-    return True
-
-
 def _furnished(t, W, D, target, mode, generate):
     lit, ent = MODES[mode]
     keep = []
-    for g in F.best_fits(library(), BEDS[t], W, D, lit=lit, entry_sides=ent, target_m2=target, top=10, generate=generate):
-        if not _flat_ok(g, mode.startswith("through")):  # would fail the flat checks: let the next plan take the slot
-            continue
+    for g in F.best_fits(library(), BEDS[t], W, D, lit=lit, entry_sides=ent, target_m2=target, top=5, generate=generate):
         items, cs = U.furnish(g)                     # furnished and checked (src/generate/furnish.py): wardrobe, bed, kitchen, bathroom
         if U.passes(cs):
             g["furniture"], g["checks_furn"] = items, cs
