@@ -595,6 +595,15 @@ input[type=radio], input[type=checkbox] { accent-color: var(--neon) }
 /* step 4: the rules | the rulebook, as tabs */
 #rp-rules > .lede, #book > .lede { margin-top: 24px }
 #rp-rules .golden { margin-top: 24px }
+/* Annex 4 (conversions): the note above the rule cards, and each card's scope */
+#rp-rules .a4 { margin-top: 16px; padding: 24px; display: grid; gap: 16px }
+#rp-rules .a4 > p { margin: 0; color: var(--slate); max-width: 90ch }
+.a4grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px }
+.a4grid > div { border: 1.5px solid var(--line); border-radius: var(--r-sm); padding: 16px; display: grid; gap: 8px; align-content: start }
+.a4 ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px }
+.a4 blockquote, .rule .xq { margin: 0; padding-left: 10px; border-left: 2px solid var(--terra); color: var(--slate); font-style: italic; font-size: 13px }
+.rule .scope { font: 600 11.5px var(--mono); color: var(--ink) } .rule .conv { font-size: 13px; color: var(--slate) }
+.conv { font-size: 14px; color: var(--ink) }
 body.simple #book { display: block !important }
 
 /* weights: label and share on one line, the slider full width under it; one slider look for the whole site */
@@ -774,6 +783,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
   <div id="rp-rules">
   <p class="lede">The 16 rules NOMAD checks, each with the sentence of the law it comes from. A card passes when its quote is found word for word in the rulebook and the number is in the quote.</p>
   <div class="golden panel" id="golden"></div>
+  <div class="a4 panel" id="annex4"></div>
   <div class="rulegrid" id="rulegrid"></div>
   </div>
 </div></section>
@@ -810,6 +820,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
     <tbody>
       <tr><td>Empty ground-floor premises, 2024</td><td><a href="https://opendata-ajuntament.barcelona.cat/data/dataset/cens-locals-planta-baixa-act-economica" target="_blank" rel="noopener">Cens de locals en planta baixa 2024</a>, Ajuntament de Barcelona, Open Data BCN (CC BY 4.0)</td><td>CC BY 4.0</td></tr>
       <tr><td>Buildings (footprints, floors)</td><td>Catastro (Dirección General del Catastro) via hypercadaster_ES</td><td>EUPL-1.2 (hypercadaster_ES); Catastro data: reuse with attribution</td></tr>
+      <tr><td>Conversion group, Annex 4 Grup C or D</td><td>Built areas of each shop and its building from the Catastro's alphanumeric data, CAT format, Barcelona urban (Dirección General del Catastro; the access date is shown with each answer). NOMAD's estimate, not Catastro information (tools/annex4_grup.py)</td><td>Catastro download licence: transformed data may be published, citing the Dirección General del Catastro and the date of access; the original file is not published</td></tr>
       <tr><td>Zoning (qualificació)</td><td>Mapa Urbanístic de Catalunya, Departament de Territori, Generalitat de Catalunya (<a href="https://territori.gencat.cat/ca/06_territori_i_urbanisme/observatori_territori/mapa_urbanistic_de_catalunya/" target="_blank" rel="noopener">MUC</a>), January 2023</td><td>Generalitat open data, attribution</td></tr>
       <tr><td>Housing rules</td><td>Decret 141/2012 (DOGC 6245), CTE (BOE-A-2006-5515), PGM art. 225 (MPGM 1999), MPGM 2004 (Barcelona), Ajuntament guide on change of use (2025): 2,470 pieces from 22 norms</td><td>Official texts, cited by article</td></tr>
       <tr><td>Test shops and flats</td><td>Swiss Dwellings v3.0.0 (46,937 flats, 341 commercial units), <a href="https://zenodo.org/record/7788422" target="_blank" rel="noopener">Zenodo</a></td><td>CC BY 4.0</td></tr>
@@ -850,11 +861,11 @@ const fmt = n => Number(n).toLocaleString("en-US");
 const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const norm = s => String(s || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toUpperCase().replace(/\s+/g, " ").trim();
 const WORD = { YES: "Homes allowed", CHECK: "Maybe: the local plan decides", NO: "Homes not allowed" };   // changed by applyLang
-let D, P, B, VAL = null;
+let D, P, B, VAL = null, A4G = null;
 
 Promise.all(["data/nomad.json", "data/premises.json", "data/basemap.json"].map(u => fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); }))
-    .concat([fetch("data/daylight_validated.json").then(r => r.ok ? r.json() : null).catch(() => null)]))
-  .then(([d, p, b, v]) => { D = d; P = p.rows.map(r => Object.fromEntries(p.cols.map((c, i) => [c, r[i]]))); B = b; VAL = v; start(); })
+    .concat(["data/daylight_validated.json", "data/annex4_grup.json"].map(u => fetch(u).then(r => r.ok ? r.json() : null).catch(() => null))))
+  .then(([d, p, b, v, g]) => { D = d; P = p.rows.map(r => Object.fromEntries(p.cols.map((c, i) => [c, r[i]]))); B = b; VAL = v; A4G = g; start(); })
   .catch(e => { $("#answer").innerHTML = `<p>The data did not load (${esc(e.message)}). Reload the page.</p>`; });
 
 /* ---------- daylight: the per-shop prediction model (Exp 4, XGBoost) was tried and dropped. Per-shop daylight will come
@@ -865,6 +876,30 @@ const dec = (x, k = 2) => Number(x).toFixed(k).replace(".", ",");
 const validated = r => VAL && VAL.shops.find(s => s.address === `${r.street} ${r.num}`);
 function valHtml(s) {
   return `validated example (Radiance, ${s.sensors} sensors): mean daylight factor ${dec(s.mean_df_pct)} %; the ${VAL.method} target of ${dec(VAL.target_pct)} % reaches ${dec(s.lit_depth_m, 1)} m into a ${dec(s.depth_m, 1)} m deep shop`;
+}
+
+/* ---------- conversion rules: Decret 141/2012 Annex 4 Grup C (≤ 50 % of the building's built area changes use) or
+   Grup D (> 50 %), per shop from the Catastro CAT data (data/annex4_grup.json, built by tools/annex4_grup.py; absent
+   until the CAT file is processed). The groups' texts come from data/nomad.json "annex4" (tools/annex4_cards.py). ---------- */
+const pc = x => String(x).replace(".", ",");
+function grupOf(r) {
+  const g = A4G && A4G.shops[`${r.ref}|${r.x}|${r.y}`];
+  return g ? { grup: g[0], pct: g[1], method: g[2], pmax: g[3], why: g[4] } : null;
+}
+function convHtml(r) {                                            // the line under the zoning answer
+  const g = grupOf(r);
+  if (!A4G || A4G.pending) return `Conversion rules: Annex 4 Grup C or D <span class="meta">(not known yet: needs the Catastro CAT data)</span>`;
+  if (!g || g.grup === "unknown")
+    return `Conversion rules: Annex 4 Grup C or D <span class="meta">(not known${g && g.why ? ": " + esc(g.why) : ": no Catastro unit found for this shop"})</span>`;
+  const share = g.pmax != null ? `${pc(g.pct)}–${pc(g.pmax)} %` : `${pc(g.pct)} %`;
+  return `Conversion rules: Annex 4 Grup ${g.grup} <span class="meta">(the shop is ${share} of the building's built area${g.method === "same" ? ", whichever of its units it is" : ""}; NOMAD's estimate from Dirección General del Catastro data, accessed ${esc(A4G.accessed)})</span>`;
+}
+function convDetail(r) {                                          // what the group means, in the details
+  const g = grupOf(r), A = D.annex4;
+  if (!A) return "";
+  const grp = g && g.grup !== "unknown" ? A.groups.filter(x => x.grup === g.grup) : A.groups;
+  return grp.map(x => `<b>Grup ${x.grup}</b> (${esc(x.when)}): ${esc(x.plain)}`).join("<br>") +
+    ` <a href="#rulecards">Read the law</a>`;
 }
 
 /* NOMAD's category for each place: candidate (zone YES, no avoid flag) / risky (zone CHECK, or "keep it a shop":
@@ -907,9 +942,11 @@ function show(r) {
   $("#answer").innerHTML = `
     <div><div class="addr">${esc(r.street)} ${esc(r.num)}</div><div class="meta">${esc(r.barri)} · ${esc(r.district)} · empty, ${esc(r.offer)}${r.ref ? " · ref. " + esc(r.ref) : ""}</div></div>
     <div><span class="pill ${r.housing}">${WORD[r.housing]}</span></div>
+    ${r.housing !== "NO" ? `<div class="conv" id="conv">${convHtml(r)}</div>` : ""}
     <details class="more"><summary>Show the details</summary><dl><dt>ZONE</dt><dd>${esc(r.zone)}${r.key ? ` <span class="num">(PGM key ${esc(r.key)})</span>` : ""}</dd>
         <dt>WHY</dt><dd>${esc(r.why)}</dd>
         <dt>RULE</dt><dd>PGM art. 225.7 (MPGM 1999): housing on the ground floor in zones built along street lines</dd>
+        ${r.housing !== "NO" ? `<dt>CONVERSION</dt><dd>Decret 141/2012 Annex 4: ${convDetail(r)}</dd>` : ""}
         <dt>NOMAD</dt><dd><span class="pill ${CATPILL[r.cat]}">${esc(CATN[r.cat])}</span> ${esc(r.catWhy)}</dd>
         <dt>DAYLIGHT</dt><dd>${validated(r) ? esc(valHtml(validated(r))) : esc(DAYLIGHT_SOON)}</dd>
         ${r.shops != null ? `<dt>STREET LIFE</dt><dd>${r.shops} shops within 100 m <span class="meta">(city median 16)</span></dd>` : ""}
@@ -1146,12 +1183,31 @@ function drawSteps() {
 function drawRules() {
   $("#golden").innerHTML = `<div><b class="num">${D.rules.filter(r => r.confidence === 1).length} / ${D.rules.length}</b><span>cards checked against the official text</span></div>`;
   const val = r => r.unit === "ratio" ? (r.value === 0.125 ? "1/8" : r.value) : r.unit === "m per m2" ? "S/9" : `${String(r.value).replace(".", ",")} ${r.unit.replace("m2", "m²").replace(" per dwelling", "")}`;
+  const pg = n => n ? ` · p. ${n}` : "";
   $("#rulegrid").innerHTML = D.rules.map(r => `<div class="rule panel">
       <div class="top"><span class="what">${esc(r.applies_to)}<br>${esc(r.parameter.replace(/_/g, " "))} ${esc(r.operator)}</span><span class="val num">${esc(val(r))}</span></div>
-      <span class="src">${esc(r.source.norm)} · ${esc((r.source.article || "").replace(/\s+/g, " "))}</span>
+      ${r.scope ? `<span class="scope">For: ${esc(r.scope)}</span>` : ""}
+      ${r.conversion && r.conversion !== "unchanged" ? `<span class="conv">Conversion: ${esc(r.conversion)}</span>` : ""}
+      <span class="src">${esc(r.source.norm)} · ${esc((r.source.article || "").replace(/\s+/g, " "))}${pg(r.source.page)}</span>
       <span class="chk ${r.confidence < 1 ? "review" : ""}">${r.confidence < 1 ? "to review against the PDF" : /^by eye/.test(r.checked || "") ? "checked by eye against the official scan" : "quote found word for word"}</span>
-      ${r.quote ? `<details><summary>Read the law</summary><blockquote>${esc(r.quote.slice(0, 520))}${r.quote.length > 520 ? " …" : ""}</blockquote></details>` : ""}
+      ${r.quote ? `<details><summary>Read the law</summary><blockquote>${esc(r.quote.slice(0, 520))}${r.quote.length > 520 ? " …" : ""}</blockquote>
+        ${(r.extra_quotes || []).map(q => `<p class="src">${esc(q.article)}${pg(q.page)}</p><blockquote class="xq">${esc(q.quote)}</blockquote>`).join("")}</details>` : ""}
       ${r.note ? `<span class="src">${esc(r.note)}</span>` : ""}</div>`).join("");
+  drawAnnex4();
+}
+function drawAnnex4() {                                           // Decret 141/2012 Annex 4: conversions (rules/annex4.json)
+  const A = D.annex4, box = $("#annex4");
+  if (!A) { box.hidden = true; return; }
+  const p = n => `${esc(A.source.norm)} · p. ${n}`;
+  box.innerHTML = `<h3>Conversions: Decret 141/2012, Annex 4</h3>
+    <p>A shop that becomes homes is a change of use of part of a building. Annex 1 (the rules for new buildings) applies
+      with the exceptions of Annex 4, which depend on how much of the building's built area changes use. ${esc(A.decide)}</p>
+    <div class="a4grid">${A.groups.map(g => `<div><b>Grup ${g.grup}: ${esc(g.when)}</b><span>${esc(g.plain)}</span>
+      <blockquote>${esc(g.quote)}</blockquote><span class="src">${p(g.page)}</span></div>`).join("")}</div>
+    <div><b>${esc(A.grup_d_note)}</b>
+      <ul>${A.grup_d_apartat2.map(a => `<li><b>${esc(a.apartat)}</b> ${esc(a.what)}
+        <details><summary>Read the law</summary><blockquote>${esc(a.quote)}</blockquote><span class="src">${p(a.page)}</span></details></li>`).join("")}</ul></div>
+    <p class="note">${esc(A.symbol_note)}</p>`;
 }
 
 /* ---------- 5. experiments ---------- */

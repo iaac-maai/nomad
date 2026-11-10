@@ -41,12 +41,14 @@ All paths in the table start with `nomad/04_Website/` unless they start with a f
 | `nomad/04_Website/` | **The website.** `index.html` is the page; `data/` its data (27 MB, all in git); `rulebook/` the index of the book of laws; `img/city_still.jpg` the picture shown when a browser has no 3D. | everything you see |
 | `nomad/02_Code/src/` | The 17 scripts that **rebuild the website's data** from the raw data (census, Catastro, MUC zoning, law PDFs). The raw data is large and not in git: it lives in `02_Code/data/` on the computer that rebuilds the data. `app/build_site.py` writes `nomad.json`, `premises.json`, `basemap.json` and the 3D city; `zoning/zoning.py` gives each premises its zone; `zoning/warehouses.py` the empty buildings; `zoning/catastro_site.py` the building of each shop; `check/avoid.py` the street life; `rules/build_rules.py` the rule cards; `rulebook/compile_rulebook.py` the book of laws; `collect/` downloads and reads the laws. | `04_Website/data/` |
 | `nomad/06_Results/` | The 19 result files `build_site.py` reads for the parts the site still shows (zoning summary, street life, golden set, Exp 1 plan-reading scores). | Find your shop, Rule cards, Experiments |
-| `nomad/07_Rules_and_evaluation/` | `rules/rules.json`: the 16 rule cards (value, article, exact sentence). `eval/golden_set.csv`: 16 questions with their answers checked in the law. | Rule cards |
+| `nomad/07_Rules_and_evaluation/` | `rules/rules.json`: the 16 rule cards (value, article, exact sentence, page, who they apply to); `rules/annex4.json`: the Annex 4 note (Grups C and D). `eval/golden_set.csv`: 16 questions with their answers checked in the law. | Rule cards |
 | `exp1_daylight/` | **Daylight simulations** in Grasshopper + Ladybug/Honeybee (Radiance): the Rhino and Grasshopper files, the shop variants and their results, and the 5 real shops simulated (`results_shops.csv`). The per-shop grid simulation will build on it. `daylight_thresholds.json`: the EN 17037 targets for Barcelona from the TMYx weather file (climate.onebuilding.org; no licence stated, not redistributed). | Experiments (Exp 4), daylight of 2 shops in Find your shop |
-| `tools/` | `get_rulebook.py` downloads the pinned law PDFs and builds the book's pages; `--check` tells whether an official text changed (and which articles), `--accept` takes the new versions · `check_quotes.py` checks the rule cards' sentences against the official PDFs · `daylight_validated.py` makes the validated daylight examples · `import_site_data.py` brought the site's data from the published site into git · `fix_rule_quotes.py` the 9 Nov fix of the rule cards' sentences. | The laws, Rule cards, Experiments |
+| `tools/` | `get_rulebook.py` downloads the pinned law PDFs and builds the book's pages; `--check` tells whether an official text changed (and which articles), `--accept` takes the new versions · `check_quotes.py` checks the rule cards' sentences against the official PDFs · `daylight_validated.py` makes the validated daylight examples · `import_site_data.py` brought the site's data from the published site into git · `fix_rule_quotes.py` the 9 Nov fix of the rule cards' sentences · `annex4_cards.py` adds to the Decret 141 cards who they apply to (new buildings / conversions, Annex 4) and their pages · `annex4_grup.py` Grup C or D for each shop from the Catastro CAT file (`test_annex4_grup.py` tests it). | The laws, Rule cards, Experiments |
 | `docs/AI_LOG.md` | Every use of AI in the project (IAAC rule), and the table of sources and licences. | Sources |
 | `docs/DATA_INVENTORY.md` | Every file of the published site (321): type, size, origin, where the site uses it. | — |
 | `docs/LAW_TEXT_CHECK.md` | The rule cards' sentences compared with the official PDFs, and what was corrected. | Rule cards |
+| `docs/ANNEX4.md` | Conversions (Decret 141/2012 Annex 4): which card applies when, how Grup C or D is computed for each shop, how to run it, and the Catastro CAT licence. | Rule cards, Find your shop |
+| `docs/OPEN_QUESTIONS.md` | Legal and data questions NOMAD cannot settle by itself, and who could answer them. | — |
 | `PARKED.md` | Features taken off the site for now (the "Your homes" layout engine, weights, plan upload, Ask NOMAD), their files, and what must be true before they come back. | — |
 | `experiments/README.md` | One line for each experiment that is not on the site; they are complete on the branch `archive/experiments`. | — |
 | `CLEANUP.md` | What the 9–10 Nov 2026 cleanup removed, parked and fixed, why, and how it was tested. | — |
@@ -69,6 +71,9 @@ The website's data is in git, so nobody needs to rebuild it to open the site. To
 `nomad/02_Code/data/` and `pip install -r requirements.txt`; then run the scripts in
 `nomad/02_Code/src/` (each one says how at its top) and copy their output into `04_Website/data/`.
 After new Radiance runs of real shops: `python tools/daylight_validated.py`.
+
+Grup C or D for each shop (Decret 141 Annex 4), after downloading the Catastro CAT file (needs a login; see
+`docs/ANNEX4.md`): `python tools/annex4_grup.py --cat <file>.CAT.gz --accessed YYYY-MM-DD`.
 
 ## Law versions
 
