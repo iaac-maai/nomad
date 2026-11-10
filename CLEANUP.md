@@ -93,11 +93,9 @@ Every file was sorted into used by the site / experiment / dead (approved on 10 
 - **The scanned PGM pages** have no OCR text in the book unless `ocr_pgm.py` (Tesseract) is run first.
 - **Bhavini's newer site** (her published artifact, after v43) holds work that is in no branch; ask her to push it.
 - ~~**Rename** `Bhavini_NOMAD Files/` to `nomad/`~~ — done on 10 Nov 2026 in PR #2 (every path updated, all tests and the clean-clone test run again).
-- **Are area-01 and facade-01 still in force?** MPGM 2004, Disposició addicional primera 2, says its conditions
-  (40 m² useful area, 3 m of façade) apply only "until the Ordenances Metropolitanes d'Edificació are modified"
-  ("En tant no s'aprovi la modificació de les esmentades Ordenances"). The OME is in the rulebook: check whether a
-  later OME text replaced these two conditions, and whether cards `BCN-MPGM2004-area-01` and `BCN-MPGM2004-facade-01`
-  are still in force.
+- **Legal questions** (Annex 4 Grup C/D, "sobre o sota rasant", whether MPGM 2004 area-01 and facade-01 are still in
+  force after the OME) are now in `docs/OPEN_QUESTIONS.md`. The missing "≤" of Grup C was checked on 10 Nov 2026:
+  it is in the original DOGC 6245, page 53451.
 - **Source of the Exp 3 chart** (keyword search 4/10, vector search 8/10): `outputs/run_pdf/exp2_summary.md` (keyword)
   and `outputs/run_notebook/exp2_summary.md` (vector), on the branch `archive/experiments`; also in `AGENTS.md`
   before the cleanup ("keyword 23/50 drafts correct, vector 38/50"). The 4 and 8 count the questions whose majority

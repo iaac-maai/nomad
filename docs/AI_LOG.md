@@ -20,6 +20,7 @@ IAAC asks us to declare every AI tool we use. Add one row each time.
 | 2026-11-05 | Bhavini | Claude | Website v41: selected building in 3D (see-through neon), checks open their law in the rulebook, laws list with the open law lit and + dropdowns, Saved and For the city closed with + / -, The laws after step 2, metro base map (amb_base.py), Sources extended | Reverted on 9 Nov, not in main (kept on branch parked/bhavini-v43) |
 | 2026-11-05 | Bhavini | Claude | E34 space optimisation: eval_space.py, room placer and connection table (placed_plans.py), homes with their own street door, efficiency figure on the site; website v43 with scrolling columns. City rerun with the new engine still running: city counts are from the old engine | Reverted on 9 Nov, not in main (kept on branch parked/bhavini-v43) |
 | 2026-11-09 | Bars | Claude | Post-midterm cleanup on branch cleanup-after-midterm (removals, parked features, data in the repo, law-text check, Sources); see CLEANUP.md | Every change reviewed by Bars before the pull request |
+| 2026-11-10 | Bars | Claude | Conversion rules (Decret 141/2012 Annex 4) on branch conversion-rules-annex4: which card applies to new buildings or conversions, Annex 4 note with pages, Grup C/D per shop from the Catastro CAT file (tool and tests; no real CAT data yet), the "≤" checked in DOGC 6245, docs/OPEN_QUESTIONS.md | Every quote checked word for word on its page; no rule value changed; for Bars's review before merging |
 
 ## Sources, tools and licences
 
@@ -29,6 +30,7 @@ The same list as the website's Sources table (9 Nov 2026). No row is left "to ch
 | --- | --- | --- |
 | Empty ground-floor premises | Cens de locals en planta baixa 2024, Ajuntament de Barcelona, Open Data BCN | CC BY 4.0 |
 | Buildings (footprints, floors) | Catastro (Dirección General del Catastro) via hypercadaster_ES | EUPL-1.2 (hypercadaster_ES); Catastro data: reuse with attribution |
+| Built areas for Annex 4 Grup C/D | Catastro alphanumeric data, CAT format, Barcelona urban (Dirección General del Catastro), downloaded by a registered user | Catastro download licence: transformed data may be published citing the DGC and the access date; the original file is not published (docs/ANNEX4.md) |
 | Zoning (qualificació) | Mapa Urbanístic de Catalunya, Generalitat de Catalunya, January 2023 | Generalitat open data, attribution |
 | Housing rules | Decret 141/2012, CTE, PGM art. 225 (MPGM 1999), MPGM 2004, Ajuntament guide on change of use (2025) | Official texts, cited by article |
 | Test shops and flats | Swiss Dwellings v3.0.0, Zenodo (zenodo.org/record/7788422) | CC BY 4.0 |
