@@ -16,14 +16,32 @@ import pymupdf
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "nomad" / "02_Code" / "data"
 RULES = ROOT / "nomad" / "07_Rules_and_evaluation" / "rules" / "rules.json"
+ANNEX4 = RULES.with_name("annex4.json")
 PDF = {"Decret 141/2012": "catalonia/raw/D141-2012.pdf", "MPGM 2004": "pgm/raw/MPGM-2004-habitatges-parcela.pdf",
        "CTE-DB-SUA": "national/cte_db/DBSUA.pdf", "CTE DB-SUA": "national/cte_db/DBSUA.pdf"}
 
 
 def fold(s):
     s = unicodedata.normalize("NFKC", s).replace("’", "'").replace("ŀ", "l").replace("­", "")
+    s = s.replace("≤", "")                                          # the consolidated Decret 141 PDF drops it (Annex 4 Grup C)
     s = re.sub(r"(\w)-\s+(\w)", r"\1\2", s)                        # a word split at the end of a line
-    return re.sub(r"\s+", " ", s).strip()
+    return re.sub(r"\s+", " ", s).replace("( ", "(").strip()
+
+
+def check_annex4(cards, bad):
+    """The Annex 4 quotes (extra quotes on the cards, rules/annex4.json): word for word, and on the page they give."""
+    pdf = pymupdf.open(DATA / PDF["Decret 141/2012"])
+    pages = [fold(p.get_text()) for p in pdf]
+    quotes = [(c["rule_id"] + " +", q["quote"], q["page"]) for c in cards for q in c.get("extra_quotes", [])]
+    quotes += [(c["rule_id"] + " p.", c["quote"], c["source"]["page"]) for c in cards if c["source"].get("page")]
+    a4 = json.loads(ANNEX4.read_text(encoding="utf-8"))
+    quotes += [("Annex 4 Grup " + g["grup"], g["quote"], g["page"]) for g in a4["groups"]]
+    quotes += [("Grup D apartat " + a["apartat"], a["quote"], a["page"]) for a in a4["grup_d_apartat2"]]
+    for name, q, page in quotes:
+        here = fold(q) in pages[page - 1] or fold(q) in fold(pages[page - 1] + " " + (pages[page] if page < len(pages) else ""))
+        print(f"{'OK  ' if here else 'FAIL'} {name:<30} p. {page}")
+        bad += not here
+    return bad, len(quotes)
 
 
 def main():
@@ -45,7 +63,10 @@ def main():
         else:
             print(f"FAIL {c['rule_id']:<26} quote not found in {rel}"); bad += 1
     print(f"\n{len(cards) - bad} of {len(cards)} cards checked")
-    sys.exit(1 if bad else 0)
+    print("\nAnnex 4 (conversions): the extra quotes, rules/annex4.json and each Decret 141 card's page")
+    bad4, n4 = check_annex4(cards, 0)
+    print(f"\n{n4 - bad4} of {n4} Annex 4 quotes found on their page")
+    sys.exit(1 if bad or bad4 else 0)
 
 
 if __name__ == "__main__":
