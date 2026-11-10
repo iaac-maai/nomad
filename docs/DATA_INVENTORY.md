@@ -47,3 +47,8 @@ If a file over 5 MB is added, track it with `git lfs track <file>` before commit
 | `data/annex4_grup.json` | JSON | <1 kB until filled | `tools/annex4_grup.py`: Decret 141/2012 Annex 4 Grup C or D per shop, from the Catastro CAT file (pending) | Find your shop: conversion rules | derived from Catastro data, see docs/ANNEX4.md |
 | `data/daylight_validated.json` | JSON | 1 kB | `tools/daylight_validated.py`: the 5 Radiance shops (exp1_daylight) | Find your shop, Experiments | team's own |
 
+**Changes on 10 Nov 2026 (licence audit, docs/LICENCES.md):** `data/catastro/b_*.json` and `data/warehouses.json` are
+now transformed by `tools/transform_catastro.py` (only the fields the site uses; outlines simplified and rounded to
+0,5 m; areas rounded to 10 m², façade lengths to 0,5 m): 4.41 → 3.35 MB. The Ajuntament's change-of-use guide is no
+longer reproduced in the book (its reuse terms are not stated): `rulebook/parts/25.pdf` is the Barcelona divider with a
+link, and the book has 1,400 pages.

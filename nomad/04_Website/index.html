@@ -69,6 +69,7 @@ h3 { font-size: 19px; line-height: 1.2 }
 .bk-side input[type=search] { width: 100%; font: 13px var(--body); padding: 7px 9px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); margin: 6px 0 10px }
 .bk-lvl { font: 600 12px var(--mono); color: var(--terra-ink); letter-spacing: .04em; margin: 12px 0 4px; text-transform: uppercase }
 .bk-lvlp { font-size: 12px; color: var(--muted); margin: 0 0 6px }
+a.bk-doc { text-decoration: none } a.bk-doc .pg { font-size: 11px }
 .bk-doc { display: block; width: 100%; text-align: left; border: 0; border-top: 1px solid var(--line); background: none; color: var(--ink); padding: 7px 2px; cursor: pointer; font: 13px var(--body) }
 .bk-doc b { font-weight: 600 } .bk-doc .pg { float: right; font: 12px var(--mono); color: var(--terra-ink) } .bk-doc small { display: block; color: var(--muted); font-size: 12px; margin-top: 2px }
 .bk-doc:hover, .bk-doc:focus-visible, .bk-doc.on { background: var(--pink) }
@@ -759,7 +760,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
     <label><input type="checkbox" value="shop" checked> empty shops</label><label><input type="checkbox" value="warehouse" checked> warehouses</label>
     <label><input type="checkbox" value="commercial" checked> commercial buildings</label><label><input type="checkbox" value="office" checked> office buildings</label></div>
   <div id="pout" aria-live="polite"><p class="hint2">Loading the city…</p></div>
-  <p class="note">Districts: the official boundaries (Ajuntament de Barcelona, Open Data BCN, CC BY 4.0). Built area: Catastro, for whole buildings; an empty shop's own area needs the Catastro CAT data, not loaded yet. Whole buildings have no street-life flag. In use or not: the 2024 census of ground-floor premises, a hint, not proof. Every place still needs its owner and a visit.</p>
+  <p class="note">Districts: the official boundaries (Ajuntament de Barcelona, Open Data BCN, CC BY 4.0). Built area: Catastro, for whole buildings, rounded to 10 m²; an empty shop's own area needs the Catastro CAT data, not loaded yet. Whole buildings have no street-life flag. In use or not: the 2024 census of ground-floor premises, a hint, not proof. Every place still needs its owner and a visit.</p>
   </div>
 </div></section>
 
@@ -845,7 +846,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
       <tr><td>The building in 3D, floor by floor</td><td>A link to the Catastro's own 3D viewer (Sede Electrónica del Catastro, Visor 3D) for each shop's parcel; NOMAD copies none of its data</td><td>Catastro legal notice: download and private use only</td></tr>
       <tr><td>Conversion group, Annex 4 Grup C or D</td><td>Built areas of each shop and its building from the Catastro's alphanumeric data, CAT format, Barcelona urban (Dirección General del Catastro; the access date is shown with each answer). NOMAD's estimate, not Catastro information (tools/annex4_grup.py)</td><td>Catastro download licence: transformed data may be published, citing the Dirección General del Catastro and the date of access; the original file is not published</td></tr>
       <tr><td>Zoning (qualificació)</td><td>Mapa Urbanístic de Catalunya, Departament de Territori, Generalitat de Catalunya (<a href="https://territori.gencat.cat/ca/06_territori_i_urbanisme/observatori_territori/mapa_urbanistic_de_catalunya/" target="_blank" rel="noopener">MUC</a>), January 2023</td><td>Llicència oberta d'ús d'informació – Catalunya: "Generalitat de Catalunya. Departament de Territori", data of January 2023</td></tr>
-      <tr><td>Housing rules</td><td>Decret 141/2012 (DOGC 6245), CTE (BOE-A-2006-5515), PGM art. 225 (MPGM 1999), MPGM 2004 (Barcelona), Ajuntament guide on change of use (2025): 2,470 pieces from 22 norms; the book of laws: 23 official PDFs</td><td>Laws, regulations and acts of public bodies are not subject to copyright (art. 13, RDL 1/1996). BOE texts: "Fuente de los datos: Agencia Estatal Boletín Oficial del Estado"; Portal Jurídic and RPUC: Generalitat de Catalunya; Ajuntament guide: reused unaltered. Version dates in the book's index; NOMAD's additions (index, page numbers, signatures blacked out) are marked in the book</td></tr>
+      <tr><td>Housing rules</td><td>Decret 141/2012 (DOGC 6245), CTE (BOE-A-2006-5515), PGM art. 225 (MPGM 1999), MPGM 2004 (Barcelona), Ajuntament guide on change of use (2025): 2,470 pieces from 22 norms; the book of laws: 22 official PDFs, and the Ajuntament's guide linked</td><td>Laws, regulations and acts of public bodies are not subject to copyright (art. 13, RDL 1/1996). BOE texts: "Fuente de los datos: Agencia Estatal Boletín Oficial del Estado"; Portal Jurídic and RPUC: Generalitat de Catalunya. The Ajuntament's guide states no reuse terms: it is linked to its official page, not reproduced in the book. Version dates in the book's index; NOMAD's additions (index, page numbers, signatures blacked out) are marked in the book</td></tr>
       <tr><td>Test shops and flats</td><td>Swiss Dwellings v3.0.0 (46,937 flats, 341 commercial units), <a href="https://zenodo.org/record/7788422" target="_blank" rel="noopener">Zenodo</a></td><td>CC BY 4.0</td></tr>
       <tr><td>Real plan scans</td><td>CubiCasa5K, test split only (<a href="https://zenodo.org/records/2613548" target="_blank" rel="noopener">Zenodo</a>)</td><td>CC BY-NC-SA 4.0 · <b>not for commercial use</b></td></tr>
       <tr><td>Plan reader model</td><td>floorplan-to-3d (Yytsi), trained on CubiCasa5K</td><td>MIT</td></tr>
@@ -1016,7 +1017,7 @@ function showWh(r) {                                           // a whole buildi
     <dl><dt>ZONE</dt><dd>${esc(r.zone)}${r.key ? ` <span class="num">(PGM key ${esc(r.key)})</span>` : ""}</dd>
         <dt>WHY</dt><dd>${esc(r.why)}</dd>
         <dt>IN USE?</dt><dd>${esc(r.status)} <span class="meta">(hint from the 2024 census of ground-floor premises, not proof)</span></dd>
-        <dt>SIZE</dt><dd>${fmt(r.built_m2)} m² built · ${fmt(r.ground_m2)} m² ground floor · ${r.floors} storey${r.floors > 1 ? "s" : ""} · ${r.street_m} m on the street${r.open_m ? `, ${r.open_m} m on open ground` : ""}</dd>
+        <dt>SIZE</dt><dd>about ${fmt(r.built_m2)} m² built · about ${fmt(r.ground_m2)} m² ground floor · ${r.floors} storey${r.floors > 1 ? "s" : ""} · ${r.street_m} m on the street${r.open_m ? `, ${r.open_m} m on open ground` : ""}</dd>
         <dt>RULE</dt><dd>Decret 141/2012 Annex 4 Group B: total change of use of a building (Annex 1 with its building rules, patios -10 %, 2,40 m clear height)</dd>
 </dl>
     <div class="next">${r.housing === "NO" ? "This zone does not take housing (industry, a facility or a future street): NOMAD answers NO." : r.housing === "CHECK" ? "Maybe: this zone has its own detailed plan, and that plan decides. Ask the Ajuntament." : "The zone allows homes. The whole building is a change of use (Decret 141/2012 Annex 4 Group B): an architect checks the building rules."}</div>`;
@@ -1054,7 +1055,7 @@ async function showBuilding(ref, prem) {
     <div class="bfloors" role="group" aria-label="Floor">${fl.map(f => `<button type="button" class="chip" data-k="${f.k}" aria-pressed="false">${floorName(f.k)}</button>`).join("")}</div>
     <div class="bgrid"><div><div class="bplan"></div></div>
       <div class="bstage"><canvas aria-label="3D model of the building, floor by floor. The plan beside it gives the same information."></canvas><span class="hint">drag to turn · scroll to zoom</span></div></div>
-    <p class="meta">The building's outline on each floor, from the Catastro building parts and their number of floors; floors drawn 3 m apart. Source: Dirección General del Catastro.</p>`;
+    <p class="meta">The building's outline on each floor, from the Catastro building parts and their number of floors, simplified to 0,5 m; floors drawn 3 m apart. NOMAD's drawing based on Dirección General del Catastro data (INSPIRE).</p>`;
   const pts = fl.flatMap(f => f.parts.flatMap(p => p.pts)), xs = pts.map(q => q[0]), ys = pts.map(q => q[1]);
   const x0 = Math.min(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys), w = Math.max(...xs) - x0, h = y1 - y0, pad = 0.04 * Math.max(w, h);
   const solids = s => fl.flatMap(f => f.parts.map(p => ({ pts: p.pts.map(q => [q[0] - x0, q[1] - y0]), z0: f.k * 3, h: 2.9, rgb: [226, 222, 213], alpha: f.k === s ? 1 : 0.28 })));
@@ -1557,7 +1558,7 @@ function drawPolicy() {
   const big = all.filter(x => x.m2 != null).sort((a, b) => b.m2 - a.m2), rest = all.filter(x => x.m2 == null);
   const order = big.concat(rest);
   const showAll = pShow > 15, list = showAll ? order.filter(x => (!pDist || x.district === pDist) && (!pCat || x.cat === pCat)) : order.slice(0, 15);
-  const row = (x, i) => `<tr><td>${esc(x.name)}</td><td>${esc(KN[x.kind])}</td><td>${esc(x.district)}</td><td class="num">${x.m2 != null ? fmt(x.m2) + " m²" : "—"}</td>
+  const row = (x, i) => `<tr><td>${esc(x.name)}</td><td>${esc(KN[x.kind])}</td><td>${esc(x.district)}</td><td class="num">${x.m2 != null ? "≈ " + fmt(x.m2) + " m²" : "—"}</td>
     <td><span class="pill ${CATPILL[x.cat]}">${esc(CATN[x.cat])}</span></td><td><button type="button" class="chip" data-pi="${i}">open</button></td></tr>`;
   $("#pout").innerHTML = `<div class="tally">${CATS.map(([k, c, l]) => `<div><b class="num" style="color:var(${c})">${fmt(n(k))}</b><span>${l}</span></div>`).join("")}</div>
     <h4>Where (by district)</h4>
@@ -2106,11 +2107,12 @@ function drawBookIndex(q) {
     I.levels.map(L => {
       const ds = I.docs.filter(d => d.level === L.id && (!f || norm(d.short + " " + d.title + " " + d.plain).includes(f)));
       if (!ds.length) return "";
-      return `<div class="bk-lvl">${esc(L.name)}</div><p class="bk-lvlp">${esc(L.plain)}</p>` + ds.map(d =>
+      return `<div class="bk-lvl">${esc(L.name)}</div><p class="bk-lvlp">${esc(L.plain)}</p>` + ds.map(d => d.link ?
+        `<a class="bk-doc" href="${esc(d.link)}" target="_blank" rel="noopener"><span class="pg">official site ↗</span><b>${esc(d.short)}</b> · ${esc(d.title)}<small>${esc(d.plain)} Not reproduced in this book: ${esc(d.why)}. © Ajuntament de Barcelona.</small><small class="bk-ver">${esc(lawVersion(d))}</small></a>` :
         `<button type="button" class="bk-doc" data-p="${d.start}"><span class="pg">p. ${d.start}</span><b>${esc(d.short)}</b> · ${esc(d.title)}<small>${esc(d.plain)}${d.scan ? " (scanned original)" : ""}</small><small class="bk-ver">${esc(lawVersion(d))}</small></button>`).join("");
     }).join("") +
-    `<p class="hint2" style="margin-top:10px">${I.docs.length} official documents, ${fmt(I.pages)} pages. Sources: BOE, codigotecnico.org, Portal Jurídic de Catalunya, Agència de l'Habitatge, RPUC (Generalitat), AMB, Ajuntament de Barcelona.</p>`;
-  $("#bkindex").onclick = e => { const b = e.target.closest(".bk-doc"); if (b) { BK.hl = null; bookGo(+b.dataset.p, true); } };
+    `<p class="hint2" style="margin-top:10px">${I.docs.filter(d => !d.link).length} official documents in the book, ${fmt(I.pages)} pages${I.docs.some(d => d.link) ? `, and ${I.docs.filter(d => d.link).length} linked to its official page` : ""}. Sources: BOE, codigotecnico.org, Portal Jurídic de Catalunya, Agència de l'Habitatge, RPUC (Generalitat), AMB, Ajuntament de Barcelona.</p>`;
+  $("#bkindex").onclick = e => { const b = e.target.closest("button.bk-doc"); if (b) { BK.hl = null; bookGo(+b.dataset.p, true); } };
 }
 function bookMarks() {
   if (!BK.anchors) return;
