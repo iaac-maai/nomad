@@ -4,7 +4,9 @@ These features were taken off the website after the midterm (9 Nov 2026). Nothin
 the whole site as it was, with every file named below, is on the branch **`parked/before-cleanup`**.
 To look at one, check out that branch (`git switch parked/before-cleanup`) and open the file.
 
-Line numbers refer to `Bhavini_NOMAD Files/04_Website/index.html` on `parked/before-cleanup`.
+Line numbers refer to `Bhavini_NOMAD Files/04_Website/index.html` on `parked/before-cleanup`. On that branch the folder
+still has its old name, `Bhavini_NOMAD Files/`; on `main` it is `nomad/` (renamed on 10 Nov 2026), so the paths below
+are given as they are on the parked branch.
 
 Bhavini's later versions of the site (v41–v43: Five layouts, layout scores, space optimisation) are on a
 separate branch, **`parked/bhavini-v43`**, untouched.

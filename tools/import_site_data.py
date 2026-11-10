@@ -2,7 +2,7 @@
 
 Until 9 Nov 2026 the site's data lived only in the published artifact (321 files). This script reads a folder that
 holds a copy of those files (same paths: data/..., rulebook/..., py/..., img/..., models/...), and:
-  1. copies the files the cleaned site uses into  Bhavini_NOMAD Files/04_Website/  , removing what the cleanup took
+  1. copies the files the cleaned site uses into  nomad/04_Website/  , removing what the cleanup took
      out (prices, daylight predictions, home counts, layout-engine data, Catastro Visor 3D units);
   2. writes docs/DATA_INVENTORY.md: every file, its type and size, where it came from, where the site uses it,
      and what happened to it.
@@ -17,8 +17,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE = ROOT / "Bhavini_NOMAD Files" / "04_Website"
-B = "Bhavini_NOMAD Files/02_Code/src/"
+SITE = ROOT / "nomad" / "04_Website"
+B = "nomad/02_Code/src/"
 
 # path pattern -> (where it came from, where the cleaned site uses it, decision)
 RULES = [

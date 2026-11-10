@@ -13,7 +13,7 @@ import webbrowser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-SITE = ROOT / "Bhavini_NOMAD Files" / "04_Website"
+SITE = ROOT / "nomad" / "04_Website"
 
 
 def main():

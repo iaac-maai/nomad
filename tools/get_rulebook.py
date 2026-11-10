@@ -1,10 +1,10 @@
 """NOMAD - download the law PDFs of the rulebook from their official sources and build the website's book pages.
 
 The rulebook (the flipbook in "The laws") is 23 official documents compiled into one book with a cover, an index,
-dividers and page numbers (Bhavini_NOMAD Files/02_Code/src/rulebook/compile_rulebook.py). The PDFs are not kept in
+dividers and page numbers (nomad/02_Code/src/rulebook/compile_rulebook.py). The PDFs are not kept in
 git: this script downloads each one from the body that publishes it (BOE, codigotecnico.org, Portal Jurídic de
 Catalunya, Agència de l'Habitatge, RPUC, AMB, Ajuntament de Barcelona), then compiles the book into
-Bhavini_NOMAD Files/04_Website/rulebook/parts/.
+nomad/04_Website/rulebook/parts/.
 
 Page numbers: rulebook/index.json and rulebook/anchors.json (in git) were made from the versions downloaded in
 October 2026. Consolidated laws are updated over time. The script compares every document's page count with
@@ -21,10 +21,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CODE = ROOT / "Bhavini_NOMAD Files" / "02_Code"
+CODE = ROOT / "nomad" / "02_Code"
 DATA = CODE / "data"                                   # where compile_rulebook.py reads the PDFs (not in git)
 BUILT = CODE / "results" / "rulebook"                  # where compile_rulebook.py writes the book (not in git)
-SITE = ROOT / "Bhavini_NOMAD Files" / "04_Website" / "rulebook"
+SITE = ROOT / "nomad" / "04_Website" / "rulebook"
 
 BOE = "https://www.boe.es/buscar/pdf/{y}/{id}-consolidado.pdf"
 PJ = "https://portaljuridic.gencat.cat/eli/es-ct/{eli}/cat/pdf"

@@ -8,7 +8,7 @@ can its zone take homes, how risky is it, and which laws decide it (Decret 141/2
 rules)? The website is the product: `python serve.py` opens it. README.md has the map of every folder.
 
 ## What is on main and what is not
-- `main`: the website (`Bhavini_NOMAD Files/04_Website`), the scripts that build its data, the rule cards, the
+- `main`: the website (`nomad/04_Website`), the scripts that build its data, the rule cards, the
   daylight simulations (`exp1_daylight/`), and the tools in `tools/`.
 - `parked/before-cleanup`: the parked website features (layout engine, weights, plan upload, Ask NOMAD). See PARKED.md.
 - `archive/experiments`: every experiment not used by the site (Exp 2/3 rule-card drafting, Bhavini's lab book E01–E32,
@@ -16,7 +16,7 @@ rules)? The website is the product: `python serve.py` opens it. README.md has th
 - `parked/bhavini-v43`: Bhavini's site versions v41–v43, untouched.
 
 ## Rule card format
-Rule cards live in `Bhavini_NOMAD Files/07_Rules_and_evaluation/rules/rules.json` (the site reads a copy in
+Rule cards live in `nomad/07_Rules_and_evaluation/rules/rules.json` (the site reads a copy in
 `04_Website/data/nomad.json`). Each card has a value, the article, and the exact sentence of the law (`quote`) in its
 original language, plus how that sentence was checked (`checked`). `python tools/check_quotes.py` checks them again.
 

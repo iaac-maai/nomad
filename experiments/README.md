@@ -2,7 +2,8 @@
 
 The experiments that are not part of the website were moved off `main` on 10 Nov 2026. Their code, data, figures and
 documents are complete on the branch **`archive/experiments`** (`git switch archive/experiments`); the parked website
-features are on `parked/before-cleanup` (see `PARKED.md`). One line each:
+features are on `parked/before-cleanup` (see `PARKED.md`). On both branches the folder `nomad/` still has its old
+name, `Bhavini_NOMAD Files/`, so the paths below are given as they are there. One line each:
 
 ## Team experiments
 

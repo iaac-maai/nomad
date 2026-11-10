@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-SITE = ROOT / "Bhavini_NOMAD Files" / "04_Website"
+SITE = ROOT / "nomad" / "04_Website"
 ok = True
 
 
@@ -18,7 +18,7 @@ def line(good, text, fix="", needed=True):
 print("Python %s" % sys.version.split()[0])
 line(sys.version_info >= (3, 10), "Python 3.10 or newer", "install Python 3.12 from python.org")
 line((SITE / "index.html").exists() and (SITE / "data" / "premises.json").exists(), "the website and its data",
-     "clone the repo again: the files under Bhavini_NOMAD Files/04_Website are in git")
+     "clone the repo again: the files under nomad/04_Website are in git")
 for mod, pip_name, why in [("pymupdf", "pymupdf", "to build the rulebook pages"), ("PIL", "pillow", "to build the rulebook pages")]:
     try:
         importlib.import_module(mod)
