@@ -9,8 +9,8 @@ Every file of the published site (claude.ai artifact MBLnc4q9R1XusSQQyjkvYX, ver
 | `data/basemap.json` | JSON | 1,365 kB | nomad/02_Code/src/app/build_site.py basemap(): MUC zones merged and simplified | the 2D map, 3D city typology | in the repo |
 | `data/catastro/b_* (94 files)` | JSON | 14,676 kB | nomad/02_Code/src/zoning/catastro_site.py: Catastro building parts per parcel | Find your shop: the building | in the repo, without the 600 Visor 3D unit buildings |
 | `data/city/index.json` | JSON | 815 kB | nomad/02_Code/src/app/build_site.py city(): tile index and empty-shop façades | City in 3D | in the repo |
-| `data/city/layers.json` | JSON | 3,170 kB | nomad/02_Code/src/app/build_site.py city(): MUC ground layers, Open Data BCN trees | City in 3D | in the repo |
-| `data/city/t_* (132 files)` | JSON | 14,290 kB | nomad/02_Code/src/app/build_site.py city(): Catastro INSPIRE building parts, 1 km tiles | City in 3D | in the repo |
+| `data/city/layers.json` | JSON | 3,170 kB | nomad/02_Code/src/app/build_site.py city(): MUC ground layers (no trees: the trees are in the tiles) | City in 3D | in the repo |
+| `data/city/t_* (132 files)` | JSON | 14,290 kB | nomad/02_Code/src/app/build_site.py city(): Catastro INSPIRE building parts, 1 km tiles | City in 3D | in the repo; trees added on 10 Nov 2026 (below) |
 | `data/city_homes.json` | JSON | 87 kB | nomad/02_Code/src/check/city_runs.py: home counts per place | nothing (home counts removed) | not copied: home counts removed |
 | `data/daylight.json` | JSON | 419 kB | nomad/02_Code/src/app/daylight_site.py (XGBoost predictions, Exp 4) | nothing (removed) | not copied: Exp 4 model removed |
 | `data/demo_shops.json` | JSON | 4 kB | nomad/02_Code/src/app/build_site.py engine(): five test shops | nothing (parked) | not copied: parked layout engine |
@@ -36,3 +36,14 @@ Every file of the published site (claude.ai artifact MBLnc4q9R1XusSQQyjkvYX, ver
 
 No data file in the repo is over 5 MB (the largest, data/city/layers.json, is 3.2 MB), so none needs Git LFS.
 If a file over 5 MB is added, track it with `git lfs track <file>` before committing it.
+
+## Added since the cleanup
+
+| File | Type | Size | Where it came from | Where the site uses it | Licence |
+| --- | --- | ---: | --- | --- | --- |
+| `data/city/t_* (trees)` | JSON, in the tiles | 15,704 kB for all 134 tiles (+1,414 kB of trees) | `tools/add_trees.py`: Ajuntament de Barcelona, Open Data BCN, street trees (arbrat viari, 145,552), zone trees (arbrat zona, 44,067), park trees (arbrat parcs, 33,299), version of 1 Oct 2026: 222,918 trees, size class from categoria_arbrat, palms from tipus_element. The published tiles had been built without them, so the layer drew nothing; 2 tiles in the index had no file and now hold trees only | City in 3D, "trees" layer (loaded with the tiles near the view) | CC BY 4.0 |
+| `data/city/index.json` | JSON | 816 kB | as above, plus the tree count and its source (`trees`) | City in 3D: the layer's label | — |
+| `data/districts.json` | JSON | 92 kB | `tools/districts.py`: Ajuntament de Barcelona, Open Data BCN, Unitats administratives (district boundaries), simplified to 1 m | For the city: districts | CC BY 4.0 |
+| `data/annex4_grup.json` | JSON | <1 kB until filled | `tools/annex4_grup.py`: Decret 141/2012 Annex 4 Grup C or D per shop, from the Catastro CAT file (pending) | Find your shop: conversion rules | derived from Catastro data, see docs/ANNEX4.md |
+| `data/daylight_validated.json` | JSON | 1 kB | `tools/daylight_validated.py`: the 5 Radiance shops (exp1_daylight) | Find your shop, Experiments | team's own |
+

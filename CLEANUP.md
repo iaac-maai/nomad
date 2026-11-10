@@ -84,6 +84,9 @@ Every file was sorted into used by the site / experiment / dead (approved on 10 
 ## 7. Open, for later
 
 - **Phone width:** the rulebook's "previous page" arrow sticks out by 2 px at 390 px wide (it did before the cleanup too).
+- **Trees in the 3D city** (222,918, Open Data BCN, added 10 Nov 2026): on the Intel UHD GPU a frame takes about 35–39 ms
+  with them instead of 15 ms (about 28 fps instead of 60), so the layer is off by default; the checkbox stays. A lighter
+  tree (fewer triangles, no shadows) could let it be on.
 - **Llei 18/2007** has a newer consolidated version (10 Nov 2026, 136 pages instead of 135): only arts. 22.4 and
   123.1 e) changed (terminology, Llei 15/2026), no rule card cites the law, art. 18 bis is unchanged. The book grew by
   one page and the later bookmarks moved by one. Since PR #3 every law version is pinned
