@@ -15,6 +15,7 @@ Run: .venv/Scripts/python src/rulebook/compile_rulebook.py
 import io
 import json
 import re
+import sys
 import unicodedata
 from pathlib import Path
 
@@ -236,6 +237,10 @@ def text_page(book, title, lines, w=595, h=842):
     return pg
 
 
+REDACTED = []                                                    # (document, its page, book page) of every signature blacked out
+ID_NUMBER = re.compile(r"\b\d{8}\s?-?[A-Z]\b|\b[XYZ]\d{7}[A-Z]\b|\bDNI\s*\d")   # Spanish DNI / NIE
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "parts").mkdir(exist_ok=True)
@@ -253,8 +258,9 @@ def main():
         ("Every regulation that decides whether a ground-floor shop in Barcelona can become a home, in one book.", 14, INK, 0),
         ("%d official documents · %d original pages · 4 levels: Spain, Catalonia, the metropolitan plan, Barcelona."
          % (len(srcs), total_src), 11, MUTED, 18),
-        ("The pages are the official texts themselves, unchanged. NOMAD only adds this cover, a page on how to read the book, "
-         "the index, one divider per level, page numbers and bookmarks.", 11, MUTED, 10),
+        ("The pages are the official texts themselves. NOMAD only adds this cover, a page on how to read the book, "
+         "the index, one divider per level, page numbers and bookmarks, and blacks out digital signatures (personal data).",
+         11, MUTED, 10),
         ("IAAC Master in AI for Architecture 2026-27 · NOMAD (Bhavini, Alvaro, Bars) · compiled %s" % "29 October 2026", 9, MUTED, 40),
     ])
     text_page(book, "How to read this book", [
@@ -290,8 +296,17 @@ def main():
             if s["short"] == "MPGM B1600":                       # 117 MB of 200-dpi colour scans: re-encode so the book can go online
                 small = shrink_scans(src); src.close(); src = small
             start = book.page_count
+            sigs = [(i, w.rect) for i, pg in enumerate(src) for w in (pg.widgets() or []) if w.field_type_string == "Signature"]
             book.insert_pdf(src)
             src.close()
+            for i, r in sigs:                                    # a digital signature shows the signer's name and ID number:
+                pg = book[start + i]                             # black it out in the book, and delete the signature field itself
+                for w in list(pg.widgets() or []):
+                    if w.field_type_string == "Signature":
+                        pg.delete_widget(w)
+                pg.add_redact_annot(r, text="signature removed (personal data)", fontsize=6, fill=(0, 0, 0), text_color=(1, 1, 1))
+                pg.apply_redactions()
+                REDACTED.append((s["short"], i + 1, start + i + 1))
             s["start"] = start + 1                               # 1-based page in the book
             starts[s["short"]] = s["start"]
             toc.append([2, "%s — %s" % (s["short"], s["title"][:90]), s["start"]])
@@ -367,6 +382,10 @@ def main():
                                  "note": "phrase not found: opens the document's first page"}
         print("%-13s %-18s p.%-5s %s" % (key, short, anchors[key]["page"], "" if found else "(not found)"))
 
+    hits = [(i + 1, m.group(0)) for i, pg in enumerate(book) for m in ID_NUMBER.finditer(pg.get_text())]
+    if hits:                                                     # never publish an ID number
+        sys.exit("ID number in the book, pages %s: black it out before publishing" % sorted({h[0] for h in hits}))
+    print("signatures blacked out:", REDACTED or "none")
     book.save(OUT / "NOMAD_rulebook.pdf", garbage=3, deflate=True)
     # one file per document for the website (each under the host's 15 MB limit; the flipbook loads only what is opened).
     # A level's divider page travels with its first document. Page numbers stay those of the full book.

@@ -48,6 +48,7 @@ All paths in the table start with `nomad/04_Website/` unless they start with a f
 | `docs/DATA_INVENTORY.md` | Every file of the published site (321): type, size, origin, where the site uses it. | — |
 | `docs/LAW_TEXT_CHECK.md` | The rule cards' sentences compared with the official PDFs, and what was corrected. | Rule cards |
 | `docs/ANNEX4.md` | Conversions (Decret 141/2012 Annex 4): which card applies when, how Grup C or D is computed for each shop, how to run it, and the Catastro CAT licence. | Rule cards, Find your shop |
+| `docs/LICENCES.md` | The licence of every published file and every source, the attribution the site shows, and what is still to check. | Sources |
 | `docs/OPEN_QUESTIONS.md` | Legal and data questions NOMAD cannot settle by itself, and who could answer them. | — |
 | `PARKED.md` | Features taken off the site for now (the "Your homes" layout engine, weights, plan upload, Ask NOMAD), their files, and what must be true before they come back. | — |
 | `experiments/README.md` | One line for each experiment that is not on the site; they are complete on the branch `archive/experiments`. | — |
