@@ -7,7 +7,7 @@ use) or **Grup D** (> 50 %). Official text: the consolidated Decret 141/2012 tha
 
 | | Grup C (≤ 50 %) | Grup D (> 50 %) |
 | --- | --- | --- |
-| Annex 1 apartat 2 (the building: access, stairs, lift, patios, shared spaces) | exempt, except **2.2.1** (each home is reached from a public, common or annex space) | **applies**, incl. 2.1 accessible route (p. 14), 2.2.2 1,50 m landing (p. 14), 2.4.1 lift (p. 14), 2.6 shared space from 8 homes (p. 15) |
+| Annex 1 apartat 2 (the building: access, stairs, lift, patios, shared spaces) | exempt, except **2.2.1** (each home is reached from a public, common or annex space) | **applies**: 2.1 accessible route (p. 14), 2.2.2 1,50 m landing (p. 14), 2.6 shared space from 8 homes (p. 15); whether the lift rule 2.4.1 a) applies to conversions is still open |
 | Ventilation patios, Annex 1 2.5.1 (p. 15) | not required (apartat 2 exempt) | areas −10 %: 8,1 m² (rooms) / 5,4 m² (kitchens, baths, stairs) |
 | Clear height, Annex 1 3.5 (p. 17) | 2,40 m instead of 2,50 m; the rest of 3.5 stays: 2,20 m in bathrooms, kitchens and circulation, 2,30 m over at most 20 % of a room | same as Grup C |
 | Annex 1 apartat 3 (the home: area, façade, rooms, windows, bathroom) | applies unchanged | applies unchanged |

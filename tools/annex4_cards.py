@@ -4,7 +4,7 @@
    a conversion, in plain words) and `source.page` (its page in the official PDF).
 2. height-04C and patio-01 get `extra_quotes`: the other sentences that decide them, each with its page.
 3. rules/annex4.json: the Annex 4 note for the Rule cards page: Grups C and D word for word, and the parts of Annex 1
-   apartat 2 that apply in Grup D (2.1, 2.2.2, 2.4.1 a, 2.6).
+   apartat 2 that apply in Grup D (2.1, 2.2.2, 2.6; whether the lift rule 2.4.1 a) applies is open).
 Every quote must be found word for word in the official PDF (the one tools/get_rulebook.py downloads, pinned in
 nomad/04_Website/rulebook/sources.lock.json), or the script stops. The pages are the PDF's own page numbers.
 
@@ -79,7 +79,7 @@ GROUPS = [
      "Annex aplicable i excepcions: annex 1 amb les excepcions següents: Apartat 2.5.1 s’accepta una reducció del 10% "
      "en les superfícies. Apartat 3.5: mínim de 2,40 m en comptes de 2,50 m, la resta igual.",
      "Annex 1 applies in full, except: ventilation patios (2.5.1) may be 10 % smaller (8,1 m² / 5,4 m²); clear height "
-     "2,40 m. So apartat 2 applies, including the items below."),
+     "2,40 m. So apartat 2 applies (below)."),
 ]
 APARTAT2_D = [
     ("2.1", "accessible route to every home",
@@ -89,10 +89,6 @@ APARTAT2_D = [
     ("2.2.2", "1,50 m landing in front of the lift",
      "Els espais comuns situats davant de la porta de l’ascensor han de permetre la inscripció d’un cercle d’1,50 m de "
      "diàmetre."),
-    ("2.4.1 a)", "lift",
-     "Els edificis plurifamiliars de nova construcció han de tenir ascensor si no són directament accessibles per a les "
-     "persones amb mobilitat reduïda, excepte en els casos d’impossibilitat tècnica o econòmica regulats als apartats "
-     "següents."),
     ("2.6", "shared facilities from 8 homes",
      "Els edificis plurifamiliars, a partir de 8 habitatges, han de disposar d’un espai, per edifici o escala, per a ús "
      "de la comunitat, accessible des de l’exterior o zones comunes, d’1,20 m × 0,80 m com a mínim i una alçada no "
@@ -145,8 +141,8 @@ def main():
         "dogc": DOGC,
         "groups": [{"grup": g, "when": w, "quote": q, "page": page_of(q), "plain": p} for g, w, q, p in GROUPS],
         "grup_d_apartat2": [{"apartat": a, "what": w, "quote": q, "page": page_of(q)} for a, w, q in APARTAT2_D],
-        "grup_d_note": "2.4.1 a) speaks of buildings \"de nova construcció\": whether Grup D makes a lift compulsory "
-                       "in a conversion is an open question (docs/OPEN_QUESTIONS.md).",
+        "grup_d_note": "Grup D: apartat 2 applies (accessible route, 1.50 m landing, shared facilities from 8 homes). "
+                       "Whether the lift rule 2.4.1 a) applies to conversions is still open.",
         "decide": "Grup C or D: the shop's built area ÷ the building's total built area (above and below ground), from "
                   "the Catastro CAT data (tools/annex4_grup.py).",
     }

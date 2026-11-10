@@ -1204,10 +1204,10 @@ function drawAnnex4() {                                           // Decret 141/
       with the exceptions of Annex 4, which depend on how much of the building's built area changes use. ${esc(A.decide)}</p>
     <div class="a4grid">${A.groups.map(g => `<div><b>Grup ${g.grup}: ${esc(g.when)}</b><span>${esc(g.plain)}</span>
       <blockquote>${esc(g.quote)}</blockquote><span class="src">${p(g.page)}</span></div>`).join("")}</div>
-    <div><b>In Grup D, Annex 1 apartat 2 applies, including:</b>
+    <div><b>${esc(A.grup_d_note)}</b>
       <ul>${A.grup_d_apartat2.map(a => `<li><b>${esc(a.apartat)}</b> ${esc(a.what)}
         <details><summary>Read the law</summary><blockquote>${esc(a.quote)}</blockquote><span class="src">${p(a.page)}</span></details></li>`).join("")}</ul></div>
-    <p class="note">${esc(A.symbol_note)} ${esc(A.grup_d_note)}</p>`;
+    <p class="note">${esc(A.symbol_note)}</p>`;
 }
 
 /* ---------- 5. experiments ---------- */
