@@ -1,0 +1,468 @@
+{
+ "title": "NOMAD rulebook",
+ "pages": 1409,
+ "levels": [
+  {
+   "id": "national",
+   "name": "1 · Spain",
+   "plain": "Laws for the whole country: who may build, what every building must meet (safety, health, accessibility, noise, energy), the right to housing, and how owners of one building share it."
+  },
+  {
+   "id": "catalonia",
+   "name": "2 · Catalonia",
+   "plain": "Catalan laws: what makes a dwelling habitable (sizes, heights, light, air), the right to housing in Catalonia, and the urban planning law; plus two circulars that explain how the habitability rules are read."
+  },
+  {
+   "id": "pgm",
+   "name": "3 · Metropolitan plan (PGM)",
+   "plain": "The metropolitan plan of the Barcelona area and its changes: where housing is allowed on a ground floor, how many dwellings fit in a plot, and the metropolitan building and renovation ordinances."
+  },
+  {
+   "id": "barcelona",
+   "name": "4 · Barcelona",
+   "plain": "The city's own guide to turning a ground-floor shop into a home: what the Ajuntament checks."
+  }
+ ],
+ "docs": [
+  {
+   "level": "national",
+   "short": "LOE",
+   "title": "Ley 38/1999, de Ordenación de la Edificación",
+   "plain": "The Building Act: who is responsible for a building (owner, architect, builder) and the basic quality every building must have.",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1999-21567",
+   "scan": false,
+   "pages": 23,
+   "start": 6
+  },
+  {
+   "level": "national",
+   "short": "CTE",
+   "title": "Real Decreto 314/2006, Código Técnico de la Edificación (Parte I)",
+   "plain": "The Technical Building Code: the general part that says which technical rules (the DB documents below) apply, also to works on existing buildings.",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-5515",
+   "scan": false,
+   "pages": 26,
+   "start": 29
+  },
+  {
+   "level": "national",
+   "short": "CTE DB-SUA",
+   "title": "CTE Documento Básico SUA: Seguridad de utilización y accesibilidad",
+   "plain": "Safety in use and accessibility: corridors, doors, steps, falls, and access for people with reduced mobility.",
+   "url": "https://www.codigotecnico.org/pdf/Documentos/SUA/DBSUA.pdf",
+   "scan": false,
+   "pages": 47,
+   "start": 55
+  },
+  {
+   "level": "national",
+   "short": "CTE DB-HS",
+   "title": "CTE Documento Básico HS: Salubridad",
+   "plain": "Health: indoor air and ventilation (HS 3), damp, water supply and drainage, waste.",
+   "url": "https://www.codigotecnico.org/pdf/Documentos/HS/DBHS.pdf",
+   "scan": false,
+   "pages": 184,
+   "start": 102
+  },
+  {
+   "level": "national",
+   "short": "CTE DB-SI",
+   "title": "CTE Documento Básico SI: Seguridad en caso de incendio",
+   "plain": "Fire safety: escape routes, fire separation from the rest of the building, materials.",
+   "url": "https://www.codigotecnico.org/pdf/Documentos/SI/DBSI.pdf",
+   "scan": false,
+   "pages": 92,
+   "start": 286
+  },
+  {
+   "level": "national",
+   "short": "CTE DB-HR",
+   "title": "CTE Documento Básico HR: Protección frente al ruido",
+   "plain": "Noise: how well walls and floors must block sound between a home and its neighbours or a shop.",
+   "url": "https://www.codigotecnico.org/pdf/Documentos/HR/DBHR.pdf",
+   "scan": false,
+   "pages": 80,
+   "start": 378
+  },
+  {
+   "level": "national",
+   "short": "CTE DB-HE",
+   "title": "CTE Documento Básico HE: Ahorro de energía",
+   "plain": "Energy: insulation, heating and cooling demand, renewable energy.",
+   "url": "https://www.codigotecnico.org/pdf/Documentos/HE/DBHE.pdf",
+   "scan": false,
+   "pages": 56,
+   "start": 458
+  },
+  {
+   "level": "national",
+   "short": "TRLSRU",
+   "title": "Real Decreto Legislativo 7/2015, Ley de Suelo y Rehabilitación Urbana",
+   "plain": "Land and urban renovation: owners' duties to keep buildings in good state, and renovation of existing city areas.",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11723",
+   "scan": false,
+   "pages": 56,
+   "start": 514
+  },
+  {
+   "level": "national",
+   "short": "LDV",
+   "title": "Ley 12/2023, por el derecho a la vivienda",
+   "plain": "The Right to Housing Act (2023): housing as a right, social and affordable housing, empty homes.",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2023-12203",
+   "scan": false,
+   "pages": 54,
+   "start": 570
+  },
+  {
+   "level": "national",
+   "short": "LPH",
+   "title": "Ley 49/1960, sobre propiedad horizontal",
+   "plain": "Horizontal Property Act: how the owners of flats and shops in one building decide together (a change of use may need the community's agreement).",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1960-10906",
+   "scan": false,
+   "pages": 20,
+   "start": 624
+  },
+  {
+   "level": "catalonia",
+   "short": "Decret 141/2012",
+   "title": "Decret 141/2012, condicions mínimes d'habitabilitat dels habitatges i cèdula d'habitabilitat",
+   "plain": "THE habitability decree: minimum sizes of a dwelling and its rooms, ceiling heights, façade, windows, light and ventilation. Annex 4 says which rules apply when a shop becomes a home.",
+   "url": "https://portaljuridic.gencat.cat/eli/es-ct/d/2012/10/30/141",
+   "scan": false,
+   "pages": 25,
+   "start": 645
+  },
+  {
+   "level": "catalonia",
+   "short": "Circular 10/2025",
+   "title": "Circular 10/2025, Agència de l'Habitatge de Catalunya",
+   "plain": "How the habitability office reads the decree on direct light (an interpretation, not a law).",
+   "url": "https://habitatge.gencat.cat/web/.content/home/ambits_dactuacio/Cedules-habitabilitat/Circulars-informatives/CIRCULAR-NUM.-10-2025.pdf",
+   "scan": false,
+   "pages": 2,
+   "start": 670
+  },
+  {
+   "level": "catalonia",
+   "short": "Circular 8",
+   "title": "Circular informativa 8, Agència de l'Habitatge de Catalunya",
+   "plain": "Another interpretation note of the habitability office (not a law).",
+   "url": "https://habitatge.gencat.cat/web/.content/home/ambits_dactuacio/Cedules-habitabilitat/Circulars-informatives/Circular_informativa_8.pdf",
+   "scan": false,
+   "pages": 6,
+   "start": 672
+  },
+  {
+   "level": "catalonia",
+   "short": "Llei 18/2007",
+   "title": "Llei 18/2007, del dret a l'habitatge",
+   "plain": "The Catalan Right to Housing Act: quality of dwellings, empty homes, social housing.",
+   "url": "https://portaljuridic.gencat.cat/eli/es-ct/l/2007/12/28/18",
+   "scan": false,
+   "pages": 136,
+   "start": 678
+  },
+  {
+   "level": "catalonia",
+   "short": "DL 50/2020",
+   "title": "Decret llei 50/2020, de mesures urgents per estimular la promoció d'habitatge amb protecció oficial",
+   "plain": "Urgent measures for protected housing; among others it repealed part of the habitability decree.",
+   "url": "https://portaljuridic.gencat.cat/eli/es-ct/dl/2020/12/09/50",
+   "scan": false,
+   "pages": 11,
+   "start": 814
+  },
+  {
+   "level": "catalonia",
+   "short": "TRLU",
+   "title": "Decret legislatiu 1/2010, Text refós de la Llei d'urbanisme",
+   "plain": "The Catalan planning law: zoning, licences, changes of use.",
+   "url": "https://portaljuridic.gencat.cat/eli/es-ct/dlg/2010/08/03/1",
+   "scan": false,
+   "pages": 203,
+   "start": 825
+  },
+  {
+   "level": "pgm",
+   "short": "MPGM 1999 art. 225",
+   "title": "Modificació del PGM: art. 225 de les normes urbanístiques, ús d'habitatge en planta baixa",
+   "plain": "Where a ground floor may be a home: art. 225.7 allows ground-floor housing in street-line zones, with open space in front.",
+   "url": "https://planejamenturbanisme.territori.gencat.cat/rpucportal/#/consulta/detallExpedient/96749",
+   "scan": true,
+   "pages": 11,
+   "start": 1029
+  },
+  {
+   "level": "pgm",
+   "short": "MPGM 2004",
+   "title": "Modificació del PGM: nombre màxim d'habitatges per parcel·la a Barcelona",
+   "plain": "How many dwellings fit in a plot in Barcelona (one per 80 m² built), and the minimum size and façade of a dwelling.",
+   "url": "https://planejamenturbanisme.territori.gencat.cat/rpucportal/#/consulta/detallExpedient/215050",
+   "scan": true,
+   "pages": 25,
+   "start": 1040
+  },
+  {
+   "level": "pgm",
+   "short": "MPGM B1600",
+   "title": "Modificació del PGM per a l'obtenció d'habitatge assequible (B1600, 2018)",
+   "plain": "Affordable housing in the consolidated city (30 % rule). Its final provision two was annulled by the court (next document).",
+   "url": "https://planejamenturbanisme.territori.gencat.cat/rpucportal/#/consulta/detallExpedient/283290",
+   "scan": true,
+   "pages": 210,
+   "start": 1065
+  },
+  {
+   "level": "pgm",
+   "short": "B1600 ruling",
+   "title": "Acord de 31/5/2022 sobre la sentència del TSJC (MPGM B1600)",
+   "plain": "The court ruling on the B1600 change, as recorded by the planning commission.",
+   "url": "https://planejamenturbanisme.territori.gencat.cat/rpucportal/#/consulta/detallExpedient/283290",
+   "scan": false,
+   "pages": 2,
+   "start": 1275
+  },
+  {
+   "level": "pgm",
+   "short": "OME",
+   "title": "Ordenances metropolitanes d'edificació",
+   "plain": "Metropolitan building ordinances: heights, patios, projections and other building details.",
+   "url": "https://www.amb.cat/web/territori/gestio-i-organitzacio/numamb",
+   "scan": false,
+   "pages": 105,
+   "start": 1277
+  },
+  {
+   "level": "pgm",
+   "short": "OM rehabilitació",
+   "title": "Ordenances metropolitanes de rehabilitació",
+   "plain": "Metropolitan renovation ordinances: what existing buildings must meet when they are renovated.",
+   "url": "https://www.amb.cat/web/territori/gestio-i-organitzacio/numamb",
+   "scan": false,
+   "pages": 18,
+   "start": 1382
+  },
+  {
+   "level": "barcelona",
+   "short": "Guia canvi d'ús",
+   "title": "Informació bàsica per a consultes sobre canvi d'ús de locals a habitatge (Ajuntament de Barcelona, 2025)",
+   "plain": "The city's guide: every rule it checks before a shop can become a home (guidance, not a law).",
+   "url": "https://ajuntament.barcelona.cat/urbanisme-accio-climatica-mobilitat-pla-barris-serveis-urbans/sites/default/files/2025-03/InforUrb_Canvi-us-habitatge.pdf",
+   "scan": false,
+   "pages": 9,
+   "start": 1401
+  }
+ ],
+ "parts": [
+  {
+   "level": "front",
+   "doc": "front",
+   "file": "parts/00.pdf",
+   "first_page": 1,
+   "last_page": 4,
+   "mb": 0.03
+  },
+  {
+   "level": "national",
+   "doc": "LOE",
+   "file": "parts/01.pdf",
+   "first_page": 5,
+   "last_page": 28,
+   "mb": 0.27
+  },
+  {
+   "level": "national",
+   "doc": "CTE",
+   "file": "parts/02.pdf",
+   "first_page": 29,
+   "last_page": 54,
+   "mb": 0.22
+  },
+  {
+   "level": "national",
+   "doc": "CTE DB-SUA",
+   "file": "parts/03.pdf",
+   "first_page": 55,
+   "last_page": 101,
+   "mb": 0.96
+  },
+  {
+   "level": "national",
+   "doc": "CTE DB-HS",
+   "file": "parts/04.pdf",
+   "first_page": 102,
+   "last_page": 285,
+   "mb": 3.58
+  },
+  {
+   "level": "national",
+   "doc": "CTE DB-SI",
+   "file": "parts/05.pdf",
+   "first_page": 286,
+   "last_page": 377,
+   "mb": 1.55
+  },
+  {
+   "level": "national",
+   "doc": "CTE DB-HR",
+   "file": "parts/06.pdf",
+   "first_page": 378,
+   "last_page": 457,
+   "mb": 1.0
+  },
+  {
+   "level": "national",
+   "doc": "CTE DB-HE",
+   "file": "parts/07.pdf",
+   "first_page": 458,
+   "last_page": 513,
+   "mb": 0.55
+  },
+  {
+   "level": "national",
+   "doc": "TRLSRU",
+   "file": "parts/08.pdf",
+   "first_page": 514,
+   "last_page": 569,
+   "mb": 0.38
+  },
+  {
+   "level": "national",
+   "doc": "LDV",
+   "file": "parts/09.pdf",
+   "first_page": 570,
+   "last_page": 623,
+   "mb": 0.37
+  },
+  {
+   "level": "national",
+   "doc": "LPH",
+   "file": "parts/10.pdf",
+   "first_page": 624,
+   "last_page": 643,
+   "mb": 0.2
+  },
+  {
+   "level": "catalonia",
+   "doc": "Decret 141/2012",
+   "file": "parts/11.pdf",
+   "first_page": 644,
+   "last_page": 669,
+   "mb": 0.16
+  },
+  {
+   "level": "catalonia",
+   "doc": "Circular 10/2025",
+   "file": "parts/12.pdf",
+   "first_page": 670,
+   "last_page": 671,
+   "mb": 0.2
+  },
+  {
+   "level": "catalonia",
+   "doc": "Circular 8",
+   "file": "parts/13.pdf",
+   "first_page": 672,
+   "last_page": 677,
+   "mb": 0.13
+  },
+  {
+   "level": "catalonia",
+   "doc": "Llei 18/2007",
+   "file": "parts/14.pdf",
+   "first_page": 678,
+   "last_page": 813,
+   "mb": 0.53
+  },
+  {
+   "level": "catalonia",
+   "doc": "DL 50/2020",
+   "file": "parts/15.pdf",
+   "first_page": 814,
+   "last_page": 824,
+   "mb": 0.1
+  },
+  {
+   "level": "catalonia",
+   "doc": "TRLU",
+   "file": "parts/16.pdf",
+   "first_page": 825,
+   "last_page": 1027,
+   "mb": 0.75
+  },
+  {
+   "level": "pgm",
+   "doc": "MPGM 1999 art. 225",
+   "file": "parts/17.pdf",
+   "first_page": 1028,
+   "last_page": 1039,
+   "mb": 0.74
+  },
+  {
+   "level": "pgm",
+   "doc": "MPGM 2004",
+   "file": "parts/18.pdf",
+   "first_page": 1040,
+   "last_page": 1064,
+   "mb": 1.61
+  },
+  {
+   "level": "pgm",
+   "doc": "MPGM B1600",
+   "file": "parts/19.pdf",
+   "first_page": 1065,
+   "last_page": 1134,
+   "mb": 8.96
+  },
+  {
+   "level": "pgm",
+   "doc": "MPGM B1600",
+   "file": "parts/20.pdf",
+   "first_page": 1135,
+   "last_page": 1204,
+   "mb": 7.13
+  },
+  {
+   "level": "pgm",
+   "doc": "MPGM B1600",
+   "file": "parts/21.pdf",
+   "first_page": 1205,
+   "last_page": 1274,
+   "mb": 6.98
+  },
+  {
+   "level": "pgm",
+   "doc": "B1600 ruling",
+   "file": "parts/22.pdf",
+   "first_page": 1275,
+   "last_page": 1276,
+   "mb": 0.13
+  },
+  {
+   "level": "pgm",
+   "doc": "OME",
+   "file": "parts/23.pdf",
+   "first_page": 1277,
+   "last_page": 1381,
+   "mb": 7.86
+  },
+  {
+   "level": "pgm",
+   "doc": "OM rehabilitació",
+   "file": "parts/24.pdf",
+   "first_page": 1382,
+   "last_page": 1399,
+   "mb": 4.73
+  },
+  {
+   "level": "barcelona",
+   "doc": "Guia canvi d'ús",
+   "file": "parts/25.pdf",
+   "first_page": 1400,
+   "last_page": 1409,
+   "mb": 0.54
+  }
+ ]
+}

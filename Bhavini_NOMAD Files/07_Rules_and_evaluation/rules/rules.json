@@ -21,7 +21,8 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "word for word in the official PDF, 9 Nov 2026"
  },
  {
   "rule_id": "BCN-MPGM2004-area-01",
@@ -33,11 +34,11 @@
   "unit": "m2",
   "source": {
    "norm": "MPGM 2004 nombre màxim d'habitatges (Barcelona)",
-   "article": "DISPOSICIONS ADDICIONALS DE LA MPGM",
+   "article": "Disposicions addicionals de la MPGM · Primera, 2 a)",
    "block_id": "MPGM-2004-habitatges-parcela:disposicions-addicionals-de-la-m",
    "url": "https://planejamenturbanisme.territori.gencat.cat/rpucportal/#/consulta/detallExpedient/215050"
   },
-  "quote": "S\na) Els habitatges es desenvoluparan en una y superficie Útil mínima de 40 m².",
+  "quote": "a) Els habitatges es desenvoluparan en una superfície útil mínima de 40 m².",
   "used_by": "src/generate/layout.py CITE useful; src/sim/unit_mix.py min_useful_bcn",
   "note": "Barcelona raises the Catalan 36 m² to 40 m².",
   "checks": {
@@ -45,7 +46,8 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "by eye against the official scan (RPUC document 126035, page 19): read by Claude from the page image on 9 Nov 2026, checked by a human (Bars) on 10 Nov 2026; the PDF has no text layer"
  },
  {
   "rule_id": "BCN-MPGM2004-facade-01",
@@ -57,11 +59,11 @@
   "unit": "m",
   "source": {
    "norm": "MPGM 2004 nombre màxim d'habitatges (Barcelona)",
-   "article": "DISPOSICIONS ADDICIONALS DE LA MPGM",
+   "article": "Disposicions addicionals de la MPGM · Primera, 2 b)",
    "block_id": "MPGM-2004-habitatges-parcela:disposicions-addicionals-de-la-m",
    "url": "https://planejamenturbanisme.territori.gencat.cat/rpucportal/#/consulta/detallExpedient/215050"
   },
-  "quote": "S\na) Els habitatges es desenvoluparan en una y superficie Útil mínima de 40 m².\nb) Cada habitatge disposarà, com a mínim, t i d'una longitud de 3 m en contacte amb la façana a via pública o pati interior d'illa\nc) La superfície corresponent als cossos sortints tancats — (tribunes, miradors, etc), no comptabilitzarà als efectes de superfície mínima de les peces a les que estiguin i annexionats.",
+  "quote": "b) Cada habitatge disposarà, com a mínim, d’una longitud de 3 m en contacte amb la façana a via pública o pati interior d’illa.",
   "used_by": "src/check/flags.py cards facade; src/sim/unit_mix.py min_facade_bcn",
   "note": "",
   "checks": {
@@ -69,7 +71,8 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "by eye against the official scan (RPUC document 126035, page 19): read by Claude from the page image on 9 Nov 2026, checked by a human (Bars) on 10 Nov 2026; the PDF has no text layer"
  },
  {
   "rule_id": "CAT-141-2012-facade-01",
@@ -93,7 +96,8 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "word for word in the official PDF, 9 Nov 2026"
  },
  {
   "rule_id": "CAT-141-2012-height-01",
@@ -117,7 +121,8 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "word for word in the official PDF, 9 Nov 2026"
  },
  {
   "rule_id": "CAT-141-2012-height-04C",
@@ -141,7 +146,8 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "word for word in the official PDF, 9 Nov 2026"
  },
  {
   "rule_id": "CAT-141-2012-bedroom-01",
@@ -165,7 +171,8 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "word for word in the official PDF, 9 Nov 2026"
  },
  {
   "rule_id": "CAT-141-2012-bedroom-02",
@@ -189,7 +196,8 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "word for word in the official PDF, 9 Nov 2026"
  },
  {
   "rule_id": "CAT-141-2012-living-01",
@@ -213,7 +221,8 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "word for word in the official PDF, 9 Nov 2026"
  },
  {
   "rule_id": "CAT-141-2012-window-01",
@@ -237,7 +246,8 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "word for word in the official PDF, 9 Nov 2026"
  },
  {
   "rule_id": "CAT-141-2012-bath-01",
@@ -253,7 +263,7 @@
    "block_id": "annex1-3.11",
    "url": "https://portaljuridic.gencat.cat/eli/es-ct/d/2012/10/30/141"
   },
-  "quote": "Nre. d’habitacions | 0, 1, 2 o 3 | 4 o més\nVàter | 1 | 2\nRentamans | 1 | 2\n[/Tabla]\nPlat de dutxa/banyera 1 1\n3.11.2 Els aparells destinats a la higiene se situaran a les cambres higièniques i la seva agrupació és\nlliure, llevat del rentamans, que es podrà situar a fora.",
+  "quote": "3.11.1 Tots els habitatges han de disposar, com a mínim, d’una dotació d’aparells destinats a la higiene, d’acord amb el quadre següent: Nre. d’habitacions 0, 1, 2 o 3 4 o més Vàter 1 2",
   "used_by": "src/generate/layout.py CITE bath",
   "note": "2 toilets from 4 bedrooms (same table).",
   "checks": {
@@ -261,7 +271,8 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "word for word in the official PDF, 9 Nov 2026 (the table's cells in reading order)"
  },
  {
   "rule_id": "CAT-141-2012-patio-01",
@@ -285,7 +296,8 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "word for word in the official PDF, 9 Nov 2026"
  },
  {
   "rule_id": "CTE-SUA-corridor-01",
@@ -299,17 +311,18 @@
    "norm": "CTE-DB-SUA",
    "article": "Anejo A Terminología (parte 1/6)",
    "block_id": "AnejoA/p1",
-   "url": "https://www.codigotecnico.org/pdf/Documentos/SUA/DBSUA.pdf#page=35"
+   "url": "https://www.codigotecnico.org/pdf/Documentos/SUA/DBSUA.pdf#page=36"
   },
-  "quote": "",
+  "quote": "Anchura libre de paso ≥ 1,20 m. En zonas comunes de edificios de uso Residencial Vivienda se admite 1,10 m",
   "used_by": "src/generate/better.py CITE corridor",
-  "note": "The table row was garbled when the PDF was read; the same table admits 1,10 m in shared areas of housing.",
+  "note": "Accessible route, 'Pasillos y pasos'. In the PDF 'Vivienda' is split across two lines ('Vivien- da').",
   "checks": {
    "source_found": true,
-   "quote_in_source": false,
-   "value_in_quote": false
+   "quote_in_source": true,
+   "value_in_quote": true
   },
-  "confidence": 0.33
+  "confidence": 1.0,
+  "checked": "word for word in the official PDF, 9 Nov 2026 (the line-break hyphen in 'Vivien-da' joined)"
  },
  {
   "rule_id": "CTE-SUA-door-01",
@@ -323,9 +336,9 @@
    "norm": "CTE-DB-SUA",
    "article": "Anejo A Terminología (parte 1/6)",
    "block_id": "AnejoA/p1",
-   "url": "https://www.codigotecnico.org/pdf/Documentos/SUA/DBSUA.pdf#page=35"
+   "url": "https://www.codigotecnico.org/pdf/Documentos/SUA/DBSUA.pdf#page=36"
   },
-  "quote": "[Tabla]\nda se admite 1,10 m\n- | Estrechamientos puntuales de anchura ≥ 1,00 m, de longitud ≤ 0,50 m, y con separación ≥\n0,65 m a huecos de paso o a cambios de dirección\n- | Puertas | - | Anchura libre de paso ≥ 0,80 m medida en el marco y aportada por no más de una hoja.",
+  "quote": "Anchura libre de paso ≥ 0,80 m medida en el marco y aportada por no más de una hoja.",
   "used_by": "src/rhino/nomad_model.py DOOR_W (Stage 7.2)",
   "note": "",
   "checks": {
@@ -333,7 +346,8 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "word for word in the official PDF, 9 Nov 2026"
  },
  {
   "rule_id": "BCN-MPGM2004-density-12",
@@ -345,11 +359,11 @@
   "unit": "m2 per dwelling",
   "source": {
    "norm": "MPGM 2004 nombre màxim d'habitatges (Barcelona)",
-   "article": "Art. 318.",
+   "article": "Art. 318.1",
    "block_id": "MPGM-2004-habitatges-parcela:art.-318.",
    "url": "https://planejamenturbanisme.territori.gencat.cat/rpucportal/#/consulta/detallExpedient/215050"
   },
-  "quote": "Les sollicituds d'edificació en la subzona I, de substitució de l'edificació antiga, hauran de limitar el nombre d'habitatges per parcel-la al que, per excés, resulti de dividir la superfície construida pel mòdul de 80 m²\n2.",
+  "quote": "1. Les sol·licituds d’edificació en la subzona I, de substitució de l’edificació antiga, hauran de limitar el nombre d’habitatges per parcel·la al que, per excés, resulti de dividir la superfície construïda pel mòdul de 80 m².",
   "used_by": "src/check/flags.py cards density; src/sim/unit_mix.py density_module",
   "note": "Rounded up ('per excés').",
   "checks": {
@@ -357,7 +371,8 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "by eye against the official scan (RPUC document 126035, page 21): read by Claude from the page image on 9 Nov 2026, checked by a human (Bars) on 10 Nov 2026; the PDF has no text layer"
  },
  {
   "rule_id": "BCN-MPGM2004-density-13",
@@ -369,11 +384,11 @@
   "unit": "m2 per dwelling",
   "source": {
    "norm": "MPGM 2004 nombre màxim d'habitatges (Barcelona)",
-   "article": "Art. 323.",
+   "article": "Art. 323.1",
    "block_id": "MPGM-2004-habitatges-parcela:art.-323.",
    "url": "https://planejamenturbanisme.territori.gencat.cat/rpucportal/#/consulta/detallExpedient/215050"
   },
-  "quote": "Les edificacions que s'aixequin a la subzona I, intensiva, i a la subzona II, semiintensiva, no podran —depassar per parcella un nombre Es) DIFICACIÓ DE LES NORMES URBANISTIQUES XIM D'HABITATGES PER PARCEL:LA, DINS EL d'habitatges igual al que resulti, per excés, de dividir la superfície construida pel mòdul de 80 m².",
+  "quote": "1. Les edificacions que s’aixequin a la subzona I, intensiva, i a la subzona II, semiintensiva, no podran depassar per parcel·la un nombre d’habitatges igual al que resulti, per excés, de dividir la superfície construïda pel mòdul de 80 m².",
   "used_by": "src/check/flags.py cards density; src/sim/unit_mix.py density_module",
   "note": "Same module as zone 12; the Ajuntament's 2025 guide applies it to every change of use (section 'tercer').",
   "checks": {
@@ -381,6 +396,7 @@
    "quote_in_source": true,
    "value_in_quote": true
   },
-  "confidence": 1.0
+  "confidence": 1.0,
+  "checked": "by eye against the official scan (RPUC document 126035, page 21): read by Claude from the page image on 9 Nov 2026, checked by a human (Bars) on 10 Nov 2026; the PDF has no text layer"
  }
 ]
