@@ -7,9 +7,10 @@ compared with the official PDF, downloaded from the body that publishes it (`too
   found word for word in the PDF's text. `python tools/check_quotes.py` repeats this check.
 - **Scans** (MPGM 2004 from the RPUC, document 126035): the official PDF is a picture of the pages, with no text.
   The old sentences came from our own OCR (Tesseract), which made mistakes. They were replaced by the text read on
-  the page images (rendered at 110–150 dpi) and typed by Claude, the AI assistant; this is not OCR. **These 4 quotes
-  (pages 19 and 21) still need a check by a person**: `docs/law_check_scans/CHECK.md` shows each page crop next to
-  our quote. `check_quotes.py` cannot read a scan; it lists the page to look at.
+  the page images (rendered at 110–150 dpi) and typed by Claude, the AI assistant; this is not OCR. **Checked by a
+  human (Bars) on 10 Nov 2026**: numbers, articles and sentences match the scan (pages 19 and 21);
+  `docs/law_check_scans/CHECK.md` shows each page crop next to our quote. `check_quotes.py` cannot read a scan; it
+  lists the page to look at.
 
 Result: all 16 cards now match the official text. No quote had to be removed. No rule value changed.
 The fixes are applied by `tools/fix_rule_quotes.py` to both `07_Rules_and_evaluation/rules/rules.json` and the site's

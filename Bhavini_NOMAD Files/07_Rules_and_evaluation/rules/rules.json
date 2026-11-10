@@ -47,7 +47,7 @@
    "value_in_quote": true
   },
   "confidence": 1.0,
-  "checked": "by eye against the official scan (RPUC document 126035, page 19), 9 Nov 2026: the PDF has no text layer"
+  "checked": "by eye against the official scan (RPUC document 126035, page 19): read by Claude from the page image on 9 Nov 2026, checked by a human (Bars) on 10 Nov 2026; the PDF has no text layer"
  },
  {
   "rule_id": "BCN-MPGM2004-facade-01",
@@ -72,7 +72,7 @@
    "value_in_quote": true
   },
   "confidence": 1.0,
-  "checked": "by eye against the official scan (RPUC document 126035, page 19), 9 Nov 2026: the PDF has no text layer"
+  "checked": "by eye against the official scan (RPUC document 126035, page 19): read by Claude from the page image on 9 Nov 2026, checked by a human (Bars) on 10 Nov 2026; the PDF has no text layer"
  },
  {
   "rule_id": "CAT-141-2012-facade-01",
@@ -372,7 +372,7 @@
    "value_in_quote": true
   },
   "confidence": 1.0,
-  "checked": "by eye against the official scan (RPUC document 126035, page 21), 9 Nov 2026: the PDF has no text layer"
+  "checked": "by eye against the official scan (RPUC document 126035, page 21): read by Claude from the page image on 9 Nov 2026, checked by a human (Bars) on 10 Nov 2026; the PDF has no text layer"
  },
  {
   "rule_id": "BCN-MPGM2004-density-13",
@@ -397,6 +397,6 @@
    "value_in_quote": true
   },
   "confidence": 1.0,
-  "checked": "by eye against the official scan (RPUC document 126035, page 21), 9 Nov 2026: the PDF has no text layer"
+  "checked": "by eye against the official scan (RPUC document 126035, page 21): read by Claude from the page image on 9 Nov 2026, checked by a human (Bars) on 10 Nov 2026; the PDF has no text layer"
  }
 ]

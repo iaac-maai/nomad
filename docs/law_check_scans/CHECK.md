@@ -1,8 +1,7 @@
 # Check the 4 scanned quotes by eye
 
 The MPGM 2004 is a scan with no text layer, so these 4 quotes were read on the page images and typed by Claude (not OCR).
-Please compare each quote with the crop above it, letter by letter (accents, apostrophes, `l·l`, numbers), then reply
-"quotes OK" or list the differences.
+**Checked by a human (Bars) on 10 Nov 2026: all 4 quotes match the scans** (numbers, articles and sentences).
 
 Source: MPGM 2004, nombre màxim d'habitatges per parcel·la (Barcelona), RPUC expedient 215050, document 126035:
 <https://planejamenturbanisme.territori.gencat.cat/RPUC-portal/rest/consulta/documents?documentId=126035&downloadType=1&idioma=ca>
@@ -18,7 +17,7 @@ Source: MPGM 2004, nombre màxim d'habitatges per parcel·la (Barcelona), RPUC e
 
 > a) Els habitatges es desenvoluparan en una superfície útil mínima de 40 m².
 
-- [ ] matches the scan
+- [x] matches the scan (Bars, 10 Nov 2026)
 
 ## 2. `BCN-MPGM2004-facade-01` — Barcelona: at least 3 m of façade per dwelling
 
@@ -30,7 +29,7 @@ Source: MPGM 2004, nombre màxim d'habitatges per parcel·la (Barcelona), RPUC e
 
 > b) Cada habitatge disposarà, com a mínim, d’una longitud de 3 m en contacte amb la façana a via pública o pati interior d’illa.
 
-- [ ] matches the scan
+- [x] matches the scan (Bars, 10 Nov 2026)
 
 ## 3. `BCN-MPGM2004-density-12` — Zone 12: dwellings per plot = built area / 80 m², rounded up
 
@@ -42,7 +41,7 @@ Source: MPGM 2004, nombre màxim d'habitatges per parcel·la (Barcelona), RPUC e
 
 > 1. Les sol·licituds d’edificació en la subzona I, de substitució de l’edificació antiga, hauran de limitar el nombre d’habitatges per parcel·la al que, per excés, resulti de dividir la superfície construïda pel mòdul de 80 m².
 
-- [ ] matches the scan
+- [x] matches the scan (Bars, 10 Nov 2026)
 
 ## 4. `BCN-MPGM2004-density-13` — Zone 13: dwellings per plot = built area / 80 m², rounded up
 
@@ -55,4 +54,4 @@ Source: MPGM 2004, nombre màxim d'habitatges per parcel·la (Barcelona), RPUC e
 
 > 1. Les edificacions que s’aixequin a la subzona I, intensiva, i a la subzona II, semiintensiva, no podran depassar per parcel·la un nombre d’habitatges igual al que resulti, per excés, de dividir la superfície construïda pel mòdul de 80 m².
 
-- [ ] matches the scan
+- [x] matches the scan (Bars, 10 Nov 2026)
