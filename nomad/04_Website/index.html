@@ -842,6 +842,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
     <tbody>
       <tr><td>Empty ground-floor premises, 2024</td><td><a href="https://opendata-ajuntament.barcelona.cat/data/dataset/cens-locals-planta-baixa-act-economica" target="_blank" rel="noopener">Cens de locals en planta baixa 2024</a>, Ajuntament de Barcelona, Open Data BCN (CC BY 4.0)</td><td>CC BY 4.0</td></tr>
       <tr><td>Buildings (footprints, floors)</td><td>Catastro (Dirección General del Catastro) via hypercadaster_ES</td><td>EUPL-1.2 (hypercadaster_ES); Catastro data: reuse with attribution</td></tr>
+      <tr><td>The building in 3D, floor by floor</td><td>A link to the Catastro's own 3D viewer (Sede Electrónica del Catastro, Visor 3D) for each shop's parcel; NOMAD copies none of its data</td><td>Catastro legal notice: download and private use only</td></tr>
       <tr><td>Conversion group, Annex 4 Grup C or D</td><td>Built areas of each shop and its building from the Catastro's alphanumeric data, CAT format, Barcelona urban (Dirección General del Catastro; the access date is shown with each answer). NOMAD's estimate, not Catastro information (tools/annex4_grup.py)</td><td>Catastro download licence: transformed data may be published, citing the Dirección General del Catastro and the date of access; the original file is not published</td></tr>
       <tr><td>Zoning (qualificació)</td><td>Mapa Urbanístic de Catalunya, Departament de Territori, Generalitat de Catalunya (<a href="https://territori.gencat.cat/ca/06_territori_i_urbanisme/observatori_territori/mapa_urbanistic_de_catalunya/" target="_blank" rel="noopener">MUC</a>), January 2023</td><td>Generalitat open data, attribution</td></tr>
       <tr><td>Housing rules</td><td>Decret 141/2012 (DOGC 6245), CTE (BOE-A-2006-5515), PGM art. 225 (MPGM 1999), MPGM 2004 (Barcelona), Ajuntament guide on change of use (2025): 2,470 pieces from 22 norms</td><td>Official texts, cited by article</td></tr>
@@ -911,11 +912,24 @@ function grupOf(r) {
 }
 function convHtml(r) {                                            // the line under the zoning answer
   const g = grupOf(r);
-  if (!A4G || A4G.pending) return `Conversion rules: Annex 4 Grup C or D <span class="meta">(not known yet: needs the Catastro CAT data)</span>`;
-  if (!g || g.grup === "unknown")
-    return `Conversion rules: Annex 4 Grup C or D <span class="meta">(not known${g && g.why ? ": " + esc(g.why) : ": no Catastro unit found for this shop"})</span>`;
+  if (!A4G || A4G.pending || !g || g.grup === "unknown")             // no CAT result: NOMAD's estimate from the building's floors (convEstimate)
+    return `Conversion rules: Annex 4 Grup C or D <span class="meta">(estimating from the building…)</span>`;
   const share = g.pmax != null ? `${pc(g.pct)}–${pc(g.pmax)} %` : `${pc(g.pct)} %`;
   return `Conversion rules: Annex 4 Grup ${g.grup} <span class="meta">(the shop is ${share} of the building's built area${g.method === "same" ? ", whichever of its units it is" : ""}; NOMAD's estimate from Dirección General del Catastro data, accessed ${esc(A4G.accessed)})</span>`;
+}
+/* until the Catastro CAT data is processed: an estimate from the building parts we have (data/catastro/b_*.json).
+   A building with at least one floor above the ground floor: a ground-floor shop is very likely <= 50 % of its built
+   area, so likely Grup C. A single-storey building, or no building parts: could be Grup D, not known. */
+async function convEstimate(r) {
+  const g0 = grupOf(r);
+  if (A4G && !A4G.pending && g0 && g0.grup !== "unknown") return;   // the CAT result is shown: no estimate
+  const b = r.ref ? await bundleOf(r.ref) : null, el = $("#conv");
+  if (sel !== r || !el) return;                                     // another shop was picked meanwhile
+  const up = b && b.parts && b.parts.length ? Math.max(...b.parts.map(p => p.up || 0)) : 0, g = grupOf(r);
+  const cat = A4G && !A4G.pending && g && g.why ? ` CAT data: ${esc(g.why)}.` : "";
+  el.innerHTML = up >= 2
+    ? `Conversion rules: likely Annex 4 Grup C <span class="meta">(NOMAD's estimate, not the legal result: the building has ${up} floors above ground.${cat} The Catastro CAT data will give the real share.)</span>`
+    : `Conversion rules: could be Grup D / not known: needs the Catastro CAT data <span class="meta">(NOMAD's estimate, not the legal result: ${b && up ? "a single-storey building" : "no Catastro building parts for this shop"}.${cat})</span>`;
 }
 function convDetail(r) {                                          // what the group means, in the details
   const g = grupOf(r), A = D.annex4;
@@ -978,9 +992,10 @@ function show(r) {
     <div class="next">${r.housing === "YES" ? "Good news: the zone allows homes on this ground floor. The rules inside the shop (Decret 141/2012) still decide how many homes fit: an architect checks them." :
       r.housing === "CHECK" ? "Maybe: this zone has its own detailed plan, and that plan decides. Ask the Ajuntament." :
       "This zone does not take homes (a facility, a park, industry or a future street). Try another shop."}${others ? ` <span class="meta">${others} more empty premises share this cadastral reference.</span>` : ""}</div>
-    <div class="reqrow"><button type="button" class="chip" data-act="save" data-t="save">${esc(T("save"))}</button><button type="button" class="chip" data-act="pdf" data-t="report">${esc(T("report"))}</button><span id="dactmsg" class="hint2" aria-live="polite"></span></div>`;
+    <div class="reqrow">${r.ref ? `<a class="chip" id="visor3d" href="https://www1.sedecatastro.gob.es/Cartografia/FXCC/Visor3D.aspx?del=8&amp;mun=900&amp;refcat=${encodeURIComponent(r.ref.slice(0, 14))}&amp;final=" target="_blank" rel="noopener">Open this building in the Catastro 3D viewer</a>` : ""}<button type="button" class="chip" data-act="save" data-t="save">${esc(T("save"))}</button><button type="button" class="chip" data-act="pdf" data-t="report">${esc(T("report"))}</button><span id="dactmsg" class="hint2" aria-live="polite"></span></div>`;
   bldgBox(r.ref ? "" : "This premises has no cadastral reference, so NOMAD has no building to draw.");
   if (r.ref) showBuilding(r.ref, r);
+  if (r.housing !== "NO") convEstimate(r);
 }
 function bldgBox(msg) { $("#bldgcol").innerHTML = msg ? `<p class="meta">${esc(msg)}</p>` : `<div class="bldg" id="bldg"></div>`; }
 
@@ -1013,13 +1028,18 @@ function showWh(r) {                                           // a whole buildi
 const BUNDLES = {};
 const floorName = k => k === 0 ? "ground" : k < 0 ? `basement ${-k}` : `floor ${k}`;
 let bView = null;
+function bundleOf(ref) {                                            // the Catastro building of a 14-character ref, or null
+  const key = ref.slice(0, 2);
+  BUNDLES[key] = BUNDLES[key] || fetch(`data/catastro/b_${key}.json`).then(r => r.ok ? r.json() : {}).catch(() => ({}));
+  return BUNDLES[key].then(x => x[ref.slice(0, 14)] || null);
+}
 async function showBuilding(ref, prem) {
   const box = $("#bldg");
   if (!box) return;
   let b;
   try {
     const key = ref.slice(0, 2);
-    BUNDLES[key] = BUNDLES[key] || fetch(`data/catastro/b_${key}.json`).then(r => r.ok ? r.json() : {});
+    BUNDLES[key] = BUNDLES[key] || fetch(`data/catastro/b_${key}.json`).then(r => r.ok ? r.json() : {});   // see bundleOf
     b = (await BUNDLES[key])[ref];
   } catch (e) { b = null; }
   if ($("#bldg") !== box) return;                                     // another shop was picked meanwhile

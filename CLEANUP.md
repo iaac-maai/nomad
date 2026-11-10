@@ -17,7 +17,7 @@ published. Nothing is lost: everything removed from `main` is on a branch (see t
 | --- | --- | --- |
 | **Exp 4: the XGBoost daylight model**, the per-shop daylight classes and the "dark → not liveable" rule | A prediction is not a simulation; per-shop daylight will come from a grid simulation | Removed `train_daylight.py`, `predict_shops.py`, `map_shops.py`, `shops_bcn_pred.csv`, `daylight_site.py`, `bars_daylight.py`, `data/daylight.json` and their outputs, and the xgboost dependency. The site now says "daylight: per-shop grid simulation, coming". The 5 shops simulated in Radiance stay as **validated examples** (`tools/daylight_validated.py`, read straight from the sensor grid, no model); the experiments page keeps "tried, dropped, replaced by grid simulation". |
 | **Layouts and home counts from footprints** ("Your homes", Results, For the city) | A count of homes is a design result, not a zoning answer; the counts were never checked by an architect | "Your homes" parked (below). The Results section removed (it also held the metropolitan-area map, which went with it). Every place now has a **category**: candidate (zone YES, no avoid flag) / risky (zone CHECK, or "keep it a shop": the 10 % of shops with the fewest shops within 100 m) / zoning doesn't allow (NO), on the shop answer, the map and the 3D city. **For the city** counts the three categories per district and lists the places; no charts. **Saved** and the **PDF report** keep only the zoning answer and its sources. `build_site.py` no longer writes home counts. |
-| **Catastro Visor 3D units** | Not open data ("download and private use") | The building of a shop is drawn from the Catastro building parts only; the 600 buildings that only had Visor units point to City in 3D. `catastro_plans.py` (the Visor scraper) removed; `catastro_site.py` no longer reads it. |
+| **Catastro Visor 3D units** | Not open data ("download and private use"; Catastro legal notice: reproduction, distribution, public communication and transformation "totalmente prohibida salvo que medie autorización expresa") | The building of a shop is drawn from the Catastro building parts only; the 600 buildings that only had Visor units point to City in 3D. `catastro_plans.py` (the Visor scraper) removed; `catastro_site.py` no longer reads it. |
 | **idealista18 prices** | A 2018 asking price is not a value; the feature was not asked for | Price box, comparison row and source row removed; `value.py` and `premises_value.csv` removed; `build_site.py` no longer writes prices. |
 
 ## 2. Parked (on `parked/before-cleanup`, see PARKED.md)
@@ -84,6 +84,11 @@ Every file was sorted into used by the site / experiment / dead (approved on 10 
 ## 7. Open, for later
 
 - **Phone width:** the rulebook's "previous page" arrow sticks out by 2 px at 390 px wide (it did before the cleanup too).
+- **The building floor by floor (10 Nov 2026):** the Visor 3D units stay out: the Catastro's legal notice allows only
+  download and private use of its web content, so showing unit outlines and m² on a public site would need its written
+  permission. Instead every shop in Find your shop has "Open this building in the Catastro 3D viewer", a link to the
+  Catastro's own viewer for the parcel (new tab); no data is copied. Until the CAT file arrives, the Annex 4 line is
+  NOMAD's estimate from the building parts (at least one floor above the ground floor: likely Grup C).
 - **Trees in the 3D city** (222,918, Open Data BCN, added 10 Nov 2026): on the Intel UHD GPU a frame takes about 35–39 ms
   with them instead of 15 ms (about 28 fps instead of 60), so the layer is off by default; the checkbox stays. A lighter
   tree (fewer triangles, no shadows) could let it be on.
