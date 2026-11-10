@@ -658,6 +658,19 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
 </div></header>
 
 <main id="main" tabindex="-1">
+<section class="sheet" id="city" data-view="app"><div class="wrap">
+  <p class="eyebrow">For the city · walk the streets</p>
+  <h2>Walk the streets and see every empty shop <span class="h2note">· estimated heights, for context only</span></h2>
+  <p class="lede">Every building in the city, raised from its Catastro footprint and floors. The ground floor of each empty shop is coloured by what its zone allows. Click a building to see its floors and use, and open its real façade in Street View.</p>
+  <div class="citybox panel">
+    <div class="cityrow"><div class="citystage" id="citystage"><canvas id="citycv" role="img" aria-label="3D view of Barcelona around the chosen shop, with buildings, trees, streets and shadows. The layer list beside it says what is shown."></canvas><div class="cityhud" id="cityhud">loading the city…</div></div>
+      <form class="citypanel" id="citypanel" onsubmit="return false"></form></div>
+    <div class="bar2"><button class="chip" id="cv-top">from above</button><button class="chip" id="cv-tilt">tilted</button><button class="chip" id="cv-street">street level</button>
+      <span class="hint2">Left drag: move · right drag or two fingers: turn · scroll: zoom</span></div>
+    <p class="vh-summary" id="citysum">What you see: Barcelona's buildings raised from the Catastro, coloured by their PGM zone; streets, paths, parks, rail and water from the zoning map; 222,617 trees; and the ground floor of each empty shop coloured by what its zone allows. Click a building for its details.</p>
+    <div class="note">Buildings: Catastro (heights estimated: 5 m ground floor + 3 m per upper floor). Roads, paths, parks, rail, water and zones: Mapa Urbanístic de Catalunya. Trees: Open Data BCN street, zone and park trees (CC BY 4.0). Sun: computed for Barcelona on the chosen date and time. Façade textures are not open data: the Street View link shows the real street.</div>
+  </div>
+</div></section>
 <section class="sheet start" id="start" data-view="app"><div class="wrap">
   <p class="eyebrow">NOMAD · Barcelona</p>
   <h1>Can an empty shop become homes?</h1>
@@ -717,20 +730,6 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
     <label><input type="checkbox" value="commercial" checked> commercial buildings</label><label><input type="checkbox" value="office" checked> office buildings</label></div>
   <div id="pout" aria-live="polite"><p class="hint2">Loading the city…</p></div>
   <p class="note"><b>Candidate</b>: the zone allows homes and there is no avoid flag; daylight and the other checks are not done yet. <b>Risky</b>: the zone's own detailed plan decides, or "keep it a shop" (one of the 10 % of shops with the fewest shops within 100 m). <b>Zoning doesn't allow</b>: the zone takes no housing. Whole buildings have no street-life flag. In use or not: the 2024 census of ground-floor premises, a hint, not proof. Every place still needs its owner and a visit.</p>
-</div></section>
-
-<section class="sheet" id="city" data-view="app"><div class="wrap">
-  <p class="eyebrow">For the city · walk the streets</p>
-  <h2>Walk the streets and see every empty shop <span class="h2note">· estimated heights, for context only</span></h2>
-  <p class="lede">Every building in the city, raised from its Catastro footprint and floors. The ground floor of each empty shop is coloured by what its zone allows. Click a building to see its floors and use, and open its real façade in Street View.</p>
-  <div class="citybox panel">
-    <div class="cityrow"><div class="citystage" id="citystage"><canvas id="citycv" role="img" aria-label="3D view of Barcelona around the chosen shop, with buildings, trees, streets and shadows. The layer list beside it says what is shown."></canvas><div class="cityhud" id="cityhud">loading the city…</div></div>
-      <form class="citypanel" id="citypanel" onsubmit="return false"></form></div>
-    <div class="bar2"><button class="chip" id="cv-top">from above</button><button class="chip" id="cv-tilt">tilted</button><button class="chip" id="cv-street">street level</button>
-      <span class="hint2">Left drag: move · right drag or two fingers: turn · scroll: zoom</span></div>
-    <p class="vh-summary" id="citysum">What you see: Barcelona's buildings raised from the Catastro, coloured by their PGM zone; streets, paths, parks, rail and water from the zoning map; 222,617 trees; and the ground floor of each empty shop coloured by what its zone allows. Click a building for its details.</p>
-    <div class="note">Buildings: Catastro (heights estimated: 5 m ground floor + 3 m per upper floor). Roads, paths, parks, rail, water and zones: Mapa Urbanístic de Catalunya. Trees: Open Data BCN street, zone and park trees (CC BY 4.0). Sun: computed for Barcelona on the chosen date and time. Façade textures are not open data: the Street View link shows the real street.</div>
-  </div>
 </div></section>
 
 <section class="sheet" id="rules" data-view="app"><div class="wrap">
