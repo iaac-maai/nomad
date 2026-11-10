@@ -1,5 +1,8 @@
 # NOMAD — can an empty shop in Barcelona become homes?
 
+> **Scope: NOMAD is an academic, non-commercial IAAC project, for now.** Every data source and licence is read for
+> that use in `docs/LICENCES.md`, which also lists what would have to change if NOMAD ever became commercial.
+
 NOMAD checks an empty ground-floor shop in Barcelona against the city's zoning and shows the laws behind the answer.
 For every one of the 6,149 empty premises in the city's 2024 census it says whether the zone allows homes, sorts the
 city into **candidate / risky / zoning doesn't allow**, and keeps every law it uses in one book of the official texts.
@@ -27,7 +30,7 @@ The first `python serve.py` downloads the 23 law PDFs from their official websit
 | **Saved** and **the PDF report** | Your saved shops side by side; a one-page report with the zoning answer and its sources | made in the page from the shop you checked | same as above |
 | **For the city** | Candidate / risky / zoning doesn't allow, counted by district, and the list | `data/premises.json`, `data/warehouses.json` | same as above |
 | **City in 3D** | Every building raised from its floor count (estimated heights, for context only), streets, parks, trees, sun and shadows | `data/city/` (index, layers and 1 km tiles) | Catastro INSPIRE buildings; MUC ground layers; Open Data BCN trees (CC BY 4.0) |
-| **The laws** | 23 official documents in one book, with the rules NOMAD checks bookmarked | `rulebook/index.json`, `rulebook/anchors.json`, `rulebook/sources.lock.json` (the pinned version of each law); pages downloaded by `tools/get_rulebook.py` | BOE, codigotecnico.org, Portal Jurídic de Catalunya, Agència de l'Habitatge, RPUC, AMB, Ajuntament: official texts, cited by article |
+| **The laws** | 22 official documents in one book (the Ajuntament's guide is linked, not reproduced: its reuse terms are not stated), with the rules NOMAD checks bookmarked | `rulebook/index.json`, `rulebook/anchors.json`, `rulebook/sources.lock.json` (the pinned version of each law); pages downloaded by `tools/get_rulebook.py` | BOE, codigotecnico.org, Portal Jurídic de Catalunya, Agència de l'Habitatge, RPUC, AMB, Ajuntament: official texts, cited by article |
 | **Rule cards** (Research) | The 16 rules NOMAD checks, each with the sentence of the law it comes from | `data/nomad.json` (copied from `07_Rules_and_evaluation/rules/rules.json`) | the official texts above; every sentence checked against the official PDF (`docs/LAW_TEXT_CHECK.md`) |
 | **Experiments, Workflow, Precedents, Sources** (Research) | What the team tested and learned; daylight: 5 shops simulated in Radiance | `data/nomad.json`, `data/daylight_validated.json`, and the page itself | Radiance simulations by Bars (`exp1_daylight/`); sources table on the page and in `docs/AI_LOG.md` |
 

@@ -1,6 +1,6 @@
 {
  "title": "NOMAD rulebook",
- "pages": 1409,
+ "pages": 1400,
  "levels": [
   {
    "id": "national",
@@ -295,8 +295,10 @@
    "plain": "The city's guide: every rule it checks before a shop can become a home (guidance, not a law).",
    "url": "https://ajuntament.barcelona.cat/urbanisme-accio-climatica-mobilitat-pla-barris-serveis-urbans/sites/default/files/2025-03/InforUrb_Canvi-us-habitatge.pdf",
    "scan": false,
-   "pages": 9,
-   "start": 1401,
+   "pages": 0,
+   "start": 1400,
+   "link": "https://ajuntament.barcelona.cat/urbanisme-accio-climatica-mobilitat-pla-barris-serveis-urbans/sites/default/files/2025-03/InforUrb_Canvi-us-habitatge.pdf",
+   "why": "the Ajuntament's guide states no reuse terms; read it on the Ajuntament's site",
    "version_date": "2025-03",
    "version_basis": "month in the Ajuntament's URL"
   }
@@ -507,8 +509,8 @@
    "doc": "Guia canvi d'ús",
    "file": "parts/25.pdf",
    "first_page": 1400,
-   "last_page": 1409,
-   "mb": 0.54
+   "last_page": 1400,
+   "mb": 0.0
   }
  ],
  "as_of": "2026-11-09"

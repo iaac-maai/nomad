@@ -347,17 +347,5 @@
    595.2,
    842.0
   ]
- },
- "guide": {
-  "key": "guide",
-  "name": "What Barcelona checks for a shop-to-home change",
-  "doc": "Guia canvi d'ús",
-  "page": 1401,
-  "phrase": "canvi d'ús",
-  "rects": [],
-  "page_size": [
-   595.3,
-   841.9
-  ]
  }
 }

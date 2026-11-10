@@ -130,7 +130,6 @@ ANCHORS = [
     ("ldk_repealed", "Annex 1 3.7.1 (20 m² living-kitchen) repealed", "Decret 141/2012", ["3.7.1 derogat", "Apartat 3.7.1 derogat"]),
     ("corridor", "Shared corridor width (accessible route)", "CTE DB-SUA", ["Itinerario accesible"]),
     ("ventilation", "Indoor air quality and ventilation (HS 3)", "CTE DB-HS", ["Calidad del aire interior"]),
-    ("guide", "What Barcelona checks for a shop-to-home change", "Guia canvi d'ús", ["canvi d'ús", "habitatge"]),
 ]
 
 
@@ -237,6 +236,8 @@ def text_page(book, title, lines, w=595, h=842):
     return pg
 
 
+# documents listed in the book but not reproduced: their terms do not clearly allow republishing (docs/LICENCES.md)
+LINK_ONLY = {"Guia canvi d'ús": "the Ajuntament's guide states no reuse terms; read it on the Ajuntament's site"}
 REDACTED = []                                                    # (document, its page, book page) of every signature blacked out
 ID_NUMBER = re.compile(r"\b\d{8}\s?-?[A-Z]\b|\b[XYZ]\d{7}[A-Z]\b|\bDNI\s*\d")   # Spanish DNI / NIE
 
@@ -246,18 +247,23 @@ def main():
     (OUT / "parts").mkdir(exist_ok=True)
     srcs = []
     for lvl, rel, short, title, plain, url, scan in DOCS:
+        if short in LINK_ONLY:                                   # listed and linked, not reproduced
+            srcs.append(dict(level=lvl, file=rel, short=short, title=title, plain=plain, url=url, scan=scan, pages=0, link=url))
+            continue
         f = D / rel
         doc = pymupdf.open(f)
         srcs.append(dict(level=lvl, file=rel, short=short, title=title, plain=plain, url=url, scan=scan, pages=doc.page_count))
         doc.close()
     total_src = sum(s["pages"] for s in srcs)
+    n_in = sum(1 for s in srcs if not s.get("link"))
 
     book = pymupdf.open()
     # ---- front matter: cover, how to read, index (index pages are filled after we know every page number) ----
     text_page(book, "NOMAD rulebook", [
         ("Every regulation that decides whether a ground-floor shop in Barcelona can become a home, in one book.", 14, INK, 0),
-        ("%d official documents · %d original pages · 4 levels: Spain, Catalonia, the metropolitan plan, Barcelona."
-         % (len(srcs), total_src), 11, MUTED, 18),
+        ("%d official documents · %d original pages · 4 levels: Spain, Catalonia, the metropolitan plan, Barcelona.%s"
+         % (n_in, total_src, " %d more is listed with a link to its official page." % (len(srcs) - n_in) if len(srcs) > n_in else ""),
+         11, MUTED, 18),
         ("The pages are the official texts themselves. NOMAD only adds this cover, a page on how to read the book, "
          "the index, one divider per level, page numbers and bookmarks, and blacks out digital signatures (personal data).",
          11, MUTED, 10),
@@ -275,7 +281,7 @@ def main():
          "answer, and highlights the lines where it can.", 11, INK, 8),
         ("5. The page numbers at the bottom right are this book's. Each document keeps its own original numbering too.", 11, INK, 8),
         ("Not legal advice. Consolidated texts from the Portal Jurídic de Catalunya are working copies (the official text is "
-         "the DOGC); the circulars and the Ajuntament guide are interpretations, not laws. Always confirm with the Ajuntament "
+         "the DOGC); the circulars and the Ajuntament's guide (linked, not reproduced) are interpretations, not laws. Always confirm with the Ajuntament "
          "or an architect before starting works.", 9, MUTED, 22),
     ])
     n_index = 2                                                  # index pages (reserved; 23 entries over 2 pages)
@@ -288,10 +294,16 @@ def main():
     for lvl, lname, lplain in LEVELS:
         docs = [s for s in srcs if s["level"] == lvl]
         text_page(book, "Level " + lname, [(lplain, 12, INK, 0)] +
-                  [("%s  —  %s" % (s["short"], s["title"]), 10, MUTED, 10) for s in docs])
+                  [("%s  —  %s" % (s["short"], s["title"]) + ("  —  not reproduced: %s (%s)" % (LINK_ONLY[s["short"]], s["link"])
+                                                               if s.get("link") else ""), 10, MUTED, 10) for s in docs])
         toc.append([1, "Level " + lname, book.page_count])
         s_level = book.page_count
         for s in docs:
+            if s.get("link"):                                    # the level's divider names it and gives the link
+                s["start"] = s_level
+                starts[s["short"]] = s["start"]
+                toc.append([2, "%s — %s (link)" % (s["short"], s["title"][:80]), s["start"]])
+                continue
             src = pymupdf.open(D / s["file"])
             if s["short"] == "MPGM B1600":                       # 117 MB of 200-dpi colour scans: re-encode so the book can go online
                 small = shrink_scans(src); src.close(); src = small
@@ -342,8 +354,11 @@ def main():
             pg.insert_text((480, y), str(s["start"]), fontsize=10, fontname="hebo", color=ACC)
             y = put(pg, 60, y, s["short"] + "  ·  " + s["title"], 9.5, 405, font="hebo", color=INK)
             y = put(pg, 60, y + 1, s["plain"], 8, 460, color=MUTED)
-            pg.insert_link({"kind": pymupdf.LINK_GOTO, "page": s["start"] - 1, "from": pymupdf.Rect(56, y0 - 11, 540, y - 6),
-                            "to": pymupdf.Point(0, 0)})
+            if s.get("link"):                                    # not in the book: the index line opens the official page
+                pg.insert_link({"kind": pymupdf.LINK_URI, "uri": s["link"], "from": pymupdf.Rect(56, y0 - 11, 540, y - 6)})
+            else:
+                pg.insert_link({"kind": pymupdf.LINK_GOTO, "page": s["start"] - 1, "from": pymupdf.Rect(56, y0 - 11, 540, y - 6),
+                                "to": pymupdf.Point(0, 0)})
         y += 16
     toc = [[1, "Cover", 1], [1, "How to read this book", 2], [1, "Index", 3]] + toc
 
@@ -395,8 +410,10 @@ def main():
     for lvl, a, b in globals()["PARTS"]:
         docs = [s for s in srcs if s["level"] == lvl]
         for j, s in enumerate(docs):
+            if s.get("link") and j > 0:
+                continue
             first = a if j == 0 else s["start"]                   # page a = the level divider, kept with its first document
-            last = s["start"] + s["pages"] - 1
+            last = max(first, s["start"] + s["pages"] - 1)        # a linked document: its divider alone
             chunks = [(first, last)]
             while True:                                           # a document over 12 MB is cut into equal chunks
                 trial = []
@@ -419,7 +436,8 @@ def main():
     parts.insert(0, {"level": "front", "doc": "front", "file": "parts/00.pdf", "first_page": 1, "last_page": front,
                      "mb": round((OUT / "parts" / "00.pdf").stat().st_size / 1e6, 2)})
     idx = {"title": "NOMAD rulebook", "pages": total, "levels": [{"id": l, "name": n, "plain": p} for l, n, p in LEVELS],
-           "docs": [{k: s[k] for k in ("level", "short", "title", "plain", "url", "scan", "pages", "start")} for s in srcs],
+           "docs": [dict({k: s[k] for k in ("level", "short", "title", "plain", "url", "scan", "pages", "start")},
+                         **({"link": s["link"], "why": LINK_ONLY[s["short"]]} if s.get("link") else {})) for s in srcs],
            "parts": parts}
     json.dump(idx, io.open(OUT / "index.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     json.dump(anchors, io.open(OUT / "anchors.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)

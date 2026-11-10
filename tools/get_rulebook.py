@@ -1,6 +1,7 @@
 """NOMAD - the law PDFs of the rulebook: download them from their official sources, pin their versions, build the book.
 
-The rulebook (the flipbook in "The laws") is 23 official documents compiled into one book with a cover, an index,
+The rulebook (the flipbook in "The laws") is 22 official documents (plus the Ajuntament's guide, version-locked but
+only linked, see compile_rulebook.py LINK_ONLY) compiled into one book with a cover, an index,
 dividers and page numbers (nomad/02_Code/src/rulebook/compile_rulebook.py). The PDFs are not kept in git: this script
 downloads each one from the body that publishes it (BOE, codigotecnico.org, Portal Jurídic de Catalunya, Agència de
 l'Habitatge, RPUC, AMB, Ajuntament de Barcelona) and builds the book into nomad/04_Website/rulebook/parts/.
@@ -242,6 +243,9 @@ def build(lock, changed_docs):
     new_start = {d["short"]: d["start"] for d in new_index["docs"]}
     merged = {}
     for k, a in old_anch.items():                          # unchanged document: same place, moved with its document
+        if k not in new_anch:                              # the bookmark's document is no longer reproduced (a link only)
+            print(f"  bookmark {k}: dropped ({a['doc']} is not in the book)")
+            continue
         if a["doc"] not in moved:
             merged[k] = dict(a, page=a["page"] - old_docs[a["doc"]]["start"] + new_start[a["doc"]])
         else:                                              # changed document: found again in the new pages
