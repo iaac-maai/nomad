@@ -959,6 +959,7 @@ function drawTally() {
 }
 function show(r) {
   if (!r) return;
+  if (r.other) return showOther(r);
   sel = r; drawMap(); cityMark((r.ref || "").slice(0, 14));
   const others = P.filter(x => x !== r && x.ref && x.ref === r.ref).length;
   $("#answer").innerHTML = `
@@ -981,6 +982,14 @@ function show(r) {
   if (r.ref) showBuilding(r.ref, r);
 }
 function bldgBox(msg) { $("#bldgcol").innerHTML = msg ? `<p class="meta">${esc(msg)}</p>` : `<div class="bldg" id="bldg"></div>`; }
+
+function showOther(r) {                                         // a building clicked in 3D that is neither an empty premises nor an unused building
+  sel = r; drawMap(); cityMark(r.ref);
+  $("#answer").innerHTML = `
+    <div><div class="addr">Catastro ${esc(r.ref)}</div><div class="meta">${esc(r.typology)} · ${esc(r.use)} · ${r.floors} floors${r.dwell ? " · " + r.dwell + " dwellings" : ""}</div></div>
+    <div class="next">This building is not in the 2024 census of empty premises, nor among the unused buildings, so NOMAD has no answer for it.</div>`;
+  bldgBox(""); showBuilding(r.ref, null);
+}
 
 function showWh(r) {                                           // a whole building: what NOMAD knows
   sel = r; drawMap(); cityMark(String(r.ref || "").slice(0, 14));
@@ -1153,7 +1162,7 @@ function initMap() {
   $("#zin").addEventListener("click", () => zoom(0.6));
   $("#zout").addEventListener("click", () => zoom(1.6));
   $("#zall").addEventListener("click", () => { Object.assign(view, home); drawMap(); });
-  $("#to3d").addEventListener("click", () => { const c = sel || { x: view.cx, y: view.cy }; cityFly(c.x, c.y, sel); location.hash = "city"; });
+  $("#to3d").addEventListener("click", () => { const c = sel || { x: view.cx, y: view.cy }; cityFly(c.x, c.y, sel && !sel.other ? sel : null); location.hash = "city"; });
   new ResizeObserver(drawMap).observe(cv);
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawMap);
 }
@@ -1182,7 +1191,7 @@ function drawMap() {
     const [px, py] = proj(sel.x, sel.y, W);
     g.lineWidth = 2.5 * dpr; g.strokeStyle = css("--m-ink"); g.fillStyle = css("--m-sheet");
     g.beginPath(); g.arc(px, py, 9 * dpr, 0, 7); g.fill(); g.stroke();
-    g.fillStyle = css(sel.housing === "YES" ? "--m-yes" : sel.housing === "CHECK" ? "--m-check" : "--m-no");
+    g.fillStyle = css(sel.other ? "--m-slate" : sel.housing === "YES" ? "--m-yes" : sel.housing === "CHECK" ? "--m-check" : "--m-no");
     g.beginPath(); g.arc(px, py, 5 * dpr, 0, 7); g.fill();
   }
 }
@@ -1717,17 +1726,25 @@ function initCity() {
     if (!hit) return;
     const t = hit.object.userData.tile, part = t.triPart[hit.faceIndex], meta = t.data.b[t.data.bid[part]];
     const [ref, use, dwell, floors] = meta, typ = t.typo[part], st = answerIndex().get(ref);
-    cityMark(ref);                                                       // light the clicked building (cityMark from 594c46b)
     const shops = P.filter(p => (p.ref || "").slice(0, 14) === ref);
     const wx = hit.point.x + city.cx, wy = -hit.point.z + city.cy;
     $("#cityhud").innerHTML = `<b>Catastro ${esc(ref)}</b><div class="meta">${esc((TYPO[typ] || TYPO[10])[0])} · ${esc(String(use).replace(/^[\d_]+/, "").replace(/_/g, " "))} · ${floors} floors${dwell ? " · " + dwell + " dwellings" : ""}</div>
       ${shops.length ? shops.slice(0, 3).map(p => `<div>${esc(p.street)} ${esc(p.num)}: empty, zone <span class="pill ${p.housing}">${WORD[p.housing]}</span></div>`).join("") : `<div class="hint2">No empty shop in the 2024 census.</div>`}
       ${st ? `<div>NOMAD: <span class="pill ${CATPILL[st]}">${ANSKEY.find(([k]) => k === st)[1]}</span></div>` : ""}
-      ${shops.length ? `<div><button type="button" class="chip" id="hudopen">Open this building in Find your shop</button></div>` : ""}`;
-    const op = $("#hudopen");
-    if (op) op.addEventListener("click", () => { show(shops[0]); $("#check").scrollIntoView({ behavior: "smooth" }); });
+      <div id="hudwh"></div>`;
+    const tok = ++cityPick, jump = () => setTimeout(() => { if (tok === cityPick) $("#hero3").scrollIntoView({ behavior: "smooth", block: "start" }); }, 900);   // see the yellow first; the answer is in Find your shop
+    const far = p => Math.hypot(p.x - wx, p.y - wy), shop = shops.slice().sort((a, c) => far(a) - far(c))[0];
+    if (shop) { $("#q").value = shop.street + " " + shop.num; show(shop); jump(); return; }
+    loadWH().then(() => {
+      if (tok !== cityPick) return;                                     // another building was clicked meanwhile
+      const wh = WH.find(r => String(r.ref).slice(0, 14) === ref);
+      if (wh) { $("#hudwh").innerHTML = `<div>${esc(WHKIND[wh.kind])}: zone <span class="pill ${wh.housing}">${WORD[wh.housing]}</span></div>`; $("#q").value = wh.street ? wh.street + " " + wh.num : wh.ref; showWh(wh); jump(); return; }
+      $("#q").value = ref;
+      show({ other: true, ref, x: wx, y: wy, typology: (TYPO[typ] || TYPO[10])[0], use: String(use).replace(/^[\d_]+/, "").replace(/_/g, " "), floors, dwell }); jump();
+    }).catch(e => console.error("loadWH", e));
   });
 }
+let cityPick = 0;
 function buildPanel() {
   const today = new Date(), iso = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
   const lay = [["buildings", "buildings"], ["shops", "empty shops (ground floor)"], ["trees", "trees (222,617)"], ...Object.entries(GROUND).map(([k, [l]]) => [k, l]), ["zoning", "zoning tint: can it take housing?"]];
@@ -1739,7 +1756,7 @@ function buildPanel() {
       <div class="ckey" id="ckey"></div></fieldset>
     <fieldset><legend>Sun and shadows</legend>
       <label class="row"><span>Date</span><input type="date" id="sdate" value="${iso}"></label>
-      <label class="row"><span>Time <b id="stime-v"></b></span><input type="range" id="stime" min="5" max="22" step="0.25" value="${Math.min(19, Math.max(8, today.getHours() + today.getMinutes() / 60)).toFixed(2)}"></label>
+      <label class="row"><span>Time <b id="stime-v"></b></span><input type="range" id="stime" min="5" max="22" step="0.25" value="12.50"></label>
       <div class="presets"><button type="button" class="chip" data-p="06-21">21 June</button><button type="button" class="chip" data-p="12-21">21 Dec</button><button type="button" class="chip" data-p="03-20">21 March</button></div>
       <label><input type="checkbox" id="sshadow" checked>shadows</label><div class="hint2" id="sinfo"></div></fieldset>`;
   $("#citypanel").addEventListener("change", e => {
