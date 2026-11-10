@@ -27,7 +27,7 @@ The first `python serve.py` downloads the 23 law PDFs from their official websit
 | **Saved** and **the PDF report** | Your saved shops side by side; a one-page report with the zoning answer and its sources | made in the page from the shop you checked | same as above |
 | **For the city** | Candidate / risky / zoning doesn't allow, counted by district, and the list | `data/premises.json`, `data/warehouses.json` | same as above |
 | **City in 3D** | Every building raised from its floor count (estimated heights, for context only), streets, parks, trees, sun and shadows | `data/city/` (index, layers and 1 km tiles) | Catastro INSPIRE buildings; MUC ground layers; Open Data BCN trees (CC BY 4.0) |
-| **The laws** | 23 official documents in one book, with the rules NOMAD checks bookmarked | `rulebook/index.json`, `rulebook/anchors.json`; pages downloaded by `tools/get_rulebook.py` | BOE, codigotecnico.org, Portal Jurídic de Catalunya, Agència de l'Habitatge, RPUC, AMB, Ajuntament: official texts, cited by article |
+| **The laws** | 23 official documents in one book, with the rules NOMAD checks bookmarked | `rulebook/index.json`, `rulebook/anchors.json`, `rulebook/sources.lock.json` (the pinned version of each law); pages downloaded by `tools/get_rulebook.py` | BOE, codigotecnico.org, Portal Jurídic de Catalunya, Agència de l'Habitatge, RPUC, AMB, Ajuntament: official texts, cited by article |
 | **Rule cards** (Research) | The 16 rules NOMAD checks, each with the sentence of the law it comes from | `data/nomad.json` (copied from `07_Rules_and_evaluation/rules/rules.json`) | the official texts above; every sentence checked against the official PDF (`docs/LAW_TEXT_CHECK.md`) |
 | **Experiments, Workflow, Precedents, Sources** (Research) | What the team tested and learned; daylight: 5 shops simulated in Radiance | `data/nomad.json`, `data/daylight_validated.json`, and the page itself | Radiance simulations by Bars (`exp1_daylight/`); sources table on the page and in `docs/AI_LOG.md` |
 
@@ -43,7 +43,7 @@ All paths in the table start with `nomad/04_Website/` unless they start with a f
 | `nomad/06_Results/` | The 19 result files `build_site.py` reads for the parts the site still shows (zoning summary, street life, golden set, Exp 1 plan-reading scores). | Find your shop, Rule cards, Experiments |
 | `nomad/07_Rules_and_evaluation/` | `rules/rules.json`: the 16 rule cards (value, article, exact sentence). `eval/golden_set.csv`: 16 questions with their answers checked in the law. | Rule cards |
 | `exp1_daylight/` | **Daylight simulations** in Grasshopper + Ladybug/Honeybee (Radiance): the Rhino and Grasshopper files, the shop variants and their results, and the 5 real shops simulated (`results_shops.csv`). The per-shop grid simulation will build on it. `daylight_thresholds.json`: the EN 17037 targets for Barcelona from the TMYx weather file (climate.onebuilding.org; no licence stated, not redistributed). | Experiments (Exp 4), daylight of 2 shops in Find your shop |
-| `tools/` | `get_rulebook.py` downloads the law PDFs and builds the book's pages · `check_quotes.py` checks the rule cards' sentences against the official PDFs · `daylight_validated.py` makes the validated daylight examples · `import_site_data.py` brought the site's data from the published site into git · `fix_rule_quotes.py` the 9 Nov fix of the rule cards' sentences. | The laws, Rule cards, Experiments |
+| `tools/` | `get_rulebook.py` downloads the pinned law PDFs and builds the book's pages; `--check` tells whether an official text changed (and which articles), `--accept` takes the new versions · `check_quotes.py` checks the rule cards' sentences against the official PDFs · `daylight_validated.py` makes the validated daylight examples · `import_site_data.py` brought the site's data from the published site into git · `fix_rule_quotes.py` the 9 Nov fix of the rule cards' sentences. | The laws, Rule cards, Experiments |
 | `docs/AI_LOG.md` | Every use of AI in the project (IAAC rule), and the table of sources and licences. | Sources |
 | `docs/DATA_INVENTORY.md` | Every file of the published site (321): type, size, origin, where the site uses it. | — |
 | `docs/LAW_TEXT_CHECK.md` | The rule cards' sentences compared with the official PDFs, and what was corrected. | Rule cards |
@@ -69,5 +69,22 @@ The website's data is in git, so nobody needs to rebuild it to open the site. To
 `nomad/02_Code/data/` and `pip install -r requirements.txt`; then run the scripts in
 `nomad/02_Code/src/` (each one says how at its top) and copy their output into `04_Website/data/`.
 After new Radiance runs of real shops: `python tools/daylight_validated.py`.
+
+## Law versions
+
+Every law in the book is pinned in `nomad/04_Website/rulebook/sources.lock.json`: the URL of the version used, its
+official version date (and what that date is based on), the download date and two fingerprints (the file and its text).
+The site shows "Law texts as of <date>" and a version next to each document. To see whether an official text changed:
+
+```bash
+python tools/get_rulebook.py --check     # lists the changed articles; changes nothing
+python tools/get_rulebook.py --accept    # only after reading the changes: updates the lock and rebuilds the book
+```
+
+## Publishing (standing rule)
+
+The website is published only from `main`, and only after a pull request has been merged. Never from another branch,
+never before the merge, and never to anyone else's artifact. The published site is
+https://claude.ai/artifact/MBLnc4q9R1XusSQQyjkvYX.
 
 API keys live only in `.env`, which never goes to GitHub. The repo is private.

@@ -28,3 +28,7 @@ original language, plus how that sentence was checked (`checked`). `python tools
 - Keep scripts runnable from the repo root.
 - Log AI-assisted work in `docs/AI_LOG.md`.
 - Shop conversions fall under Decret 141/2012 Annex 4, Group C (minimum ceiling height 2,40 m).
+- Law versions are pinned in `nomad/04_Website/rulebook/sources.lock.json`. Never edit it by hand; run
+  `python tools/get_rulebook.py --check`, show the person the changed articles, and run `--accept` only when they agree.
+- **Standing rule: publish the website only from `main`, only after a PR is merged**, and only to
+  https://claude.ai/artifact/MBLnc4q9R1XusSQQyjkvYX (never to Bhavini's or anyone else's artifact).
