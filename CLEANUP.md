@@ -84,6 +84,10 @@ Every file was sorted into used by the site / experiment / dead (approved on 10 
 ## 7. Open, for later
 
 - **Phone width:** the rulebook's "previous page" arrow sticks out by 2 px at 390 px wide (it did before the cleanup too).
+- **Licence audit (10 Nov 2026):** `docs/LICENCES.md`. Two digital signatures in the book of laws (Circular 10/2025,
+  book p. 671; Circular 8, book p. 677, whose signature showed the signer's DNI) are blacked out by the book build, which
+  now stops if an ID number appears; the published book had not shown them (the signature fields were not copied),
+  but the full book did. Open: the Catastro building files, TMYx, the Ajuntament guide ("check" in LICENCES.md).
 - **The building floor by floor (10 Nov 2026):** the Visor 3D units stay out: the Catastro's legal notice allows only
   download and private use of its web content, so showing unit outlines and m² on a public site would need its written
   permission. Instead every shop in Find your shop has "Open this building in the Catastro 3D viewer", a link to the
