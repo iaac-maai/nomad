@@ -633,6 +633,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
 @media (max-width: 760px) { .doors { grid-template-columns: 1fr } header.bar .wrap { grid-template-columns: auto auto } .views { grid-column: 1 / -1 } }
 .h2note { font-size: .55em; font-weight: 500; color: var(--slate); white-space: nowrap }
 .catnote { font-weight: 400; color: var(--slate); text-transform: none; letter-spacing: 0 }
+.bk-doc .bk-ver { display: block; margin-top: 2px; font: 400 11px var(--mono); color: var(--muted) }
 #pcat { max-width: 100%; min-width: 0; text-overflow: ellipsis }
 </style>
 
@@ -757,7 +758,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
     <p class="fb-foot"><label class="vh" for="bkpage">Page</label><input id="bkpage" type="number" min="1" value="1"> <span id="bkof"></span> · <span class="bk-where" id="bkwhere"></span></p>
   </div>
   </div>
-  <p class="hint2" id="bknote">Click a page or its curling corner to turn it, or use the arrow keys. The pages are the official documents; NOMAD only added the index, the dividers and the page numbers.</p>
+  <p class="hint2" id="bknote"><b id="bkasof"></b>Click a page or its curling corner to turn it, or use the arrow keys. The pages are the official documents; NOMAD only added the index, the dividers and the page numbers.</p>
   </div>
 </div></section>
 
@@ -1919,6 +1920,7 @@ async function initBook() {
   else $("#bkspread").innerHTML = `<p class="hint2">The page viewer did not load. The index still works: download any document from it.</p>`;
   const [idx, an] = await Promise.all(["rulebook/index.json", "rulebook/anchors.json"].map(u => fetch(u).then(r => r.json())));
   BK.idx = idx; BK.anchors = an;
+  if (idx.as_of) $("#bkasof").textContent = `Law texts as of ${lawDate(idx.as_of)}: the date the official PDFs were downloaded and checked (each document's own version is in the index). `;
   $("#bkof").textContent = "of " + fmt(idx.pages);
   $("#bkpage").max = idx.pages;
   drawBookIndex("");
@@ -1934,6 +1936,10 @@ async function initBook() {
   window.addEventListener("resize", () => { clearTimeout(BK.rt); BK.rt = setTimeout(() => { if (BK.shown) bookShow(); }, 250); });
   new IntersectionObserver(es => { if (es[0].isIntersecting && !BK.shown) { BK.shown = true; bookShow(); } }, { rootMargin: "200px" }).observe($("#bkstage"));
 }
+/* law versions (tools/get_rulebook.py, rulebook/sources.lock.json): "2026-11-10" -> "10 Nov 2026", "2025-03" -> "Mar 2025" */
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const lawDate = s => { if (!s) return ""; const [y, m, d] = s.split("-"); return d ? `${+d} ${MON[m - 1]} ${y}` : `${MON[m - 1]} ${y}`; };
+const lawVersion = d => d.version_date ? `version ${lawDate(d.version_date)} (${d.version_basis})` : (d.version_basis || "");
 function drawBookIndex(q) {
   const f = norm(q), I = BK.idx;
   $("#bkindex").innerHTML = `<button type="button" class="bk-doc" data-p="2"><span class="pg">p. 2</span><b>How to read this book</b>, and the index<small>Start here: what the four levels are and where the numbers for a shop conversion are.</small></button>` +
@@ -1941,7 +1947,7 @@ function drawBookIndex(q) {
       const ds = I.docs.filter(d => d.level === L.id && (!f || norm(d.short + " " + d.title + " " + d.plain).includes(f)));
       if (!ds.length) return "";
       return `<div class="bk-lvl">${esc(L.name)}</div><p class="bk-lvlp">${esc(L.plain)}</p>` + ds.map(d =>
-        `<button type="button" class="bk-doc" data-p="${d.start}"><span class="pg">p. ${d.start}</span><b>${esc(d.short)}</b> · ${esc(d.title)}<small>${esc(d.plain)}${d.scan ? " (scanned original)" : ""}</small></button>`).join("");
+        `<button type="button" class="bk-doc" data-p="${d.start}"><span class="pg">p. ${d.start}</span><b>${esc(d.short)}</b> · ${esc(d.title)}<small>${esc(d.plain)}${d.scan ? " (scanned original)" : ""}</small><small class="bk-ver">${esc(lawVersion(d))}</small></button>`).join("");
     }).join("") +
     `<p class="hint2" style="margin-top:10px">${I.docs.length} official documents, ${fmt(I.pages)} pages. Sources: BOE, codigotecnico.org, Portal Jurídic de Catalunya, Agència de l'Habitatge, RPUC (Generalitat), AMB, Ajuntament de Barcelona.</p>`;
   $("#bkindex").onclick = e => { const b = e.target.closest(".bk-doc"); if (b) { BK.hl = null; bookGo(+b.dataset.p, true); } };

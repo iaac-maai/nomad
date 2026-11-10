@@ -84,8 +84,10 @@ Every file was sorted into used by the site / experiment / dead (approved on 10 
 ## 7. Open, for later
 
 - **Phone width:** the rulebook's "previous page" arrow sticks out by 2 px at 390 px wide (it did before the cleanup too).
-- **Llei 18/2007** has a newer consolidated version (10 Nov 2026, 136 pages instead of 135), so the book grew by one
-  page and the later bookmarks moved by one; `get_rulebook.py` handles this, but the book changes when a law changes.
+- **Llei 18/2007** has a newer consolidated version (10 Nov 2026, 136 pages instead of 135): only arts. 22.4 and
+  123.1 e) changed (terminology, Llei 15/2026), no rule card cites the law, art. 18 bis is unchanged. The book grew by
+  one page and the later bookmarks moved by one. Since PR #3 every law version is pinned
+  (`rulebook/sources.lock.json`) and `get_rulebook.py --check` lists the articles that change.
 - **Rebuilding the data** needs the raw data (`02_Code/data`, not in git, on the machine that built it). `avoid.py` still
   computes daylight and layout answers that the site no longer reads; only its street-life count is used.
 - **The scanned PGM pages** have no OCR text in the book unless `ocr_pgm.py` (Tesseract) is run first.
