@@ -39,8 +39,8 @@ The same list as the website's Sources table (9 Nov 2026). No row is left "to ch
 | Weather file | Barcelona TMYx (ESP_CT_Barcelona.081800_TMYx.epw), climate.onebuilding.org (Lawrie and Crawley, "Development of Global Typical Meteorological Years (TMYx)") | No licence stated on the site (checked 9 Nov 2026); cited as the site asks; the file is not redistributed (not in the repo) |
 | Rule cards (Exp 3) | open-notebook (vector search) and Gemini 3.5 Flash Lite, model `gemini-3.5-flash-lite` (drafting) | MIT (open-notebook); Gemini: Google API terms |
 | Code help | Claude (Anthropic) | Anthropic terms of use |
-| Base map (data/basemap.json) | Barcelona's zones from the MUC (muc_qualificacio_bcn.geojson), merged and simplified (Bhavini_NOMAD Files/02_Code/src/app/build_site.py) | Generalitat open data, attribution |
-| OCR of PGM/RPUC legal texts for the rulebook | Tesseract OCR (Bhavini_NOMAD Files/02_Code/src/collect/ocr_pgm.py) | Apache-2.0 |
+| Base map (data/basemap.json) | Barcelona's zones from the MUC (muc_qualificacio_bcn.geojson), merged and simplified (nomad/02_Code/src/app/build_site.py) | Generalitat open data, attribution |
+| OCR of PGM/RPUC legal texts for the rulebook | Tesseract OCR (nomad/02_Code/src/collect/ocr_pgm.py) | Apache-2.0 |
 | Trees in the 3D city | Open Data BCN street, zone and park trees | CC BY 4.0 |
 | 3D viewer | three.js 0.147 | MIT |
 | Rulebook viewer | PDF.js 3.11 | Apache-2.0 |

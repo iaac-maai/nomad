@@ -1,8 +1,8 @@
 # The website and its tools (serve.py, tools/get_rulebook.py, tools/check_quotes.py)
 pymupdf
 pillow
-# Rebuilding the website's data (Bhavini_NOMAD Files/02_Code/src: build_site.py, zoning.py, warehouses.py, avoid.py,
-# build_rules.py, compile_rulebook.py ...); needs the raw data in Bhavini_NOMAD Files/02_Code/data, not in git
+# Rebuilding the website's data (nomad/02_Code/src: build_site.py, zoning.py, warehouses.py, avoid.py,
+# build_rules.py, compile_rulebook.py ...); needs the raw data in nomad/02_Code/data, not in git
 requests
 pandas
 numpy

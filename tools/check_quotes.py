@@ -14,8 +14,8 @@ from pathlib import Path
 import pymupdf
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "Bhavini_NOMAD Files" / "02_Code" / "data"
-RULES = ROOT / "Bhavini_NOMAD Files" / "07_Rules_and_evaluation" / "rules" / "rules.json"
+DATA = ROOT / "nomad" / "02_Code" / "data"
+RULES = ROOT / "nomad" / "07_Rules_and_evaluation" / "rules" / "rules.json"
 PDF = {"Decret 141/2012": "catalonia/raw/D141-2012.pdf", "MPGM 2004": "pgm/raw/MPGM-2004-habitatges-parcela.pdf",
        "CTE-DB-SUA": "national/cte_db/DBSUA.pdf", "CTE DB-SUA": "national/cte_db/DBSUA.pdf"}
 

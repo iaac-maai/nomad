@@ -90,7 +90,7 @@ Every file was sorted into used by the site / experiment / dead (approved on 10 
   computes daylight and layout answers that the site no longer reads; only its street-life count is used.
 - **The scanned PGM pages** have no OCR text in the book unless `ocr_pgm.py` (Tesseract) is run first.
 - **Bhavini's newer site** (her published artifact, after v43) holds work that is in no branch; ask her to push it.
-- **Rename** `Bhavini_NOMAD Files/` to `nomad/` in a separate small PR, updating every path and running the tests again.
+- ~~**Rename** `Bhavini_NOMAD Files/` to `nomad/`~~ — done on 10 Nov 2026 in PR #2 (every path updated, all tests and the clean-clone test run again).
 - **Are area-01 and facade-01 still in force?** MPGM 2004, Disposició addicional primera 2, says its conditions
   (40 m² useful area, 3 m of façade) apply only "until the Ordenances Metropolitanes d'Edificació are modified"
   ("En tant no s'aprovi la modificació de les esmentades Ordenances"). The OME is in the rulebook: check whether a

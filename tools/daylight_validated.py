@@ -3,7 +3,7 @@
 
 Reads : exp1_daylight/results_shops.csv        the 5 real shops simulated in Grasshopper (one row each)
         exp1_daylight/daylight_thresholds.json  EN 17037 target / minimum daylight factor for Barcelona (TMYx)
-Writes: Bhavini_NOMAD Files/04_Website/data/daylight_validated.json
+Writes: nomad/04_Website/data/daylight_validated.json
 
 Lit depth = how far from the window the row-average daylight factor stays at or above the EN 17037 target.
 Run from the repo root:  python tools/daylight_validated.py
@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EXP = ROOT / "exp1_daylight"
-OUT = ROOT / "Bhavini_NOMAD Files" / "04_Website" / "data" / "daylight_validated.json"
+OUT = ROOT / "nomad" / "04_Website" / "data" / "daylight_validated.json"
 
 
 def lit_depth(df, ys, target):

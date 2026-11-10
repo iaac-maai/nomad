@@ -10,6 +10,6 @@ Thumbs.db
 data/ESP_CT_Barcelona.081800_TMYx/
 *.rhl
 # law PDFs and the compiled rulebook: downloaded by tools/get_rulebook.py, never committed
-Bhavini_NOMAD Files/02_Code/data/
-Bhavini_NOMAD Files/02_Code/results/
-Bhavini_NOMAD Files/04_Website/rulebook/parts/
+nomad/02_Code/data/
+nomad/02_Code/results/
+nomad/04_Website/rulebook/parts/

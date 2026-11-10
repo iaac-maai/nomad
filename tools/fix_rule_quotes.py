@@ -11,8 +11,8 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-FILES = [ROOT / "Bhavini_NOMAD Files" / "07_Rules_and_evaluation" / "rules" / "rules.json",
-         ROOT / "Bhavini_NOMAD Files" / "04_Website" / "data" / "nomad.json"]
+FILES = [ROOT / "nomad" / "07_Rules_and_evaluation" / "rules" / "rules.json",
+         ROOT / "nomad" / "04_Website" / "data" / "nomad.json"]
 SCAN = ("by eye against the official scan (RPUC document 126035, page {p}): read by Claude from the page image on 9 Nov 2026, "
         "checked by a human (Bars) on 10 Nov 2026; the PDF has no text layer")
 TEXT = "word for word in the official PDF, 9 Nov 2026"
