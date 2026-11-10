@@ -21,6 +21,7 @@ IAAC asks us to declare every AI tool we use. Add one row each time.
 | 2026-11-05 | Bhavini | Claude | E34 space optimisation: eval_space.py, room placer and connection table (placed_plans.py), homes with their own street door, efficiency figure on the site; website v43 with scrolling columns. City rerun with the new engine still running: city counts are from the old engine | Reverted on 9 Nov, not in main (kept on branch parked/bhavini-v43) |
 | 2026-11-09 | Bars | Claude | Post-midterm cleanup on branch cleanup-after-midterm (removals, parked features, data in the repo, law-text check, Sources); see CLEANUP.md | Every change reviewed by Bars before the pull request |
 | 2026-11-10 | Bars | Claude | Conversion rules (Decret 141/2012 Annex 4) on branch conversion-rules-annex4: which card applies to new buildings or conversions, Annex 4 note with pages, Grup C/D per shop from the Catastro CAT file (tool and tests; no real CAT data yet), the "≤" checked in DOGC 6245, docs/OPEN_QUESTIONS.md | Every quote checked word for word on its page; no rule value changed; for Bars's review before merging |
+| 2026-11-10 | Bars | Claude | Page layout (intro first, For the city and Saved closed by default, official districts), Bhavini's 3D city features restored (click to Find your shop, highlight, sun 12:30; her code, credited), trees layer filled from Open Data BCN (tools/add_trees.py) | Tested in Chrome on the real GPU; PRs #6–#8 |
 
 ## Sources, tools and licences
 
