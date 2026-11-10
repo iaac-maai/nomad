@@ -91,3 +91,13 @@ Every file was sorted into used by the site / experiment / dead (approved on 10 
 - **The scanned PGM pages** have no OCR text in the book unless `ocr_pgm.py` (Tesseract) is run first.
 - **Bhavini's newer site** (her published artifact, after v43) holds work that is in no branch; ask her to push it.
 - **Rename** `Bhavini_NOMAD Files/` to `nomad/` in a separate small PR, updating every path and running the tests again.
+- **Are area-01 and facade-01 still in force?** MPGM 2004, Disposició addicional primera 2, says its conditions
+  (40 m² useful area, 3 m of façade) apply only "until the Ordenances Metropolitanes d'Edificació are modified"
+  ("En tant no s'aprovi la modificació de les esmentades Ordenances"). The OME is in the rulebook: check whether a
+  later OME text replaced these two conditions, and whether cards `BCN-MPGM2004-area-01` and `BCN-MPGM2004-facade-01`
+  are still in force.
+- **Source of the Exp 3 chart** (keyword search 4/10, vector search 8/10): `outputs/run_pdf/exp2_summary.md` (keyword)
+  and `outputs/run_notebook/exp2_summary.md` (vector), on the branch `archive/experiments`; also in `AGENTS.md`
+  before the cleanup ("keyword 23/50 drafts correct, vector 38/50"). The 4 and 8 count the questions whose majority
+  card (check and value) matches the gold card. The site says "fully correct": by the stricter measure (all 5 runs
+  right) the result is 4 → 7, so the wording should name the measure.
