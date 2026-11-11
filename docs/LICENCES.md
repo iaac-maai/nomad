@@ -105,5 +105,6 @@ appears anywhere (`compile_rulebook.py`).
 
 | Files | What they hold | Source and licence | Attribution if shown | Status |
 | --- | --- | --- | --- | --- |
+| `cut_shells.json` | each premises' shape cut to its true size (rules A and B, assumed) | NOMAD's own drawing from Catastro INSPIRE Buildings + the Catastro CAT file (units, accessed 2026-11-11) + census 2024 doors | "NOMAD's assumption based on data from the Dirección General del Catastro (accessed 11 Nov 2026)" | OK (transformed: outlines rounded to 0,5 m, areas to 10 m², no unit areas) |
 | `doors.json` | building entrances and premises doors | Catastro INSPIRE Addresses (INSPIRE licence) + census 2024 (CC BY 4.0) | "Dirección General del Catastro"; "Ajuntament de Barcelona" | OK (transformed: points moved to local metres and rounded to 0,5 m) |
-| `facts/f_*.json` | per building: census premises (status, offer, activity, flags) and floors above / below ground | census 2024 (CC BY 4.0) + Catastro INSPIRE building parts | "Ajuntament de Barcelona"; "Dirección General del Catastro" | OK (no unit data) |
+| `facts/f_*.json` | per building: census premises (status, offer, activity, flags), floors above / below ground, number of units by use | census 2024 (CC BY 4.0) + Catastro INSPIRE building parts + CAT file (unit counts) | "Ajuntament de Barcelona"; "Dirección General del Catastro (accessed 11 Nov 2026)" | OK (transformed: unit counts by use only, no areas, years or floor lists) |

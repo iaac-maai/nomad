@@ -1,11 +1,14 @@
 """NOMAD - shop data: one file for the shop shapes, the doors and the facts that the app shows (E44, 11 Nov 2026).
 
 In the team repo the paths below are relative to nomad/02_Code (ROOT), like the other scripts here: the raw data lives in
-nomad/02_Code/data on the computer that builds it (not in git), and the outputs that say site/data go to ROOT/site/data;
-the files in nomad/06_Results/shops_doors_facts are the step 4 team copy of them.
+nomad/02_Code/data on the computer that builds it (not in git; the CAT file in data/barcelona/catastro/CAT_files/), and
+the outputs that say site/data go to ROOT/site/data; the files in nomad/06_Results/shops_doors_facts are the step 4 team
+copy of them.
 
-Read it top to bottom. It runs in four steps:
+Read it top to bottom. It runs in five steps:
 
+  STEP 0  UNITS     every unit of every building (floor, door, use, m2, year) from the Catastro CAT file
+                    -> data/barcelona/catastro/units_cat.jsonl
   STEP 1  DOORS     building entrances (land registry addresses) + every premises door (city census 2024)
                     -> data/barcelona/catastro/entrances.json, site/data/doors.json
   STEP 2  SHAPES    each empty premises' shape cut to its true size, rule A or rule B (an ASSUMPTION, labelled)
@@ -16,14 +19,14 @@ Read it top to bottom. It runs in four steps:
                     -> the folder you give
 
 Run everything:     .venv/Scripts/python src/building/shop_data.py
-Run one step:       .venv/Scripts/python src/building/shop_data.py doors | shapes | facts
+Run one step:       .venv/Scripts/python src/building/shop_data.py units | doors | shapes | facts
 Team copy:          .venv/Scripts/python src/building/shop_data.py team <folder>
 
 What it reads (all on this computer, not in git):
   results/real_shops/shells.json                 our shop shapes = each building's whole ground floor (Catastro footprint)
   site/data/premises.json                        the empty premises NOMAD answers for
   data/barcelona/census/2024_CensComercial_BCN.csv           city census of ground-floor premises 2024 (CC BY 4.0)
-  data/barcelona/catastro/units.jsonl            land registry unit list: floor, use, m2, year of every unit
+  data/barcelona/catastro/CAT_files/08900U_14082026.CAT.gz   Catastro CAT file, Barcelona urban (download licence; never committed)
   data/barcelona/catastro/buildings.json.gz      land registry building parts (floors above / below ground)
   data/barcelona/catastro/addresses/A.ES.SDGC.AD.08900.gml   land registry addresses (INSPIRE), from
       https://www.catastro.hacienda.gob.es/INSPIRE/Addresses/08/08900-BARCELONA/A.ES.SDGC.AD.08900.zip
@@ -40,7 +43,7 @@ from shapely.ops import unary_union
 
 ROOT = Path(__file__).resolve().parents[2]
 CENSUS = ROOT / "data/barcelona/census/2024_CensComercial_BCN.csv"
-UNITS = ROOT / "data/barcelona/catastro/units.jsonl"
+UNITS = ROOT / "data/barcelona/catastro/units_cat.jsonl"        # made by step 0 from the CAT file
 BUILDINGS = ROOT / "data/barcelona/catastro/buildings.json.gz"
 ADDRESSES = ROOT / "data/barcelona/catastro/addresses/A.ES.SDGC.AD.08900.gml"
 SHELLS = ROOT / "results/real_shops/shells.json"
@@ -60,12 +63,67 @@ def read_census(cols):
 
 
 def read_units():
-    """{ref14: {"ref", "n", "units": [{"pt" floor code, "use", "m2", "year", ...}]}}"""
+    """{ref14: {"ref", "n", "units": [{"car" unit number, "pt" floor code, "pu" door, "use", "m2", "year"}]}}
+    From the CAT file (step 0), never from the Sede's Consulta_DNPRC web service (private use only)."""
     U = {}
     for line in open(UNITS, encoding="utf-8"):
         d = json.loads(line)
         U[d["ref"]] = d
     return U
+
+
+# ======================================================================================================================
+# STEP 0  UNITS from the Catastro CAT file (alphanumeric bulk download, Barcelona urban, 08900U_14082026.CAT.gz, accessed
+#   2026-11-11; download licence: transformed data may be published (clause 6), never the original file online (5, 8);
+#   cite the Dirección General del Catastro and the access date (12)). The file stays in CAT_files and is never committed.
+#   Fixed width, one record a line (format "Fichero informático de remisión de catastro"):
+#     record 15 (each unit / bien inmueble): parcel (31,14) · unit number (45,4) · floor (252,3) · door (255,3) ·
+#               use letter (428,1) · built area with its share of common parts (442,10)
+#     record 14 (each construction): parcel (31,14) · unit number (51,4) · year built (79,4)
+#   The unit's year = the oldest year among its own constructions.
+# ======================================================================================================================
+
+CAT = ROOT / "data/barcelona/catastro/CAT_files/08900U_14082026.CAT.gz"
+CAT_ACCESSED = "2026-11-11"
+USE_LETTER = {"V": "Residencial", "C": "Comercial", "O": "Oficinas", "A": "Almacen-Estacionamiento", "I": "Industrial",
+              "K": "Deportivo", "T": "Espectaculos", "G": "Ocio y Hosteleria", "Y": "Sanidad y Beneficencia",
+              "E": "Cultural", "R": "Religioso", "M": "Obras de urbanizacion y jardineria, suelos sin edificar",
+              "P": "Edificio singular", "B": "Almacen agrario", "J": "Industrial agrario", "Z": "Agrario"}
+
+
+def cut(line, start, n):
+    return line[start - 1:start - 1 + n].strip()
+
+
+def step_units():
+    keep = set(json.load(open(SHELLS, encoding="utf-8")))
+    rows, c = read_premises()
+    keep |= {(r[c("ref")] or "")[:14] for r in rows} - {""}
+    units, years = defaultdict(list), defaultdict(list)
+    import io
+    for line in io.TextIOWrapper(gzip.open(CAT), encoding="latin-1"):
+        kind, ref = line[:2], line[30:44]
+        if ref not in keep:
+            continue
+        if kind == "15":
+            try:
+                m2 = float(cut(line, 442, 10) or 0)
+            except ValueError:
+                m2 = 0.0
+            units[ref].append({"car": cut(line, 45, 4), "pt": cut(line, 252, 3), "pu": cut(line, 255, 3),
+                               "use": USE_LETTER.get(cut(line, 428, 1), cut(line, 428, 1)), "m2": m2 or None})
+        elif kind == "14" and cut(line, 51, 4):
+            y = cut(line, 79, 4)
+            if y.isdigit() and y != "0000":
+                years[(ref, cut(line, 51, 4))].append(y)
+    with open(UNITS, "w", encoding="utf-8") as f:
+        for ref in sorted(units):
+            us = units[ref]
+            for u in us:
+                y = years.get((ref, u["car"]))
+                u["year"] = min(y) if y else None
+            f.write(json.dumps({"ref": ref, "n": len(us), "units": us, "source": "CAT %s" % CAT_ACCESSED}, ensure_ascii=False) + "\n")
+    print("buildings with units:", len(units), " units:", sum(len(v) for v in units.values()))
 
 
 def read_premises():
@@ -390,7 +448,7 @@ def step_facts():
 # ======================================================================================================================
 # STEP 4  TEAM COPY (only when asked). The Catastro licence allows only transformed data online, and the team shows no
 #   unit areas: outlines and points rounded to 0,5 m, cut areas to 10 m2, reasons without unit sizes, unit lists
-#   reduced to counts by use and the floor codes. The census stays as it is (CC BY 4.0).
+#   reduced to the number of units by use (no areas, no year, no floor list). The census stays as it is (CC BY 4.0).
 # ======================================================================================================================
 
 def step_team(folder):
@@ -418,9 +476,9 @@ def step_team(folder):
         F = json.load(open(f, encoding="utf-8"))
         for v in F.values():
             u = v.pop("u", None)
+            v.pop("y", None)                                    # the year and the floor list stay out: too close to the file
             if u:
-                v["n"] = dict(Counter(use for _, use, _ in u))
-                v["fl"] = sorted({str(fl) for fl, _, _ in u if fl})
+                v["n"] = dict(Counter(use for _, use, _ in u))     # only the number of units by use
         json.dump(F, open(D / "facts" / f.name, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     print("team copy written to", D)
 
@@ -429,6 +487,8 @@ def step_team(folder):
 
 if __name__ == "__main__":
     what = sys.argv[1] if len(sys.argv) > 1 else "all"
+    if what in ("all", "units"):
+        print("== STEP 0 UNITS (CAT file)"); step_units()
     if what in ("all", "doors"):
         print("== STEP 1 DOORS"); step_doors()
     if what in ("all", "shapes"):
