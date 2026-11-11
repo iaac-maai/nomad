@@ -24,6 +24,7 @@ IAAC asks us to declare every AI tool we use. Add one row each time.
 | 2026-11-10 | Bars | Claude | Page layout (intro first, For the city and Saved closed by default, official districts), Bhavini's 3D city features restored (click to Find your shop, highlight, sun 12:30; her code, credited), trees layer filled from Open Data BCN (tools/add_trees.py) | Tested in Chrome on the real GPU; PRs #6–#8 |
 | 2026-11-11 | Bhavini | Claude | Data on branch bhavini-data-2026-11-11: building entrances (Catastro INSPIRE Addresses) and premises doors (census 2024), census facts and floors per building, and shop_data.py; the cut shop shapes and unit lists are held back until rebuilt from the CAT file (their source, Consulta_DNPRC, is private use only) | Licence check by Bars and Bhavini against the Sede legal notice and the CAT download licence |
 | 2026-11-11 | Bhavini | Claude | Same branch: unit list rebuilt from the Catastro CAT file (shop_data.py step 0, records 14/15), cut shop shapes (rules A and B) and unit counts by use added back, transformed for the download licence | Checked against the old list: unit counts match in 5,325 of 5,328 buildings, shop areas within about 1 m² |
+| 2026-11-11 | Bars | Claude | Annex 4 v2 (PR #12): tools/annex4_grup.py rewritten (building area per parcel or own construction unit; shop area = ground-floor non-housing space + own basement; data-mismatch check), Grup B added to tools/annex4_cards.py and the site; run on the real CAT file (B 60, C 5,094, D 151, unknown 767) | 10/10 tests, 20/20 Annex 4 quotes (check_quotes.py), spot check by Bars of shops in each group; site checked after publishing |
 | 2026-11-12 | Bhavini | Claude | shop_data.py moved to tools/ (as Bars asked), paths set for the repo root and the CAT file in nomad/02_Code/data/barcelona/catastro/cat/ | Script parses; same code as Bhavini's local version |
 
 ## Sources, tools and licences
@@ -34,7 +35,7 @@ The same list as the website's Sources table (9 Nov 2026). No row is left "to ch
 | --- | --- | --- |
 | Empty ground-floor premises | Cens de locals en planta baixa 2024, Ajuntament de Barcelona, Open Data BCN | CC BY 4.0 |
 | Buildings (footprints, floors) | Catastro (Dirección General del Catastro) via hypercadaster_ES | EUPL-1.2 (hypercadaster_ES); Catastro data: reuse with attribution |
-| Built areas for Annex 4 Grup C/D | Catastro alphanumeric data, CAT format, Barcelona urban (Dirección General del Catastro), downloaded by a registered user | Catastro download licence: transformed data may be published citing the DGC and the access date; the original file is not published (docs/ANNEX4.md) |
+| Built areas for Annex 4 Grup B/C/D | Catastro alphanumeric data, CAT format, Barcelona urban (Dirección General del Catastro), downloaded by a registered user | Catastro download licence: transformed data may be published citing the DGC and the access date; the original file is not published (docs/ANNEX4.md) |
 | Zoning (qualificació) | Mapa Urbanístic de Catalunya, Generalitat de Catalunya, January 2023 | Generalitat open data, attribution |
 | Housing rules | Decret 141/2012, CTE, PGM art. 225 (MPGM 1999), MPGM 2004, Ajuntament guide on change of use (2025) | Official texts, cited by article |
 | Test shops and flats | Swiss Dwellings v3.0.0, Zenodo (zenodo.org/record/7788422) | CC BY 4.0 |

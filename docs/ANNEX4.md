@@ -1,16 +1,17 @@
 # Conversions: Decret 141/2012 Annex 4
 
-A shop that becomes homes is a change of use of part of a building. Decret 141/2012 Annex 4 says which rules of
-Annex 1 (new buildings) apply then. For a single shop it is **Grup C** (≤ 50 % of the building's built area changes
-use) or **Grup D** (> 50 %). Official text: the consolidated Decret 141/2012 that `tools/get_rulebook.py` downloads
-(pinned in `nomad/04_Website/rulebook/sources.lock.json`), Annex 4 apartat 2, **page 23**.
+A shop that becomes homes is a change of use of a building or of part of one. Decret 141/2012 Annex 4 says which
+rules of Annex 1 (new buildings) apply then. For a shop it is **Grup B** (the whole building changes use), **Grup C**
+(≤ 50 % of the building's built area, above or below ground, changes use) or **Grup D** (> 50 %). Official text: the
+consolidated Decret 141/2012 that `tools/get_rulebook.py` downloads (pinned in
+`nomad/04_Website/rulebook/sources.lock.json`), Annex 4 apartat 2, **page 23**.
 
-| | Grup C (≤ 50 %) | Grup D (> 50 %) |
-| --- | --- | --- |
-| Annex 1 apartat 2 (the building: access, stairs, lift, patios, shared spaces) | exempt, except **2.2.1** (each home is reached from a public, common or annex space) | **applies**: 2.1 accessible route (p. 14), 2.2.2 1,50 m landing (p. 14), 2.6 shared space from 8 homes (p. 15); whether the lift rule 2.4.1 a) applies to conversions is still open |
-| Ventilation patios, Annex 1 2.5.1 (p. 15) | not required (apartat 2 exempt) | areas −10 %: 8,1 m² (rooms) / 5,4 m² (kitchens, baths, stairs) |
-| Clear height, Annex 1 3.5 (p. 17) | 2,40 m instead of 2,50 m; the rest of 3.5 stays: 2,20 m in bathrooms, kitchens and circulation, 2,30 m over at most 20 % of a room | same as Grup C |
-| Annex 1 apartat 3 (the home: area, façade, rooms, windows, bathroom) | applies unchanged | applies unchanged |
+| | Grup B (whole building) | Grup C (≤ 50 %) | Grup D (> 50 %) |
+| --- | --- | --- | --- |
+| Annex 1 apartat 2 (the building: access, stairs, lift, patios, shared spaces) | **applies** (Annex 1 in full, except 2.5.1 and 3.5 below) | exempt, except **2.2.1** (each home is reached from a public, common or annex space) | **applies**: 2.1 accessible route (p. 14), 2.2.2 1,50 m landing (p. 14), 2.6 shared space from 8 homes (p. 15); whether the lift rule 2.4.1 a) applies to conversions is still open (also for Grup B) |
+| Ventilation patios, Annex 1 2.5.1 (p. 15) | areas −10 %: 8,1 m² (rooms) / 5,4 m² (kitchens, baths, stairs) | not required (apartat 2 exempt) | areas −10 %: 8,1 m² / 5,4 m² |
+| Clear height, Annex 1 3.5 (p. 17) | 2,40 m instead of 2,50 m; the rest of 3.5 stays | 2,40 m instead of 2,50 m; the rest of 3.5 stays: 2,20 m in bathrooms, kitchens and circulation, 2,30 m over at most 20 % of a room | same as Grup C |
+| Annex 1 apartat 3 (the home: area, façade, rooms, windows, bathroom) | applies unchanged | applies unchanged | applies unchanged |
 
 ## On the rule cards (no value changed)
 
@@ -22,16 +23,19 @@ Annex 4 quotes).
 | Card | For | Conversion |
 | --- | --- | --- |
 | height-01 (2,50 m) | new buildings (Annex 1) | replaced by height-04C |
-| height-04C (2,40 m) | conversions (Annex 4 Grups C and D) | 2,40 m; 2,20 m in bathrooms, kitchens, circulation; 2,30 m over ≤ 20 % of a room |
-| patio-01 (9 m²) | new buildings; conversions see the change | not required in Grup C; −10 % in Grup D (8,1 / 5,4 m²) |
+| height-04C (2,40 m) | conversions (Annex 4 Grups B, C and D) | 2,40 m; 2,20 m in bathrooms, kitchens, circulation; 2,30 m over ≤ 20 % of a room |
+| patio-01 (9 m²) | new buildings; conversions see the change | not required in Grup C; −10 % in Grups B and D (8,1 / 5,4 m²) |
 | area-01, facade-01, bedroom-01/02, living-01, window-01, bath-01 | new buildings and conversions | unchanged |
 
 The MPGM 2004 and CTE cards are not Decret 141: Annex 4 does not change them.
 
-## Grup C or D for each shop
+## Grup B, C or D for each shop
 
-`tools/annex4_grup.py` computes, for each empty premises of the 2024 census:
-**the shop's built area ÷ the building's total built area (above and below ground)** → Grup C (≤ 50 %) or D (> 50 %).
+`tools/annex4_grup.py` (version 2, 11 Nov 2026) computes, for each empty premises of the 2024 census,
+**the shop's built area ÷ the building's total built area (above and below ground)**:
+- **Grup B**: the shop is the whole building (at least 90 % of its built area, and no housing in it);
+- **Grup C**: ≤ 50 %;
+- **Grup D**: > 50 %.
 
 **Data: the Catastro's alphanumeric data, CAT format** (one file per municipality, urban; record layout
 "Fichero informático de remisión de catastro", revision 16-11-2022,
@@ -43,13 +47,21 @@ https://www.catastro.hacienda.gob.es/documentos/formatos_intercambio/catastro_fi
 The Catastro Visor layer is **not** used.
 
 **Which unit is the shop.** The census gives the parcel (14 characters), "LOC" and a door number. Candidates are the
-parcel's non-residential units with a construction on the ground floor:
+parcel's non-housing units with a construction on the ground floor (the door is read from record 14, or from
+record 15 when record 14 has none):
 `door` (one candidate has the census door) · `only` (one candidate) · `same` (several, all the same group; the %
-shown is the smallest–largest) · `unknown` (no parcel, no candidate, or candidates that give different groups).
-**Building** = the parcel; when the parcel holds several buildings, the shop's own building. The shop's area is its
-own constructions on every floor (its basement too); common elements count only in the building's total.
+shown is the smallest–largest) · `unknown` (no parcel, no candidate, candidates that give different groups, the
+Catastro records the ground floor as housing, or a data mismatch: the shop's area more than 2 % above the building's).
 
-### How to run it (needs Bars: the download needs a login)
+**Building** = the parcel's total (record 11); when the parcel holds several buildings and the shop's own building
+has upper floors, that building. **Shop area** = the unit's ground-floor non-housing constructions, plus its own
+basement only when the unit holds no homes. Common elements count only in the building's total.
+
+**Result** (CAT file of 14 Aug 2026, accessed 11 Nov 2026): 6,072 premises — Grup B 60, Grup C 5,094, Grup D 151,
+not known 767. Found by `same` 3,643, `only` 1,586, `door` 76. 181 shops would change group if above and below ground
+were counted separately (`docs/OPEN_QUESTIONS.md`, question 2).
+
+### How to run it again (needs Bars: the download needs a login)
 
 1. On the Sede Electrónica del Catastro (https://www.sedecatastro.gob.es/Accesos/SECAccDescargaDatos.aspx), log in as
    a registered user or with a digital certificate, accept the licence and download the **urban CAT file of
@@ -59,17 +71,20 @@ own constructions on every floor (its basement too); common elements count only 
    (https://opendata-ajuntament.barcelona.cat/data/dataset/cens-locals-planta-baixa-act-economica, CC BY 4.0).
 4. `python tools/annex4_grup.py --cat <file>.CAT.gz --accessed YYYY-MM-DD`
    → `nomad/04_Website/data/annex4_grup.json` (site: group, %, how found) and
-   `nomad/02_Code/results/annex4/spotcheck.md` (local only: counts, how each unit was found, 5 shops of each group with
-   their m², and how many shops would change group if above and below ground were counted separately).
-5. Tests without real data: `python tools/test_annex4_grup.py` (CAT records written by hand to the format).
+   `nomad/02_Code/results/annex4/spotcheck.md` (local only: counts, how each unit was found, shops of each group
+   (B, C, D, not known) with their m², and how many shops would change group if above and below ground were counted
+   separately).
+5. Tests without real data: `python tools/test_annex4_grup.py` (CAT records written by hand to the format; 10/10).
+6. Then `python tools/annex4_cards.py` and `python tools/check_quotes.py`.
 
-Until then the site says "Conversion rules: Annex 4 Grup C or D (not known yet: needs the Catastro CAT data)".
+The site shows, for each shop, the group, the % and how the unit was found, as "NOMAD's estimate from Dirección
+General del Catastro data, accessed 2026-11-11".
 
 ## Licence of the CAT data, and attribution
 
 Catastro "Licencia de descarga de productos catastrales" (https://www.catastro.hacienda.gob.es/pdf/ovc/licdescargaES.pdf),
 which the download asks to accept:
-- **Access:** "se requerirá la autentificación previa del usuario, bien accediendo como usuario registrado … o bien
+- **Access:** "se requerirá la autentificación previa del usuario, bien accediendo como usuario registrado …o bien
   … certificado digital" (Condiciones técnicas).
 - **Original data:** "No se autoriza el uso público ni la comercialización de la información catastral original" (5);
   "En ningún caso se autoriza a que la información catastral original descargada y no trasformada pueda ser difundida
