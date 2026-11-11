@@ -1,7 +1,12 @@
-"""NOMAD - Decret 141/2012 Annex 4: is each empty shop's conversion Grup C (≤ 50 %) or Grup D (> 50 %)?
+"""NOMAD - Decret 141/2012 Annex 4: is each empty shop's conversion Grup B, C (≤ 50 %) or D (> 50 %)?
 
-Grup C / D = the shop's built area ÷ the building's total built area, above and below ground ("canvi d'ús d'un edifici
-(≤ 50% de la superfície construïda sobre o sota rasant)", DOGC 6245 p. 53451).
+Grup B = change of use of the whole building (here: the shop is >= 90 % of a building that holds no homes).
+Shop = the census premises' non-housing constructions on the ground floor (record 14), plus its own basement when its
+unit holds no homes. Building = the parcel's total built area (record 11), so both sides of the ratio use one scope.
+A ratio above 102 % is reported as "unknown: data mismatch", never as a group.
+
+Grup B / C / D come from the shop's built area ÷ the building's total built area, above and below ground ("canvi d'ús
+d'un edifici (≤ 50% de la superfície construïda sobre o sota rasant)", DOGC 6245 p. 53451).
 
 Data: the Catastro's alphanumeric data, CAT format, Barcelona urban (fixed width, 1000 characters a record; format
 "Fichero informático de remisión de catastro", revision 16-11-2022):
@@ -14,16 +19,18 @@ The CAT file is downloaded by a registered user from the Sede Electrónica del C
 the original file on the internet: it stays in nomad/02_Code/data/barcelona/catastro/cat/ (not in git). Only the
 derived group and percentage go into the site (docs/ANNEX4.md).
 
-Which unit is the shop? The census (Open Data BCN, cens de locals en planta baixa 2024) gives the 14-character parcel,
-"Planta" (always LOC) and "Porta". For each empty premises, the candidates are the parcel's non-residential units with a
-construction on the ground floor:
-  door      a candidate on the ground floor whose door number equals the census door (the only such one)
+Which space is the shop? The census (Open Data BCN, cens de locals en planta baixa 2024) gives the 14-character parcel,
+"Planta" (always LOC) and "Porta". The candidates are the parcel's non-housing constructions on the ground floor
+(record 14), grouped by unit, or by door inside an undivided building (one unit that also holds the homes):
+  door      the census door matches a construction's door (record 14) or a unit's door (record 15)
   only      the parcel has exactly one candidate
-  same      several candidates, and every one gives the same group (the percentage shown is the smallest-largest)
-  unknown   no CAT parcel, no candidate, or candidates that give different groups
-Building = the parcel (record 11), or, when the parcel holds several buildings (unidades constructivas), the shop's own
-building (sum of its records 14). The alternative reading of "sobre o sota rasant" (above and below ground counted
-separately) is computed too, to count the shops it would move (docs/OPEN_QUESTIONS.md).
+  same      several candidates, and every one gives the same group (the % shown is the smallest, ratio_max the largest);
+  unknown   no CAT parcel, no candidate, the Catastro records the ground floor as housing, a data mismatch (> 102 %),
+            or candidates that give different groups
+Building = the parcel (record 11), or, when the parcel holds several buildings (unidades constructivas) and the shop
+sits in one that also has upper floors, that building (the sum of its records 14). Shop and building always use the
+same scope. The alternative reading of "sobre o sota rasant" (above and below ground counted separately) is computed
+too, to count the shops it would move (docs/OPEN_QUESTIONS.md).
 
 Run from the repo root:
   python tools/annex4_grup.py --cat <08_900_U_YYYY-MM-DD.CAT.gz> --accessed YYYY-MM-DD [--census <csv>]
@@ -93,54 +100,96 @@ def open_cat(path):
         return parse(fh)
 
 
-def measure(p, cargo):
-    """One unit as the shop -> numbers for the ratio."""
-    own = [c for c in p["cons"] if c["unit"] == cargo]
-    shop = sum(c["m2"] for c in own) or p["units"][cargo]["m2"]
-    shop_below = sum(c["m2"] for c in own if below(c["floor"]))
+def nonres(c):
+    """A construction that is not housing and not a common element (the shop's own space)."""
+    return bool(c["unit"]) and bool(c["use"]) and not c["use"].upper().startswith("V")
+
+
+def building_area(p, cons):
+    """The building of these constructions: the parcel (record 11, or the sum of its constructions when record 11 has
+    none), or, when the parcel holds several unidades constructivas and the shop sits in one that also has upper
+    floors (a separate building), that one."""
     ucs = {c["uc"] for c in p["cons"] if c["uc"]}
-    if len(ucs) > 1 and own:
-        uc = Counter(c["uc"] for c in own).most_common(1)[0][0]
+    own = {c["uc"] for c in cons if c["uc"]}
+    if len(ucs) > 1 and len(own) == 1:
+        uc = next(iter(own))
         inb = [c for c in p["cons"] if c["uc"] == uc]
-        bldg, bldg_below, src = sum(c["m2"] for c in inb), sum(c["m2"] for c in inb if below(c["floor"])), "building"
-    else:
-        bldg, bldg_below, src = p["total"] or sum(c["m2"] for c in p["cons"]), p["below"], "parcel"
-        if not p["total"]:
-            bldg_below = sum(c["m2"] for c in p["cons"] if below(c["floor"]))
+        if any(not ground(c["floor"]) and not below(c["floor"]) for c in inb):
+            return sum(c["m2"] for c in inb), sum(c["m2"] for c in inb if below(c["floor"])), "building"
+    tot = p["total"] or sum(c["m2"] for c in p["cons"])
+    blw = p["below"] if p["total"] else sum(c["m2"] for c in p["cons"] if below(c["floor"]))
+    return tot, blw, "parcel"
+
+
+def shop_area(p, cons):
+    """The shop = these ground-floor constructions, plus the below-ground non-housing constructions of the same units
+    when those units hold no housing (a shop's own basement). In an undivided building (one unit that also holds the
+    homes) only the ground-floor constructions count, never the whole unit."""
+    units = {c["unit"] for c in cons}
+    own_below = [c for c in p["cons"] if c["unit"] in units and below(c["floor"]) and nonres(c) and c not in cons
+                 and not any(d["unit"] == c["unit"] and not nonres(d) for d in p["cons"])]
+    return sum(c["m2"] for c in cons) + sum(c["m2"] for c in own_below), sum(c["m2"] for c in own_below)
+
+
+def result(p, cons, method, extra=None):
+    bldg, bldg_below, scope = building_area(p, cons)
     if not bldg:
-        return None
+        return {"grup": "unknown", "method": "unknown", "why": "no built area"}
+    shop, shop_below = shop_area(p, cons)
     ratio = shop / bldg
+    if ratio > 1.02:
+        return {"grup": "unknown", "method": "unknown", "why": "data mismatch: shop larger than the building",
+                "shop_m2": shop, "building_m2": bldg, "building_below_m2": bldg_below}
     above_r = (shop - shop_below) / (bldg - bldg_below) if bldg - bldg_below > 0 else 0
     below_r = shop_below / bldg_below if bldg_below > 0 else 0
-    return {"cargo": cargo, "shop_m2": shop, "shop_below_m2": shop_below, "building_m2": bldg,
-            "building_below_m2": bldg_below, "denominator": src, "ratio": ratio, "grup": "D" if ratio > 0.5 else "C",
-            "grup_separately": "D" if max(above_r, below_r) > 0.5 else "C"}
+    whole = ratio >= 0.9 and not any(c["use"].upper().startswith("V") for c in p["cons"])   # no homes: the whole building
+    grup = "B" if whole else ("D" if ratio > 0.5 else "C")
+    sep = "B" if whole else ("D" if max(above_r, below_r) > 0.5 else "C")
+    out = {"cargo": ",".join(sorted({c["unit"] for c in cons})), "shop_m2": shop, "shop_below_m2": shop_below,
+           "building_m2": bldg, "building_below_m2": bldg_below, "denominator": scope, "ratio": min(ratio, 1.0),
+           "grup": grup, "grup_separately": sep, "method": method}
+    out.update(extra or {})
+    return out
 
 
 def classify(P, ref, porta):
-    """One census premises -> {grup, ratio, method, ...}."""
+    """One census premises -> {grup, ratio, method, ...}.
+    Candidates are the parcel's non-housing constructions on the ground floor (record 14), grouped by unit, or by door
+    inside an undivided building. door = the census door matches; only = one candidate; same = several candidates
+    that all give the same group."""
     p = P.get(ref)
     if p is None:
         return {"grup": "unknown", "method": "unknown", "why": "parcel not in the CAT file"}
-    on_ground = {c["unit"] for c in p["cons"] if c["unit"] and ground(c["floor"])}
-    cands = [k for k, u in p["units"].items() if u["use"] != "V" and (k in on_ground or ground(u["floor"]))]
-    if not cands:
-        return {"grup": "unknown", "method": "unknown", "why": "no non-residential unit on the ground floor"}
-    by_door = [k for k in cands if porta and door(p["units"][k]["door"]) == door(porta)]
-    if len(by_door) == 1:
-        m = measure(p, by_door[0])
-        return dict(m, method="door") if m else {"grup": "unknown", "method": "unknown", "why": "no built area"}
-    ms = [m for m in (measure(p, k) for k in cands) if m]
-    if not ms:
-        return {"grup": "unknown", "method": "unknown", "why": "no built area"}
-    if len(ms) == 1:
-        return dict(ms[0], method="only")
-    groups = {m["grup"] for m in ms}
-    if len(groups) == 1:
-        lo, hi = min(ms, key=lambda m: m["ratio"]), max(ms, key=lambda m: m["ratio"])
-        return dict(lo, method="same", ratio_max=hi["ratio"], candidates=len(ms))
-    return {"grup": "unknown", "method": "unknown", "candidates": len(ms),
-            "why": f"{len(ms)} units could be this shop and they give different groups"}
+    g = [c for c in p["cons"] if ground(c["floor"]) and nonres(c)]
+    if not g:
+        why = ("the Catastro records the ground floor as housing" if any(ground(c["floor"]) for c in p["cons"])
+               else "no construction on the ground floor")
+        return {"grup": "unknown", "method": "unknown", "why": why}
+    if porta and door(porta):
+        by_door = [c for c in g if door(c["door"]) == door(porta)]
+        if not by_door:                                         # the door may be on the unit (record 15) only
+            units = {k for k, u in p["units"].items() if door(u["door"]) == door(porta)}
+            by_door = [c for c in g if c["unit"] in units]
+        if by_door:
+            return result(p, by_door, "door")
+    groups = defaultdict(list)                                  # candidates: by unit, or by door in a mixed unit
+    for c in g:
+        mixed = any(d["unit"] == c["unit"] and not nonres(d) for d in p["cons"])
+        groups[(c["unit"], door(c["door"]) if mixed else "")].append(c)
+    cands = list(groups.values())
+    if len(cands) == 1:
+        return result(p, cands[0], "only")
+    ms = [result(p, c, "same", {"candidates": len(cands)}) for c in cands]
+    ms = [m for m in ms if m["grup"] != "unknown"]
+    hi = result(p, g, "same", {"candidates": len(cands)})        # all the ground-floor non-housing space together
+    if ms and len(ms) == len(cands) and all(m["grup"] == ms[0]["grup"] for m in ms):
+        lo = min(ms, key=lambda m: m["ratio"])
+        out = dict(lo, ratio_max=max(m["ratio"] for m in ms))
+        if hi["grup"] == "C" and out["grup"] == "C":
+            out["why"] = "even all the ground-floor non-housing space together is <= 50 %"
+        return out
+    return {"grup": "unknown", "method": "unknown", "candidates": len(cands),
+            "why": f"{len(cands)} spaces could be this shop and they give different groups"}
 
 
 def main():
@@ -158,7 +207,7 @@ def main():
             if r["Nom_Sector_Activitat"].startswith("Locals buits") and r["Referencia_Cadastral"]:
                 key = f"{r['Referencia_Cadastral']}|{round(float(r['X_UTM_ETRS89']))}|{round(float(r['Y_UTM_ETRS89']))}"
                 census.setdefault(key, []).append(r)
-    shops, detail = {}, []
+    shops, detail, seen = {}, [], set()
     for r in rows:
         key = f"{r['ref']}|{r['x']}|{r['y']}"
         cs = census.get(key, [])
@@ -167,7 +216,8 @@ def main():
         out = res[0] if len(g) == 1 else {"grup": "unknown", "method": "unknown", "why": "premises at this point differ"}
         shops[key] = [out["grup"], round(100 * out["ratio"], 1) if "ratio" in out else None, out["method"],
                       round(100 * out["ratio_max"], 1) if "ratio_max" in out else None, out.get("why", "")]
-        detail.append((r, out))
+        if key not in seen:
+            seen.add(key); detail.append((r, out))
     counts = Counter(v[0] for v in shops.values())
     methods = Counter(v[2] for v in shops.values())
     moved = sum(1 for _, o in detail if o.get("grup_separately") and o["grup_separately"] != o["grup"])
@@ -184,10 +234,10 @@ def main():
           f"Shops: {len(shops)} · " + " · ".join(f"Grup {k}: {v}" for k, v in sorted(counts.items())),
           "How the unit was found: " + " · ".join(f"{k}: {v}" for k, v in methods.most_common()),
           f"Would change group if above and below ground were counted separately: {moved}", ""]
-    for grp in ("C", "D", "unknown"):
+    for grp in ("B", "C", "D", "unknown"):
         ex = [d for d in detail if d[1]["grup"] == grp]
         ex = ex[:: max(1, len(ex) // 5)][:5]
-        md += [f"## Grup {grp}: 5 of {sum(1 for d in detail if d[1]['grup'] == grp)}", "",
+        md += [f"## Grup {grp}: {len(ex)} of {sum(1 for d in detail if d[1]['grup'] == grp)}", "",
                "| Shop | Ref | Shop m² | Building m² (below) | % | Unit | Found by / why |", "|---|---|---:|---:|---:|---|---|"]
         for r, o in ex:
             md.append(f"| {r['street']} {r['num']} | {r['ref']} | {o.get('shop_m2', '')} | {o.get('building_m2', '')} "

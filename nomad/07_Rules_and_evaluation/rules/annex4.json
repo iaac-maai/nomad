@@ -13,6 +13,13 @@
  },
  "groups": [
   {
+   "grup": "B",
+   "when": "the whole building changes use",
+   "quote": "Grup B Intervencions: canvi d’ús total d’un edifici (sobre o sota rasant). Annex aplicable i excepcions: annex 1 amb les excepcions següents: Apartat 2.5.1 s’accepta una reducció del 10% en les superfícies. Apartat 3.5: mínim de 2,40 m en comptes de 2,50 m, la resta igual.",
+   "page": 23,
+   "plain": "Annex 1 applies in full, except: ventilation patios (2.5.1) may be 10 % smaller (8,1 m² / 5,4 m²); clear height 2,40 m. So apartat 2 applies (below)."
+  },
+  {
    "grup": "C",
    "when": "≤ 50 % of the building's built area changes use",
    "quote": "Grup C Intervencions: canvi d’ús d’un edifici (≤ 50% de la superfície construïda sobre o sota rasant). Annex aplicable i excepcions: annex 1 amb les excepcions següents: Apartat 2 íntegrament exempt, excepte 2.2.1. Apartat 3.5: mínim de 2,40 m en comptes de 2,50 m, la resta igual.",
@@ -47,6 +54,6 @@
    "page": 15
   }
  ],
- "grup_d_note": "Grup D: apartat 2 applies (accessible route, 1.50 m landing, shared facilities from 8 homes). Whether the lift rule 2.4.1 a) applies to conversions is still open.",
- "decide": "Grup C or D: the shop's built area ÷ the building's total built area (above and below ground), from the Catastro CAT data (tools/annex4_grup.py)."
+ "grup_d_note": "Grups B and D: apartat 2 applies (accessible route, 1.50 m landing, shared facilities from 8 homes). Whether the lift rule 2.4.1 a) applies to conversions is still open.",
+ "decide": "Grup B, C or D: the shop's built area ÷ the building's total built area (above and below ground), from the Catastro CAT data (tools/annex4_grup.py). Grup B when the shop is the whole building (no homes in it)."
 }

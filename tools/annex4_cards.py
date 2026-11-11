@@ -1,10 +1,10 @@
 """NOMAD - Decret 141/2012 Annex 4 (conversions) on the rule cards. No rule value changes: only which card applies when.
 
-1. Every Decret 141 card gets `scope` (new buildings / conversions, Annex 4 Grup C or D), `conversion` (what changes for
+1. Every Decret 141 card gets `scope` (new buildings / conversions, Annex 4 Grup B, C or D), `conversion` (what changes for
    a conversion, in plain words) and `source.page` (its page in the official PDF).
 2. height-04C and patio-01 get `extra_quotes`: the other sentences that decide them, each with its page.
-3. rules/annex4.json: the Annex 4 note for the Rule cards page: Grups C and D word for word, and the parts of Annex 1
-   apartat 2 that apply in Grup D (2.1, 2.2.2, 2.6; whether the lift rule 2.4.1 a) applies is open).
+3. rules/annex4.json: the Annex 4 note for the Rule cards page: Grups B, C and D word for word, and the parts of
+   Annex 1 apartat 2 that apply in Grups B and D (2.1, 2.2.2, 2.6; whether the lift rule 2.4.1 a) applies is open).
 Every quote must be found word for word in the official PDF (the one tools/get_rulebook.py downloads, pinned in
 nomad/04_Website/rulebook/sources.lock.json), or the script stops. The pages are the PDF's own page numbers.
 
@@ -30,7 +30,7 @@ LOCK = ROOT / "nomad" / "04_Website" / "rulebook" / "sources.lock.json"
 DOGC = {"issue": "DOGC 6245, 2 Nov 2012", "page": 53451,
         "url": "https://portaldogc.gencat.cat/utilsEADOP/PDF/6245/1267583.pdf"}
 
-BOTH = "new buildings (Annex 1) and conversions (Annex 4 Grups C and D keep it)"
+BOTH = "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)"
 SCOPE = {   # rule_id -> (scope, what changes for a conversion)
     "CAT-141-2012-area-01": (BOTH, "unchanged"),
     "CAT-141-2012-facade-01": (BOTH, "unchanged"),
@@ -40,14 +40,14 @@ SCOPE = {   # rule_id -> (scope, what changes for a conversion)
     "CAT-141-2012-window-01": (BOTH, "unchanged"),
     "CAT-141-2012-bath-01": (BOTH, "unchanged"),
     "CAT-141-2012-height-01": ("new buildings (Annex 1)",
-                               "a conversion uses the 2,40 m card (Annex 4 Grups C and D)"),
-    "CAT-141-2012-height-04C": ("conversions (Annex 4 Grups C and D)",
+                                "a conversion uses the 2,40 m card (Annex 4 Grups B, C and D)"),
+    "CAT-141-2012-height-04C": ("conversions (Annex 4 Grups B, C and D)",
                                 "2,40 m; 2,20 m in bathrooms, kitchens and circulation; 2,30 m over at most 20 % of a room"),
     "CAT-141-2012-patio-01": ("new buildings (Annex 1); conversions: see the change",
-                              "not required in Grup C; areas −10 % in Grup D (8,1 m² / 5,4 m²)"),
+                                "not required in Grup C; areas −10 % in Grups B and D (8,1 m² / 5,4 m²)"),
 }
 NOTE_04C = ("Annex 4 sets 2,40 m in place of 2,50 m in Grups A to F (the same sentence each time), so it applies to a "
-            "shop conversion in Grup C and in Grup D. The rest of Annex 1 3.5 stays: 2,20 m in bathrooms, kitchens and "
+            "shop conversion in Grups B, C and D. The rest of Annex 1 3.5 stays: 2,20 m in bathrooms, kitchens and "
             "circulation, and 2,30 m over at most 20 % of a room.")
 EXTRA = {
     "CAT-141-2012-height-04C": [
@@ -68,6 +68,12 @@ EXTRA = {
     ],
 }
 GROUPS = [
+    ("B", "the whole building changes use",
+     "Grup B Intervencions: canvi d’ús total d’un edifici (sobre o sota rasant). "
+     "Annex aplicable i excepcions: annex 1 amb les excepcions següents: Apartat 2.5.1 s’accepta una reducció del 10% "
+     "en les superfícies. Apartat 3.5: mínim de 2,40 m en comptes de 2,50 m, la resta igual.",
+     "Annex 1 applies in full, except: ventilation patios (2.5.1) may be 10 % smaller (8,1 m² / 5,4 m²); clear height "
+     "2,40 m. So apartat 2 applies (below)."),
     ("C", "≤ 50 % of the building's built area changes use",
      "Grup C Intervencions: canvi d’ús d’un edifici (≤ 50% de la superfície construïda sobre o sota rasant). "
      "Annex aplicable i excepcions: annex 1 amb les excepcions següents: Apartat 2 íntegrament exempt, excepte 2.2.1. "
@@ -141,10 +147,11 @@ def main():
         "dogc": DOGC,
         "groups": [{"grup": g, "when": w, "quote": q, "page": page_of(q), "plain": p} for g, w, q, p in GROUPS],
         "grup_d_apartat2": [{"apartat": a, "what": w, "quote": q, "page": page_of(q)} for a, w, q in APARTAT2_D],
-        "grup_d_note": "Grup D: apartat 2 applies (accessible route, 1.50 m landing, shared facilities from 8 homes). "
+        "grup_d_note": "Grups B and D: apartat 2 applies (accessible route, 1.50 m landing, shared facilities from 8 homes). "
                        "Whether the lift rule 2.4.1 a) applies to conversions is still open.",
-        "decide": "Grup C or D: the shop's built area ÷ the building's total built area (above and below ground), from "
-                  "the Catastro CAT data (tools/annex4_grup.py).",
+        "decide": "Grup B, C or D: the shop's built area ÷ the building's total built area (above and below ground), "
+                  "from the Catastro CAT data (tools/annex4_grup.py). Grup B when the shop is the whole building (no "
+                  "homes in it).",
     }
     for g in annex4["groups"]:
         print(f"Grup {g['grup']}  p. {g['page']}")

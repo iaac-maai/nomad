@@ -24,7 +24,7 @@
   },
   "confidence": 1.0,
   "checked": "word for word in the official PDF, 9 Nov 2026",
-  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups C and D keep it)",
+  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)",
   "conversion": "unchanged"
  },
  {
@@ -102,7 +102,7 @@
   },
   "confidence": 1.0,
   "checked": "word for word in the official PDF, 9 Nov 2026",
-  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups C and D keep it)",
+  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)",
   "conversion": "unchanged"
  },
  {
@@ -131,7 +131,7 @@
   "confidence": 1.0,
   "checked": "word for word in the official PDF, 9 Nov 2026",
   "scope": "new buildings (Annex 1)",
-  "conversion": "a conversion uses the 2,40 m card (Annex 4 Grups C and D)"
+  "conversion": "a conversion uses the 2,40 m card (Annex 4 Grups B, C and D)"
  },
  {
   "rule_id": "CAT-141-2012-height-04C",
@@ -150,7 +150,7 @@
   },
   "quote": "Apartat 3.5: mínim de 2,40 m en comptes de 2,50 m, la resta igual.",
   "used_by": "not used yet",
-  "note": "Annex 4 sets 2,40 m in place of 2,50 m in Grups A to F (the same sentence each time), so it applies to a shop conversion in Grup C and in Grup D. The rest of Annex 1 3.5 stays: 2,20 m in bathrooms, kitchens and circulation, and 2,30 m over at most 20 % of a room.",
+  "note": "Annex 4 sets 2,40 m in place of 2,50 m in Grups A to F (the same sentence each time), so it applies to a shop conversion in Grups B, C and D. The rest of Annex 1 3.5 stays: 2,20 m in bathrooms, kitchens and circulation, and 2,30 m over at most 20 % of a room.",
   "checks": {
    "source_found": true,
    "quote_in_source": true,
@@ -158,7 +158,7 @@
   },
   "confidence": 1.0,
   "checked": "word for word in the official PDF, 9 Nov 2026",
-  "scope": "conversions (Annex 4 Grups C and D)",
+  "scope": "conversions (Annex 4 Grups B, C and D)",
   "conversion": "2,40 m; 2,20 m in bathrooms, kitchens and circulation; 2,30 m over at most 20 % of a room",
   "extra_quotes": [
    {
@@ -198,7 +198,7 @@
   },
   "confidence": 1.0,
   "checked": "word for word in the official PDF, 9 Nov 2026",
-  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups C and D keep it)",
+  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)",
   "conversion": "unchanged"
  },
  {
@@ -226,7 +226,7 @@
   },
   "confidence": 1.0,
   "checked": "word for word in the official PDF, 9 Nov 2026",
-  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups C and D keep it)",
+  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)",
   "conversion": "unchanged"
  },
  {
@@ -254,7 +254,7 @@
   },
   "confidence": 1.0,
   "checked": "word for word in the official PDF, 9 Nov 2026",
-  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups C and D keep it)",
+  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)",
   "conversion": "unchanged"
  },
  {
@@ -282,7 +282,7 @@
   },
   "confidence": 1.0,
   "checked": "word for word in the official PDF, 9 Nov 2026",
-  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups C and D keep it)",
+  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)",
   "conversion": "unchanged"
  },
  {
@@ -310,7 +310,7 @@
   },
   "confidence": 1.0,
   "checked": "word for word in the official PDF, 9 Nov 2026 (the table's cells in reading order)",
-  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups C and D keep it)",
+  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)",
   "conversion": "unchanged"
  },
  {
@@ -339,7 +339,7 @@
   "confidence": 1.0,
   "checked": "word for word in the official PDF, 9 Nov 2026",
   "scope": "new buildings (Annex 1); conversions: see the change",
-  "conversion": "not required in Grup C; areas −10 % in Grup D (8,1 m² / 5,4 m²)",
+  "conversion": "not required in Grup C; areas −10 % in Grups B and D (8,1 m² / 5,4 m²)",
   "extra_quotes": [
    {
     "article": "Annex 4 · Apartat 2 · Grup C",
