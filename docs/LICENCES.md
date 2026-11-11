@@ -100,3 +100,10 @@ appears anywhere (`compile_rulebook.py`).
 - **Gemini and Claude**: review their terms for commercial use of outputs and for the API plan used.
 - **Catastro, BOE, Generalitat, Open Data BCN**: their licences already allow commercial use (of transformed data, for
   the Catastro), so nothing changes beyond keeping the attribution.
+
+## Data in `nomad/06_Results/shops_doors_facts/` (not on the site yet)
+
+| Files | What they hold | Source and licence | Attribution if shown | Status |
+| --- | --- | --- | --- | --- |
+| `doors.json` | building entrances and premises doors | Catastro INSPIRE Addresses (INSPIRE licence) + census 2024 (CC BY 4.0) | "Dirección General del Catastro"; "Ajuntament de Barcelona" | OK (transformed: points moved to local metres and rounded to 0,5 m) |
+| `facts/f_*.json` | per building: census premises (status, offer, activity, flags) and floors above / below ground | census 2024 (CC BY 4.0) + Catastro INSPIRE building parts | "Ajuntament de Barcelona"; "Dirección General del Catastro" | OK (no unit data) |
