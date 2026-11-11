@@ -36,7 +36,7 @@ attribution is shown · not allowed = must not be published (nothing is).
 | `data/city/index.json`, `data/city/layers.json` | tile index, empty-shop façade bands, tree count; ground layers (roads, paths, parks, rail, water, facilities, zoning tint) | as above; layers from the MUC | Sources rows | OK |
 | `data/districts.json` | Barcelona's 10 districts, simplified to 1 m | Open Data BCN, Unitats administratives (CC BY 4.0) | Sources row | OK |
 | `data/daylight_validated.json` | 5 shops simulated in Radiance; EN 17037 thresholds | own simulations (Ladybug Tools, AGPL-3.0, as tools); thresholds derived from the Barcelona TMYx weather file | Sources rows (method, weather file with the citation) | OK for this academic project: we publish only derived thresholds, not the file |
-| `data/annex4_grup.json` | pending: Grup C / D and a percentage per shop | will be derived from the Catastro CAT file (download licence: transformed data, citing the DGC and the access date) | each answer names the source and date | OK (only the group and the %, never the m²) |
+| `data/annex4_grup.json` | Grup B / C / D and a percentage per shop (6,072 shops: B 60, C 5,094, D 151, unknown 767) | derived from the Catastro CAT file of 14 Aug 2026, accessed 11 Nov 2026 (download licence: transformed data, citing the DGC and the access date); the CAT file itself is not in the repo | each answer names the source and date | OK (only the group and the %, never the m²) |
 | `img/city_still.jpg` | picture of the 3D city | own rendering of the tiles above | — | OK |
 | `rulebook/index.json`, `rulebook/anchors.json` | the book's index and bookmark positions | own | — | OK |
 | `rulebook/parts/00.pdf` | cover, how to read, index | own | — | OK |
@@ -58,7 +58,7 @@ appears anywhere (`compile_rulebook.py`).
 | Empty ground-floor premises 2024 (Open Data BCN) | CC BY 4.0 | OK |
 | Buildings: footprints and floors (Catastro INSPIRE, via hypercadaster_ES) | INSPIRE licence (transformed data only); hypercadaster_ES EUPL-1.2 | OK (published only transformed: simplified outlines, rounded areas) |
 | The building in 3D, floor by floor (link to the Catastro Visor 3D) | Catastro legal notice: download and private use only; NOMAD links, copies nothing | OK |
-| Conversion group, Annex 4 (Catastro CAT data) | Catastro download licence | OK (pending) |
+| Conversion group, Annex 4 (Catastro CAT data) | Catastro download licence | OK (derived, accessed 11 Nov 2026; the CAT file is not published) |
 | Zoning (MUC, January 2023) | Llicència oberta d'ús d'informació – Catalunya | OK |
 | Housing rules (laws, regulations, circulars, guide) | art. 13; BOE / Generalitat conditions; the Ajuntament's guide linked, not reproduced | OK |
 | Test shops and flats (Swiss Dwellings v3.0.0) | CC BY 4.0 | OK (experiments only) |
