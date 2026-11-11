@@ -24,6 +24,7 @@ IAAC asks us to declare every AI tool we use. Add one row each time.
 | 2026-11-10 | Bars | Claude | Page layout (intro first, For the city and Saved closed by default, official districts), Bhavini's 3D city features restored (click to Find your shop, highlight, sun 12:30; her code, credited), trees layer filled from Open Data BCN (tools/add_trees.py) | Tested in Chrome on the real GPU; PRs #6–#8 |
 | 2026-11-11 | Bhavini | Claude | Data on branch bhavini-data-2026-11-11: building entrances (Catastro INSPIRE Addresses) and premises doors (census 2024), census facts and floors per building, and shop_data.py; the cut shop shapes and unit lists are held back until rebuilt from the CAT file (their source, Consulta_DNPRC, is private use only) | Licence check by Bars and Bhavini against the Sede legal notice and the CAT download licence |
 | 2026-11-11 | Bhavini | Claude | Same branch: unit list rebuilt from the Catastro CAT file (shop_data.py step 0, records 14/15), cut shop shapes (rules A and B) and unit counts by use added back, transformed for the download licence | Checked against the old list: unit counts match in 5,325 of 5,328 buildings, shop areas within about 1 m² |
+| 2026-11-12 | Bhavini | Claude | shop_data.py moved to tools/ (as Bars asked), paths set for the repo root and the CAT file in nomad/02_Code/data/barcelona/catastro/cat/ | Script parses; same code as Bhavini's local version |
 
 ## Sources, tools and licences
 

@@ -1,9 +1,9 @@
 """NOMAD - shop data: one file for the shop shapes, the doors and the facts that the app shows (E44, 11 Nov 2026).
 
-In the team repo the paths below are relative to nomad/02_Code (ROOT), like the other scripts here: the raw data lives in
-nomad/02_Code/data on the computer that builds it (not in git; the CAT file in data/barcelona/catastro/CAT_files/), and
-the outputs that say site/data go to ROOT/site/data; the files in nomad/06_Results/shops_doors_facts are the step 4 team
-copy of them.
+Team repo: run from the repo root (python tools/shop_data.py). Every path below is relative to nomad/02_Code (ROOT): the
+raw data lives in nomad/02_Code/data on the computer that builds it (not in git; the CAT file in
+data/barcelona/catastro/cat/, as for tools/annex4_grup.py); the outputs that say site/data go to nomad/02_Code/site/data;
+nomad/06_Results/shops_doors_facts holds the step 4 team copy (python tools/shop_data.py team nomad/06_Results/shops_doors_facts).
 
 Read it top to bottom. It runs in five steps:
 
@@ -18,15 +18,16 @@ Read it top to bottom. It runs in five steps:
   STEP 4  TEAM COPY (only when asked) the same data changed for the Catastro licence, for the team repo
                     -> the folder you give
 
-Run everything:     .venv/Scripts/python src/building/shop_data.py
-Run one step:       .venv/Scripts/python src/building/shop_data.py units | doors | shapes | facts
-Team copy:          .venv/Scripts/python src/building/shop_data.py team <folder>
+Run everything:     python tools/shop_data.py
+Run one step:       python tools/shop_data.py units | doors | shapes | facts
+Team copy:          python tools/shop_data.py team <folder>
 
-What it reads (all on this computer, not in git):
+What it reads (all on the computer that builds the data, not in git; shells.json and premises.json come from
+Bhavini's pipeline: ask her for them):
   results/real_shops/shells.json                 our shop shapes = each building's whole ground floor (Catastro footprint)
   site/data/premises.json                        the empty premises NOMAD answers for
   data/barcelona/census/2024_CensComercial_BCN.csv           city census of ground-floor premises 2024 (CC BY 4.0)
-  data/barcelona/catastro/CAT_files/08900U_14082026.CAT.gz   Catastro CAT file, Barcelona urban (download licence; never committed)
+  data/barcelona/catastro/cat/08900U_14082026.CAT.gz         Catastro CAT file, Barcelona urban (download licence; never committed)
   data/barcelona/catastro/buildings.json.gz      land registry building parts (floors above / below ground)
   data/barcelona/catastro/addresses/A.ES.SDGC.AD.08900.gml   land registry addresses (INSPIRE), from
       https://www.catastro.hacienda.gob.es/INSPIRE/Addresses/08/08900-BARCELONA/A.ES.SDGC.AD.08900.zip
@@ -41,7 +42,7 @@ from shapely import affinity
 from shapely.geometry import LineString, Point, Polygon, box
 from shapely.ops import unary_union
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1] / "nomad" / "02_Code"     # run from the repo root: python tools/shop_data.py
 CENSUS = ROOT / "data/barcelona/census/2024_CensComercial_BCN.csv"
 UNITS = ROOT / "data/barcelona/catastro/units_cat.jsonl"        # made by step 0 from the CAT file
 BUILDINGS = ROOT / "data/barcelona/catastro/buildings.json.gz"
@@ -75,7 +76,7 @@ def read_units():
 # ======================================================================================================================
 # STEP 0  UNITS from the Catastro CAT file (alphanumeric bulk download, Barcelona urban, 08900U_14082026.CAT.gz, accessed
 #   2026-11-11; download licence: transformed data may be published (clause 6), never the original file online (5, 8);
-#   cite the Dirección General del Catastro and the access date (12)). The file stays in CAT_files and is never committed.
+#   cite the Dirección General del Catastro and the access date (12)). The file stays in data/barcelona/catastro/cat/, never committed.
 #   Fixed width, one record a line (format "Fichero informático de remisión de catastro"):
 #     record 15 (each unit / bien inmueble): parcel (31,14) · unit number (45,4) · floor (252,3) · door (255,3) ·
 #               use letter (428,1) · built area with its share of common parts (442,10)
@@ -83,7 +84,7 @@ def read_units():
 #   The unit's year = the oldest year among its own constructions.
 # ======================================================================================================================
 
-CAT = ROOT / "data/barcelona/catastro/CAT_files/08900U_14082026.CAT.gz"
+CAT = ROOT / "data/barcelona/catastro/cat/08900U_14082026.CAT.gz"   # as tools/annex4_grup.py; never committed
 CAT_ACCESSED = "2026-11-11"
 USE_LETTER = {"V": "Residencial", "C": "Comercial", "O": "Oficinas", "A": "Almacen-Estacionamiento", "I": "Industrial",
               "K": "Deportivo", "T": "Espectaculos", "G": "Ocio y Hosteleria", "Y": "Sanidad y Beneficencia",

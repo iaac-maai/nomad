@@ -1,6 +1,6 @@
 # Shop shapes, doors and facts per building (Bhavini, 11 Nov 2026)
 
-Made by `nomad/02_Code/src/building/shop_data.py` (step 0 units from the CAT file, step 1 doors, step 2 shapes, step 3 facts, step 4 this licence-safe copy). Every
+Made by `tools/shop_data.py` (step 0 units from the CAT file, step 1 doors, step 2 shapes, step 3 facts, step 4 this licence-safe copy). Every
 file is keyed by the 14-character cadastral reference (`ref14`) used in `04_Website/data/premises.json`.
 Coordinates are local metres from the building's origin (`o` in `doors.json`, ETRS89 / UTM 31N).
 
