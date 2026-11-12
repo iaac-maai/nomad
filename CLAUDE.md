@@ -72,15 +72,14 @@ art. 225), MPGM 2004, Ajuntament guide on change of use (2025).
 | 9–10 Nov | **Post-midterm cleanup (PR #1, see CLEANUP.md).** Removed: the XGBoost daylight model, home counts from footprints, Catastro Visor 3D units (licence), idealista prices, the golden-set score. Parked: layout engine, weight sliders, plan upload, Ask NOMAD (PARKED.md). Site data (235 files, 27 MB) moved into git. The 16 rule-card quotes checked against the official PDFs (7 corrected, no value changed; `docs/LAW_TEXT_CHECK.md`). |
 | 10 Nov | PR #2 folder renamed to `nomad/` · PR #3 law versions pinned (`sources.lock.json`, `--check`/`--accept`) and the standing publish rule · PR #4 3D city on top · PR #5 Annex 4: which card applies to new buildings vs conversions, Grup C/D tool and tests, `docs/ANNEX4.md`, `docs/OPEN_QUESTIONS.md` · PR #6 page layout · PR #7 Bhavini's 3D features restored · PR #8 trees layer. |
 | 11 Nov | PR #9 Catastro 3D viewer link · PR #10–#11 licence audit (`docs/LICENCES.md`, signatures blacked out in the law book; scope academic, non-commercial) · **PR #12 Annex 4 v2** run on the real CAT file: **B 60, C 5,094, D 151, unknown 767** · PR #13 Bhavini's shop data (building entrances, premises doors, census facts, cut shop shapes rebuilt from the CAT file, `tools/shop_data.py`) · PR #14 docs. |
-| 12 Nov | Bhavini opened **PR #16** with all their files, and pushed branch `docs-pipeline-2026-11-12` (no PR yet). This file was written. |
+| 12 Nov | Bhavini's PR #15 (`docs/PIPELINE.md`) was closed without merging. **PR #16 merged** (`4e43103`): all Bhavini's files in one folder `Bhavini's files/`, including the facade code and a newer `docs/pipeline.md`. PR #17: this file. |
 
 ### Branches and PRs right now
 
 | Branch | State |
 | --- | --- |
-| `main` | Last merge: PR #14 (`09fd924`). |
-| `bhavini-all-files-2026-11-12` → **PR #16, open, not reviewed** | One commit, 100 files, all inside a new folder **`Bhavini's files/`** (`code/src/…`, `docs/`, `grasshopper/`, `lab_book/`, `CLAUDE.md`, `START_HERE.md`). Note: the PR description talks about `nomad/02_Code/…` and `nomad/08_Docs/…`, but the branch actually puts everything under `Bhavini's files/`. Raise this in the review. **The facade code is only here.** |
-| `docs-pipeline-2026-11-12` | Bhavini, 12 Nov: adds `docs/PIPELINE.md` (381 lines: the whole pipeline with sources, licences, scripts) + one AI_LOG row. No PR opened. |
+| `main` | Last merge: PR #16 (`4e43103`). Has the folder **`Bhavini's files/`** (`code/src/…`, `docs/`, `grasshopper/`, `lab_book/`, their own `CLAUDE.md`, `START_HERE.md`). PR #16's description says `nomad/02_Code/…` and `nomad/08_Docs/…`, but the files are under `Bhavini's files/`. That folder is Bhavini's record: leave it as it is. |
+| `docs-pipeline-2026-11-12` | PR #15, closed without merging. An older version of `Bhavini's files/docs/pipeline.md`; nothing to do. |
 | `parked/before-cleanup`, `parked/bhavini-v43`, `archive/experiments` | Kept on purpose; do not merge or delete (README "Branches"). |
 | `site-daylight-update` and the merged feature branches | Already in `main`; nothing left on them. |
 
@@ -113,9 +112,9 @@ art. 225), MPGM 2004, Ajuntament guide on change of use (2025).
 ## 5. Current task: the facade
 
 Alvaro is taking over the **facade work** next. Here is what exists, what is missing on this PC, and the decisions
-still open. **Ask Alvaro before choosing an approach; do not start the port without agreement.**
+made and still open. **Ask Alvaro before any choice not listed as decided in 5.3.**
 
-### 5.1 What exists (Bhavini's work, only on PR #16's branch)
+### 5.1 What exists (Bhavini's work, on `main` under `Bhavini's files/`)
 
 Method: `Bhavini's files/docs/facade_workflow.md` (read it in full first). Read one Catastro facade photo per building
 and turn it into a measured elevation: windows, doors, shopfronts, balconies, floor lines, in metres.
@@ -174,13 +173,19 @@ number until the article is found and quoted. Slab 0,30, lintel 0,30, balcony sl
   Bhavini's own note goes further ("the results made from it stay on this computer"), so agree with the team, and
   record it in `docs/LICENCES.md`, before any facade result goes on the site.
 
-### 5.3 Decisions to make with Alvaro (and the team) first
+### 5.3 Decisions
 
-1. How the facade code comes to `main`: review and merge PR #16 as it is (the `Bhavini's files/` folder), or move
-   only the facade files into the repo layout (e.g. `nomad/02_Code/src/facade/` + a tool in `tools/`) on a new branch.
-2. Where local inputs and outputs live (suggestion: `nomad/02_Code/data/…` and a git-ignored results folder) and
-   whether `facade.py` gets a configurable root instead of `parents[2]`.
-3. The first test: reproduce Av. Diagonal 413 (ground 5,75 / upper 3,80 m) on this PC before changing any rule.
+**Decided with Alvaro, 12 Nov:**
+
+1. The facade files move into the repo layout (`nomad/02_Code/src/facade/`, a tool in `tools/`) on a new branch.
+   `Bhavini's files/` stays untouched as their record.
+2. `facade.py` gets a configurable data root instead of `parents[2]`; local inputs and outputs live under
+   `nomad/02_Code/data/` (git-ignored). Exact folder names: propose them in that PR.
+3. First test: reproduce Av. Diagonal 413 (ground 5,75 / upper 3,80 m) on this PC before changing any rule. This
+   needs the GPU venv (CUDA 12.8+ torch), its photo, LiDAR tile and Catastro data, all local.
+
+**Still open (ask the team):**
+
 4. Whether the 3D city should take approved facade heights instead of 5 m + 3 m, and how the site labels which
    buildings are measured vs estimated.
 5. What the site may show from a facade (licence, see 5.2) and the approval step (who approves).
@@ -197,7 +202,8 @@ number until the article is found and quoted. Slab 0,30, lintel 0,30, balcony sl
   after the OME; whether CAT-derived results count as "transformed".
 - **Parked features** (`PARKED.md`): layout engine, weights, plan upload, Ask NOMAD, each with conditions before it
   can come back. Shared housing: 24 m² private + 6 m² common, 36 m² total (Decret llei 50/2020); never 40 m².
-- **Review** `docs-pipeline-2026-11-12` (Bhavini's `docs/PIPELINE.md`) and open a PR for it if the team wants it.
+- **Pipeline doc:** `Bhavini's files/docs/pipeline.md` (whole pipeline: sources, licences, scripts). Not yet checked
+  against README.md or `docs/LICENCES.md`.
 
 ---
 
@@ -213,7 +219,7 @@ python tools/annex4_grup.py --cat <file>.CAT.gz --accessed YYYY-MM-DD   # Annex 
 python tools/test_annex4_grup.py                          # Annex 4 tests (10/10 on 11 Nov)
 git fetch origin; git switch -c <topic>-YYYY-MM-DD        # start a task
 gh pr create --fill                                       # then fill the template
-git show "origin/bhavini-all-files-2026-11-12:Bhavini's files/docs/facade_workflow.md"   # read PR #16 files without checking out
+git show "origin/main:Bhavini's files/docs/facade_workflow.md"   # read a file on main without switching branch
 ```
 
 ## 8. Read these when the task touches them
@@ -231,4 +237,4 @@ git show "origin/bhavini-all-files-2026-11-12:Bhavini's files/docs/facade_workfl
 | Open questions | docs/OPEN_QUESTIONS.md |
 | AI use | docs/AI_LOG.md |
 | Experiments not on the site | experiments/README.md (branch `archive/experiments`) |
-| Facade method | PR #16: `Bhavini's files/docs/facade_workflow.md`, `docs/handoff_bars_facade.md`, `code/src/facade/facade.py` |
+| Facade method | In `Bhavini's files/`: `docs/facade_workflow.md`, `docs/handoff_bars_facade.md`, `code/src/facade/facade.py` |
