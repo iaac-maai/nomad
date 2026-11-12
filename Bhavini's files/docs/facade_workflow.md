@@ -8,19 +8,19 @@ Order matters: **always correct the image first**, then measure, then detect, th
 | What | Source | Licence / note |
 |---|---|---|
 | Facade photo, 1 per property | Catastro `OVCFotoFachada.svc/RecuperarFotoFachadaGet?ReferenciaCatastral=<ref14>` | Stays on this computer. Only what we make from it (counts, sizes, drawings) is shown, with "Source: Dirección General del Catastro, accessed <date>". Never on the site, GitHub or to the team. |
-| Street front length, floors above ground | Catastro INSPIRE buildings (`data/barcelona/catastro/buildings.json.gz`) | |
-| Street level and facade height | ICGC LiDAR v3.1 grids (`data/lidar/grid`) | CC BY 4.0 |
+| Street front length, floors above ground | Catastro INSPIRE buildings (`0_shared_input/catastro/buildings.json.gz`) | |
+| Street level and facade height | ICGC LiDAR v3.1 grids (`0_shared_input/lidar/grid`) | CC BY 4.0 |
 | Detector | Grounding DINO base (Apache-2.0), in `tools/train-venv` | |
 | Backup photo | Mapillary (CC BY-SA, account needed) | Only when the Catastro photo is bad. |
 
 Not used: Google Street View (terms), OpenStreetMap (181 buildings in the city have any facade tag), airborne LiDAR for openings (sees roofs, not walls).
 
-## Steps (scripts in `src/facade/`)
+## Steps (scripts in `3_facade/code/`)
 
 1. **Straighten the photo** (`facade.py (step 1) <ref>`)
    - Lens bend: choose the correction that makes the vertical lines meet in one point.
    - Vertical and horizontal vanishing points give the camera turn and focal length; turn the photo to face the facade.
-   - Out: `results/facade/<ref>/straight.jpg`.
+   - Out: `3_facade/output/<ref>/straight.jpg`.
 2. **Heights from LiDAR, measured at the facade** (`heights.py`)
    - Street level = LiDAR ground on the pavement strip 1-4 m in front of the facade line (not a wide window around the plot).
    - Facade height = median LiDAR top in the strip 0,5-2,5 m behind the facade line = top of the front wall (cornice). Rooftop huts, tanks, pediments and lower back parts are not the facade height.
@@ -46,11 +46,11 @@ Not used: Google Street View (terms), OpenStreetMap (181 buildings in the city h
    - **Balconies:** sized from the doors they serve plus the side margin of the middle balcony (least perspective), because parts that stand out of the wall stay in perspective after straightening.
    - Ground floor, first floor (bay windows) and top floor (attic) keep their own pattern.
    - Everything rebuilt from rules or mirrors is **marked inferred** (light grey-blue / hatched).
-7. **Draw in the one Rhino file** (`src/rhino/record_facade.py`, run with `run_in_rhino.ps1` while Rhino is closed)
-   - `rhino/NOMAD.3dm`, layer `06 NOMAD experiments::facade <address>`: 1 photo straightened (private), 2 facade drawing with floor heights and mirror axis. Backup first; redraw in place. 3D only when the user asks (`ONLY_2D`).
-   - Pictures: `src/rhino/capture_facade.py`.
+7. **Draw in the one Rhino file** (`rhino_grasshopper/code/record_facade.py`, run with `run_in_rhino.ps1` while Rhino is closed)
+   - `rhino_grasshopper/NOMAD.3dm`, layer `06 NOMAD experiments::facade <address>`: 1 photo straightened (private), 2 facade drawing with floor heights and mirror axis. Backup first; redraw in place. 3D only when the user asks (`ONLY_2D`).
+   - Pictures: `rhino_grasshopper/code/capture_facade.py`.
 
-## Outputs per building (`results/facade/<ref>/`)
+## Outputs per building (`3_facade/output/<ref>/`)
 
 `facade.json` (detections in metres, floor lines measured and fitted, LiDAR front heights, checks), `openings.json` (the drawing: floor, kind, x0, x1, sill, head, inferred), `elevation.png`. Photos and `*_PRIVATE.jpg` stay local.
 
@@ -70,8 +70,8 @@ Corner (chamfered) buildings have two facades in one photo: not solved. About 2 
 
 ## Approval checkpoint (user, 12 Nov 2026)
 A facade drawing reaches the app, its 3D and the plans ONLY after the user has looked at its elevation and approved it:
-`.venv/Scripts/python src/facade/facade.py <ref> approve`. Approval freezes a copy (results/facade/approved/<ref>/);
-the app reads only those copies (site/data/facades.json), so later code changes never alter an approved facade until
+`.venv/Scripts/python 3_facade/code/facade.py <ref> approve`. Approval freezes a copy (3_facade/output/approved/<ref>/);
+the app reads only those copies (app/data/facades.json), so later code changes never alter an approved facade until
 it is approved again. Approved: Av. Diagonal 413 (10 Nov version). Waiting: Pl. Sortidor 4.
 In the app an approved facade gives: the facade drawing in The building, the floors at their measured heights, and the
 street face's windows, doors, shopfronts and balconies on the building's 3D. Next: the shop's real openings in the plans.

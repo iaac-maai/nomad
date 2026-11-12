@@ -1,20 +1,9 @@
-# Bhavini's files
+# NOMAD
 
-Everything from Bhavini's NOMAD folder (12 Nov 2026). Nothing outside this folder was changed.
+Checks whether an empty Barcelona ground-floor shop can legally become housing, reads its floor plan, gives a YES / PARTLY / NO verdict, proposes layouts and builds the 3D model in Rhino.
 
-| Folder | What |
-|---|---|
-| `code/src/` | All Python scripts, by step (zoning, building, facade, generate, library, ai, check, model3d, rhino, collect, rules, eval, book). Start with `code/src/README.md`. |
-| `code/requirements.txt` | Python packages. |
-| `app_site/` | The app page (`index.html`) and its Python engine for the browser (`py/src/*.txt`, `py/worker.js`). Pyodide itself and the data are not included. |
-| `grasshopper/` | `NOMAD.gh` and its README. |
-| `rules_and_evaluation/` | Rule cards (`rules/rules.json`, `review.json`) and the golden set (`eval/golden_set.csv`). |
-| `docs/` | Pipeline (`pipeline.md`), facade method, floor-plan checklist, licences, sources, workflow, reviews, presentation, the app's README (`README_app.md`). |
-| `lab_book/` | Lab book: `experiments.json`, figures, and the built book (`site/index.html`). |
-| `START_HERE.md`, `CLAUDE.md` | How the project is run and the decisions made. |
+- Start here: [0_START_HERE.md](0_START_HERE.md) (the map of every folder)
+- Project rules and working notes for Claude: [CLAUDE.md](CLAUDE.md)
+- Data sources: [docs/sources.md](docs/sources.md), downloads: [docs/download_checklist.md](docs/download_checklist.md)
 
-Not included, because of their licences or size:
-
-- Catastro Sede content: facade photos and the drawings made from them (E47, E48 figures), Visor 3D plans, Consulta_DNPRC units (private use only).
-- The original CAT file (licence clauses 5 and 8), all raw data (`data/`) and results (`results/`).
-- `rhino/NOMAD.3dm`, Python environments, and the Pyodide runtime.
+This repository is a code/rules/docs snapshot. Big data, Python environments, third-party clones, model weights and the Rhino model are kept on the local PC only. See [0_shared_input/EXCLUDED.md](0_shared_input/EXCLUDED.md).

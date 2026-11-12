@@ -1,7 +1,7 @@
 # What makes a flat habitable: rules learned from 13,444 real flats (2026-11-01)
 
 Source: Swiss Dwellings v3.0.0 (CC BY 4.0), the 13,444 flats (0-3 bedrooms) that pass every NOMAD rule.
-Code: src/learn/habitability.py -> results/habitability/units.csv, rooms.csv; src/learn/habitability_summary.py -> summary.json.
+Code: 7_floor_plans/code/habitability.py -> 7_floor_plans/output/habitability/units.csv, rooms.csv; 7_floor_plans/code/habitability_summary.py -> summary.json.
 Numbers: median (10th-90th percentile). These are design targets from real plans, not law.
 
 ## 1. Use the whole floor
