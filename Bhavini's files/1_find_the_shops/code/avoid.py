@@ -66,7 +66,7 @@ def main():
         elif h is not None and (h == 0 or (isinstance(h, float) and np.isnan(h))):
             ans.append("not liveable"); why.append("no home that passes the rules fits" + (" in its Catastro unit (%s, %.0f m²)" % (cu.unit_use, cu.unit_m2) if cu is not None and ref not in homes else ""))
         elif d is not None and d < 1.0:
-            ans.append("not liveable"); why.append("dark: predicted daylight factor %.1f %% (Bars's model)" % d)
+            ans.append("not liveable"); why.append("dark: predicted daylight factor %.1f %%" % d)
         elif r["retail_100m"] <= cut:
             ans.append("keep it a shop"); why.append("only %d shops within 100 m (lowest 10 %% of the city)" % r["retail_100m"])
         elif h is not None:

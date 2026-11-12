@@ -10,7 +10,7 @@ Each component does one step and passes its result (a Python object) to the next
   4 Flats asked    n_studio, n_1bed, n_2bed, n_3bed                                -> mix
   5 Flat sizes     m2_studio, m2_1bed, m2_2bed, m2_3bed, compact                   -> programs, size
   6 Check+layouts  shop, mix, programs, size                                       -> case, verdict, works, report
-  7 Daylight       shop                                                            -> daylight (Bars's model, real shops)
+  7 Daylight       shop                                                            -> daylight (the daylight model, real shops)
   8 3D preview     shop, case, floor_height                                        -> rooms, colours, flats, shell, facade, plan_image, plan_material
   9 Make           shop, mix, programs, case, make_sheet, make_demo                -> report
  10 This file      run_inbox, show_experiments                                     -> report
@@ -114,7 +114,7 @@ daylight = "Daylight: give a Barcelona address in 3 Zoning to see Bars's predict
 if ref and os.path.exists(f):
     d = json.load(io.open(f, encoding="utf-8")).get(ref)
     if d:
-        daylight = "Daylight (Bars's model): mean daylight factor %.1f %%; DF >= 2 %% reaches %.1f m in from the window%s." % (
+        daylight = "Daylight (the daylight model): mean daylight factor %.1f %%; DF >= 2 %% reaches %.1f m in from the window%s." % (
             d["df"], d["lit_depth"], "" if d["in_range"] else " (outside the range the model was trained on: indicative)")
     else:
         daylight = "Daylight: this shop is not among the 1,650 real shops modelled."
