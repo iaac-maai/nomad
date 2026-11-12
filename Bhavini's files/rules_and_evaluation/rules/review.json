@@ -1,0 +1,10 @@
+[
+ {
+  "rule_id": "CTE-SUA-corridor-01",
+  "why": [
+   "quote_in_source",
+   "value_in_quote"
+  ],
+  "note": "The table row was garbled when the PDF was read; the same table admits 1,10 m in shared areas of housing."
+ }
+]
