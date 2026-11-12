@@ -1,0 +1,7 @@
+requests
+pandas
+pymupdf
+pdfplumber
+pydantic
+shapely
+matplotlib>=3.9      # charts for the lab book
