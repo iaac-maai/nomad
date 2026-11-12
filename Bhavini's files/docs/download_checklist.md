@@ -8,7 +8,7 @@ Nomad needs come from the modifications (225, 236, 285 bis–quinquies, 318) ins
 Save each file with the **exact file name** given, in the folder given. Then tell Claude "files are in".
 Must = needed for the change-of-use checks. Nice = useful, can wait.
 
-## Catalonia → `C:\Bhavini\AI\ADs\nomad\data\catalonia\raw\`
+## Catalonia → `C:\Bhavini\AI\ADs\nomad\4_laws_and_rules\input\catalonia\raw\`
 
 | # | Need | What | Page to open | What to click | Save as |
 |---|---|---|---|---|---|
@@ -21,7 +21,7 @@ Must = needed for the change-of-use checks. Nice = useful, can wait.
 
 Skip Circulars 7 and 9: they are about Annex 2 (existing dwellings). A change of use must meet Annex 1 (new dwelling).
 
-## PGM + metropolitan ordinances → `C:\Bhavini\AI\ADs\nomad\data\pgm\raw\`
+## PGM + metropolitan ordinances → `C:\Bhavini\AI\ADs\nomad\4_laws_and_rules\input\pgm\raw\`
 
 | # | Need | What | Page to open | What to click | Save as |
 |---|---|---|---|---|---|

@@ -1,5 +1,5 @@
 {
- "about": "NOMAD lab book: one entry per experiment, newest last. Numbers in {curly braces} are filled from our result files by src/book/build_book.py, so they always match the latest run. Add an entry after every experiment.",
+ "about": "NOMAD lab book: one entry per experiment, newest last. Numbers in {curly braces} are filled from our result files by lab_book/code/build_book.py, so they always match the latest run. Add an entry after every experiment.",
  "experiments": [
   {
    "id": "E01",
@@ -18,7 +18,7 @@
     "An early clean-up deleted short words like \"no\", which flipped the meaning of a rule. Clean-up now never deletes letters or digits.",
     "Some sites (gencat, amb.cat) block scripts; those PDFs were downloaded by hand in the browser."
    ],
-   "decision": "One file, data/rulebook.jsonl, is the only source of legal text for every later stage.",
+   "decision": "One file, 4_laws_and_rules/output/rulebook.jsonl, is the only source of legal text for every later stage.",
    "figures": [
     [
      "e01_rulebook_pieces.png",
@@ -68,7 +68,7 @@
    "learned": [
     "Size is the main reason: most dropped shops are under 40 m² (Barcelona minimum)."
    ],
-   "decision": "The generator and every later test use these {clean_shops} shops (data/clean/nomad_shells.json).",
+   "decision": "The generator and every later test use these {clean_shops} shops (7_floor_plans/output/clean/nomad_shells.json).",
    "figures": [
     [
      "e03_dataset_cleaning.png",
@@ -198,7 +198,7 @@
    "title": "Flags on the plan, drawn in Rhino",
    "question": "Can NOMAD show on the plan itself which parts are usable for housing, which rules pass or fail, and give one clear answer: YES, PARTLY or NO?",
    "did": [
-    "Wrote the Stage 5 check (src/check/flags.py): one rule card per rule with OK/FAIL, the value, and the article it comes from; a new check that every flat stays inside the shop; and the verdict.",
+    "Wrote the Stage 5 check (6_check_the_shop/code/flags.py): one rule card per rule with OK/FAIL, the value, and the article it comes from; a new check that every flat stays inside the shop; and the verdict.",
     "Drew it as a sheet in Rhino from NOMAD.gh: the plan tinted by daylight from the façade, flats and rooms labelled, rule cards (leaders only where a rule fails), 'How it was checked' and 'Result'.",
     "Added 'make sheet' and 'run inbox' to NOMAD.gh: drop plans in nomad/inbox and each one gets a sheet (PNG + numbers).",
     "Ran the check on all {clean_shops} shops for three unit mixes."
@@ -208,7 +208,7 @@
     "Almost no flat that fits breaks a housing rule; the problem is space along the façade. That is Stage 6's job (patios, back flats, corridor).",
     "The new 'inside the shop' check caught a generator flat that crossed the outline on a read plan.",
     "Taken from GitHub for this step: nothing. The rule checks already existed in our code; IfcOpenShell/IfcTester checks BIM models and is kept for Stage 7.",
-    "Rhino stopped obeying /runscript at start-up after a plug-in update; a helper now types the command into a fresh Rhino (src/rhino/run_in_rhino.ps1)."
+    "Rhino stopped obeying /runscript at start-up after a plug-in update; a helper now types the command into a fresh Rhino (rhino_grasshopper/code/run_in_rhino.ps1)."
    ],
    "decision": "Stage 5 v1 lives in NOMAD.gh. The daylight part stays as it is (the daylight analysis is a separate study). Next: Stage 6, better plans.",
    "figures": [
@@ -225,10 +225,10 @@
    "title": "Before and after: the smallest change that houses more flats",
    "question": "When the flats asked for do not fit, which is the smallest building change that makes more of them fit and pass every rule?",
    "did": [
-    "Wrote Stage 6 (src/generate/better.py): try the shop as it is; then cut a light patio into the dark interior, add a 1,20 m shared corridor from the street, and line the patio with back flats. One patio at a time, kept only if it houses more passing flats; ties go to the fewest and smallest patios.",
+    "Wrote Stage 6 (7_floor_plans/code/better.py): try the shop as it is; then cut a light patio into the dark interior, add a 1,20 m shared corridor from the street, and line the patio with back flats. One patio at a time, kept only if it houses more passing flats; ties go to the fewest and smallest patios.",
     "Rules from our rulebook: patio = Decret 141/2012 Annex 1 2.5.1 (fits a 3 m circle, at least 9 m²); corridor = CTE DB-SUA Anejo A (accessible route at least 1,20 m). A cross patio runs across narrow deep shops, with an open gallery behind it so every back flat has a door.",
     "Redrew the sheets the way you asked: white, no grid, no boxes, clear Arial text, before and after side by side, the verdict large and translucent over each plan.",
-    "Every sheet is saved as an experiment that NOMAD.gh draws into rhino/NOMAD.3dm (layer 06 NOMAD experiments), so they all stay in the one Rhino file. Tested on a copy of the file: 7 experiments, 726 objects."
+    "Every sheet is saved as an experiment that NOMAD.gh draws into rhino_grasshopper/NOMAD.3dm (layer 06 NOMAD experiments), so they all stay in the one Rhino file. Tested on a copy of the file: 7 experiments, 726 objects."
    ],
    "result": "Asking 2 × 1-bed + 1 × 2-bed of all {clean_shops} shops: shops where everything works {s6_works_v1} → {s6_works_after}; flats that pass {s6_flats_v1} → {s6_flats_after}. Asking 5 × 1-bed + 2 × 2-bed: flats that pass {s6_flats_v1_big} → {s6_flats_after_big}.",
    "learned": [
@@ -272,7 +272,7 @@
     "Stage 5: flags on the shop as it is, for the flats asked for (2 × 1-bed + 1 × 2-bed): every rule with its article, and the verdict.",
     "Stage 6: three 2D iterations - 1 as asked, 2 as asked with compact (still legal) rooms, 3 as many homes as fit - each may add a light patio and a 1,20 m shared corridor when that houses more flats; each is checked again.",
     "Stage 7: a 3D model of each iteration, built in Rhino under its plan (walls cut at 1,20 m so the rooms show).",
-    "Five shops (one read from a drawing) drawn by NOMAD.gh in Rhino; every one is kept in rhino/NOMAD.3dm on layer 06 NOMAD experiments. Then all 180 shops for the totals."
+    "Five shops (one read from a drawing) drawn by NOMAD.gh in Rhino; every one is kept in rhino_grasshopper/NOMAD.3dm on layer 06 NOMAD experiments. Then all 180 shops for the totals."
    ],
    "result": "All {clean_shops} shops, asked 2 × 1-bed + 1 × 2-bed. Stage 5 as it is: {it_flag_yes} YES, {it_flag_partly} PARTLY, {it_flag_no} NO. Homes: iteration 1 {it1_homes}, iteration 2 {it2_homes}, iteration 3 {it3_homes} (YES in {it3_yes} shops; at least one home in {it3_any} shops).",
    "learned": [
@@ -380,8 +380,8 @@
    "title": "Rule cards and a golden set: does NOMAD use the right numbers?",
    "question": "Does every number NOMAD checks match the official text, with the right article, and does it check every rule it should?",
    "did": [
-    "Wrote 16 rule cards (rules/rules.json), each quoting its sentence of the official text from the rulebook. Two automatic checks: the quote is word for word in the official text, and the number is in the quote. 15 pass; the CTE corridor card goes to review (the PDF table was garbled).",
-    "Wrote a golden set of 16 questions (eval/golden_set.csv): 10 from the team's gold cards (Exp 2) and 6 from the text, every answer found word for word in its source.",
+    "Wrote 16 rule cards (4_laws_and_rules/output/rules/rules.json), each quoting its sentence of the official text from the rulebook. Two automatic checks: the quote is word for word in the official text, and the number is in the quote. 15 pass; the CTE corridor card goes to review (the PDF table was garbled).",
+    "Wrote a golden set of 16 questions (4_laws_and_rules/input/golden_set/golden_set.csv): 10 from the team's gold cards (Exp 2) and 6 from the text, every answer found word for word in its source.",
     "Scored NOMAD's code against it: the value each check uses and the article it cites. Also scored plain keyword search (BM25) of the rulebook: does the right article come first?",
     "Fixed what the evaluation found, and scored again."
    ],
@@ -405,7 +405,7 @@
     "Wrote IFC 4 with IfcOpenShell (LGPL): IfcWall, IfcWindow, IfcDoor, IfcSlab, and an IfcSpace per room with its name, flat and floor area.",
     "Wrote glTF (.glb) with trimesh (MIT): one mesh per colour, glass see-through."
    ],
-   "result": "12 IFC + 12 glTF files for the demo shops (results/model3d/); the IFC files pass IfcOpenShell's schema check with 0 problems. The largest: 497 walls, 26 windows, 48 doors, 60 rooms.",
+   "result": "12 IFC + 12 glTF files for the demo shops (7_floor_plans/output/model3d/); the IFC files pass IfcOpenShell's schema check with 0 problems. The largest: 497 walls, 26 windows, 48 doors, 60 rooms.",
    "learned": [
     "One geometry, three outputs: Rhino, IFC and glTF cannot drift apart.",
     "The export found 6 window slivers on very short façade edges; they are now dropped in Rhino too."
@@ -447,7 +447,7 @@
     "Most real shops share their ground floor with other premises: the Catastro outline is then the whole floor, so those 3,680 are labelled and left out until the CAT file splits them.",
     "The street façade, not the area, is what limits the homes."
    ],
-   "decision": "Real shops are now the main test set. Next: the Catastro CAT file (src/building/cat_file.py, ready) to cut shared floors into each shop.",
+   "decision": "Real shops are now the main test set. Next: the Catastro CAT file (2_building/code/cat_file.py, ready) to cut shared floors into each shop.",
    "figures": [
     [
      "e16_shells_check.png",
@@ -565,7 +565,7 @@
    "learned": [
     "Grasshopper splits a Python dict into its keys on a wire: whole objects must travel wrapped."
    ],
-   "decision": "The old single component stays in grasshopper/archive.",
+   "decision": "The old single component stays in old/grasshopper_archive.",
    "figures": []
   },
   {
@@ -576,7 +576,7 @@
    "question": "Can the 2D iterations be real design options, each a different way to reach the flats, as Finch builds its floor-plate options?",
    "did": [
     "Studied Finch 3D: options are circulation strategies (existing circulation, new cores, corridor + core), searched over parameters and scored with weight sliders.",
-    "Rebuilt the iterations in src/generate/plan2.py as strategies: flats on both façades (back to back, half the depth each), a 1.20 m corridor to the block-interior façade, and small flats filling every reachable façade. Each is searched over corridor width, position and flat order, and scored with one set of weights.",
+    "Rebuilt the iterations in 7_floor_plans/code/plan2.py as strategies: flats on both façades (back to back, half the depth each), a 1.20 m corridor to the block-interior façade, and small flats filling every reachable façade. Each is searched over corridor width, position and flat order, and scored with one set of weights.",
     "A strategy is shown only if it changes the plan; if none adds a home, 'street flats only' is shown with the reason.",
     "Back flats more than 25 m from the street door are dropped (CTE DB-SI SI 3); proposals show only flats that pass.",
     "Compared old and new generators on 300 real Barcelona shops and 188 test shops."
@@ -606,7 +606,7 @@
    "title": "What makes a flat habitable: 13,444 real plans measured",
    "question": "How do real, rule-passing flats use every square metre: entrance, circulation, light, room shapes, services? And where do NOMAD's plans differ?",
    "did": [
-    "Measured every room, door, window, entrance and fixture of the 13,444 Swiss Dwellings flats (0-3 bedrooms) that pass every NOMAD rule: 94,471 rooms (src/learn/habitability.py).",
+    "Measured every room, door, window, entrance and fixture of the 13,444 Swiss Dwellings flats (0-3 bedrooms) that pass every NOMAD rule: 94,471 rooms (7_floor_plans/code/habitability.py).",
     "Built each flat's room graph from its doors and open connections, starting at the front door.",
     "Measured NOMAD's own demo plans the same way."
    ],
@@ -642,7 +642,7 @@
     "Added the law's door and turning rules: entrance and practicable-space doors >= 0,80 m, others >= 0,70 m, circulation >= 1 m, a 1,20 m circle in practicable spaces (Decret 141/2012 Annex 1 3.4), living room 2,80 m (3.7.2), kitchen 1,60 m (3.7.3); doors narrower than the law are widened.",
     "Plan-graph checks: every room reached from the entrance hall, no bedroom only through another, a bathroom reached without crossing a bedroom, living room and bedrooms on a façade.",
     "A stretch solver (as Finch's Cassowary): wall lines move as little as possible, walls locked, bathrooms and kitchens stiff, no room under its legal width; plans fit only between 80 % and 130 % of their own size and must fill their space (no dead corners).",
-    "New layout (src/generate/plan3.py): a street lobby and a shared hall behind the flats, flats along every façade the hall reaches within 25 m, through flats in pairs off a passage, side-entered flats off a passage for shallow shops."
+    "New layout (7_floor_plans/code/plan3.py): a street lobby and a shared hall behind the flats, flats along every façade the hall reaches within 25 m, through flats in pairs off a passage, side-entered flats off a passage for shallow shops."
    ],
    "result": "920 real flats NOMAD can use (51 studios, 290 one-beds, 454 two-beds, 125 three-beds); fits score 77-98. On 40 real Barcelona shops: 54 legal homes in 28 shops (old generator: 70 homes in 28 shops, with narrower invented rooms).",
    "learned": [
@@ -669,7 +669,7 @@
    "title": "The building's own stair, ResPlan, door swings, a plan gallery and weight sliders",
    "question": "What was NOMAD still missing from Finch's method (Grok's decoding): existing circulation, more real plans, door clearances, a ranked gallery, user weights?",
    "did": [
-    "Existing circulation: the Catastro's ground-floor common parts (portal, stair) added to 531 real shops (src/building/existing_core.py); no flat or hall is drawn over them, and the portal on the street becomes the flats' entrance.",
+    "Existing circulation: the Catastro's ground-floor common parts (portal, stair) added to 531 real shops (2_building/code/existing_core.py); no flat or hall is drawn over them, and the portal on the street becomes the flats' entrance.",
     "ResPlan (17,000 plans, CC BY 4.0) squared into the library like the Swiss flats (6,920 kept); its net area does not match its drawn rooms, so each plan is scaled by its doors (median inner door = 0,80 m, an assumption).",
     "Door swings: every door's leaf sweep (into the room from the hall, into the flat at the entrance); a 1,20 m circle clear of the sweeps in each practicable space (Decret 141/2012 Annex 1 3.4.1.e) and a 1,20 m circle in the hall in front of their doors (3.4.1.d).",
     "Gallery: each flat keeps its three best real plans (identical flats counted once) with fit, stretch and room-by-room scores against real rooms; the website swaps them.",
@@ -696,7 +696,7 @@
    "title": "A street door for every street façade, and the 25 m rule for every flat",
    "question": "Large shops left long street façades empty: can each get its own street door, lobby and hall?",
    "did": [
-    "Every street façade now gets street doors: one lobby per 40 m of façade, a shared hall behind its flats (src/generate/plan3.py: _street_block).",
+    "Every street façade now gets street doors: one lobby per 40 m of façade, a shared hall behind its flats (7_floor_plans/code/plan3.py: _street_block).",
     "The 25 m rule (CTE DB-SI SI 3, one exit) is now checked for every flat, also the street flats: a flat whose door is further than 25 m from its street door along the hall is not placed."
    ],
    "result": "40 real shops: 53 legal homes in 28 shops; a 1,479 m² shop gets 8 homes off 4 street doors. The large demo shop drops from 8 to 6 homes: two of its earlier flats were more than 25 m from the street door.",
@@ -718,9 +718,9 @@
    "title": "Furniture, your own plans, generated plans and an assistant (the rest of the Finch list)",
    "question": "Can every flat be furnished as the law asks, can users add their own plans, what happens when no real plan fits, and can a chat assistant make bulk edits?",
    "did": [
-    "Furniture (src/generate/furnish.py): every flat gets what Decret 141/2012 Annex 1 asks for: a wardrobe 0,60 m deep, 1 m long over 6 m², 1,5 m over 8 m² (3.10.1); the bedroom square still free of door swings and the wardrobe (3.8); a worktop with sink and cooker and 1,00 m free in front (3.15.c, 3.7.3); WC, basin and shower (3.15.b, 3.11.1); a washing machine place (3.15.d); and the 1,20 m circle free of door swings and fixed equipment (3.4.1.e). Beds, sofa and dining table use typical sizes (an assumption, not law). Items are placed where they leave the biggest free square or circle. A practicable bathroom's door opens outward when that frees the circle.",
+    "Furniture (7_floor_plans/code/furnish.py): every flat gets what Decret 141/2012 Annex 1 asks for: a wardrobe 0,60 m deep, 1 m long over 6 m², 1,5 m over 8 m² (3.10.1); the bedroom square still free of door swings and the wardrobe (3.8); a worktop with sink and cooker and 1,00 m free in front (3.15.c, 3.7.3); WC, basin and shower (3.15.b, 3.11.1); a washing machine place (3.15.d); and the 1,20 m circle free of door swings and fixed equipment (3.4.1.e). Beds, sofa and dining table use typical sizes (an assumption, not law). Items are placed where they leave the biggest free square or circle. A practicable bathroom's door opens outward when that frees the circle.",
     "Only flats that can be furnished stay in the library: 690 of the 761 real street flats. Every placed flat is furnished again after it is stretched.",
-    "Your own plans (src/library/own_plans.py): a DXF from Rhino or AutoCAD (rooms as closed polylines on layers named by use, in English, Catalan or Spanish; doors, windows, entrance and open connections as lines) or JSON. NOMAD squares it, builds its plan graph, checks and furnishes it like every real plan, and adds it to the library. On the website it is kept in the browser and used by the next layouts.",
+    "Your own plans (7_floor_plans/code/own_plans.py): a DXF from Rhino or AutoCAD (rooms as closed polylines on layers named by use, in English, Catalan or Spanish; doors, windows, entrance and open connections as lines) or JSON. NOMAD squares it, builds its plan graph, checks and furnishes it like every real plan, and adds it to the library. On the website it is kept in the browser and used by the next layouts.",
     "Generated plans: when no real plan fits a row, a real plan's room graph is re-proportioned beyond the usual 80-130 % (up to 65-160 %). It must pass every legal, graph and furniture check and is marked 'generated'. Graph2Plan / HouseDiffusion were not used: they need training data and a GPU, and their output would still have to pass these checks.",
     "Ask NOMAD: a chat assistant on the website (like Finch's Archie). It runs on the viewer's own Claude account and can only change the request and weights, make the layouts, pick one, and swap plans in bulk (best fit, least stretched, largest, smallest).",
     "Speed: a plan's gallery is built only for the kept layouts, and depth checks are cached. The large demo shop went from 16,8 s to 6,7 s in Python and from 19 s to 9 s in the browser, with the same homes."
@@ -777,9 +777,9 @@
    "title": "Whole buildings: empty warehouses, commercial and office buildings",
    "question": "Can NOMAD also turn empty warehouses (naus) and commercial or office buildings into homes, not only ground-floor shops?",
    "did": [
-    "Candidates (src/zoning/warehouses.py): every Catastro building whose use is industrial, retail or office and holds no dwelling (4,823), with its PGM zone answer and a hint from the 2024 census of ground-floor premises (empty premises / no active business / active business). The census lists ground floors only, so this is a hint, not proof that a building is unused.",
+    "Candidates (1_find_the_shops/code/warehouses.py): every Catastro building whose use is industrial, retail or office and holds no dwelling (4,823), with its PGM zone answer and a hint from the 2024 census of ground-floor premises (empty premises / no active business / active business). The census lists ground floors only, so this is a hint, not proof that a building is unused.",
     "The law: a whole building is Decret 141/2012 Annex 4 Group B (total change of use). Annex 1 applies with patio surfaces -10 % and a 2,40 m clear height. Unlike a shop (Group C), the building rules of Annex 1 section 2 apply: accessible route (2.1), access and lift landing (2.2), stairs (2.3, CTE DB-SUA SUA 1 4.2), lift and second lift (2.4.1, 2.4.2, DB-SUA SUA 9 1.1.2), patios (2.5.1), community room (2.6).",
-    "Engine (src/generate/building.py):",
+    "Engine (7_floor_plans/code/building.py):",
     "- A warehouse with room for two 2,40 m storeys and a slab gets a mezzanine (two levels of homes). Commercial and office buildings keep their Catastro storeys (3,0 m each, an assumption).",
     "- Deep floors get patios cut through them (3 m wide, Annex 1 2.5.1), with a 1,50 m passage across. A patio is kept only when the part behind it gets homes.",
     "- Each part is laid out with real plans (plan3), and the same floor is stacked on every level.",
@@ -812,7 +812,7 @@
    "question": "Can the deep part of a building behind a patio get homes when it is more than 25 m from the main street door?",
    "did": [
     "Fire escape (CTE DB-SI SI 3, checked in the rulebook): with one exit, every route is at most 25 m. With more than one exit it may reach 50 m, or 35 m where people sleep.",
-    "src/generate/building.py: when the part of a building behind a patio touches another street (a corner, or a building through the block), it gets its own street door on that street, and every home in it is measured to that door (25 m).",
+    "7_floor_plans/code/building.py: when the part of a building behind a patio touches another street (a corner, or a building through the block), it gets its own street door on that street, and every home in it is measured to that door (25 m).",
     "Looked for an official register of empty buildings and for building heights in Barcelona Open Data and at ICGC. None found. The 2024 census of ground-floor premises stays the vacancy hint, and the user sets the clear or storey height in step 2."
    ],
    "result": "67 of the 818 candidate buildings in zones that admit housing (not in use by the census hint) have a part behind a patio on a second street. In 12 tested, the second door adds homes in several: an 903 m² office building 44 -> 55 homes, a 1,073 m² office building 30 -> 40, a 504 m² commercial building 18 -> 24, a 453 m² office building 24 -> 32. The 40-warehouse sample is unchanged (48 homes): those naus have one street.",
@@ -832,9 +832,9 @@
    "did": [
     "Real daylight in the check (critic B, 'people don't need to live in a jail'): the generator and the final check now use the predicted lit depth for each shop (DF >= 2 %, E20), or 5,5 m labelled as an assumption where there is none. A living room or bedroom passes only with at least half its floor within that depth (NOMAD liveability, not law).",
     "Liveable zones ('blue spots'): the website draws the floor in lit / service / dark bands in the first tile of every design ('As it is: where light reaches').",
-    "Temporary / emergency homes (critics A and C): read the law first. 'Allotjament temporal de protecció' is only allowed on public land for facilities (TRLU art. 34.5 quater), not in a private shop. The route that fits a shop is shared-space housing (Llei 18/2007 art. 3.p and 18 bis, DL 50/2020, DT 10a, Circular 8 AHC): a private space of at least 24 m² plus shared rooms of at least 6 m² per home (6 m², 2,45 m circle, lit). In Barcelona the private space plus its share of the shared rooms must reach 40 m² (MPGM 2004 DA1 2.a with art. 18 bis.2, the stricter reading). Density may be exceeded for homes for groups needing social attention (MPGM 2004 DA2). src/generate/shared.py: small studios, the best-lit ones become shared living rooms and kitchens until every home has its proportional share. Website: 'Kind of homes' in step 2.",
-    "For the city (critic A: policy makers): src/check/city_runs.py ran NOMAD on all 1,694 clean empty shops and all 1,206 warehouses, commercial and office buildings not in use by the census hint. Website section 'For the city': the homes the city needs, then the fewest places that reach it, by district, and what to avoid (not allowed, not liveable, keep it a shop, no legal home fits).",
-    "Beyond Barcelona (critic C): src/zoning/amb.py read the Catastro buildings of all 36 AMB towns (links from the Catastro's index) and their MUC zoning. Towns with their own plan are answered by the harmonised MUC code: A1 industrial, A2 tertiary and N non-urbanisable = no; R residential and other codes = the local plan decides.",
+    "Temporary / emergency homes (critics A and C): read the law first. 'Allotjament temporal de protecció' is only allowed on public land for facilities (TRLU art. 34.5 quater), not in a private shop. The route that fits a shop is shared-space housing (Llei 18/2007 art. 3.p and 18 bis, DL 50/2020, DT 10a, Circular 8 AHC): a private space of at least 24 m² plus shared rooms of at least 6 m² per home (6 m², 2,45 m circle, lit). In Barcelona the private space plus its share of the shared rooms must reach 40 m² (MPGM 2004 DA1 2.a with art. 18 bis.2, the stricter reading). Density may be exceeded for homes for groups needing social attention (MPGM 2004 DA2). 7_floor_plans/code/shared.py: small studios, the best-lit ones become shared living rooms and kitchens until every home has its proportional share. Website: 'Kind of homes' in step 2.",
+    "For the city (critic A: policy makers): 8_report_and_city/code/city_runs.py ran NOMAD on all 1,694 clean empty shops and all 1,206 warehouses, commercial and office buildings not in use by the census hint. Website section 'For the city': the homes the city needs, then the fewest places that reach it, by district, and what to avoid (not allowed, not liveable, keep it a shop, no legal home fits).",
+    "Beyond Barcelona (critic C): 1_find_the_shops/code/amb.py read the Catastro buildings of all 36 AMB towns (links from the Catastro's index) and their MUC zoning. Towns with their own plan are answered by the harmonised MUC code: A1 industrial, A2 tertiary and N non-urbanisable = no; R residential and other codes = the local plan decides.",
     "Precedents (critic A): a website section with the sourced numbers (Barcelona, Madrid, Paris, England, APROP), each marked official or secondary."
    ],
    "result": "Real daylight: on 40 real shops, 48 legal homes in 22 shops instead of 57 in 28; 9 homes in 6 shops had rooms mostly in the dark. City: 838 of 1,694 empty shops give 1,405 homes; unused buildings: 249 warehouses give 1,672 homes, 261 commercial buildings 3,414, 211 office buildings 8,077 (several storeys). In zones that admit housing: 6,442 homes; 1,000 homes need 13 places. Avoid: 1,159 not allowed, 949 not liveable, 464 keep it a shop, 739 where no legal home fits. AMB: 201,339 buildings; 15,885 warehouses, commercial and office buildings with no homes; 3,769 in a zone that admits housing, 2,177 where the local plan decides. Shared-space homes: in Barcelona's 40 m² rule they give as many homes as full flats (large demo shop: 6), smaller and with shared rooms.",
@@ -863,9 +863,9 @@
    "question": "Can an AI trained on real plans draw flats that fit a shop better than stretching the few real plans that pass?",
    "did": [
     "Datasets searched (docs/plan_datasets_2026-11-03.md): Finch's library is not public; free to use: Swiss Dwellings and ResPlan (CC BY 4.0); RPLAN and LIFULL only on request for research. MSD's server was unreachable, and MSD is made from Swiss Dwellings anyway.",
-    "Training set (src/ai/plan_data.py): the 15,545 squared real flats of the plan library and their mirrors, 29,930 pictures at 0,25 m a pixel; the condition is the flat's rectangle, its window sides, the entrance and the number of bedrooms; the answer is a room type for every pixel.",
-    "Model (src/ai/train_plan.py, our own code): a U-Net with 4,3 million weights, trained 40 epochs (about 1 h) on the laptop's RTX 3060. 5 % of the flats were kept aside, never seen in training.",
-    "Picture to plan (src/ai/generate_plans.py): small blobs join their neighbour, walls are snapped to the plan's main wall lines (straight, orthogonal walls), every wall pixel joins a room (no dead area), doors are added as people walk (through a hall first, never through a bathroom), windows on the lit sides. Then the same checks as every real plan: plan graph, doors, turning circles, widths, daylight side, furniture, a kitchen and a bathroom, no room with more than 8 corners.",
+    "Training set (7_floor_plans/code/plan_data.py): the 15,545 squared real flats of the plan library and their mirrors, 29,930 pictures at 0,25 m a pixel; the condition is the flat's rectangle, its window sides, the entrance and the number of bedrooms; the answer is a room type for every pixel.",
+    "Model (7_floor_plans/code/train_plan.py, our own code): a U-Net with 4,3 million weights, trained 40 epochs (about 1 h) on the laptop's RTX 3060. 5 % of the flats were kept aside, never seen in training.",
+    "Picture to plan (7_floor_plans/code/generate_plans.py): small blobs join their neighbour, walls are snapped to the plan's main wall lines (straight, orthogonal walls), every wall pixel joins a room (no dead area), doors are added as people walk (through a hall first, never through a bathroom), windows on the lit sides. Then the same checks as every real plan: plan graph, doors, turning circles, widths, daylight side, furniture, a kitchen and a bathroom, no room with more than 8 corners.",
     "AI library: 5,760 street-flat slots (one-sided and through flats, 4,5-12 m wide, 6-10 m deep, 0-3 bedrooms, 5 entrance positions); the plans that pass every check join the street library as 'NOMAD AI'.",
     "Also fixed: plan3 now drops a plan before ranking it when it would fail the flat checks (useful area, daylight depth, window share), so a plan that cannot pass no longer takes a slot from one that can."
    ],
@@ -898,11 +898,11 @@
    "title": "Space optimisation: a room placer, and flats with their own street door",
    "question": "How much of the floor the law lets us reach do NOMAD's layouts really use, and what stops them using more?",
    "did": [
-    "New measure (src/generate/eval_space.py), on the same 40 real shops as E33 with the new daylight data: reachable floor = inside the shop and within 9 m of a street facade, because Decret 141/2012 Annex 1 3.6.2 (facade >= S/9) caps the depth of a flat lit from one facade at 9 m. Efficiency = floor of the passing flats / reachable floor.",
+    "New measure (7_floor_plans/code/eval_space.py), on the same 40 real shops as E33 with the new daylight data: reachable floor = inside the shop and within 9 m of a street facade, because Decret 141/2012 Annex 1 3.6.2 (facade >= S/9) caps the depth of a flat lit from one facade at 9 m. Efficiency = floor of the passing flats / reachable floor.",
     "Law read first: 3.9.1 asks natural light of the common spaces and bedrooms. Bath, hall and storage may stand in the dark back; the kitchen stays open to the living room (3.7.3: opening >= 3,50 m2).",
     "Gaps along the facade filled with generated plans: +2 homes only, so gaps were not the main cause.",
-    "Connection table from 15,545 real plans (results/library/connections.json) and a room placer (src/library/placed_plans.py): narrow flats drawn from rules, then the same checks and furniture as a real plan: 374 plans pass.",
-    "Diagnosis (src/generate/diag_shops.py): a shop 21 m long and 6-7 m deep got no homes, because every layout needed a shared hall behind the flats. New strategy: homes with their own street door (plan3.build_doors), no lobby and no hall.",
+    "Connection table from 15,545 real plans (7_floor_plans/output/library/connections.json) and a room placer (7_floor_plans/code/placed_plans.py): narrow flats drawn from rules, then the same checks and furniture as a real plan: 374 plans pass.",
+    "Diagnosis (7_floor_plans/code/diag_shops.py): a shop 21 m long and 6-7 m deep got no homes, because every layout needed a shared hall behind the flats. New strategy: homes with their own street door (plan3.build_doors), no lobby and no hall.",
     "A first run scored higher but filled deep flats with oversized kitchens and long halls. Kitchen and hall depth capped (3,0 m and 2,6 m); the dark floor left behind them becomes storage.",
     "A first version reported 70 homes, but flats on two street fronts could overlap at a corner. New rule (plan3._FLOOR): each flat is cut from the floor still free, so no two flats can claim the same floor. The numbers here are with that rule."
    ],
@@ -914,7 +914,7 @@
     "Scoring floor area alone rewards bad plans: the first run looked better while kitchens grew. Room mix must be read with the score.",
     "The 16 shops still empty are real limits: under 6 m of front, 4-5 m deep, or as little as 1,3 m of daylight."
    ],
-   "decision": "Keep: placed plans in the library, marked 'NOMAD placed', and own-street-door homes as a new option. The website shows efficiency on the reachable floor. To confirm: no rule found forbids a home's door opening directly on the street, but this needs an architect's check against Barcelona's ordinances. City counts (6,156 homes) still come from the old engine: rerun src/check/city_runs.py.",
+   "decision": "Keep: placed plans in the library, marked 'NOMAD placed', and own-street-door homes as a new option. The website shows efficiency on the reachable floor. To confirm: no rule found forbids a home's door opening directly on the street, but this needs an architect's check against Barcelona's ordinances. City counts (6,156 homes) still come from the old engine: rerun 8_report_and_city/code/city_runs.py.",
    "figures": []
   },
   {
@@ -969,7 +969,7 @@
     "New flat rules (ours, not law): foyer at least 3 m², entry hall at least 1,10 m, kitchen within 6 m of the door, bathroom within 5 m of each bedroom, no bedroom wall shared with the living room or kitchen, no bathroom or bedroom door facing the entrance, door swings do not cross.",
     "Flats were redrawn: hall between living room and bedrooms for both entrances, a direct way from the hall to the kitchen, the bathroom beside the hall.",
     "The fire route now runs from the furthest room door, not the flat door. Floor no home uses is partitioned by BSP and a service corridor joins the deep rooms. The 9 m band is cut by recursive bisection.",
-    "A separate scorer, src/check/eval_matrix.py, was run on the same 40 shops while building."
+    "A separate scorer, 6_check_the_shop/code/eval_matrix.py, was run on the same 40 shops while building."
    ],
    "result": "Last scored run, before the final small changes: 59 homes in 27 shops, 27 Gold layouts, 13 shops with no layout. Street library 439 flats.",
    "learned": [
@@ -998,7 +998,7 @@
     "Wet-core flats let 2 and 3 bedrooms mirror: kitchen and main bathroom at the party wall, one straight hall, a second bathroom among the bedrooms. Bent halls are pulled back onto the walls. Solar zones by facade direction and a 0-100 Solar and Daylight Autonomy score (ours, not law).",
     "The weight sliders were replaced by five layouts, each with one criterion at 100 %: the flats asked for, as many homes as fit, how well real plans fit, best circulation, most daylight. The Selected panel became a table of small tables.",
     "v5.0: rectangular street bays take a real plan from the library first, morphed to fit. Every kitchen and bathroom gets a 60 x 60 cm duct chase on a party wall or hall, fittings go round it, doors keep a 15 cm jamb, and flats along a front share one back wall line.",
-    "Final city run on the v5.0 engine: all 1,694 shops and 1,206 buildings, with a 20 minute limit per building. Layouts sped up: plans are ranked first and checked only when needed, and a table worked out once (src/library/fit_table.py) lists the plans that can pass at each size. The browser also starts the engine on page load and stops widening its search after a short time limit.",
+    "Final city run on the v5.0 engine: all 1,694 shops and 1,206 buildings, with a 20 minute limit per building. Layouts sped up: plans are ranked first and checked only when needed, and a table worked out once (7_floor_plans/code/fit_table.py) lists the plans that can pass at each size. The browser also starts the engine on page load and stops widening its search after a short time limit.",
     "Clear height test: one ICGC LiDAR tile (431584, 1 km, CC BY 4.0) was read for the shops inside it. Roof height above the street, divided by the Catastro floor count, gives an average floor height; a slab of 0,30 m (our assumption) is taken off."
    ],
    "result": "Implemented, not scored. The team reviews the plans. Clear height citywide: 85 LiDAR tiles, 8,394 properties. 7,868 have an estimate, 133 are set aside because floors and roof disagree, 393 have no LiDAR reading. Median clear height is about 3.0 m (shops 2.9, offices 3.1, commercial 3.4, warehouses 4.4); 454 fall under 2.40 m. 155 read over 8 m, nearly all listed as one floor, so these are likely wrong floor counts or roofs of something taller. These are estimates with no ground truth: roof height divided by floors, less an assumed 0.30 m slab, so a taller ground floor reads low. Nothing is wired into the site or the layouts. The site now starts each property at its LiDAR height, labelled as an estimate and open to correction; readings outside 2 to 8 m clear stay on the default. Commercial and office buildings now use the typed storey height, which the engine used to ignore. The city numbers still use the old flat heights.",
@@ -1020,10 +1020,10 @@
    "title": "Footprints are not floor plans: the shop's own unit",
    "question": "The jury said a footprint is not a floor plan. Where the Catastro has the shop's own unit, can Design homes draw on that shape instead of the whole ground floor, and say which shape it used?",
    "did": [
-    "src/building/unit_shells.py: for every premises whose building has a Catastro per-floor plan, take the nearest ground-floor unit that is not common and not a home, within 8 m of the door, and mark its street and open edges as in catastro_shops. Written to site/data/unit_shells.json.",
+    "2_building/code/unit_shells.py: for every premises whose building has a Catastro per-floor plan, take the nearest ground-floor unit that is not common and not a home, within 8 m of the door, and mark its street and open edges as in catastro_shops. Written to app/data/unit_shells.json.",
     "The site uses that unit when it exists. Every shop card now says where its shape came from: 'this premises' own Catastro unit (N m²)' or 'the building's whole ground floor, from its footprint', and that columns, stairs and services inside are not known.",
     "Buildings where no layout fits (for example a clear height under 2,40 m) now show a message instead of breaking the page.",
-    "src/building/catastro_units.py reads every unit of a building (floor, door, use, m², year) from the Catastro's public Consulta_DNPRC service, 3 requests at a time, resumable. Area only, no shape."
+    "2_building/code/catastro_units.py reads every unit of a building (floor, door, use, m², year) from the Catastro's public Consulta_DNPRC service, 3 requests at a time, resumable. Area only, no shape."
    ],
    "result": "714 premises sit in buildings with a Catastro floor plan; 655 got their own unit (640 different units). Not used: 80 with no street edge, 129 under 40 m², 26 with the door far from any unit, 33 with no shop unit. In those buildings the real unit is a median 28 % of the whole-floor shape we used before, and 524 of 688 are under half. Only 600 of 5,376 buildings have a Catastro floor plan, so this is a sample, not the city. The unit list fetch stopped at 1,238 of 5,376 buildings and can be resumed. Example: Fastenrath 170, a 149 m² unit, layouts drawn on its real outline in 9.6 s.",
    "learned": [
@@ -1062,11 +1062,11 @@
    "title": "One facade read from a photo, straightened, into Rhino",
    "question": "Can NOMAD turn a facade photo into a true-size facade drawing (floors, windows, balcony doors, shopfronts) and a 3D wall with real openings?",
    "did": [
-    "Straightening (src/facade/straighten.py): line pieces found with OpenCV; the lens bend chosen so the vertical lines meet in one point; vertical and horizontal vanishing points give the camera turn and focal length; the photo is turned to face the facade.",
-    "Edges and scale (src/facade/read_facade.py): building edges = the longest vertical lines either side of the centre; across = the Catastro footprint side whose length makes the across and up scales agree; up = ICGC LiDAR roof height.",
+    "Straightening (3_facade/code/straighten.py): line pieces found with OpenCV; the lens bend chosen so the vertical lines meet in one point; vertical and horizontal vanishing points give the camera turn and focal length; the photo is turned to face the facade.",
+    "Edges and scale (3_facade/code/read_facade.py): building edges = the longest vertical lines either side of the centre; across = the Catastro footprint side whose length makes the across and up scales agree; up = ICGC LiDAR roof height.",
     "Floors: fitted to the facade's own horizontal lines (ground floor, first floor, then equal floors - our assumption), then set on the balcony bottoms.",
     "Openings: Grounding DINO (Apache-2.0) on the straightened facade, whole and in enlarged tiles, plus a second look at the ground floor. Tidied per floor: a window over a balcony becomes a balcony door to the floor.",
-    "Drawn in rhino/NOMAD.3dm (src/rhino/record_facade.py), layer '06 NOMAD experiments::facade Av Diagonal 413': straightened photo, facade drawing with floor heights, 3D wall with openings cut out, balconies and floor slabs."
+    "Drawn in rhino_grasshopper/NOMAD.3dm (rhino_grasshopper/code/record_facade.py), layer '06 NOMAD experiments::facade Av Diagonal 413': straightened photo, facade drawing with floor heights, 3D wall with openings cut out, balconies and floor slabs."
    ],
    "result": "Av. Diagonal 413 (9331705DF2893A): 21.3 m x 32.8 m; across and up scales 25.8 and 25.4 px/m (within 2 %). Floors at 0, 6.27, 10.17, 13.98, 18.09, 22.05, 26.01 m. 37 openings: 4 shopfronts + 1 door, 5 bay windows, balcony doors on floors 2-4, windows on floors 5-6. Second building (8206307DF2880E, a chamfered corner): scales 19.6 vs 29.1 px/m, so not read correctly. Time: straightening 1 s, reading 103 s per building on the RTX 3060.",
    "learned": [
@@ -1089,7 +1089,7 @@
     "Balconies found this way also place their floor (lowest bottom + 0,15 m); a balcony belongs to the floor line nearest its bottom.",
     "Facade grid (exemplar method, from the user's note): on the typical floors every opening snaps to its column's centre line and takes the column's typical width (from openings really seen); balcony ends snap to the column edges. Ground floor, first floor and top floor keep their own pattern.",
     "Hidden by the tree: a cell with no opening copies the opening of the same column on the nearest floor; on a floor where the other bays have balconies, the hidden bay gets one too. Both are marked inferred (light grey-blue in Rhino, hatched in the drawing).",
-    "Redrawn in rhino/NOMAD.3dm on the same layer ('06 NOMAD experiments::facade Av Diagonal 413'); backup first."
+    "Redrawn in rhino_grasshopper/NOMAD.3dm on the same layer ('06 NOMAD experiments::facade Av Diagonal 413'); backup first."
    ],
    "result": "Floors at 0, 6.27, 10.17, 13.98, 18.09, 22.99, 26.01 m (floor 5 moved from 22.05 to 22.99 once its balconies were found). 47 openings: ground 4 shopfronts + 1 door; floor 1 five bay windows; floors 2-5 five balcony doors each with their balconies (floor 5: four curved stone balconies found, one inferred behind the palm); top floor 4 windows (one inferred). 6 columns.",
    "learned": [
@@ -1107,7 +1107,7 @@
    "title": "Floor heights measured at the facade, and the facade rules",
    "question": "The heights of Av. Diagonal 413 did not look right. Where does each floor's height come from, and what rules make a facade drawing read like the building?",
    "did": [
-    "LiDAR measured where the facade is (src/facade/heights.py): street level on the pavement strip 1-4 m in front of the facade line; facade height = median top in the strip 0,5-2,5 m behind it (the front wall's top, the cornice). The old method used ground within 25 m and the 75th percentile of the whole roof.",
+    "LiDAR measured where the facade is (3_facade/code/heights.py): street level on the pavement strip 1-4 m in front of the facade line; facade height = median top in the strip 0,5-2,5 m behind it (the front wall's top, the cornice). The old method used ground within 25 m and the 75th percentile of the whole roof.",
     "Edges: of the long vertical lines either side, the pair that makes the Catastro street front fit the LiDAR height scale (outer side of the corner pilasters). Detection stays on the same crop as before, so the boxes do not change; only the measuring does.",
     "Floor lines must sit above the heads of the floor below + 0,30 m (our assumption). Then the user's rule: the ground floor has its own height and every floor above has one same height, fitted by least squares; the rest up to the cornice is the cornice band.",
     "Drawing rules: one opening width and height on the typical floors; one size for the ground-floor arches (shopfronts and entrance); symmetry tested (60 % of openings with a mirror partner within 0,8 m), not assumed; missing balconies stamped by repetition; everything inferred marked.",
@@ -1130,11 +1130,11 @@
    "title": "Shop shapes cut to their true size; doors, entrances and the census and land registry facts",
    "question": "Our shop shape was the building's whole ground floor, often much bigger than the premises. Can the land registry's unit sizes and the city census doors give each premises a truer shape, and what else can the app tell about each shop and its building?",
    "did": [
-    "Rule A (one shop unit on the ground floor): when the shape is more than 15 % bigger than the unit, keep the part behind the door on its street facade (narrower and centred on the door when the front is long), as deep as the unit's m2 (src/building/cut_shells.py).",
+    "Rule A (one shop unit on the ground floor): when the shape is more than 15 % bigger than the unit, keep the part behind the door on its street facade (narrower and centred on the door when the front is long), as deep as the unit's m2 (2_building/code/cut_shells.py).",
     "Rule B (2 or more shop units): the street front is shared out between the premises doors of the 2024 city census (halfway to the next door); the area stays between the smallest and largest unit; shallower than 4 m -> narrowed round the door.",
     "Cuts narrower than 2,5 m, doors more than 8 m from the building or cuts that lose the street facade keep the footprint. Every cut is labelled 'assumed (rule A/B)' in the app; the premises' own Catastro unit plan still comes first.",
-    "Building entrances: Catastro INSPIRE Addresses for Barcelona (3,7 MB), points marked 'Entrance', matched by cadastral reference (src/building/entrances.py). Shop doors: every premises of the building in the census, empty or in use.",
-    "Facts for the app (src/building/site_facts.py, site/data/facts/): census status and offer, where the premises opens (street, market, gallery, shopping centre, shopping street), night / 24 h flags, the other premises in the building and their activity; land registry year built, floors, every unit with use and m2.",
+    "Building entrances: Catastro INSPIRE Addresses for Barcelona (3,7 MB), points marked 'Entrance', matched by cadastral reference (2_building/code/entrances.py). Shop doors: every premises of the building in the census, empty or in use.",
+    "Facts for the app (2_building/code/site_facts.py, app/data/facts/): census status and offer, where the premises opens (street, market, gallery, shopping centre, shopping street), night / 24 h flags, the other premises in the building and their activity; land registry year built, floors, every unit with use and m2.",
     "The 1:1000 city map (CartoBCN TOPO1000 GPKG, Dec 2025) downloaded: the old 652 MB file never finished because the server drops every connection after about 6 minutes."
    ],
    "result": "2,932 of 6,056 premises now have a cut shape: 498 by rule A, 2,459 by rule B (2,261 have no shop unit on the ground floor and keep the footprint). 3,479 of 5,322 modelled buildings have a registered entrance; 13,833 shop doors. Viladomat 147 (rule A, 121 m2): 5 layouts, 1 home each, 32 s in the browser.",
@@ -1160,7 +1160,7 @@
    "did": [
     "The team's annex4_grup.json (tools/annex4_grup.py, from the Catastro CAT file: the shop's built area / the building's) copied into the local site.",
     "Find your shop and Design homes show each shop's group, its share and what it means in plain words.",
-    "The engine (src/app/nomad_web.py) puts a 'Conversion group' card first on every layout; for Grup D with 8 homes or more it checks the community room (Annex 1 2.6: 1,20 x 0,80 m, +0,05 m2 per home over 12) against the plan's shared rooms, and a fail turns YES into PARTLY.",
+    "The engine (app/code/nomad_web.py) puts a 'Conversion group' card first on every layout; for Grup D with 8 homes or more it checks the community room (Annex 1 2.6: 1,20 x 0,80 m, +0,05 m2 per home over 12) against the plan's shared rooms, and a fail turns YES into PARTLY.",
     "Grup D's other building rules do not bite on one ground floor: every home is on the entry level (2.1 route met), no lift (2.2.2 landing), and NOMAD's shop plans light no room from a patio (2.5.1)."
    ],
    "result": "Groups: 5,094 Grup C, 151 Grup D, 60 Grup B, 767 not known (NOMAD applies Grup C to these). The generator already followed Grup C, so most answers do not change. París 95 (Grup D, 64,3 %): layouts as before, group card shown.",
@@ -1181,7 +1181,7 @@
     "Tested on the buildings whose real hall and stair are known (Catastro plans we hold, private calibration only).",
     "Sizes: the median of 1,692 real halls with their stairs is 3,5 x 7,6 m (p10-p90 1,4-8,5 m wide).",
     "Three ways to place it from the land registry entrance point: a straight box in from the door; a hall from the door to the nearest light well with the stair beside it; a hall from the door to the stair tower (the building's smallest part as tall as its tallest, INSPIRE building parts).",
-    "Rule C uses the stair tower first, then the light well, then the box; marked 'assumed' with its tested accuracy; the generator keeps homes off it and may use it as the flats' way in (src/building/shop_data.py step 2b, site/data/cores.json).",
+    "Rule C uses the stair tower first, then the light well, then the box; marked 'assumed' with its tested accuracy; the generator keeps homes off it and may use it as the flats' way in (2_building/code/shop_data.py step 2b, app/data/cores.json).",
     "Looked for better data: the CAT file lists a ground-floor common area for only 25 of 5,322 buildings (it records common parts for the whole building); the 1:1000 map draws no stairs inside buildings; the stair tower in the INSPIRE parts was the useful find."
    ],
    "result": "Lands on the real hall/stair: door-to-tower 93 % (171 buildings), door-to-well 91 % (88), box 72 % (294). The stair tower exists in 52 % of buildings and touches the real hall/stair in 87 %; the stair touches a light well in 89 % of buildings that have one. 2,942 buildings get an assumed hall (655 tower, 1,285 light well, 1,002 box). Muntaner 336 and Creu dels Molers 12: layouts as before, homes kept off the hall.",
@@ -1200,7 +1200,7 @@
    "title": "Second facade: Pl. Sortidor 4 (narrow, 6 floors)",
    "question": "Does the facade method from Av. Diagonal 413 work on a different building: narrow, three columns, a pair of narrow windows in the middle?",
    "did": [
-    "Ran src/facade/facade.py steps 1-4 on Pl. Sortidor 4 (0006311DF3800E). Straightening worked first time.",
+    "Ran 3_facade/code/facade.py steps 1-4 on Pl. Sortidor 4 (0006311DF3800E). Straightening worked first time.",
     "Fixes found on the way, each checked to leave Diagonal 413 unchanged: the main piece of the footprint (not the first, a 3 m sliver); street level only from doors and shopfronts in the lowest fifth of the photo (a 'shopfront' at first-floor height had set the street 4,5 m too high); search the whole facade again when the strongest lines cut part of it off (the left balcony column was never searched); symmetry also needs the mirror line within 8 % of the width from the middle; a 'balcony' under 0,6 m is a ledge; columns of narrow windows keep their own width; balconies stamped only in columns that have them on most floors."
    ],
    "result": "Ground floor 4,57 m, upper floors 3,16 m each (measured lines within 0,37 m of the fit); width 8,6 m (Catastro) fits the LiDAR scale exactly; symmetrical about 4,25 m (middle 4,28 m); ground floor right (shop, entrance door, restaurant door). Still wrong: the middle pair of narrow windows is drawn as one window on floors 2-4 (one detection box covered both and joined them), right-hand balconies on floors 2 and 4 are missing, the top floor's balconies are missing.",
@@ -1223,7 +1223,7 @@
    "title": "Analyse the facade before drawing it: repeated floors, typical floor, inventory",
    "question": "Reading each floor on its own made one floor differ from the others by mistake (a pair read as one window, missing balconies). Can NOMAD first find which floors repeat and read the typical floor once?",
    "did": [
-    "New step 3b in src/facade/facade.py: level the leftover perspective, compare the floors' bands (lined up first), blend the repeated floors into one clean typical floor, vote across floors, read it as an architect (balcony = door behind it, pier = two windows, railing is not a window), write an inventory, then draw every floor from its type.",
+    "New step 3b in 3_facade/code/facade.py: level the leftover perspective, compare the floors' bands (lined up first), blend the repeated floors into one clean typical floor, vote across floors, read it as an architect (balcony = door behind it, pier = two windows, railing is not a window), write an inventory, then draw every floor from its type.",
     "Run on Pl. Sortidor 4; Diagonal 413 has no inventory and keeps its approved drawing."
    ],
    "result": "Sortidor 4: floors 1-5 found to be one type (similarity 0,45-0,77 after lining up); typical floor = balcony 1,74 m + door 1,00 x 2,50 m | two windows 0,58 and 0,63 m (sill 0,82, head 2,50) | balcony 1,53 m + door 1,00 m; ground = shop window 2,43 x 3,44 m, entrance door 1,07 m, restaurant door 1,67 m. All floors now drawn alike. The leftover tilt was 14 deg at the very top of the photo (the left balconies stood 55 px higher than the right).",

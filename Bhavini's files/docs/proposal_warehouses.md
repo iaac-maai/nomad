@@ -4,9 +4,9 @@ Today NOMAD converts one ground-floor shop. This adds whole buildings: empty war
 commercial or office buildings that nobody uses.
 
 ## What we already have
-- Catastro buildings (data/barcelona/catastro/buildings.json.gz): every building's use, footprint and storeys.
+- Catastro buildings (0_shared_input/catastro/buildings.json.gz): every building's use, footprint and storeys.
   Without any homes: 1,741 industrial, 1,989 retail, 1,093 office.
-- PGM zoning gate (src/zoning/zoning.py): zones 12, 13, 14b, 15 allow housing; 22@, 18, 20 = check the zone's own plan;
+- PGM zoning gate (1_find_the_shops/code/zoning.py): zones 12, 13, 14b, 15 allow housing; 22@, 18, 20 = check the zone's own plan;
   22a industrial = no.
 - Engine: real-plan library, furniture, patios (the warehouse demo already cuts a patio), 3D, IFC, Rhino.
 

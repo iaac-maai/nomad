@@ -41,17 +41,17 @@ All three RPUC scans are OCR'd (Tesseract cat+spa) and in the rulebook; OCR piec
 
 | Level | What | Where |
 |---|---|---|
-| pgm | Ordenances metropolitanes d'edificació (OME) | https://www.amb.cat/web/territori/gestio-i-organitzacio/numamb → "Ordenances d'edificació" → save as `data/pgm/raw/OME.pdf` |
-| pgm | Ordenances metropolitanes de rehabilitació | same page → "Ordenances de rehabilitació" → `data/pgm/raw/OM-rehabilitacio.pdf` |
+| pgm | Ordenances metropolitanes d'edificació (OME) | https://www.amb.cat/web/territori/gestio-i-organitzacio/numamb → "Ordenances d'edificació" → save as `4_laws_and_rules/input/pgm/raw/OME.pdf` |
+| pgm | Ordenances metropolitanes de rehabilitació | same page → "Ordenances de rehabilitació" → `4_laws_and_rules/input/pgm/raw/OM-rehabilitacio.pdf` |
 | pgm | PGM Normes urbanístiques (+ Barcelona MPGM 1999 art. 225.7, 2004 nombre màxim d'habitatges, B1600) | Registre de Planejament Urbanístic de Catalunya: http://ptop.gencat.cat/rpucportal/inici/ca/index.html (see docs/download_checklist.md P1-b, P3–P5) |
 
 ## Step 3 (zoning) and the empty shops (added 2026-10-29)
 
 | Level | What | Where |
 |---|---|---|
-| barcelona | Cens de locals en planta baixa destinats a activitat econòmica, 2024 (Ajuntament de Barcelona, CC BY 4.0) | https://opendata-ajuntament.barcelona.cat/data/dataset/cens-locals-planta-baixa-act-economica → `data/barcelona/census/2024_CensComercial_BCN.csv` (empty = sector "Locals buits ...") |
-| catalonia | Mapa Urbanístic de Catalunya (MUC), layer "Qualificació" (Departament de Territori, Generalitat; data of Jan 2023) | ArcGIS service hosted by Diputació de Barcelona: https://gissrv.diba.cat/arcgis/rest/services/CARTOBASE/MUC/MapServer/1 ; official download page: https://territori.gencat.cat/ca/06_territori_i_urbanisme/observatori_territori/mapa_urbanistic_de_catalunya/serveis_web_i_dades_obertes/ → cached in `data/barcelona/zoning/muc_qualificacio_bcn.geojson` |
-| datasets | CubiCasa5K test split (real plan scans + SVG answers, CC BY-NC-SA 4.0) | https://zenodo.org/records/2613548 (md5 0ce0b203d1e3c125b51087b219bd23b9) → only the 400 test plans kept in `data/datasets/cubicasa5k/raw/` |
+| barcelona | Cens de locals en planta baixa destinats a activitat econòmica, 2024 (Ajuntament de Barcelona, CC BY 4.0) | https://opendata-ajuntament.barcelona.cat/data/dataset/cens-locals-planta-baixa-act-economica → `0_shared_input/census/2024_CensComercial_BCN.csv` (empty = sector "Locals buits ...") |
+| catalonia | Mapa Urbanístic de Catalunya (MUC), layer "Qualificació" (Departament de Territori, Generalitat; data of Jan 2023) | ArcGIS service hosted by Diputació de Barcelona: https://gissrv.diba.cat/arcgis/rest/services/CARTOBASE/MUC/MapServer/1 ; official download page: https://territori.gencat.cat/ca/06_territori_i_urbanisme/observatori_territori/mapa_urbanistic_de_catalunya/serveis_web_i_dades_obertes/ → cached in `0_shared_input/zoning/muc_qualificacio_bcn.geojson` |
+| datasets | CubiCasa5K test split (real plan scans + SVG answers, CC BY-NC-SA 4.0) | https://zenodo.org/records/2613548 (md5 0ce0b203d1e3c125b51087b219bd23b9) → only the 400 test plans kept in `7_floor_plans/input/datasets/cubicasa5k/raw/` |
 | barcelona | Catastro INSPIRE Buildings for Barcelona (footprints, building parts, floors above/below ground, use, dwellings, gross floor area) | https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/08/08900-BARCELONA/A.ES.SDGC.BU.08900.zip (ATOM feed https://www.catastro.hacienda.gob.es/INSPIRE/buildings/08/ES.SDGC.bu.atom_08.xml), downloaded 2026-10-29 |
-| barcelona | (to download by hand) Catastro CAT files, province 08: area, floor and use of every premises | https://www.sedecatastro.gob.es/Accesos/SECAccDescargaDatos.aspx (needs the user's certificate or Cl@ve) → data/barcelona/catastro/CAT_files/ |
-| barcelona | Street, zone and park trees (arbrat viari / zona / parcs), Open Data BCN, CC BY 4.0, 2026 Q3 | https://opendata-ajuntament.barcelona.cat/data/dataset/arbrat-viari · .../arbrat-zona · .../arbrat-parcs → data/barcelona/trees/ (downloaded 2026-10-29) |
+| barcelona | (to download by hand) Catastro CAT files, province 08: area, floor and use of every premises | https://www.sedecatastro.gob.es/Accesos/SECAccDescargaDatos.aspx (needs the user's certificate or Cl@ve) → 0_shared_input/catastro/CAT_files/ |
+| barcelona | Street, zone and park trees (arbrat viari / zona / parcs), Open Data BCN, CC BY 4.0, 2026 Q3 | https://opendata-ajuntament.barcelona.cat/data/dataset/arbrat-viari · .../arbrat-zona · .../arbrat-parcs → app/input/trees/ (downloaded 2026-10-29) |
