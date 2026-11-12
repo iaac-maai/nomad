@@ -287,7 +287,8 @@ def engine():
     keep = {r["ref14"]: r for r in csv.DictReader(open(ROOT / "2_building/output/real_shops" / "clean_shops.csv", encoding="utf-8")) if r["kept"] == "True"}
     out = {ref: dict({"outline": s["outline"], "facade": s["facade"], "street": s["street"], "floors": s["floors"],
                       "shared": s["premises_in_building"] > 1, "label": keep[ref]["label"]},
-                     **({"existing": s["existing"]} if s.get("existing") else {}))          # the building's portal / stair
+                     **({"existing": s["existing"]} if s.get("existing") else {}),          # the building's portal / stair
+                     **{k: s.get(k, []) for k in ("patios", "wells_above")})                # light wells (light_wells.py)
            for ref, s in S.items() if ref in keep}
     json.dump(out, open(SITE / "data" / "shells.json", "w", encoding="utf-8"), separators=(",", ":"))
     demo = {}

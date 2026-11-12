@@ -1,6 +1,6 @@
 # grasshopper — ONE file: NOMAD.gh
 
-Always open NOMAD with **`OPEN_NOMAD.cmd`** (in the nomad folder). It opens `rhino_grasshopper/NOMAD.3dm` (the one
+Always open NOMAD with **`OPEN_NOMAD.cmd`** (in this folder). It opens `rhino_grasshopper/NOMAD.3dm` (the one
 Rhino file) with `rhino_grasshopper/NOMAD.gh` (the one Grasshopper file) loaded. Work and save in these two files only.
 Older experiments are in `archive/`.
 

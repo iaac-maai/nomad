@@ -5,7 +5,7 @@ files they make, and where the result is used** (the app, Rhino, the lab book, t
 is kept off GitHub.
 
 Words used below
-- **App** = the local website `app/index.html` (preview `nomad-site`, http://localhost:8766). It runs NOMAD's Python
+- **App** = the local website `app/index.html` (preview `nomad-site`, http://localhost:8766/app/index.html). It runs NOMAD's Python
   in the browser (Pyodide). **Share copy** = `old/site_share/` (port 8767), made by `app/code/make_share.py`.
 - **Engine** = the plan generator and checks; the same Python runs in Rhino and in the app (copies in `app/py/src/*.txt`).
 - **Private use only** = Catastro Sede web content (Visor 3D, Consulta_DNPRC service, facade photos): used on this
@@ -13,110 +13,63 @@ Words used below
 
 ---
 
-## 0. The flow at a glance
+## 0. The flow at a glance (folder by folder)
 
 ```
- SOURCE (file on this computer)          CODE                         OUTPUT                  SHOWS IN
- ════════════════════════════════════════════════════════════════════════════════════════════════════
+ FOLDER               INPUT (what goes in)              CODE (what does the work)     OUTPUT → SHOWS IN THE APP
+ ══════════════════════════════════════════════════════════════════════════════════════════════════════
 
- 1 FIND THE SHOPS
- City census 2024                        1_find_the_shops/code/zoning.py         1_find_the_shops/output/zoning/
-   0_shared_input/census/                  (door → zone, gate)          lookup.json
-   2024_CensComercial_BCN.csv                                           empty_premises_zoning.csv
- MUC zoning (Generalitat)                1_find_the_shops/code/warehouses.py ──► app/data/warehouses.json
-   0_shared_input/zoning/                1_find_the_shops/code/amb.py ─────────► app/data/amb.json
- Catastro INSPIRE, 35 AMB towns          1_find_the_shops/code/amb_base.py ────► app/data/amb_base.json
-   1_find_the_shops/input/amb/                             1_find_the_shops/code/avoid.py           (answer per premises)
-                                         app/code/build_site.py ─────► app/data/premises.json ─► City in 3D,
-                                                                      basemap.json, city/,       map, Find
-                                                                      nomad.json                 your shop
+ 0_shared_input       catastro/  (INSPIRE buildings, CAT file, addresses)        used by steps 1, 2, 3, 6
+                      census/    (city census 2024)                              used by steps 1, 2
+                      zoning/    (MUC zoning map)                                used by steps 1, 6
+                      lidar/     (ICGC LiDAR grids)                              used by steps 2, 3
+        │
+        ▼
+ 1_find_the_shops     input/amb/                        zoning.py, warehouses.py,     output/zoning, warehouses,
+                      + 0_shared_input                  amb.py, amb_base.py,          avoid  → app/data/premises.json
+                                                        avoid.py                      → map, Find your shop
+        │
+        ▼
+ 2_building           input/topo1000/ (1:1000 map)      catastro_buildings.py,        output/real_shops, heights,
+                      + 0_shared_input                  real_shops.py, light_wells,   plan_reading → app/data/shells,
+                      + private/ (Visor 3D)*            lidar_heights.py, shop_data   doors, cut_shells, cores, facts
+                                                        (units, doors, shapes, halls) → The building, step 1 card
+        │
+        ▼
+ 3_facade             private/catastro_facade_photos*   facade.py                     output/<ref>/ → you APPROVE →
+                      + 0_shared_input/lidar            (straighten, read, analyse,   output/approved.json
+                                                        draw, approve, export)        → app/data/facades.json → 3D
+        │
+        ▼
+ 4_laws_and_rules     input/national, catalonia, pgm,   fetch_*.py, ocr_pgm.py,       output/rulebook.jsonl, rules/,
+                      barcelona_guide, golden_set       build_rulebook.py,            rulebook/ (law book), eval/
+                                                        build_rules.py, run_golden,   → rule cards, The laws
+                                                        compile_rulebook.py
+        │
+        ▼
+ 5_daylight           input/bars_exp1_daylight          bars_daylight.py              output/ (lit depth)
+                      (the daylight model's runs)                                     → app/data/daylight.json
+        │
+        ▼
+ 6_check_the_shop     4_laws_and_rules/output/rules     flags.py, run_flags.py        output/ (verdicts)
+                      + app/data/annex4_grup.json                                     → YES / PARTLY / NO, Grup B/C/D
+        │
+        ▼
+ 7_floor_plans        input/datasets (Swiss Dwellings,  build_library.py, plan3.py,   output/library, generation,
+                      ResPlan), input/own_plans         library_fit.py, furnish.py,   model3d, sheets → Your homes:
+                                                        prisms.py, export_ifc.py, ai  5 layouts, 3D, IFC
+        │
+        ▼
+ 8_report_and_city    input/value (idealista18),        value.py, city_runs.py,       output/value, city, dashboard
+                      input/costs                       refresh_outcomes.py           → For the city, results page
 
- 2 READ THE BUILDING
- Catastro INSPIRE Buildings 08900        2_building/code/              0_shared_input/catastro/
-   0_shared_input/catastro/raw/ (zip)      catastro_buildings.py ───► buildings.json.gz
-                                         2_building/code/real_shops.py ► app/data/shells.json ───► Find your shop,
-                                         2_building/code/light_wells.py  (patios, wells_above)      The building
- Catastro CAT file                       2_building/code/shop_data.py
-   0_shared_input/catastro/CAT_files/      step 0 units ────────────► 0_shared_input/catastro/
-   08900U_14082026.CAT.gz                                               units_cat.jsonl
- Catastro INSPIRE Addresses                step 1 doors ────────────► app/data/doors.json ────► door marks
-   0_shared_input/catastro/addresses/      step 2 shapes (A/B) ─────► app/data/cut_shells.json ► shop shape
-   A.ES.SDGC.AD.08900.zip                  step 2b cores (C) ───────► app/data/cores.json ────► hall + stair
-                                           step 3 facts ────────────► app/data/facts/f_XX.json ► Facts panel
-                                           step 4 team ─────────────► team copy (transformed)
- Catastro Visor 3D *                     2_building/code/existing_core.py ► existing in shells.json
-                                         2_building/code/catastro_plans.py
-                                         2_building/code/catastro_site.py► app/data/catastro/b_XX.json ► floor
-                                         2_building/code/unit_shells.py► app/data/unit_shells.json     by floor
-                                                                      unit_skips.json
- ICGC LiDAR v3.1                         2_building/code/              2_building/output/heights/heights.csv
-   0_shared_input/lidar/ (grid/*.npz)                lidar_heights.py ────────► app/data/heights.json ──► height box
- Catastro facade photo *                 3_facade/code/facade.py       3_facade/output/<ref>/
-   private/catastro_facade_photos/        straighten → read →        inventory.json, openings.json,
- Grounding DINO + OpenCV                   analyse → floors → draw    elevation.png, *.jpg (private)
-   (tools/train-venv)                      approve (you) ───────────► 3_facade/output/approved.json
-                                                                      3_facade/output/approved/<ref>/
-                                           export ──────────────────► app/data/facades.json ──► The building,
-                                         rhino_grasshopper/code/record_facade.py ► rhino_grasshopper/NOMAD.3dm             3D openings
- CartoBCN 1:1000 (product 144)           (not wired in yet)
-   2_building/input/topo1000/cartobcn/gpkg/
+ app                  app/data (written by the steps)   app/code/build_site.py,       index.html (the website)
+                      + the code, library, law book     nomad_web.py, make_share.py   share_copy/ only when sharing
+                        read from the step folders
+ lab_book             experiments.json, figures/        lab_book/code/build_book.py   site/index.html (the notebook)
+ rhino_grasshopper    NOMAD.3dm, NOMAD.gh               code/ (nomad_core.py …)       sheets, 3D in Rhino
 
- 3 ZONING
- MUC zoning + PGM art. 225.7 (OCR)       1_find_the_shops/code/zoning.py (gate) ► 1_find_the_shops/output/zoning/ ──────► verdict pill,
-   4_laws_and_rules/input/pgm/                                                                                     "WHY"
-
- 4 THE RULES
- BOE texts (CTE, LOE, TRLSRU, LPH…)      4_laws_and_rules/code/fetch_national.py
-   4_laws_and_rules/input/national/                        4_laws_and_rules/code/fetch_cte_db.py
- CTE DB-HS / SUA / SI / HR / HE          4_laws_and_rules/code/fetch_catalonia.py
-   4_laws_and_rules/input/national/cte_db/                 4_laws_and_rules/code/ocr_pgm.py, fetch_pgm.py
- Decret 141/2012, DOGC                   4_laws_and_rules/code/fetch_bcn_guide.py
-   4_laws_and_rules/input/catalonia/raw/                   4_laws_and_rules/code/build_rulebook.py ► 4_laws_and_rules/output/rulebook.jsonl
- PGM / MPGM normes                       4_laws_and_rules/code/build_rules.py ──► 4_laws_and_rules/output/rules/rules.json ───────► rule cards,
-   4_laws_and_rules/input/pgm/                                                          4_laws_and_rules/output/rules/review.json          citations
- Barcelona guide + ordinances            4_laws_and_rules/code/run_golden.py ────► checks 4_laws_and_rules/input/golden_set/golden_set.csv
-   data/barcelona/                       4_laws_and_rules/code/compile_rulebook.py
-                                         4_laws_and_rules/code/add_anchors.py► 4_laws_and_rules/output/rulebook/ ─────────► The laws
-                                                                                                 (flipbook)
- 5 DAYLIGHT
- Radiance runs (team repo)               5_daylight/code/              5_daylight/output/
-   exp1_daylight/results.csv               bars_daylight.py ────────► app/data/daylight.json ─► daylight bands
- Weather ESP_CT_Barcelona.081800_TMYx
-
- 6 CHECK THE SHOP
- 4_laws_and_rules/output/rules/rules.json                        6_check_the_shop/code/flags.py ────────► YES / PARTLY / NO ───────► verdict, cards
- Annex 4 groups (team, by Bars)          app/code/nomad_web.py       Grup B / C / D card ──────► Your homes
-   app/data/annex4_grup.json              (_annex4)
-
- 7 FIT THE HOMES
- Swiss Dwellings v3.0.0                  7_floor_plans/code/clean_dataset.py
-   7_floor_plans/input/datasets/                        7_floor_plans/code/learn_room_programs.py ► app/data/room_programs.json
- ResPlan                                 7_floor_plans/code/habitability.py
- Your own DXF / JSON plans               7_floor_plans/code/build_library.py, build_resplan.py,
-                                           placed_plans.py, own_plans.py
-                                         7_floor_plans/code/street_library.py ► 7_floor_plans/output/library/library_street.json
-                                         7_floor_plans/code/fit_table.py ──► fit_table.json
-                                         7_floor_plans/code/ (U-Net) ───────────► 7_floor_plans/output/library/library_ai.json
-                                         7_floor_plans/code/plan3.py
-                                           + library_fit.py ────────► 5 layouts ──────────────► Your homes
-                                         7_floor_plans/code/prisms.py ─────► 3D prisms ──────────────► 3D view
-                                         7_floor_plans/code/export_ifc.py ─► 7_floor_plans/output/model3d/*.ifc, *.glb ► IFC
-                                         rhino_grasshopper/code/nomad_core.py,
-                                           nomad_model.py ──────────► rhino_grasshopper/NOMAD.3dm
-                                         app/code/nomad_web.py ──────► app/py/src/*.txt (Pyodide)
-
- 8 REPORT
- idealista18 prices 2018                 8_report_and_city/code/value.py ──────────► 8_report_and_city/output/value/ ─────────► €/m² hint
- all of the above                        app/index.html (save, compare, PDF) ─────────────────► Saved, PDF
-                                         8_report_and_city/code/city_runs.py ────► 8_report_and_city/output/city/homes.csv
-                                                                      app/data/city_homes.json ► For the city
-                                         8_report_and_city/code/refresh_outcomes.py► 8_report_and_city/output/dashboard/ ──────► results page
-
- ACROSS ALL
- lab_book/experiments.json                   lab_book/code/build_book.py ────► lab_book/site/index.html (lab book)
- app/                                   app/code/make_share.py ─────► old/site_share/ (safe copy)
- ════════════════════════════════════════════════════════════════════════════════════════════════════
- * private use only (Catastro Sede): never on GitHub, the site or the team
+ * private: Catastro Sede content (private use only) — stays in private/, never shared
 ```
 
 Supporting the whole: the **lab book** (`lab_book/`), **Rhino** (`rhino_grasshopper/NOMAD.3dm`, one file), the **approval checkpoint**
@@ -284,7 +237,7 @@ NO forces NO and CHECK caps the layouts at PARTLY (`nomad_core.add_zoning`, "Zon
 | CTE Documentos Básicos (DB-HS, SUA, SI, HR, HE), codigotecnico.org | official, cite | `4_laws_and_rules/input/national/cte_db/` |
 | Decret 141/2012 and other Catalan texts (Portal Jurídic / DOGC, saved by hand: robots disallow bots) | public legal texts | `4_laws_and_rules/input/catalonia/raw/` |
 | PGM / MPGM normes (RPUC, scanned → Tesseract OCR cat+spa) | public register | `4_laws_and_rules/input/pgm/` |
-| Barcelona guide "canvi d'ús de locals a habitatge" (2025-03), ordinances | Ajuntament | `data/barcelona/` |
+| Barcelona guide "canvi d'ús de locals a habitatge" (2025-03), ordinances | Ajuntament | `4_laws_and_rules/input/barcelona_guide/` |
 
 Scripts: `4_laws_and_rules/code/fetch_national.py`, `fetch_cte_db.py`, `fetch_catalonia.py`, `ocr_pgm.py` → `fetch_pgm.py`,
 `fetch_bcn_guide.py` → `4_laws_and_rules/code/build_rulebook.py` → `4_laws_and_rules/output/rulebook.jsonl` (one chunk per article, current wording,
@@ -292,7 +245,7 @@ tables as rows). `4_laws_and_rules/code/build_rules.py` → `4_laws_and_rules/ou
 exact sentence (checked word for word); `4_laws_and_rules/output/rules/review.json`. `4_laws_and_rules/code/run_golden.py` on `4_laws_and_rules/input/golden_set/golden_set.csv`
 (16 questions, answers checked in the source). `4_laws_and_rules/code/compile_rulebook.py` + `add_anchors.py` → the law book
 (23 official PDFs, 1,408 pages, index, bookmarks, highlighted lines) in `4_laws_and_rules/output/rulebook/`.
-Not built: the RAG knowledge base (`src/kb/` is empty); rule cards were made from the rulebook directly.
+Not built: the RAG knowledge base; rule cards were made from the rulebook directly.
 Where used: every check card cites its rule and opens the law in The laws (flipbook). Private: the law book (`4_laws_and_rules/output/rulebook`
 is gitignored and left out of the share copy).
 
@@ -382,7 +335,7 @@ Where used: Your homes (5 layouts, cards, daylight bands, real-plan gallery, fur
 ### Privacy and sharing
 | What | Who sees it |
 |---|---|
-| App `app/`, code `src/`, lab book `lab_book/`, law book, `docs/`, `CLAUDE.md` | you only (your private repo `bhavinimanot-arch/nomad`; most paths in `.gitignore`) |
+| App `app/`, code (every `<step>/code/`), lab book `lab_book/`, law book, `docs/`, `CLAUDE.md` | you only (your private repo `bhavinimanot-arch/nomad`; most paths in `.gitignore`) |
 | Catastro facade photos and pictures from them | this computer only (`.gitignore`: `3_facade/output/**/*.jpg`) |
 | Visor 3D plans, Consulta_DNPRC units | this computer / your app only |
 | **Share copy** `old/site_share/` (`app/code/make_share.py`) | safe to share: Visor data → INSPIRE outlines, unit sizes → counts, no facades, rounded shapes |
