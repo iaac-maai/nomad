@@ -2182,6 +2182,7 @@ function drawDesign() {
   $("#dres").innerHTML = `${basisHtml(R.basis)}<p class="hint2">Asked: ${esc(R.mix)} · shop ${fmt(Math.round(R.shop.area))} m², ${R.shop.facade_m} m of façade with light.
     Where light reaches: <span class="swatch" style="background:#FFE7A3"></span> lit, up to ${ld ? ld.toFixed(1) : "?"} m from a window (${s.prem && s.prem.lit != null ? "the daylight model for this shop" : "assumed: no daylight prediction here"}): living rooms and bedrooms go here ·
     <span class="swatch" style="background:#EEF0EC"></span> kitchen, bath, hall · <span class="swatch" style="background:#AEBBCB"></span> dark: not for homes. A living room or bedroom must have half its floor in the lit part.</p>
+    <p class="hint2">Example scenarios on an estimated shop outline (Catastro INSPIRE), not a design: real plans and a site visit are needed. Home counts are a rough range.</p>
     <div class="dplans">${tiles.map((t, k) => `<button type="button" class="dplan" data-k="${k}" aria-pressed="${k === dSel}">
       <span class="fig">${esc(t.label)}</span>${planSvg(s, t.plan, { label: t.label, daylight: t.daylight })}<span class="row"><span class="pill ${t.verdict}">${t.verdict}</span><span class="num">${esc(t.txt)}</span></span></button>`).join("")}</div>`;
   $("#dres").querySelector(".dplans").onclick = e => { const b = e.target.closest("button"); if (b) { dSel = +b.dataset.k; drawDesign(); } };
@@ -3474,6 +3475,9 @@ async function makeReport() {
   const imgs = [await svgPng(planSvg(R.shopDrawn, R.before.plan)), ...await Promise.all(R.iterations.map(it => svgPng(planSvg(R.shopDrawn, it.plan))))];
   const labels = ["as it is: " + R.before.verdict].concat(R.iterations.map(it => `${it.label}: ${it.homes} homes, ${it.verdict}`));
   imgs.forEach((src, i) => { const x = 15 + (i % 2) * 92, y = 46 + Math.floor(i / 2) * 92; doc.addImage(src, "JPEG", x, y, 86, 80); doc.setFontSize(9); doc.text(labels[i], x, y + 84); });
+  doc.addPage(); doc.setFont("courier", "bold"); doc.setFontSize(13); doc.text("Layout note", 15, 18);
+  doc.setFont("helvetica", "normal"); doc.setFontSize(10);
+  doc.text(doc.splitTextToSize("Example scenarios on an estimated shop outline (Catastro INSPIRE), not a design: real plans and a site visit are needed. Home counts are a rough range.", 180), 15, 28);
   doc.addPage(); doc.setFont("courier", "bold"); doc.setFontSize(13); doc.text("Rule cards · " + b.label, 15, 18);
   doc.setFont("helvetica", "normal"); doc.setFontSize(9.5);
   let y = 26;
