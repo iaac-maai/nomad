@@ -3134,9 +3134,9 @@ function drawBookIndex(q) {
       const ds = I.docs.filter(d => d.level === L.id && (!f || norm(d.short + " " + d.title + " " + d.plain).includes(f)));
       if (!ds.length) return "";
       return `<div class="bk-lvl">${esc(L.name)}</div><p class="bk-lvlp">${esc(L.plain)}</p>` + ds.map(d =>
-        `<button type="button" class="bk-doc" data-p="${d.start}"><span class="pg">p. ${d.start}</span><b>${esc(d.short)}</b> · ${esc(d.title)}<small>${esc(d.plain)}${d.scan ? " (scanned original)" : ""}</small></button>`).join("");
+        `<button type="button" class="bk-doc" data-p="${d.start}"><span class="pg">p. ${d.start}</span><b>${esc(d.short)}</b> · ${esc(d.title)}<small>${esc(d.plain)}${d.scan ? " (scanned original)" : ""}${d.version_date ? ` · Official version ${esc(d.version_date)}, downloaded ${esc(d.downloaded)} (pinned source)` : ""}</small></button>`).join("");
     }).join("") +
-    `<p class="hint2" style="margin-top:10px">${I.docs.length} official documents, ${fmt(I.pages)} pages. Sources: BOE, codigotecnico.org, Portal Jurídic de Catalunya, Agència de l'Habitatge, RPUC (Generalitat), AMB, Ajuntament de Barcelona.</p>`;
+    `<p class="hint2" style="margin-top:10px">Law texts as of ${I.as_of || "date not recorded"}; versions are pinned in the <a href="../4_laws_and_rules/input/rulebook/sources.lock.json" target="_blank" rel="noopener">source lock</a> (downloaded 9 Nov 2026). ${I.docs.length} official documents, ${fmt(I.pages)} pages. Sources: BOE, codigotecnico.org, Portal Jurídic de Catalunya, Agència de l'Habitatge, RPUC (Generalitat), AMB, Ajuntament de Barcelona.</p>`;
   $("#bkindex").onclick = e => { const b = e.target.closest(".bk-doc"); if (b) { BK.hl = null; bookGo(+b.dataset.p, true); } };
 }
 /* each law in the list: its heading and what it means, in plain words (4_laws_and_rules/input/plain_words.json "laws") */
