@@ -23,7 +23,9 @@
    "value_in_quote": true
   },
   "confidence": 1.0,
-  "checked": "word for word in the official PDF, 9 Nov 2026"
+  "checked": "word for word in the official PDF, 9 Nov 2026",
+  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)",
+  "conversion": "unchanged"
  },
  {
   "rule_id": "BCN-MPGM2004-area-01",
@@ -99,7 +101,9 @@
    "value_in_quote": true
   },
   "confidence": 1.0,
-  "checked": "word for word in the official PDF, 9 Nov 2026"
+  "checked": "word for word in the official PDF, 9 Nov 2026",
+  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)",
+  "conversion": "unchanged"
  },
  {
   "rule_id": "CAT-141-2012-height-01",
@@ -125,7 +129,9 @@
    "value_in_quote": true
   },
   "confidence": 1.0,
-  "checked": "word for word in the official PDF, 9 Nov 2026"
+  "checked": "word for word in the official PDF, 9 Nov 2026",
+  "scope": "new buildings (Annex 1)",
+  "conversion": "a conversion uses the 2,40 m card (Annex 4 Grups B, C and D)"
  },
  {
   "rule_id": "CAT-141-2012-height-04C",
@@ -144,14 +150,17 @@
   },
   "quote": "Apartat 3.5: mínim de 2,40 m en comptes de 2,50 m, la resta igual.",
   "used_by": "not used yet",
-  "note": "Team finding (Exp 2): a shop conversion falls under Annex 4 group C, so 2,40 m applies instead of 2,50 m.",
+  "note": "Annex 4 sets 2,40 m in place of 2,50 m in Grups A to F (the same sentence each time), so it applies to a shop conversion in Grups B, C and D. The rest of Annex 1 3.5 stays: 2,20 m in bathrooms, kitchens and circulation, and 2,30 m over at most 20 % of a room.",
   "checks": {
    "source_found": true,
    "quote_in_source": true,
    "value_in_quote": true
   },
   "confidence": 1.0,
-  "checked": "word for word in the official PDF, 9 Nov 2026"
+  "checked": "word for word in the official PDF, 9 Nov 2026",
+  "scope": "conversions (Annex 4 Grups B, C and D)",
+  "conversion": "2,40 m; 2,20 m in bathrooms, kitchens and circulation; 2,30 m over at most 20 % of a room",
+  "extra_quotes": [{"article":"Annex 1 · 3.5 Alçada mínima habitable","quote":"En el cas de cambres higièniques, cuines i espais de circulació, aquesta alçada no serà inferior a 2,20 m.","page":17},{"article":"Annex 1 · 3.5 Alçada mínima habitable","quote":"Al menjador, sala d’estar i habitacions s’admetrà, excepcionalment, 2,30 m d’alçada per al pas tècnic d’instal·lacions i per a elements estructurals que no afectin més del 20% de la superfície de la peça.","page":17}]
  },
  {
   "rule_id": "CAT-141-2012-bedroom-01",
@@ -177,7 +186,9 @@
    "value_in_quote": true
   },
   "confidence": 1.0,
-  "checked": "word for word in the official PDF, 9 Nov 2026"
+  "checked": "word for word in the official PDF, 9 Nov 2026",
+  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)",
+  "conversion": "unchanged"
  },
  {
   "rule_id": "CAT-141-2012-bedroom-02",
@@ -203,7 +214,9 @@
    "value_in_quote": true
   },
   "confidence": 1.0,
-  "checked": "word for word in the official PDF, 9 Nov 2026"
+  "checked": "word for word in the official PDF, 9 Nov 2026",
+  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)",
+  "conversion": "unchanged"
  },
  {
   "rule_id": "CAT-141-2012-living-01",
@@ -229,7 +242,9 @@
    "value_in_quote": true
   },
   "confidence": 1.0,
-  "checked": "word for word in the official PDF, 9 Nov 2026"
+  "checked": "word for word in the official PDF, 9 Nov 2026",
+  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)",
+  "conversion": "unchanged"
  },
  {
   "rule_id": "CAT-141-2012-window-01",
@@ -255,7 +270,9 @@
    "value_in_quote": true
   },
   "confidence": 1.0,
-  "checked": "word for word in the official PDF, 9 Nov 2026"
+  "checked": "word for word in the official PDF, 9 Nov 2026",
+  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)",
+  "conversion": "unchanged"
  },
  {
   "rule_id": "CAT-141-2012-bath-01",
@@ -281,7 +298,9 @@
    "value_in_quote": true
   },
   "confidence": 1.0,
-  "checked": "word for word in the official PDF, 9 Nov 2026 (the table\u0027s cells in reading order)"
+  "checked": "word for word in the official PDF, 9 Nov 2026 (the table\u0027s cells in reading order)",
+  "scope": "new buildings (Annex 1) and conversions (Annex 4 Grups B, C and D keep it)",
+  "conversion": "unchanged"
  },
  {
   "rule_id": "CAT-141-2012-patio-01",
@@ -307,7 +326,10 @@
    "value_in_quote": true
   },
   "confidence": 1.0,
-  "checked": "word for word in the official PDF, 9 Nov 2026"
+  "checked": "word for word in the official PDF, 9 Nov 2026",
+  "scope": "new buildings (Annex 1); conversions: see the change",
+  "conversion": "not required in Grup C; areas −10 % in Grups B and D (8,1 m² / 5,4 m²)",
+  "extra_quotes": [{"article":"Annex 4 · Apartat 2 · Grup C","quote":"Grup C Intervencions: canvi d’ús d’un edifici (≤ 50% de la superfície construïda sobre o sota rasant). Annex aplicable i excepcions: annex 1 amb les excepcions següents: Apartat 2 íntegrament exempt, excepte 2.2.1.","page":23},{"article":"Annex 4 · Apartat 2 · Grup D","quote":"Grup D Intervencions: canvi d’ús d’un edifici (\u003e 50% de la superfície construïda sobre o sota rasant). Annex aplicable i excepcions: annex 1 amb les excepcions següents: Apartat 2.5.1 s’accepta una reducció del 10% en les superfícies.","page":23}]
  },
  {
   "rule_id": "CTE-SUA-corridor-01",

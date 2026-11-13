@@ -334,7 +334,8 @@ def experiments():
 
 def main():
     (SITE / "data").mkdir(parents=True, exist_ok=True)
-    data = {"demos": demos(), "rules": j(ROOT / "4_laws_and_rules/output/rules/rules.json"), "experiments": experiments(), "real": real()}
+    data = {"demos": demos(), "rules": j(ROOT / "4_laws_and_rules/output/rules/rules.json"),
+            "annex4": j(ROOT / "4_laws_and_rules/output/rules/annex4.json"), "experiments": experiments(), "real": real()}
     json.dump(data, open(SITE / "data" / "nomad.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     json.dump(premises(), open(SITE / "data" / "premises.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     json.dump(basemap(), open(SITE / "data" / "basemap.json", "w", encoding="utf-8"), separators=(",", ":"))

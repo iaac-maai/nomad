@@ -83,15 +83,15 @@ COMMUNITY = "Decret 141/2012 Annex 1 2.6 (community room from 8 homes: 1,20 x 0,
 
 def _annex4(grup, homes, plan):
     """The conversion group of this shop (Bars's tools/annex4_grup.py from the Catastro CAT data) and what it adds.
-    grup = [group, % of the building, how the unit was found, largest %, why unknown]. Grup C: Annex 1 apartat 2 exempt
-    except 2.2.1, patios not required, 2,40 m. Grup D: apartat 2 applies: 2.1 route (all homes on the entry level: met),
+    grup = [group, % of the building, how the unit was found, largest %, why unknown]. Grups B, C and D: 2,40 m.
+    Grup C: Annex 1 apartat 2 exempt except 2.2.1, patios not required. Grup D: apartat 2 applies: 2.1 route (all homes on the entry level: met),
     2.2.2 landing (no lift on one level), 2.5.1 patios -10 % (NOMAD's shop plans light no room from a patio), and 2.6 the
     community room from 8 homes, checked here against the plan's shared rooms."""
     g = grup[0] if grup else "unknown"
     pct = "" if not grup or grup[1] is None else "%s %% of the building's built area%s" % (grup[1], " (up to %s %%)" % grup[3] if len(grup) > 3 and grup[3] not in (None, grup[1]) else "")
     text = {"C": "Grup C (<= 50 %): Annex 1 apartat 2 exempt except 2.2.1 (each home reached from a public or common space); patios not required; 2,40 m clear height",
-            "D": "Grup D (> 50 %): Annex 1 apartat 2 applies (2.1 accessible route, 2.2.2 1,50 m landing, 2.6 community room from 8 homes); patios -10 %; 2,40 m",
-            "B": "Grup B: the shop is almost the whole building (a total change of use): use the whole-building mode",
+            "D": "Grup D (> 50 %): Annex 1 apartat 2 applies (2.1 accessible route, 2.2.2 1,50 m landing, 2.6 community room from 8 homes); patios -10 %; 2,40 m clear height",
+            "B": "Grup B: total change of use of the building; use the whole-building mode; patios -10 %; 2,40 m clear height",
             }.get(g, "group not known (no Catastro unit found for this premises): NOMAD applies Grup C")
     cards = [{"title": "Conversion group", "ok": True, "check": text, "value": pct or g, "limit": None, "cite": ANNEX4,
               "scope": "Catastro CAT data (team tool annex4_grup.py): a NOMAD estimate"}]

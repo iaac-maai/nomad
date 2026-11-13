@@ -3,6 +3,9 @@
 IAAC asks us to declare every AI tool we use. Add one row each time.
 
 | Date | Who | Tool | What for | What we kept |
+| 2026-11-13 | Bars | Codex (ChatGPT) | Reorganized Bars's work into the agreed numbered team folders, updated paths and site selection, documented outputs and verified the historical XGBoost provenance | Checked path mappings, git history, tests, output hashes, and both local server modes; results recorded in the reorganization PR branch |
+| 2026-11-13 | Bars | Codex (ChatGPT) | Corrected Bhavini site rule quotes and added checked page/provenance metadata for item 1 | Synced the 16 loaded rules with Bars checked rule data; values unchanged |
+| 2026-11-13 | Bars | Codex (ChatGPT) | Added Annex 4 group rules, checked quotes and group-display details to Bhavini's site | Grups B, C and D all show 2,40 m; Grup C patio exception; 20/20 Annex 4 quotes pass |
 | --- | --- | --- | --- | --- |
 | 2026-10-26 | | Claude | Starter kit scripts for experiments 1 and 2 | Scripts in exp1_daylight/ and exp2_rules/, reviewed by the team |
 | 2026-10-27 | Bars | Claude | Debugging Grasshopper/Honeybee setup, switching Exp 1 to ground-floor shops, training script | Scripts and settings, reviewed by Bars |
@@ -27,7 +30,6 @@ IAAC asks us to declare every AI tool we use. Add one row each time.
 | 2026-11-11 | Bars | Claude | Annex 4 v2 (PR #12): tools/annex4_grup.py rewritten (building area per parcel or own construction unit; shop area = ground-floor non-housing space + own basement; data-mismatch check), Grup B added to tools/annex4_cards.py and the site; run on the real CAT file (B 60, C 5,094, D 151, unknown 767) | 10/10 tests, 20/20 Annex 4 quotes (check_quotes.py), spot check by Bars of shops in each group; site checked after publishing |
 | 2026-11-12 | Bhavini | Claude | shop_data.py moved to tools/ (as Bars asked), paths set for the repo root and the CAT file in nomad/02_Code/data/barcelona/catastro/cat/ | Script parses; same code as Bhavini's local version |
  bars/reorganise-my-files
-| 2026-11-13 | Bars | Codex (ChatGPT) | Reorganized Bars's work into the agreed numbered team folders, updated paths and site selection, documented outputs and verified the historical XGBoost provenance | Checked path mappings, git history, tests, output hashes, and both local server modes; results recorded in the reorganization PR branch |
 | 2026-11-12 | Alvaro | Claude | CLAUDE.md: handoff for Claude Code on Alvaro's PC (state of the project, history, branches and PRs, rules, the facade task from PR #16, open work, commands); updated the same day after PR #16 merged, with the three facade decisions Alvaro made | Reviewed by Alvaro before merging; no code or data changed |
 
 
@@ -60,4 +62,3 @@ The same list as the website's Sources table (9 Nov 2026). No row is left "to ch
 
 Removed on 9 Nov 2026 with the features that used them: ResPlan, IfcOpenShell/trimesh and Pyodide (parked layout
 engine, see PARKED.md), the metropolitan-area data (Results section), idealista18 prices, Catastro Visor 3D units.
-| 2026-11-13 | Bars | Codex (ChatGPT) | Corrected Bhavini site rule quotes and added checked page/provenance metadata for item 1 | Synced the 16 loaded rules with Bars checked rule data; values unchanged |

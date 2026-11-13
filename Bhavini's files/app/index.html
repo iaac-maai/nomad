@@ -218,6 +218,13 @@ h3 { font-size: 19px; line-height: 1.2 }
 .rule summary { cursor: pointer; font: 500 12px var(--mono); color: var(--terra-ink) }
 .rule blockquote { margin: 8px 0 0; padding-left: 10px; border-left: 2px solid var(--terra); color: var(--slate); font-style: italic }
 .rule .chk { font: 600 11px var(--mono); color: var(--yes-ink) } .rule .chk.review { color: var(--check-ink) }
+.rule .scope { font: 600 11.5px var(--mono); color: var(--ink) } .rule .conv { font-size: 13px; color: var(--slate) }
+#rp-rules .a4 { margin-top: 16px; padding: 24px; display: grid; gap: 16px }
+#rp-rules .a4 > p { margin: 0; color: var(--slate); max-width: 90ch }
+.a4grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px }
+.a4grid > div { border: 1.5px solid var(--line); border-radius: var(--r-sm); padding: 16px; display: grid; gap: 8px; align-content: start }
+.a4 blockquote { margin: 0; padding-left: 10px; border-left: 2px solid var(--terra); color: var(--slate); font-style: italic; font-size: 13px }
+.a4 ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px }
 .golden { margin-top: 18px; padding: 16px 18px; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px }
 .golden b { display: block; font: 700 28px/1 var(--display) }
 .golden span { font-size: 12.5px; color: var(--slate) }
@@ -875,7 +882,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
       <div class="shopcard" id="dshop"></div></li>
     <li class="panel wstep" id="w2"><h3><span class="wn">2</span> What you need</h3>
       <div class="req" id="req"></div>
-      <div class="reqrow"><label for="hgt" id="hgtlab">Clear height of the shop (m)</label><input id="hgt" type="number" min="2" max="8" step="0.05" value="3.00"><span class="hint2">a shop conversion needs 2,40 m (Decret 141/2012, Annex 4 group C)</span><span class="hint2" id="hgtsrc"></span></div>
+      <div class="reqrow"><label for="hgt" id="hgtlab">Clear height of the shop (m)</label><input id="hgt" type="number" min="2" max="8" step="0.05" value="3.00"><span class="hint2">a shop conversion needs 2,40 m (Decret 141/2012, Annex 4 Grups B, C and D)</span><span class="hint2" id="hgtsrc"></span></div>
       <div class="reqrow" role="radiogroup" aria-label="Kind of homes"><span>Kind of homes:</span>
         <label><input type="radio" name="scheme" value="" checked> full flats</label>
         <label><input type="radio" name="scheme" value="shared"> shared-space homes: small private homes (24 m² and up) with shared living rooms and kitchens</label>
@@ -989,6 +996,7 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
   <h2>Every number comes from the official text</h2>
   <div id="rp-rules">
   <p class="lede">The 16 rules NOMAD checks, each with the sentence of the law it comes from. A card passes when its quote is found word for word in the rulebook and the number is in the quote.</p>
+  <div id="annex4" class="a4 panel"></div>
   <div class="golden panel" id="golden"></div>
   <div class="rulegrid" id="rulegrid"></div>
   </div>
@@ -1627,10 +1635,27 @@ function drawRules() {
   $("#rulegrid").innerHTML = D.rules.map(r => `<div class="rule panel">
       ${plainHtml([r.rule_id])}
       <div class="top"><span class="what">${esc(r.applies_to)}<br>${esc(r.parameter.replace(/_/g, " "))} ${esc(r.operator)}</span><span class="val num">${esc(val(r))}</span></div>
+      ${r.scope ? `<span class="scope">For: ${esc(r.scope)}</span>` : ""}
+      ${r.conversion && r.conversion !== "unchanged" ? `<span class="conv">Conversion: ${esc(r.conversion)}</span>` : ""}
       <span class="src">${esc(r.source.norm)} · ${esc((r.source.article || "").replace(/\s+/g, " "))}</span>
       <span class="chk ${r.confidence < 1 ? "review" : ""}">${r.confidence < 1 ? "to review against the PDF" : "quote found word for word"}</span>
-      ${r.quote ? `<details><summary>Read the law</summary><blockquote>${esc(r.quote.slice(0, 520))}${r.quote.length > 520 ? " …" : ""}</blockquote></details>` : ""}
+      ${r.quote ? `<details><summary>Read the law</summary><blockquote>${esc(r.quote.slice(0, 520))}${r.quote.length > 520 ? " …" : ""}</blockquote>
+        ${(r.extra_quotes || []).map(q => `<p class="src">${esc(q.article)} · p. ${q.page}</p><blockquote>${esc(q.quote)}</blockquote>`).join("")}</details>` : ""}
       ${r.note ? `<span class="src">${esc(r.note)}</span>` : ""}</div>`).join("");
+  drawAnnex4();
+}
+
+function drawAnnex4() {
+  const A = D.annex4, box = $("#annex4");
+  if (!A) { box.hidden = true; return; }
+  const p = n => `${esc(A.source.norm)} · p. ${n}`;
+  box.innerHTML = `<h3>Conversions: Decret 141/2012, Annex 4</h3>
+    <p>A shop that becomes homes is a change of use of part of a building. Annex 1 applies with Annex 4's exceptions. The group depends on how much of the building's built area changes use. ${esc(A.decide)}</p>
+    <div class="a4grid">${A.groups.map(g => `<div><b>Grup ${g.grup}: ${esc(g.when)}</b><span>${esc(g.plain)}</span>
+      <blockquote>${esc(g.quote)}</blockquote><span class="src">${p(g.page)}</span></div>`).join("")}</div>
+    <div><b>${esc(A.grup_d_note)}</b><ul>${A.grup_d_apartat2.map(a => `<li><b>${esc(a.apartat)}</b> ${esc(a.what)}
+      <details><summary>Read the law</summary><blockquote>${esc(a.quote)}</blockquote><span class="src">${p(a.page)}</span></details></li>`).join("")}</ul></div>
+    <p class="note">${esc(A.symbol_note)}</p>`;
 }
 
 /* ---------- 5. experiments ---------- */
@@ -1659,7 +1684,7 @@ function drawExps() {
     { id: "exp3", tag: "EXP 3 · STEP 4", h: "Can AI read Decret 141 and write the rules correctly?",
       p: `Team experiment: vector search raised fully correct rule cards from 4 to 8 of 10. NOMAD's own ${D.rules.length} rule cards were then tested against a golden set: ${e.golden.questions} questions, ${pct(e.golden.answer_accuracy)} % right after the fixes it found.`,
       chart: bars([["before the fixes", 75, C("--muted")], ["after", pct(e.golden.answer_accuracy), C("--yes")]], 100, " %"),
-      l: "The golden set found real bugs: shop conversions need 2,40 m (Annex 4 group C), not 2,50 m, and 8 shops had been thrown out for it." },
+      l: "The golden set found real bugs: shop conversions need 2,40 m (Annex 4 Grups B, C and D), not 2,50 m, and 8 shops had been thrown out for it." },
     { id: "exp4", tag: "EXP 4 · STEP 5 · TEAM", h: "Can AI predict daylight without a simulation?",
       p: DL ? `${DL.simulations} shop variants simulated in Radiance (Ladybug/Honeybee); ${DL.model} learns the daylight and how many metres of floor reach the ${DL.thresholds.method} target for Barcelona (daylight factor ${dec(DL.thresholds.D_target_pct)} %, minimum ${dec(DL.thresholds.D_minimum_pct)} %, from the TMYx weather file). Then all ${fmt(DL.counts.shops)} empty shops of the 2024 census, in ${DL.counts.districts} districts, predicted in seconds: ${fmt(DL.counts.livable)} livable, ${fmt(DL.counts.needs_change)} need a change, ${fmt(DL.counts.not_livable)} not livable (${dlClasses()}). Lit depth checked on ${DL.validation.shops} real shops against Radiance: mean error ${dec(DL.validation.lit_depth_mae_m)} m. Floor height and windows assumed.`
          : "the daylight results did not load.",
@@ -2060,14 +2085,16 @@ const CORE_HIT = { tower: "lands on the real hall in 93 % of 171 tested building
 const CORES = fetch("data/cores.json?v=2").then(r => r.ok ? r.json() : {}).catch(() => ({}));   /* rule C: assumed hall and stair (src/building/shop_data.py step 2b) */
 const ANNEX4 = fetch("data/annex4_grup.json?v=1").then(r => r.ok ? r.json() : {}).catch(() => ({}));
 const GRUP_EN = {
-  C: "Grup C: the shop is half the building or less. The building rules (stairs, lift, patios) do not apply, except that each home must be reached from the street or a shared space. Ceiling 2,40 m.",
-  D: "Grup D: the shop is more than half the building. The building rules apply: an accessible route, a 1,50 m landing, a community room from 8 homes, patios 10 % smaller. Ceiling 2,40 m.",
-  B: "Grup B: the shop is almost the whole building, a total change of use. Use the whole-building mode.",
+  C: "Grup C: the shop is half the building or less. Annex 1 apartat 2 is exempt except 2.2.1. A patio is not required. Clear height: 2,40 m.",
+  D: "Grup D: the shop is more than half the building. Annex 1 apartat 2 applies: accessible route, 1,50 m landing and a community room from 8 homes. Patio minimum areas may be 10 % smaller. Clear height: 2,40 m.",
+  B: "Grup B: total change of use of the building. Use the whole-building mode. Patio minimum areas may be 10 % smaller. Clear height: 2,40 m.",
 };
+const GRUP_METHOD = { same: "all possible spaces give the same group", only: "only one possible space was found", door: "matched by the census door" };
 async function grupOf(r) { const a = await ANNEX4; return a.shops ? a.shops[`${(r.ref || "").slice(0, 14)}|${r.x}|${r.y}`] || null : null; }
 function grupHtml(g) {
-  if (!g) return "not known for this premises: NOMAD applies Grup C";
-  return `<b>${g[0] === "unknown" ? "not known" : "Grup " + esc(g[0])}</b>${g[1] != null ? `, ${dec(g[1], 1)} % of the building's built area${g[3] != null && g[3] !== g[1] ? ` (up to ${dec(g[3], 1)} %)` : ""}` : ""}. ${g[0] in GRUP_EN ? GRUP_EN[g[0]] : `${esc(g[4] || "")}. NOMAD applies Grup C.`}`;
+  if (!g) return "not known for this premises. How found: no matching CAT unit. NOMAD applies Grup C as an estimate.";
+  const how = GRUP_METHOD[g[2]] || g[4] || "no matching CAT unit was found";
+  return `<b>${g[0] === "unknown" ? "not known" : "Grup " + esc(g[0])}</b>${g[1] != null ? `, ${dec(g[1], 1)} % of the building's built area${g[3] != null && g[3] !== g[1] ? ` (up to ${dec(g[3], 1)} %)` : ""}` : ""}. How found: ${esc(how)}. ${g[0] in GRUP_EN ? GRUP_EN[g[0]] : "NOMAD applies Grup C as an estimate."}`;
 }
 const DOORS = fetch("data/doors.json?v=2").then(r => r.ok ? r.json() : {}).catch(() => ({}));
 async function shopMarks(ref, r, foot, ghost) {                 /* doors and entrances on the shop plan (same local metres as the outline) */
