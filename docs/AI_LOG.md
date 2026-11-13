@@ -3,10 +3,11 @@
 IAAC asks us to declare every AI tool we use. Add one row each time.
 
 | Date | Who | Tool | What for | What we kept |
+| --- | --- | --- | --- | --- |
 | 2026-11-13 | Bars | Codex (ChatGPT) | Reorganized Bars's work into the agreed numbered team folders, updated paths and site selection, documented outputs and verified the historical XGBoost provenance | Checked path mappings, git history, tests, output hashes, and both local server modes; results recorded in the reorganization PR branch |
 | 2026-11-13 | Bars | Codex (ChatGPT) | Corrected Bhavini site rule quotes and added checked page/provenance metadata for item 1 | Synced the 16 loaded rules with Bars checked rule data; values unchanged |
 | 2026-11-13 | Bars | Codex (ChatGPT) | Added Annex 4 group rules, checked quotes and group-display details to Bhavini's site | Grups B, C and D all show 2,40 m; Grup C patio exception; 20/20 Annex 4 quotes pass |
-| --- | --- | --- | --- | --- |
+| 2026-11-13 | Bars | Codex (ChatGPT) | Added dated Catastro attribution to Bhavini site results | CAT and INSPIRE Buildings/Addresses results show their respective access dates |
 | 2026-10-26 | | Claude | Starter kit scripts for experiments 1 and 2 | Scripts in exp1_daylight/ and exp2_rules/, reviewed by the team |
 | 2026-10-27 | Bars | Claude | Debugging Grasshopper/Honeybee setup, switching Exp 1 to ground-floor shops, training script | Scripts and settings, reviewed by Bars |
 | 2026-10-27 | Bars | Gemini 3.5 Flash Lite (API, model `gemini-3.5-flash-lite`, set as GEMINI_MODEL in .env; 5 of the 155 logged drafts in outputs/run_pdf used the code default `gemini-2.5-flash`) | Drafting 10 rule cards x 5 runs from Decret 141/2012 (Exp 2) | Drafts only, scored against human gold cards |
