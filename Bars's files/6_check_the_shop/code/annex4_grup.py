@@ -33,8 +33,10 @@ same scope. The alternative reading of "sobre o sota rasant" (above and below gr
 too, to count the shops it would move (docs/OPEN_QUESTIONS.md).
 
 Run from the repo root:
-  python tools/annex4_grup.py --cat <08_900_U_YYYY-MM-DD.CAT.gz> --accessed YYYY-MM-DD [--census <csv>]
-Writes nomad/04_Website/data/annex4_grup.json (site) and nomad/02_Code/results/annex4/spotcheck.md (local, with m²).
+  python "Bars's files/6_check_the_shop/code/annex4_grup.py" --cat <08_900_U_YYYY-MM-DD.CAT.gz> --accessed YYYY-MM-DD [--census <csv>]
+Writes Bars's files/6_check_the_shop/output/annex4_grup.json (group and percent only) and
+nomad/02_Code/results/annex4/spotcheck.md (local, with m²). Copy the JSON to Bars's files/app/data/ only
+using the documented copy step in Bars's files/6_check_the_shop/README.md.
 """
 import argparse
 import csv
@@ -43,10 +45,11 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[3]
+BARS = ROOT / "Bars's files"
 CENSUS = ROOT / "nomad" / "02_Code" / "data" / "barcelona" / "census" / "2024_CensComercial_BCN.csv"
-PREMISES = ROOT / "nomad" / "04_Website" / "data" / "premises.json"
-OUT = ROOT / "nomad" / "04_Website" / "data" / "annex4_grup.json"
+PREMISES = BARS / "app" / "data" / "premises.json"
+OUT = BARS / "6_check_the_shop" / "output" / "annex4_grup.json"
 SPOT = ROOT / "nomad" / "02_Code" / "results" / "annex4" / "spotcheck.md"
 GROUND = {"00", "0", "000", "BJ", "PB", "BX", "LO", "LC", "LOC"}
 BELOW_WORDS = {"SS", "SO", "ST", "SM", "SOT"}
@@ -225,7 +228,7 @@ def main():
            f"accessed on {a.accessed}. Not Catastro information: a NOMAD estimate.")
     OUT.write_text(json.dumps({"about": "Decret 141/2012 Annex 4 group of each empty shop: [grup, % of the building's "
                                         "built area, how the unit was found, largest % when several units fit, why unknown]. "
-                                        "Built by tools/annex4_grup.py.",
+                                        "Built by Bars's files/6_check_the_shop/code/annex4_grup.py.",
                                "source": src, "accessed": a.accessed, "counts": counts, "methods": methods,
                                "moved_if_counted_separately": moved, "shops": shops},
                               ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
