@@ -1,0 +1,566 @@
+{
+ "_about": "Plain words for each rule card (4_laws_and_rules/output/rules/rules.json), written by hand from the card's official sentence and value. 'says' = what the law asks; 'means' = what it means for turning a shop into homes. Numbers must match the card. Languages: en, es, ca.",
+ "CAT-141-2012-area-01": {
+  "en": {
+   "says": "Every home needs at least 36 m² of usable floor, with a living room, a bathroom and a kitchen.",
+   "means": "In Barcelona the city asks for more (40 m², see below)."
+  },
+  "es": {
+   "says": "Toda vivienda necesita al menos 36 m² útiles, con sala de estar, baño y cocina.",
+   "means": "En Barcelona la ciudad pide más (40 m², ver abajo)."
+  },
+  "ca": {
+   "says": "Tot habitatge necessita com a mínim 36 m² útils, amb sala d'estar, bany i cuina.",
+   "means": "A Barcelona la ciutat en demana més (40 m², vegeu més avall)."
+  }
+ },
+ "BCN-MPGM2004-area-01": {
+  "en": {
+   "says": "In Barcelona, every home needs at least 40 m² of usable floor.",
+   "means": "A shop smaller than about 40 m² cannot hold even one home."
+  },
+  "es": {
+   "says": "En Barcelona, toda vivienda necesita al menos 40 m² útiles.",
+   "means": "Un local de menos de unos 40 m² no puede tener ni una vivienda."
+  },
+  "ca": {
+   "says": "A Barcelona, tot habitatge necessita com a mínim 40 m² útils.",
+   "means": "Un local de menys d'uns 40 m² no pot tenir ni un habitatge."
+  }
+ },
+ "BCN-MPGM2004-facade-01": {
+  "en": {
+   "says": "Every home needs at least 3 m of wall on the street or on the inner courtyard of the block.",
+   "means": "A narrow shop front limits how many homes fit side by side."
+  },
+  "es": {
+   "says": "Toda vivienda necesita al menos 3 m de fachada a la calle o al patio interior de manzana.",
+   "means": "Una fachada estrecha limita cuántas viviendas caben una al lado de otra."
+  },
+  "ca": {
+   "says": "Tot habitatge necessita com a mínim 3 m de façana al carrer o al pati interior d'illa.",
+   "means": "Una façana estreta limita quants habitatges hi caben un al costat de l'altre."
+  }
+ },
+ "CAT-141-2012-facade-01": {
+  "en": {
+   "says": "The bigger a home is, the more façade it needs: at least 1 m of façade for every 9 m² of usable floor.",
+   "means": "Deep shops cannot be one long home; the back part needs another use."
+  },
+  "es": {
+   "says": "Cuanto más grande es la vivienda, más fachada necesita: al menos 1 m de fachada por cada 9 m² útiles.",
+   "means": "Los locales profundos no pueden ser una sola vivienda larga; la parte de atrás necesita otro uso."
+  },
+  "ca": {
+   "says": "Com més gran és l'habitatge, més façana necessita: com a mínim 1 m de façana per cada 9 m² útils.",
+   "means": "Els locals profunds no poden ser un sol habitatge llarg; la part del darrere necessita un altre ús."
+  }
+ },
+ "CAT-141-2012-height-01": {
+  "en": {
+   "says": "Rooms in a new home need at least 2,50 m from floor to ceiling.",
+   "means": "For a shop turned into homes the lower 2,40 m applies (next card)."
+  },
+  "es": {
+   "says": "Las estancias de una vivienda nueva necesitan al menos 2,50 m del suelo al techo.",
+   "means": "Para un local convertido en viviendas se aplica el mínimo de 2,40 m (siguiente tarjeta)."
+  },
+  "ca": {
+   "says": "Les estances d'un habitatge nou necessiten com a mínim 2,50 m del terra al sostre.",
+   "means": "Per a un local convertit en habitatges s'aplica el mínim de 2,40 m (targeta següent)."
+  }
+ },
+ "CAT-141-2012-height-04C": {
+  "en": {
+   "says": "When a shop becomes homes (change of use), rooms need at least 2,40 m from floor to ceiling instead of 2,50 m.",
+   "means": "Most ground floors are tall enough; low ones cannot become homes."
+  },
+  "es": {
+   "says": "Cuando un local pasa a ser vivienda (cambio de uso), las estancias necesitan al menos 2,40 m del suelo al techo en lugar de 2,50 m.",
+   "means": "La mayoría de plantas bajas tienen altura suficiente; las bajas no pueden ser vivienda."
+  },
+  "ca": {
+   "says": "Quan un local passa a ser habitatge (canvi d'ús), les estances necessiten com a mínim 2,40 m del terra al sostre en lloc de 2,50 m.",
+   "means": "La majoria de plantes baixes tenen prou alçada; les baixes no poden ser habitatge."
+  }
+ },
+ "CAT-141-2012-bedroom-01": {
+  "en": {
+   "says": "A bedroom must have at least 6 m².",
+   "means": "Small leftover corners cannot count as bedrooms."
+  },
+  "es": {
+   "says": "Un dormitorio debe tener al menos 6 m².",
+   "means": "Los rincones pequeños no cuentan como dormitorios."
+  },
+  "ca": {
+   "says": "Una habitació ha de tenir com a mínim 6 m².",
+   "means": "Els racons petits no compten com a habitacions."
+  }
+ },
+ "CAT-141-2012-bedroom-02": {
+  "en": {
+   "says": "A 2 m × 2 m square must fit in every bedroom (in homes with 3 or more bedrooms, one bedroom needs 2,60 m).",
+   "means": "Bedrooms cannot be long narrow strips."
+  },
+  "es": {
+   "says": "En cada dormitorio debe caber un cuadrado de 2 m × 2 m (en viviendas de 3 o más dormitorios, uno necesita 2,60 m).",
+   "means": "Los dormitorios no pueden ser franjas largas y estrechas."
+  },
+  "ca": {
+   "says": "A cada habitació hi ha de cabre un quadrat de 2 m × 2 m (en habitatges de 3 o més habitacions, una necessita 2,60 m).",
+   "means": "Les habitacions no poden ser franges llargues i estretes."
+  }
+ },
+ "CAT-141-2012-living-01": {
+  "en": {
+   "says": "A circle 2,80 m wide must fit in the living or dining room.",
+   "means": "The living room needs real width, not a corridor."
+  },
+  "es": {
+   "says": "En la sala de estar o comedor debe caber un círculo de 2,80 m de diámetro.",
+   "means": "La sala necesita anchura real, no un pasillo."
+  },
+  "ca": {
+   "says": "A la sala d'estar o menjador hi ha de cabre un cercle de 2,80 m de diàmetre.",
+   "means": "La sala necessita amplada real, no un passadís."
+  }
+ },
+ "CAT-141-2012-window-01": {
+  "en": {
+   "says": "Living rooms and bedrooms need windows of at least 1/8 of their floor area (counted up to 2,5 m high), for daylight and fresh air.",
+   "means": "Rooms at the back of a deep shop, far from the façade, usually fail this."
+  },
+  "es": {
+   "says": "Salas y dormitorios necesitan ventanas de al menos 1/8 de su superficie (contadas hasta 2,5 m de altura), para luz natural y ventilación.",
+   "means": "Las estancias del fondo de un local profundo, lejos de la fachada, suelen no cumplirlo."
+  },
+  "ca": {
+   "says": "Sales i habitacions necessiten finestres d'almenys 1/8 de la seva superfície (comptades fins a 2,5 m d'alçada), per a llum natural i ventilació.",
+   "means": "Les estances del fons d'un local profund, lluny de la façana, sovint no ho compleixen."
+  }
+ },
+ "CAT-141-2012-bath-01": {
+  "en": {
+   "says": "A home with up to 3 bedrooms needs 1 toilet, 1 basin and 1 shower or bath; from 4 bedrooms, 2 toilets and 2 basins.",
+   "means": "Each home needs its own water and drain connections."
+  },
+  "es": {
+   "says": "Una vivienda de hasta 3 dormitorios necesita 1 inodoro, 1 lavabo y 1 ducha o bañera; desde 4 dormitorios, 2 inodoros y 2 lavabos.",
+   "means": "Cada vivienda necesita sus propias conexiones de agua y desagüe."
+  },
+  "ca": {
+   "says": "Un habitatge de fins a 3 habitacions necessita 1 vàter, 1 rentamans i 1 dutxa o banyera; a partir de 4 habitacions, 2 vàters i 2 rentamans.",
+   "means": "Cada habitatge necessita les seves pròpies connexions d'aigua i desguàs."
+  }
+ },
+ "CAT-141-2012-patio-01": {
+  "en": {
+   "says": "A courtyard that gives light to rooms must fit a 3 m circle and have at least 9 m² (6 m² and a 2,5 m circle if it only serves kitchens, bathrooms or stairs); more for courtyards over 3 floors high.",
+   "means": "Small light wells cannot be counted as the window of a bedroom."
+  },
+  "es": {
+   "says": "Un patio que da luz a estancias debe tener un círculo de 3 m y al menos 9 m² (6 m² y un círculo de 2,5 m si solo sirve a cocinas, baños o escaleras); más si el patio supera 3 plantas.",
+   "means": "Los patios de luces pequeños no cuentan como ventana de un dormitorio."
+  },
+  "ca": {
+   "says": "Un pati que dona llum a estances ha de tenir un cercle de 3 m i com a mínim 9 m² (6 m² i un cercle de 2,5 m si només serveix cuines, banys o escales); més si el pati supera 3 plantes.",
+   "means": "Els patis de llums petits no compten com a finestra d'una habitació."
+  }
+ },
+ "CTE-SUA-corridor-01": {
+  "en": {
+   "says": "A shared corridor on an accessible route must be at least 1,20 m wide (the same table accepts 1,10 m in shared areas of housing).",
+   "means": "Reaching homes at the back of a shop takes floor space for a corridor."
+  },
+  "es": {
+   "says": "Un pasillo común en un itinerario accesible debe tener al menos 1,20 m de ancho (la misma tabla admite 1,10 m en zonas comunes de vivienda).",
+   "means": "Llegar a viviendas al fondo del local consume superficie de pasillo."
+  },
+  "ca": {
+   "says": "Un passadís comú en un itinerari accessible ha de tenir com a mínim 1,20 m d'amplada (la mateixa taula admet 1,10 m en zones comunes d'habitatge).",
+   "means": "Arribar a habitatges al fons del local consumeix superfície de passadís."
+  }
+ },
+ "CTE-SUA-door-01": {
+  "en": {
+   "says": "A door on an accessible route must leave at least 0,80 m clear to pass.",
+   "means": "Entrance doors must be wide enough for a wheelchair."
+  },
+  "es": {
+   "says": "Una puerta en un itinerario accesible debe dejar al menos 0,80 m libres de paso.",
+   "means": "Las puertas de entrada deben ser suficientemente anchas para una silla de ruedas."
+  },
+  "ca": {
+   "says": "Una porta en un itinerari accessible ha de deixar com a mínim 0,80 m lliures de pas.",
+   "means": "Les portes d'entrada han de ser prou amples per a una cadira de rodes."
+  }
+ },
+ "BCN-MPGM2004-density-12": {
+  "en": {
+   "says": "In zone 12 (old town), a building may have at most as many homes as its built area divided by 80 m² (rounded up).",
+   "means": "This caps how many homes the whole building can have, shop included."
+  },
+  "es": {
+   "says": "En la zona 12 (casco antiguo), un edificio puede tener como máximo tantas viviendas como su superficie construida dividida por 80 m² (redondeando hacia arriba).",
+   "means": "Limita cuántas viviendas puede tener todo el edificio, local incluido."
+  },
+  "ca": {
+   "says": "A la zona 12 (casc antic), un edifici pot tenir com a màxim tants habitatges com la seva superfície construïda dividida per 80 m² (arrodonint a l'alça).",
+   "means": "Limita quants habitatges pot tenir tot l'edifici, local inclòs."
+  }
+ },
+ "BCN-MPGM2004-density-13": {
+  "en": {
+   "says": "In zone 13 (e.g. the Eixample), a building may have at most as many homes as its built area divided by 80 m² (rounded up).",
+   "means": "If the building is already full, the shop cannot add homes; the city applies this to every change of use."
+  },
+  "es": {
+   "says": "En la zona 13 (p. ej. el Eixample), un edificio puede tener como máximo tantas viviendas como su superficie construida dividida por 80 m² (redondeando hacia arriba).",
+   "means": "Si el edificio ya está lleno, el local no puede sumar viviendas; la ciudad lo aplica a todo cambio de uso."
+  },
+  "ca": {
+   "says": "A la zona 13 (p. ex. l'Eixample), un edifici pot tenir com a màxim tants habitatges com la seva superfície construïda dividida per 80 m² (arrodonint a l'alça).",
+   "means": "Si l'edifici ja és ple, el local no pot afegir habitatges; la ciutat ho aplica a tot canvi d'ús."
+  }
+ },
+ "laws": {
+  "zoning": {
+   "en": {
+    "title": "Homes on a ground floor (PGM art. 225.7)",
+    "means": "In blocks built along the street, a ground floor may become homes only if the plot does not get more homes than its zone allows. If a living room or bedroom looks onto the block's inner courtyard, the plot's part of that courtyard must stay unbuilt, at least 6 m deep and 4,5 m wide."
+   },
+   "es": {
+    "title": "Viviendas en planta baja (PGM art. 225.7)",
+    "means": "En manzanas alineadas a la calle, una planta baja puede ser vivienda solo si la parcela no supera el número de viviendas que permite su zona. Si una sala o un dormitorio da al patio interior de manzana, la parte de ese patio de la parcela debe quedar sin edificar, con al menos 6 m de fondo y 4,5 m de ancho."
+   },
+   "ca": {
+    "title": "Habitatges en planta baixa (PGM art. 225.7)",
+    "means": "En illes alineades al carrer, una planta baixa pot ser habitatge només si la parcel·la no supera el nombre d'habitatges que permet la seva zona. Si una sala o una habitació dona al pati interior d'illa, la part d'aquest pati de la parcel·la ha de quedar sense edificar, amb almenys 6 m de fondària i 4,5 m d'amplada."
+   }
+  },
+  "height": {
+   "en": {
+    "title": "When a shop becomes homes: 2,40 m height",
+    "means": "The decree sorts building works into groups. Turning up to half of a building into homes is Group C: the rules for new homes apply, but rooms may be 2,40 m high instead of 2,50 m, and the building-wide rules (section 2) do not apply, except 2.2.1. Over half of the building (Group D) also allows 2,40 m, and patios may be 10 % smaller."
+   },
+   "es": {
+    "title": "Cuando un local pasa a vivienda: 2,40 m de altura",
+    "means": "El decreto agrupa las obras. Convertir hasta la mitad de un edificio en viviendas es el Grupo C: se aplican las reglas de vivienda nueva, pero las estancias pueden tener 2,40 m de altura en lugar de 2,50 m, y no se aplican las reglas del edificio (apartado 2), salvo el 2.2.1. Más de la mitad del edificio (Grupo D) también permite 2,40 m, y los patios pueden ser un 10 % menores."
+   },
+   "ca": {
+    "title": "Quan un local passa a habitatge: 2,40 m d'alçada",
+    "means": "El decret agrupa les obres. Convertir fins a la meitat d'un edifici en habitatges és el Grup C: s'apliquen les regles d'habitatge nou, però les estances poden fer 2,40 m d'alçada en lloc de 2,50 m, i no s'apliquen les regles de l'edifici (apartat 2), llevat del 2.2.1. Més de la meitat de l'edifici (Grup D) també permet 2,40 m, i els patis poden ser un 10 % més petits."
+   }
+  },
+  "height_rule": {
+   "en": {
+    "title": "Minimum room height",
+    "means": "Rooms must be at least 2,50 m high. Bathrooms, kitchens and corridors may be 2,20 m. In living rooms and bedrooms, 2,30 m is accepted where pipes or beams pass, over no more than 20 % of the room."
+   },
+   "es": {
+    "title": "Altura mínima de las estancias",
+    "means": "Las estancias deben tener al menos 2,50 m de altura. Baños, cocinas y pasillos pueden tener 2,20 m. En salas y dormitorios se admiten 2,30 m donde pasan instalaciones o vigas, en no más del 20 % de la estancia."
+   },
+   "ca": {
+    "title": "Alçada mínima de les estances",
+    "means": "Les estances han de fer com a mínim 2,50 m d'alçada. Banys, cuines i passadissos poden fer 2,20 m. A sales i habitacions s'admeten 2,30 m on passen instal·lacions o bigues, en no més del 20 % de l'estança."
+   }
+  },
+  "useful": {
+   "en": {
+    "title": "Smallest home allowed",
+    "means": "Every home needs at least a living-dining room, a bathroom and a kitchen, and 36 m² of usable floor. If it is one open space, it must be possible to close off an 8 m² bedroom."
+   },
+   "es": {
+    "title": "Vivienda mínima permitida",
+    "means": "Toda vivienda necesita al menos una sala-comedor, un baño y una cocina, y 36 m² útiles. Si es un único espacio, debe poder cerrarse un dormitorio de 8 m²."
+   },
+   "ca": {
+    "title": "Habitatge mínim permès",
+    "means": "Tot habitatge necessita com a mínim una sala-menjador, un bany i una cuina, i 36 m² útils. Si és un únic espai, s'hi ha de poder tancar una habitació de 8 m²."
+   }
+  },
+  "useful_bcn": {
+   "en": {
+    "title": "Barcelona: smallest home and façade",
+    "means": "In Barcelona every home needs at least 40 m² of usable floor and 3 m of façade on the street or on the block's inner courtyard. Closed bay windows do not count towards a room's minimum size."
+   },
+   "es": {
+    "title": "Barcelona: vivienda mínima y fachada",
+    "means": "En Barcelona toda vivienda necesita al menos 40 m² útiles y 3 m de fachada a la calle o al patio interior de manzana. Las tribunas y miradores cerrados no cuentan para la superficie mínima de una estancia."
+   },
+   "ca": {
+    "title": "Barcelona: habitatge mínim i façana",
+    "means": "A Barcelona tot habitatge necessita com a mínim 40 m² útils i 3 m de façana al carrer o al pati interior d'illa. Les tribunes i miradors tancats no compten per a la superfície mínima d'una estança."
+   }
+  },
+  "density": {
+   "en": {
+    "title": "Barcelona: how many homes a building may have",
+    "means": "In zones 12 and 13, a plot may have at most as many homes as its built area divided by 80 m², rounded up."
+   },
+   "es": {
+    "title": "Barcelona: cuántas viviendas puede tener un edificio",
+    "means": "En las zonas 12 y 13, una parcela puede tener como máximo tantas viviendas como su superficie construida dividida por 80 m², redondeando hacia arriba."
+   },
+   "ca": {
+    "title": "Barcelona: quants habitatges pot tenir un edifici",
+    "means": "A les zones 12 i 13, una parcel·la pot tenir com a màxim tants habitatges com la seva superfície construïda dividida per 80 m², arrodonint a l'alça."
+   }
+  },
+  "facade": {
+   "en": {
+    "title": "Every home needs a façade",
+    "means": "Every home needs at least one façade to the open air outside the building, giving light and air to a living or dining space (not only to a separate kitchen). The façade must be at least 1 m long for every 9 m² of usable floor."
+   },
+   "es": {
+    "title": "Toda vivienda necesita fachada",
+    "means": "Toda vivienda necesita al menos una fachada al espacio libre exterior, que dé luz y aire a una sala o comedor (no solo a una cocina separada). La fachada debe medir al menos 1 m por cada 9 m² útiles."
+   },
+   "ca": {
+    "title": "Tot habitatge necessita façana",
+    "means": "Tot habitatge necessita com a mínim una façana a l'espai lliure exterior, que doni llum i aire a una sala o menjador (no només a una cuina separada). La façana ha de fer com a mínim 1 m per cada 9 m² útils."
+   }
+  },
+  "hall": {
+   "en": {
+    "title": "Corridors inside the home",
+    "means": "The corridors from the entrance to the main rooms must be at least 1 m wide, with room for a 1,20 m circle in front of the doors of those rooms."
+   },
+   "es": {
+    "title": "Pasillos dentro de la vivienda",
+    "means": "Los pasillos desde la entrada hasta las estancias principales deben tener al menos 1 m de ancho, con espacio para un círculo de 1,20 m delante de las puertas de esas estancias."
+   },
+   "ca": {
+    "title": "Passadissos dins l'habitatge",
+    "means": "Els passadissos des de l'entrada fins a les estances principals han de fer com a mínim 1 m d'amplada, amb espai per a un cercle d'1,20 m davant les portes d'aquestes estances."
+   }
+  },
+  "living": {
+   "en": {
+    "title": "Size of the living room",
+    "means": "A 2,80 m circle must fit in the living or dining room. It must touch the façade along at least 2,20 m and may not narrow below 1,60 m (except at pillars). Narrow parts such as halls do not count as living room."
+   },
+   "es": {
+    "title": "Tamaño de la sala",
+    "means": "En la sala o comedor debe caber un círculo de 2,80 m. Debe tocar la fachada en al menos 2,20 m y no puede estrecharse por debajo de 1,60 m (salvo en pilares). Las partes estrechas, como recibidores, no cuentan como sala."
+   },
+   "ca": {
+    "title": "Mida de la sala",
+    "means": "A la sala o menjador hi ha de cabre un cercle de 2,80 m. Ha de tocar la façana en almenys 2,20 m i no es pot estrènyer per sota d'1,60 m (llevat de pilars). Les parts estretes, com rebedors, no compten com a sala."
+   }
+  },
+  "bedroom": {
+   "en": {
+    "title": "Size of the bedrooms",
+    "means": "Every bedroom has at least 6 m² and fits a 2 m square. In homes with 3 or more bedrooms, one bedroom must fit a 2,60 m square. Door swings and wardrobes may not cut into these squares; pillars may take up to 0,30 m."
+   },
+   "es": {
+    "title": "Tamaño de los dormitorios",
+    "means": "Todo dormitorio tiene al menos 6 m² y en él cabe un cuadrado de 2 m. En viviendas de 3 o más dormitorios, en uno debe caber un cuadrado de 2,60 m. El giro de las puertas y los armarios no pueden invadir estos cuadrados; los pilares pueden ocupar hasta 0,30 m."
+   },
+   "ca": {
+    "title": "Mida de les habitacions",
+    "means": "Tota habitació té com a mínim 6 m² i hi cap un quadrat de 2 m. En habitatges de 3 o més habitacions, en una hi ha de cabre un quadrat de 2,60 m. El gir de les portes i els armaris no poden envair aquests quadrats; els pilars poden ocupar fins a 0,30 m."
+   }
+  },
+  "windows": {
+   "en": {
+    "title": "Daylight and fresh air",
+    "means": "Living spaces and bedrooms need direct daylight and fresh air through windows of at least 1/8 of their floor area, counted between the floor and 2,5 m high. A closed gallery or similar in-between space counts as outside."
+   },
+   "es": {
+    "title": "Luz natural y aire",
+    "means": "Salas y dormitorios necesitan luz natural y ventilación directas con ventanas de al menos 1/8 de su superficie, contadas entre el suelo y 2,5 m de altura. Una galería cerrada o espacio intermedio similar cuenta como exterior."
+   },
+   "ca": {
+    "title": "Llum natural i aire",
+    "means": "Sales i habitacions necessiten llum natural i ventilació directes amb finestres d'almenys 1/8 de la seva superfície, comptades entre el terra i 2,5 m d'alçada. Una galeria tancada o espai intermedi semblant compta com a exterior."
+   }
+  },
+  "bath": {
+   "en": {
+    "title": "Bathrooms",
+    "means": "Every home needs at least 1 toilet, 1 basin and 1 shower or bath. From 4 bedrooms: 2 toilets and 2 basins."
+   },
+   "es": {
+    "title": "Baños",
+    "means": "Toda vivienda necesita al menos 1 inodoro, 1 lavabo y 1 ducha o bañera. Desde 4 dormitorios: 2 inodoros y 2 lavabos."
+   },
+   "ca": {
+    "title": "Banys",
+    "means": "Tot habitatge necessita com a mínim 1 vàter, 1 rentamans i 1 dutxa o banyera. A partir de 4 habitacions: 2 vàters i 2 rentamans."
+   }
+  },
+  "patio": {
+   "en": {
+    "title": "Light wells (patios)",
+    "means": "A patio that lights bedrooms or living rooms must fit a 3 m circle and have 9 m²; one that serves only kitchens, bathrooms or stairs, a 2,5 m circle and 6 m². Each floor above 3 adds 1,80 m² (or 0,90 m²). Patios over 2 floors need an air inlet at the bottom; a patio under a skylight needs an air outlet at the top."
+   },
+   "es": {
+    "title": "Patios de luces",
+    "means": "Un patio que ilumina dormitorios o salas debe tener un círculo de 3 m y 9 m²; uno que sirve solo a cocinas, baños o escaleras, un círculo de 2,5 m y 6 m². Cada planta por encima de 3 suma 1,80 m² (o 0,90 m²). Los patios de más de 2 plantas necesitan una entrada de aire abajo; un patio bajo claraboya necesita una salida de aire arriba."
+   },
+   "ca": {
+    "title": "Patis de llums",
+    "means": "Un pati que il·lumina habitacions o sales ha de tenir un cercle de 3 m i 9 m²; un que serveix només cuines, banys o escales, un cercle de 2,5 m i 6 m². Cada planta per sobre de 3 suma 1,80 m² (o 0,90 m²). Els patis de més de 2 plantes necessiten una presa d'aire a baix; un pati sota claraboia necessita una sortida d'aire a dalt."
+   }
+  },
+  "ldk_repealed": {
+   "en": {
+    "title": "The 20 m² living-kitchen rule is gone",
+    "means": "The old rule asking for a 20 m² living-kitchen-dining room (Annex 1, 3.7.1) is no longer in force. It was repealed by Decret llei 50/2020."
+   },
+   "es": {
+    "title": "Ya no se exige la sala-cocina de 20 m²",
+    "means": "La antigua regla que pedía una sala-cocina-comedor de 20 m² (Anexo 1, 3.7.1) ya no está en vigor. La derogó el Decret llei 50/2020."
+   },
+   "ca": {
+    "title": "Ja no s'exigeix la sala-cuina de 20 m²",
+    "means": "L'antiga regla que demanava una sala-cuina-menjador de 20 m² (Annex 1, 3.7.1) ja no és vigent. La va derogar el Decret llei 50/2020."
+   }
+  },
+  "corridor": {
+   "en": {
+    "title": "Shared corridors (accessible route)",
+    "means": "On an accessible route, corridors must be at least 1,20 m wide; in the shared areas of housing buildings 1,10 m is enough. Short narrow points of at least 1,00 m are allowed if no longer than 0,50 m. Doors leave at least 0,80 m clear."
+   },
+   "es": {
+    "title": "Pasillos comunes (itinerario accesible)",
+    "means": "En un itinerario accesible los pasillos deben tener al menos 1,20 m de ancho; en zonas comunes de edificios de viviendas basta con 1,10 m. Se admiten estrechamientos de al menos 1,00 m si no superan 0,50 m de largo. Las puertas dejan al menos 0,80 m libres."
+   },
+   "ca": {
+    "title": "Passadissos comuns (itinerari accessible)",
+    "means": "En un itinerari accessible els passadissos han de fer com a mínim 1,20 m d'amplada; a les zones comunes d'edificis d'habitatges n'hi ha prou amb 1,10 m. S'admeten estrenyiments d'almenys 1,00 m si no superen 0,50 m de llargada. Les portes deixen com a mínim 0,80 m lliures."
+   }
+  },
+  "ventilation": {
+   "en": {
+    "title": "Fresh air inside (CTE HS 3)",
+    "means": "Buildings must be able to ventilate every room: bring in enough outdoor air and take stale air out. Fumes from heating and hot-water equipment go out through the roof."
+   },
+   "es": {
+    "title": "Aire limpio en el interior (CTE HS 3)",
+    "means": "Los edificios deben poder ventilar cada recinto: aportar suficiente aire exterior y extraer el aire viciado. Los humos de las instalaciones de calefacción y agua caliente salen por la cubierta."
+   },
+   "ca": {
+    "title": "Aire net a l'interior (CTE HS 3)",
+    "means": "Els edificis han de poder ventilar cada recinte: aportar prou aire exterior i extreure l'aire viciat. Els fums de les instal·lacions de calefacció i aigua calenta surten per la coberta."
+   }
+  },
+  "guide": {
+   "en": {
+    "title": "What Barcelona checks",
+    "means": "Before a shop becomes a home the city checks: the zoning allows it; there is a major works licence with a project signed by a technician; the project proves the built area, the homes the building had and that the homes do not exceed built area ÷ 80 m² (unless the plan sets another number); for ground floors, PGM art. 225.7; the habitability decree with Barcelona's 40 m² and 3 m façade; lifts and fire rules."
+   },
+   "es": {
+    "title": "Qué comprueba Barcelona",
+    "means": "Antes de que un local pase a vivienda, el Ayuntamiento comprueba: que la calificación lo permite; que hay licencia de obras mayores con proyecto firmado por un técnico; que el proyecto acredita la superficie construida, las viviendas que tenía el edificio y que no se supera superficie construida ÷ 80 m² (salvo que el planeamiento fije otra cifra); en planta baja, el art. 225.7 del PGM; el decreto de habitabilidad con los 40 m² y 3 m de fachada de Barcelona; ascensores e incendios."
+   },
+   "ca": {
+    "title": "Què comprova Barcelona",
+    "means": "Abans que un local passi a habitatge, l'Ajuntament comprova: que la qualificació ho permet; que hi ha llicència d'obres majors amb projecte signat per un tècnic; que el projecte acredita la superfície construïda, els habitatges que tenia l'edifici i que no se supera superfície construïda ÷ 80 m² (llevat que el planejament en fixi una altra xifra); en planta baixa, l'art. 225.7 del PGM; el decret d'habitabilitat amb els 40 m² i 3 m de façana de Barcelona; ascensors i incendis."
+   }
+  },
+  "door_entry": {
+   "en": {
+    "title": "Entrance door",
+    "means": "The home's entrance door and the doors of its main rooms are at least 0,80 m wide and 2 m high."
+   },
+   "es": {
+    "title": "Puerta de entrada",
+    "means": "La puerta de entrada de la vivienda y las de sus estancias principales tienen al menos 0,80 m de ancho y 2 m de alto."
+   },
+   "ca": {
+    "title": "Porta d'entrada",
+    "means": "La porta d'entrada de l'habitatge i les de les seves estances principals fan com a mínim 0,80 m d'amplada i 2 m d'alçada."
+   }
+  },
+  "door_inner": {
+   "en": {
+    "title": "Other doors inside",
+    "means": "The other doors inside the home are at least 0,70 m wide and 2 m high."
+   },
+   "es": {
+    "title": "Otras puertas interiores",
+    "means": "Las demás puertas interiores de la vivienda tienen al menos 0,70 m de ancho y 2 m de alto."
+   },
+   "ca": {
+    "title": "Altres portes interiors",
+    "means": "Les altres portes interiors de l'habitatge fan com a mínim 0,70 m d'amplada i 2 m d'alçada."
+   }
+  },
+  "turning": {
+   "en": {
+    "title": "Room to turn around",
+    "means": "In the main rooms a 1,20 m circle must fit, free of door swings and of fixed fittings up to 0,70 m high (bathroom fittings, furniture). Paths inside these rooms are at least 0,80 m wide."
+   },
+   "es": {
+    "title": "Espacio para girar",
+    "means": "En las estancias principales debe caber un círculo de 1,20 m, libre del giro de las puertas y de los equipos fijos de hasta 0,70 m de altura (sanitarios, mobiliario). Los recorridos dentro de estas estancias tienen al menos 0,80 m de ancho."
+   },
+   "ca": {
+    "title": "Espai per girar",
+    "means": "A les estances principals hi ha de cabre un cercle d'1,20 m, lliure del gir de les portes i dels equips fixos de fins a 0,70 m d'alçada (sanitaris, mobiliari). Els recorreguts dins aquestes estances fan com a mínim 0,80 m d'amplada."
+   }
+  },
+  "kitchen": {
+   "en": {
+    "title": "Kitchen size",
+    "means": "Keep at least 1,00 m clear in front of the kitchen worktop. If the kitchen is open to the living or dining room, the opening between them is at least 3,50 m²."
+   },
+   "es": {
+    "title": "Tamaño de la cocina",
+    "means": "Delante de la encimera debe quedar al menos 1,00 m libre. Si la cocina está abierta a la sala o comedor, la abertura entre ambos es de al menos 3,50 m²."
+   },
+   "ca": {
+    "title": "Mida de la cuina",
+    "means": "Davant del taulell ha de quedar com a mínim 1,00 m lliure. Si la cuina és oberta a la sala o menjador, l'obertura entre tots dos és d'almenys 3,50 m²."
+   }
+  },
+  "storage": {
+   "en": {
+    "title": "A wardrobe in each bedroom",
+    "means": "Each bedroom needs a wardrobe space 0,60 m deep and 2,20 m high: 1 m long in a bedroom over 6 m², 1,5 m in one over 8 m². It may be split into parts at least 0,30 m wide, or be lower (down to 1,50 m) if made longer."
+   },
+   "es": {
+    "title": "Un armario en cada dormitorio",
+    "means": "Cada dormitorio necesita un espacio de armario de 0,60 m de fondo y 2,20 m de alto: 1 m de largo en un dormitorio de más de 6 m², 1,5 m en uno de más de 8 m². Puede dividirse en partes de al menos 0,30 m de ancho, o ser más bajo (hasta 1,50 m) si es más largo."
+   },
+   "ca": {
+    "title": "Un armari a cada habitació",
+    "means": "Cada habitació necessita un espai d'armari de 0,60 m de fondària i 2,20 m d'alçada: 1 m de llargada en una habitació de més de 6 m², 1,5 m en una de més de 8 m². Es pot dividir en parts d'almenys 0,30 m d'amplada, o ser més baix (fins a 1,50 m) si és més llarg."
+   }
+  },
+  "equipment": {
+   "en": {
+    "title": "What every home must have",
+    "means": "Hot and cold water, drainage and electricity connected to the public networks; a basin, a toilet and a shower; a kitchen sink and a cooker with an extractor that vents to the roof; connections for a washing machine; an entry phone; and access to telecom services."
+   },
+   "es": {
+    "title": "Lo que toda vivienda debe tener",
+    "means": "Agua fría y caliente, desagüe y electricidad conectados a las redes públicas; lavabo, inodoro y ducha; fregadero y cocina con extracción mecánica que salga a la cubierta; instalación para lavadora; portero electrónico; y acceso a las telecomunicaciones."
+   },
+   "ca": {
+    "title": "El que tot habitatge ha de tenir",
+    "means": "Aigua freda i calenta, desguàs i electricitat connectats a les xarxes públiques; rentamans, vàter i dutxa; aigüera i cuina amb extracció mecànica que surti a la coberta; instal·lació per a rentadora; porter electrònic; i accés a les telecomunicacions."
+   }
+  },
+  "escape": {
+   "en": {
+    "title": "Escape route in a fire",
+    "means": "With only one exit, the route from any point to the exit of the floor is at most 25 m (with some exceptions). With more than one exit it may be 50 m, or 35 m where people sleep. One exit is allowed for up to 100 people (500 for the exit of a housing building)."
+   },
+   "es": {
+    "title": "Recorrido de evacuación en un incendio",
+    "means": "Con una sola salida, el recorrido desde cualquier punto hasta la salida de planta es como máximo de 25 m (con algunas excepciones). Con más de una salida puede ser de 50 m, o 35 m donde la gente duerme. Una sola salida se admite hasta 100 personas (500 en la salida de un edificio de viviendas)."
+   },
+   "ca": {
+    "title": "Recorregut d'evacuació en un incendi",
+    "means": "Amb una sola sortida, el recorregut des de qualsevol punt fins a la sortida de planta és com a màxim de 25 m (amb algunes excepcions). Amb més d'una sortida pot ser de 50 m, o 35 m on la gent dorm. Una sola sortida s'admet fins a 100 persones (500 a la sortida d'un edifici d'habitatges)."
+   }
+  }
+ },
+ "_about_laws": "'laws': heading + plain meaning for each law in the list beside the law book (keys of 4_laws_and_rules/output/rulebook/anchors.json), written from the full page of each law. The law itself is read in the book, where it is highlighted."
+}

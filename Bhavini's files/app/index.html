@@ -1,3 +1,4 @@
+<!-- NOMAD safe-to-share copy (app/code/make_share.py): private-use Catastro data left out -->
 <meta charset="utf-8">
 <title>NOMAD Barcelona</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -64,7 +65,7 @@ h3 { font-size: 19px; line-height: 1.2 }
 /* rulebook flipbook */
 .still3d { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
 .stilltag { position: absolute; right: 10px; bottom: 10px; z-index: 1; padding: 3px 8px; border-radius: 6px; background: rgba(17,18,17,.78); color: #ECEDE8; font: 600 11px var(--mono); letter-spacing: .04em }
-.bk { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 16px; margin-top: 18px; align-items: start }
+.bk { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 16px; margin-top: 18px; align-items: start }
 .bk-side { padding: 12px; max-height: 760px; overflow: auto; position: sticky; top: 110px }
 .bk-side input[type=search] { width: 100%; font: 13px var(--body); padding: 7px 9px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); margin: 6px 0 10px }
 .bk-lvl { font: 600 12px var(--mono); color: var(--terra-ink); letter-spacing: .04em; margin: 12px 0 4px; text-transform: uppercase }
@@ -202,6 +203,8 @@ h3 { font-size: 19px; line-height: 1.2 }
 .mark.ok { background: var(--yes) } .mark.bad { background: var(--no) } .mark.chk { background: var(--check) }
 .cards .v { color: var(--slate) }
 .cards .c { font: 11.5px var(--mono); color: var(--muted) }
+.plain { margin: 6px 0 2px; font-size: 17px; line-height: 1.45; font-weight: 500 } .pmean { margin: 0 0 6px; font-size: 14.5px; line-height: 1.45; opacity: .78 }
+.rule .plain { font-size: 18px } .rule .pmean { margin-bottom: 10px }
 .note { font-size: 12.5px; color: var(--muted); margin-top: 10px; max-width: 90ch }
 
 /* 4. rules */
@@ -443,16 +446,18 @@ input[type=range] { accent-color: #111211 }
 .swatch { border-color: var(--ink) }
 
 /* ===== the rulebook as a flipbook on its own (after Heyzine): no frame, page stack, curling corners, floating tools ===== */
-.fb { position: relative; padding: 52px 64px 64px; min-height: 420px; min-width: 0 }
+.fb { position: relative; padding: 0 0 52px; min-height: 420px; min-width: 0 }
 .fb:fullscreen { background: var(--paper); padding: 72px 96px 80px; display: flex; flex-direction: column; justify-content: center }
-.fb .bk-stage { background: transparent; padding: 0; min-height: 0; perspective: 2600px }
+.fb .bk-stage { background: transparent; padding: 0; min-height: 0; perspective: 2600px; cursor: zoom-in }
+.fb .bk-stage.mag { cursor: zoom-out; overflow: hidden } .fb .bk-stage.mag .bk-spread { transform: scale(2.4); transform-origin: var(--mx, 50%) var(--my, 50%) }
+.fb .bk-spread { transition: transform .25s var(--spring, ease) } @media (prefers-reduced-motion: reduce) { .fb .bk-spread { transition: none } }
 .fb .bk-stage:focus-visible { outline: none; box-shadow: none }
-.fb .bk-spread { max-width: 1120px; filter: drop-shadow(0 22px 26px rgba(0,0,0,.28)) drop-shadow(0 3px 5px rgba(0,0,0,.18)) }
+.fb .bk-spread { max-width: 1600px; filter: drop-shadow(0 22px 26px rgba(0,0,0,.28)) drop-shadow(0 3px 5px rgba(0,0,0,.18)) }
 .fb:fullscreen .bk-spread { max-width: min(1500px, 92vw); max-height: 82vh; aspect-ratio: 1.414 / 1 }
-.fb .bk-spread { width: min(100%, 1120px, calc((100vh - 230px) * 1.414)) }
-.bk:has(.fb) { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); margin-top: 28px }
+.fb .bk-spread { width: min(100%, 1600px, calc((100vh - 192px) * 1.414)) }
+.bk:has(.fb) { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); margin-top: 28px }
 .bk:has(.fb) .bk-side { border: 1.5px solid var(--ink); max-height: calc(100vh - 140px) }
-.fb .bk-spread.one { max-width: 560px; width: min(100%, 560px, calc((100vh - 230px) * .707)) }
+.fb .bk-spread.one { max-width: 800px; width: min(100%, 800px, calc((100vh - 192px) * .707)) }
 .fb:fullscreen .bk-spread { width: min(92vw, calc((100vh - 160px) * 1.414)) }
 .fb:fullscreen .bk-spread.one { max-width: none; width: min(92vw, calc((100vh - 160px) * .707)) }
 .fb .bk-pg { background: #FFFFFF }
@@ -468,17 +473,18 @@ input[type=range] { accent-color: #111211 }
 .fb .bk-leaf { background: #FFFFFF; box-shadow: 0 0 40px rgba(0,0,0,.25) }
 .fb .bk-leaf::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.18), transparent 30%, transparent 70%, rgba(0,0,0,.12)); pointer-events: none }
 /* floating tools, like the reader's own */
-.fb-tools { position: absolute; top: 0; right: 0; display: flex; gap: 4px; z-index: 3 }
-.fb-ic { all: unset; position: relative; box-sizing: border-box; width: 44px; height: 44px; display: grid; place-items: center; cursor: pointer; color: var(--ink); transition: transform .2s var(--spring, ease), background .1s }
-.fb-ic svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round }
-.fb-ic:hover { background: var(--neon); color: #111211 } .fb-ic:active { transform: scale(.94) } .fb-ic:focus-visible { outline: 2px solid var(--ink) }
+.fb-tools { position: absolute; bottom: 8px; right: 0; display: flex; gap: 6px; z-index: 3 }
+.fb-ic { all: unset; position: relative; box-sizing: border-box; width: 32px; height: 32px; display: grid; place-items: center; cursor: pointer; color: #111211; background: var(--neon); border-radius: var(--r-sm, 6px); transition: transform .2s var(--spring, ease), background .1s }
+.fb-ic svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round }
+.fb-ic:hover { background: var(--neon); color: #111211; transform: translateY(-1px) } .fb-ic:active { transform: scale(.94) } .fb-ic:focus-visible { outline: 2px solid var(--ink) }
 .fb-badge { position: absolute; top: 4px; right: 2px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--neon); color: #111211; font: 700 10px/18px var(--mono); text-align: center; box-shadow: 0 0 0 1.5px var(--ink) }
-.fb-arrow { all: unset; position: absolute; bottom: 8px; width: 52px; height: 40px; display: grid; place-items: center; cursor: pointer; color: var(--ink); transition: transform .2s var(--spring, ease) }
+.fb-arrow { all: unset; position: absolute; bottom: 4px; width: 52px; height: 40px; display: grid; place-items: center; cursor: pointer; color: var(--ink); transition: transform .2s var(--spring, ease) }
 .fb-arrow svg { width: 48px; height: 32px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round }
 .fb-arrow.prev { left: 8px } .fb-arrow.next { right: 8px }
 .fb-arrow:hover { color: var(--ink); transform: translateY(-2px) } .fb-arrow:active { transform: scale(.94) } .fb-arrow:focus-visible { outline: 2px solid var(--ink) }
 .fb-arrow[disabled] { opacity: .2; cursor: default }
-.fb-foot { position: absolute; left: 72px; right: 72px; bottom: 14px; margin: 0; text-align: center; font: 500 11.5px var(--mono); letter-spacing: .04em; color: var(--slate); white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.fb-foot { position: absolute; left: 72px; right: 72px; bottom: 13px; margin: 0; text-align: center; font: 500 11.5px var(--mono); letter-spacing: .04em; color: var(--slate); white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.fb-foot.tight #bkof, .fb-foot.tight .bk-where, .fb-foot.tight .sep { display: none }
 .fb-foot input { width: 64px; font: 600 12px var(--mono); text-align: center; padding: 3px 4px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink) }
 /* the contents drawer */
 .fb-drawer { position: absolute; top: 48px; right: 0; bottom: 48px; width: min(360px, 92%); z-index: 4; background: var(--sheet); border: 1.5px solid var(--ink); padding: 14px 16px; overflow: auto;
@@ -721,13 +727,15 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
 
 /* the rules list: the open law is lit; each law can be read here */
 .bk-item { position: relative; margin: 0 0 6px }
-.bk-item .bk-mark { margin: 0; padding-right: 44px }
+.bk-item .bk-mark { margin: 0; background: var(--neon); border-color: var(--neon); color: #111211 }
+.bk-item .bk-mark small, .bk-item .bk-mark .pg { color: #3B3D3A }
 .bk-mark small { color: var(--muted) }
 .bk-more { position: absolute; top: 6px; right: 6px; width: 28px; height: 28px; display: grid; place-items: center; padding: 0; border: 1.5px solid var(--ink); border-radius: var(--r-sm); background: transparent; color: var(--ink); font: 600 16px/1 var(--mono); cursor: pointer }
 .bk-more:hover { background: var(--pink) }
+.bk-mean { margin: 4px 2px 12px; font-size: 14.5px; line-height: 1.5; color: inherit }
 .bk-text { padding: 10px 12px 12px; border: 1.5px solid var(--line); border-top: 0; border-radius: 0 0 var(--r-sm) var(--r-sm); font-size: 13px; line-height: 1.5; color: var(--slate) }
 .bk-text p { margin: 0; font-size: 13px; color: var(--slate) }
-.bk-item.on .bk-mark { background: var(--neon); border-color: var(--neon); color: #111211 }
+.bk-item.on .bk-mark { background: var(--neon); border-color: var(--neon); color: #111211; box-shadow: 0 0 0 2px var(--ink) }
 .bk-item.on .bk-mark small, .bk-item.on .bk-mark .pg { color: #3B3D3A }
 .bk-item.on .bk-more { color: #111211; border-color: #111211 }
 .bk-item.on .bk-more:hover { background: rgba(17,18,17,.12) }
@@ -926,10 +934,10 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
     </div>
     <button type="button" class="fb-arrow prev" id="bkprev" aria-label="Previous pages"><svg viewBox="0 0 48 32" aria-hidden="true"><path d="M44 28c-2-11-11-17-24-17H6m0 0 8-7M6 11l8 7"/></svg></button>
     <button type="button" class="fb-arrow next" id="bknext" aria-label="Next pages"><svg viewBox="0 0 48 32" aria-hidden="true"><path d="M4 28c2-11 11-17 24-17h14m0 0-8-7m8 7-8 7"/></svg></button>
-    <p class="fb-foot"><label class="vh" for="bkpage">Page</label><input id="bkpage" type="number" min="1" value="1"> <span id="bkof"></span> · <span class="bk-where" id="bkwhere"></span></p>
+    <p class="fb-foot"><label class="vh" for="bkpage">Page</label><input id="bkpage" type="number" min="1" value="1"> <span id="bkof"></span><span class="sep"> · </span><span class="bk-where" id="bkwhere"></span></p>
   </div>
   </div>
-  <p class="hint2" id="bknote">Click a page or its curling corner to turn it, or use the arrow keys. The pages are the official documents; NOMAD only added the index, the dividers and the page numbers.</p>
+  <p class="hint2" id="bknote">Click a page to magnify it, and click again to go back. Turn pages with the curling corner, the arrows or the arrow keys. The pages are the official documents; NOMAD only added the index, the dividers and the page numbers.</p>
   </div>
 </div></section>
 
@@ -1195,10 +1203,8 @@ async function showFacts(r) {                                     /* the city ce
     <h4>The building <span class="meta">(land registry)</span></h4>
     <dl>${f.y ? `<dt>BUILT</dt><dd>${esc(f.y)}</dd>` : ""}
       ${f.up ? `<dt>FLOORS</dt><dd>${f.up} above ground${f.down ? `, ${f.down} below` : ""} <span class="meta">(highest part)</span></dd>` : ""}
-      ${units.length ? `<dt>UNITS</dt><dd>${units.length}: ${Object.entries(by).sort((a, b) => b[1].n - a[1].n).map(([k, v]) => `${v.n} × ${esc(k)} (${fmt(Math.round(v.m2))} m²)`).join(" · ")}</dd>
-      <dt>GROUND</dt><dd>${ground.length ? ground.map(u => `${esc(USE_EN[u[1]] || u[1])} ${fmt(u[2])} m²`).join(" · ") : "no unit recorded on the ground floor"}</dd>
-      <dt>FLOOR LIST</dt><dd>${esc(floors.join(", "))}</dd>` : `<dt>UNITS</dt><dd>no unit list in the land registry</dd>`}</dl>
-    <p class="meta">Sources: Ajuntament de Barcelona, Cens d'activitats econòmiques en planta baixa 2024 (CC BY 4.0); NOMAD's reading of data from the Dirección General del Catastro: units from the alphanumeric CAT file (accessed 11 Nov 2026), building parts and addresses from INSPIRE. Built year = the year most of its units carry. Floor plans of each floor: The building, below.</p>`;
+      ${f.n ? `<dt>UNITS</dt><dd>${Object.values(f.n).reduce((x, y) => x + y, 0)}: ${Object.entries(f.n).sort((x, y) => y[1] - x[1]).map(([k, v]) => `${v} × ${esc(USE_EN[k] || k)}`).join(" · ")}</dd>` : `<dt>UNITS</dt><dd>no unit list in the land registry</dd>`}</dl>
+    <p class="meta">Sources: Ajuntament de Barcelona, Cens d'activitats econòmiques en planta baixa 2024 (CC BY 4.0); NOMAD's reading of data from the Dirección General del Catastro (accessed 11 Nov 2026): the number of units by use from the alphanumeric CAT file, building parts and addresses from INSPIRE, transformed by NOMAD; not Catastro information. The outline of each floor: The building, below.</p>`;
 }
 function bldgBox(msg) { $("#bldgcol").innerHTML = msg ? `<p class="meta">${esc(msg)}</p>` : `<div class="bldg" id="bldg"></div>`; }
 
@@ -1557,7 +1563,7 @@ function pickIt(k) {
   const head = k === 0 ? "The shop as it is" : d.iterations[k - 1].label;
   $("#cards").innerHTML = `<div class="fig"><b>FIG.3</b>&nbsp; rule cards · ${esc(head)}</div>
     <ul>${src.cards.map(c => `<li><span class="mark ${c.ok ? "ok" : c.check ? "chk" : "bad"}" aria-label="${c.ok ? "passes" : "fails"}">${c.ok ? "✓" : c.check ? "?" : "✕"}</span>
-      <div><b>${esc(c.title)}</b> <span class="v">${esc(c.value)}${c.limit ? " · " + esc(c.limit) : ""}</span><div class="c">${esc(c.cite)}</div></div></li>`).join("")}</ul>
+      <div><b>${esc(c.title)}</b> <span class="v">${esc(c.value)}${c.limit ? " · " + esc(c.limit) : ""}</span>${cardPlain(c)}<div class="c">${esc(c.cite)}</div></div></li>`).join("")}</ul>
     ${k > 0 && d.iterations[k - 1].interventions.length ? `<p class="note">Changes: ${esc(d.iterations[k - 1].interventions.join("; "))}</p>` : ""}`;
   show3d();
 }
@@ -1619,6 +1625,7 @@ function drawRules() {
     <div><b class="num">${D.rules.filter(r => r.confidence === 1).length} / ${D.rules.length}</b><span>rule cards whose quote is found word for word</span></div>`;
   const val = r => r.unit === "ratio" ? (r.value === 0.125 ? "1/8" : r.value) : r.unit === "m per m2" ? "S/9" : `${String(r.value).replace(".", ",")} ${r.unit.replace("m2", "m²").replace(" per dwelling", "")}`;
   $("#rulegrid").innerHTML = D.rules.map(r => `<div class="rule panel">
+      ${plainHtml([r.rule_id])}
       <div class="top"><span class="what">${esc(r.applies_to)}<br>${esc(r.parameter.replace(/_/g, " "))} ${esc(r.operator)}</span><span class="val num">${esc(val(r))}</span></div>
       <span class="src">${esc(r.source.norm)} · ${esc((r.source.article || "").replace(/\s+/g, " "))}</span>
       <span class="chk ${r.confidence < 1 ? "review" : ""}">${r.confidence < 1 ? "to review against the PDF" : "quote found word for word"}</span>
@@ -2447,7 +2454,7 @@ function drawDesignDetail() {
   $("#dv-walls").setAttribute("aria-pressed", dMode === "walls"); $("#dv-zone").setAttribute("aria-pressed", dMode === "zone");
   const src = dSel === 0 ? dRes.before : dRes.iterations[dSel - 1];
   const head = dSel === 0 ? "the shop as it is" : src.label;
-  $("#dcards").innerHTML = `<div class="fig"><b>FIG.5</b>&nbsp; rule cards · ${esc(head)}</div><ul>${src.cards.map(c => `<li${cardLaw(c) ? ` data-law="${cardLaw(c)}" role="button" tabindex="0" title="Open this law in the rulebook"` : ""}><span class="mark ${c.ok ? "ok" : c.check ? "chk" : "bad"}">${c.ok ? "✓" : c.check ? "?" : "✕"}</span><div><b>${esc(cardName(c.title))}</b> <span class="v">${esc(c.value)}${c.limit ? " · " + esc(c.limit) : ""}</span><div class="c">${esc(c.cite)}${cardLaw(c) ? ' <span class="lawgo">→ rulebook</span>' : ""}</div></div></li>`).join("")}</ul>
+  $("#dcards").innerHTML = `<div class="fig"><b>FIG.5</b>&nbsp; rule cards · ${esc(head)}</div><ul>${src.cards.map(c => `<li${cardLaw(c) ? ` data-law="${cardLaw(c)}" role="button" tabindex="0" title="Open this law in the rulebook"` : ""}><span class="mark ${c.ok ? "ok" : c.check ? "chk" : "bad"}">${c.ok ? "✓" : c.check ? "?" : "✕"}</span><div><b>${esc(cardName(c.title))}</b> <span class="v">${esc(c.value)}${c.limit ? " · " + esc(c.limit) : ""}</span>${cardPlain(c)}<div class="c">${esc(c.cite)}${cardLaw(c) ? ' <span class="lawgo">→ rulebook</span>' : ""}</div></div></li>`).join("")}</ul>
     ${src.plan.interventions && src.plan.interventions.length ? `<p class="note">Changes: ${esc(src.plan.interventions.join("; "))}</p>` : ""}`;
   if (!window.THREE || document.body.classList.contains("simple")) return;
   if (!dView) { try { dView = miniViewer($("#dthree"), $("#dstage")); } catch (e) { $("#dviewfig").textContent = NO_GL_MSG + " The plans and rule cards above are complete."; return; } }
@@ -2904,6 +2911,8 @@ function applyLang() {
   if (sel) show(sel);
   if (dRes) drawDesign();
   drawSaved();
+  try { drawRules(); } catch (e) {}
+  try { bookMarks(); } catch (e) {}
 }
 /* the header's pill tabs (after SimiStar): groups open a small menu; the tab of the section on screen is lit */
 function initNav() {
@@ -3029,6 +3038,24 @@ const CARD_NAMES = { graph: "Rooms connect", door_entry: "Entrance door", door_i
   facade_room: "Rooms on the façade", living_circle: "Living room circle", hall_width: "Circulation width", kitchen_width: "Kitchen width", wardrobe: "Wardrobes", bed_square: "Bedroom square",
   furniture: "Furniture fits", kitchen_equip: "Kitchen equipment", circulation: "Circulation", openings: "Door and window gap", neighbours: "Room neighbours", sightline: "View from the door", grocery: "Door to kitchen counter", door_swing: "Door swings", exits: "Number of exits", stair_type: "Stair protection", fixtures_circle: "Bathroom circle", bath_equip: "Bathroom equipment", laundry: "Washing machine", daylight: "Daylight" };
 const cardName = t => CARD_NAMES[t] || t;
+/* laws in plain words (4_laws_and_rules/input/plain_words.json): what the law asks + what it means, in the chosen language */
+let PLAINW = {};
+fetch("../4_laws_and_rules/input/plain_words.json").then(r => r.ok ? r.json() : {}).then(j => { PLAINW = j || {}; if (dRes) drawDesign(); drawRules(); try { bookMarks(); } catch (e) {} }).catch(() => {});
+const CARD_RULES = { "Clear height": ["CAT-141-2012-height-04C"], "Façade with windows": ["BCN-MPGM2004-facade-01"],
+  "Façade on the street or block interior": ["BCN-MPGM2004-facade-01"], "Façade": ["CAT-141-2012-facade-01"], facade_room: ["CAT-141-2012-facade-01"],
+  "Number of flats": ["density"], "Useful area": ["BCN-MPGM2004-area-01"], "Bedrooms": ["CAT-141-2012-bedroom-01", "CAT-141-2012-bedroom-02"],
+  bed_square: ["CAT-141-2012-bedroom-02"], "Living room": ["CAT-141-2012-living-01"], living_circle: ["CAT-141-2012-living-01"],
+  "Windows": ["CAT-141-2012-window-01"], "Bathroom": ["CAT-141-2012-bath-01"], "Shared corridor": ["CTE-SUA-corridor-01"],
+  door_entry: ["CTE-SUA-door-01"], "Patio inside the flat": ["CAT-141-2012-patio-01"] };
+function plainOf(id) { const p = PLAINW[id]; return p ? (p[LANG] || p.en) : null; }
+function plainHtml(ids) {
+  return ids.map(plainOf).filter(Boolean).map(p => `<p class="plain">${esc(p.says)}</p><p class="pmean">${esc(p.means)}</p>`).join("");
+}
+function cardPlain(c) {
+  const zone = String((dRes && dRes.shopDrawn && dRes.shopDrawn.zoning && (dRes.shopDrawn.zoning.pgm_key || dRes.shopDrawn.zoning.zone)) || "");
+  const ids = (CARD_RULES[c.title] || []).map(i => i === "density" ? (zone.startsWith("12") ? "BCN-MPGM2004-density-12" : "BCN-MPGM2004-density-13") : i);
+  return plainHtml(ids);
+}
 const cardLaw = c => (CARD_ANCHORS[c.title] || []).find(k => BK.anchors && BK.anchors[k]) || (CARD_ANCHORS[c.title] || [])[0] || "";
 function openLaw(k) { const a = BK.anchors && BK.anchors[k]; if (a) { BK.hl = a; bookGo(a.page, true); lawOn(true); } }   // same as a click on the list beside the rulebook
 function lawOn(reveal) {                                        // the law open in the book is lit in the list beside it
@@ -3055,7 +3082,21 @@ async function initBook() {
   $("#fbfull").addEventListener("click", () => { const f = $("#fb"); if (document.fullscreenElement) document.exitFullscreen(); else if (f.requestFullscreen) f.requestFullscreen(); });
   document.addEventListener("fullscreenchange", () => { if (BK.shown) bookShow(); });
   $("#bkstage").addEventListener("keydown", e => { if (e.key === "ArrowRight") { e.preventDefault(); bookTurn(1); } if (e.key === "ArrowLeft") { e.preventDefault(); bookTurn(-1); } });
-  $("#bkspread").addEventListener("click", e => { const pg = e.target.closest(".bk-pg"); if (!pg || pg.classList.contains("blank")) return; bookTurn(pg.classList.contains("l") ? -1 : 1); });
+  $("#bkspread").addEventListener("click", e => {
+    const pg = e.target.closest(".bk-pg"); if (!pg || pg.classList.contains("blank")) return;
+    const st = $("#bkstage"), r = pg.getBoundingClientRect();
+    if (st.classList.contains("mag")) { bookMag(false); return; }                       // second click: back to the normal size
+    const corner = e.clientY > r.bottom - 80 && (pg.classList.contains("l") ? e.clientX < r.left + 80 : e.clientX > r.right - 80);
+    if (corner) { bookTurn(pg.classList.contains("l") ? -1 : 1); return; }               // the curling corner turns the page
+    bookMag(true, e);                                                                    // anywhere else: magnify here
+  });
+  $("#bkstage").addEventListener("mousemove", e => { if ($("#bkstage").classList.contains("mag")) bookMagAt(e); });   // move to read around
+  $("#bkstage").addEventListener("keydown", e => { if (e.key === "Escape") bookMag(false); });
+  window.addEventListener("scroll", () => {                         // scrolled to another part of the app: the page goes back to normal size
+    const st = $("#bkstage"); if (!st || !st.classList.contains("mag")) return;
+    const r = st.getBoundingClientRect(), seen = Math.min(r.bottom, innerHeight) - Math.max(r.top, 0);
+    if (seen < r.height * 0.6) bookMag(false);
+  }, { passive: true });
   window.addEventListener("resize", () => { clearTimeout(BK.rt); BK.rt = setTimeout(() => { if (BK.shown) bookShow(); }, 250); });
   new IntersectionObserver(es => { if (es[0].isIntersecting && !BK.shown) { BK.shown = true; bookShow(); } }, { rootMargin: "200px" }).observe($("#bkstage"));
 }
@@ -3071,6 +3112,12 @@ function drawBookIndex(q) {
     `<p class="hint2" style="margin-top:10px">${I.docs.length} official documents, ${fmt(I.pages)} pages. Sources: BOE, codigotecnico.org, Portal Jurídic de Catalunya, Agència de l'Habitatge, RPUC (Generalitat), AMB, Ajuntament de Barcelona.</p>`;
   $("#bkindex").onclick = e => { const b = e.target.closest(".bk-doc"); if (b) { BK.hl = null; bookGo(+b.dataset.p, true); } };
 }
+/* each law in the list: its heading and what it means, in plain words (4_laws_and_rules/input/plain_words.json "laws") */
+const LAWHEAD = {
+  en: ["Laws for your project", "Red: a rule this layout does not meet. Click a law to open its page in the book, where it is highlighted.", "The laws NOMAD checks", "What each law means, in plain words. Click one to read it in the book, where it is highlighted."],
+  es: ["Normas de tu proyecto", "Rojo: una norma que este diseño no cumple. Pulsa una norma para abrir su página en el libro, donde está resaltada.", "Las normas que comprueba NOMAD", "Qué dice cada norma, en palabras sencillas. Pulsa una para leerla en el libro, donde está resaltada."],
+  ca: ["Normes del teu projecte", "Vermell: una norma que aquest disseny no compleix. Prem una norma per obrir la seva pàgina al llibre, on està ressaltada.", "Les normes que comprova NOMAD", "Què diu cada norma, en paraules senzilles. Prem-ne una per llegir-la al llibre, on està ressaltada."] };
+function lawOf(a) { const l = PLAINW.laws && PLAINW.laws[a.key]; const t = l && (l[LANG] || l.en); return t || { title: a.name, means: "" }; }
 function bookMarks() {
   if (!BK.anchors) return;
   const A = BK.anchors, el = $("#bkmarks");
@@ -3086,18 +3133,36 @@ function bookMarks() {
     if (b.patio || (b.interventions || []).length) ["patio", "corridor"].forEach(k => { if (A[k] && !seen[k]) seen[k] = { a: A[k], ok: true }; });
     if (A.guide) seen.guide = { a: A.guide, ok: null };
     marks = Object.values(seen).sort((x, y) => ((x.ok === false) ? 0 : 1) - ((y.ok === false) ? 0 : 1) || x.a.page - y.a.page);
-    head = `<h3>Laws for your project</h3><p>${esc(dRes.shopDrawn.source.split(" (")[0])} · layout ${esc(b.label)}. Red: a rule this layout does not meet. Click to open the page; the lines are highlighted where the page has text.</p>`;
+    head = `<h3>${esc(LAWHEAD[LANG][0])}</h3><p>${esc(dRes.shopDrawn.source.split(" (")[0])} · ${esc(b.label)}. ${esc(LAWHEAD[LANG][1])}</p>`;
   } else {
     marks = Object.values(A).map(a => ({ a, ok: null })).sort((x, y) => x.a.page - y.a.page);
-    head = `<h3>The rules NOMAD checks</h3><p>Check a shop in Design homes and this list becomes the laws of your project.</p>`;
+    head = `<h3>${esc(LAWHEAD[LANG][2])}</h3><p>${esc(LAWHEAD[LANG][3])}</p>`;
   }
-  el.innerHTML = head + marks.map((m, i) => `<div class="bk-item" data-k="${esc(m.a.key)}"><button type="button" class="bk-mark" data-i="${i}">${m.ok === null ? "" : `<span class="pill ${m.ok ? "YES" : "NO"}">${m.ok ? "OK" : "FAILS"}</span>`}<span>${esc(m.a.name)} <small>· ${esc(m.a.doc)}</small></span><span class="pg">p. ${m.a.page}</span></button><button type="button" class="bk-more" aria-expanded="false" aria-label="Read this rule here">+</button><div class="bk-text" hidden>${m.a.text ? `<p>${esc(m.a.text)}</p>` : `<p>This page of the book is a scan, so its text cannot be shown here. Click the rule to read it in the book.</p>`}</div></div>`).join("");
+  el.innerHTML = head + marks.map((m, i) => `<div class="bk-item" data-k="${esc(m.a.key)}"><button type="button" class="bk-mark" data-i="${i}">${m.ok === null ? "" : `<span class="pill ${m.ok ? "YES" : "NO"}">${m.ok ? "OK" : "FAILS"}</span>`}<span>${esc(lawOf(m.a).title)} <small>· ${esc(m.a.doc)}</small></span><span class="pg">p. ${m.a.page}</span></button>${lawOf(m.a).means ? `<p class="bk-mean">${esc(lawOf(m.a).means)}</p>` : ""}</div>`).join("");
   el.onclick = e => {
-    const more = e.target.closest(".bk-more");
-    if (more) { const open = more.getAttribute("aria-expanded") !== "true"; more.setAttribute("aria-expanded", open); more.textContent = open ? "−" : "+"; more.nextElementSibling.hidden = !open; return; }
     const b = e.target.closest(".bk-mark"); if (!b) return; const m = marks[+b.dataset.i]; BK.hl = m.a; bookGo(m.a.page, true); lawOn(true); };
   lawOn();
 
+}
+function bookBar() {                                            // the bar under the book spans the book's own width
+  const fbx = $("#fb"), sp = $("#bkspread"), tools = $(".fb-tools"); if (!fbx || !sp || !tools) return;
+  const off = Math.max(0, (fbx.clientWidth - sp.offsetWidth) / 2), tw = tools.offsetWidth || 70;
+  tools.style.right = off + "px"; $("#bkprev").style.left = off + "px"; $("#bknext").style.right = (off + tw + 8) + "px";
+  const foot = $(".fb-foot"), room = sp.offsetWidth - 52 - 8 - 52 - tw - 24;   // space left between the arrows
+  foot.style.left = (off + 60) + "px"; foot.style.right = (off + tw + 68) + "px";
+  foot.classList.toggle("tight", room < 260);                      // narrow screens: only the page number, no document name
+  const side = $(".bk-side");                                      // the law column and the book end on the same line
+  if (side) side.style.maxHeight = (getComputedStyle($(".bk")).gridTemplateColumns.split(" ").length > 1) ? fbx.offsetHeight + "px" : "";
+}
+function bookMag(on, e) {                                        // magnifier: a click zooms in where you clicked, a second click goes back
+  const st = $("#bkstage"); if (!st) return;
+  st.classList.toggle("mag", on);
+  if (on && e) bookMagAt(e);
+}
+function bookMagAt(e) {
+  const sp = $("#bkspread"), r = sp.getBoundingClientRect(), st = $("#bkstage");
+  const x = (e.clientX - st.getBoundingClientRect().left - (st.clientWidth - sp.offsetWidth) / 2) / sp.offsetWidth, y = (e.clientY - st.getBoundingClientRect().top) / sp.offsetHeight;
+  sp.style.setProperty("--mx", Math.max(0, Math.min(100, x * 100)) + "%"); sp.style.setProperty("--my", Math.max(0, Math.min(100, y * 100)) + "%");
 }
 function bookPart(n) { return BK.idx.parts.find(p => n >= p.first_page && n <= p.last_page); }
 function bookDoc(n) { return [...BK.idx.docs].reverse().find(d => n >= d.start); }
@@ -3115,10 +3180,10 @@ async function bookRender(n, slot) {
   try {
     const part = bookPart(n), pdf = await bookPdf(part), page = await pdf.getPage(n - part.first_page + 1);
     const vp1 = page.getViewport({ scale: 1 }), W = slot.clientWidth || 500, H = slot.clientHeight || 700;
-    const sc = Math.min(W / vp1.width, H / vp1.height) * Math.min(2, window.devicePixelRatio || 1);
-    const vp = page.getViewport({ scale: sc }), cv = document.createElement("canvas");
+    const fit = Math.min(W / vp1.width, H / vp1.height), sharp = Math.max(3, (window.devicePixelRatio || 1) * 2);   // drawn 3x finer than shown: small legal print stays readable, also in full screen
+    const vp = page.getViewport({ scale: Math.min(fit * sharp, 4) }), cv = document.createElement("canvas");
     cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
-    cv.style.width = Math.round(vp.width / Math.min(2, window.devicePixelRatio || 1)) + "px";
+    cv.style.width = Math.round(vp1.width * fit) + "px";
     cv.setAttribute("role", "img"); cv.setAttribute("aria-label", "Rulebook page " + n);
     await page.render({ canvasContext: cv.getContext("2d"), viewport: vp }).promise;
     const box = document.createElement("div"); box.className = "box"; box.appendChild(cv);
@@ -3136,10 +3201,12 @@ async function bookRender(n, slot) {
 }
 async function bookShow() {
   if (!BK.idx || !window.pdfjsLib) return;
+  bookMag(false);                                               // a new page opens at normal size
   const sp = $("#bkspread"), pages = bookSpread(BK.at);
   lawOn();
   sp.classList.toggle("one", pages.length === 1);
   sp.innerHTML = pages.map((p, i) => `<div class="bk-pg ${pages.length === 1 ? "r" : (i ? "r" : "l")} ${p ? "" : "blank"}" data-p="${p || ""}"></div>`).join("");
+  bookBar();
   $("#bkpage").value = BK.at;
   $("#bkprev").disabled = BK.at <= 1; $("#bknext").disabled = pages[pages.length - 1] >= BK.idx.pages || BK.at >= BK.idx.pages;
   const d = BK.at >= BK.idx.docs[0].start ? bookDoc(BK.at) : null, part = bookPart(BK.at);

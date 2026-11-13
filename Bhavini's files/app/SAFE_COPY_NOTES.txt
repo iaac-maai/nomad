@@ -1,0 +1,8 @@
+NOMAD safe-to-share copy, made by app/code/make_share.py from app/.
+1. building plans: {'kept (INSPIRE)': 4724, 'Visor plan replaced by INSPIRE parts': 598, 'Visor plan removed, no INSPIRE parts': 2}
+2. unit_shells.json and unit_skips.json emptied (Visor 3D)
+3. existing portal / stair removed from 515 shop outlines and every cut shape (Visor 3D); cut shapes rounded
+4. facades.json emptied (Catastro facade photo)
+5. facts: unit lists of 5331 buildings reduced to counts by use (no areas, years, floor lists)
+6. warehouses: built and ground areas rounded to 10 m2
+7. page: the facts panel shows unit counts by use; sources name the transformed data
