@@ -2,7 +2,7 @@
 #
 # Paste this code into a Grasshopper "Script" component (Rhino 8) or a "GhPython Script" component.
 # Inputs  (right-click each input to rename it exactly like this):
-#   csv_path : text  - full path to exp1_daylight/variants.csv
+#   csv_path : text  - full path to Bars's files/5_daylight/output/variants.csv
 #   i        : int   - which variant (connect a Number Slider, 0 to 49, integers)
 # Outputs:
 #   box        : the factory floor as a closed box (connect to HB Room from Solid -> _geo)

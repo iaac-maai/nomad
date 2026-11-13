@@ -6,9 +6,9 @@ daylight hours. It turns lux into a daylight factor with the median outdoor diff
 illuminance of the site:  D = E / Ev,d,med x 100.  This script takes Ev,d,med from a
 Barcelona EPW weather file, so the thresholds are for Barcelona, not a guess.
 
-Run in the "ai-methods" environment, from the nomad repo root:
-    python exp1_daylight/daylight_threshold.py --epw path/to/ESP_CT_Barcelona....epw
-Writes: exp1_daylight/daylight_thresholds.json  (read by predict_shops.py)
+Run from the repo root:
+    python "Bars's files/5_daylight/code/daylight_threshold.py" --epw path/to/Barcelona.epw
+Writes: Bars's files/5_daylight/input/daylight_thresholds.json
 """
 import argparse
 import json
@@ -17,6 +17,7 @@ from pathlib import Path
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
+OUT = HERE.parent / "input" / "daylight_thresholds.json"
 TARGET_LX, MINIMUM_LX = 300.0, 100.0   # EN 17037, minimum level of daylight provision
 
 
@@ -46,12 +47,12 @@ def main():
            "Ev_d_med_lux": round(ev_med), "D_target_pct": round(d_target, 2),
            "D_minimum_pct": round(d_min, 2),
            "classes": {"livable": ">= D_target", "needs_change": "D_minimum to D_target", "not_livable": "< D_minimum"}}
-    (HERE / "daylight_thresholds.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
+    OUT.write_text(json.dumps(out, indent=2), encoding="utf-8")
     print("daylight hours read: %d" % len(day))
     print("median outdoor diffuse illuminance Ev,d,med: %.0f lux" % ev_med)
     print("D for 300 lx (target):  %.2f %%   -> livable at or above" % d_target)
     print("D for 100 lx (minimum): %.2f %%   -> not livable below" % d_min)
-    print("saved exp1_daylight/daylight_thresholds.json")
+    print(f"saved {OUT}")
 
 
 if __name__ == "__main__":

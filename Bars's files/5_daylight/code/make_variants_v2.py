@@ -2,8 +2,8 @@
 narrow streets (Ciutat Vella, Gracia) and deep shops (real Barcelona shops are 25-40 m deep).
 
 Run from the nomad repo root (ai-methods environment):
-    python exp1_daylight/make_variants_v2.py            # 30 variants, ids 50-79
-Output: exp1_daylight/variants_v2.csv  (same columns as variants.csv)
+    python "Bars's files/5_daylight/code/make_variants_v2.py"            # 30 variants, ids 50-79
+Output: Bars's files/5_daylight/output/variants_v2.csv  (same columns as variants.csv)
 
 In Grasshopper: point csv_path to variants_v2.csv, keep out_path = results.csv (the new ids
 50-79 are added to the 50 old rows, nothing is overwritten), slider id from 50 to 79.
@@ -15,7 +15,7 @@ from pathlib import Path
 
 import numpy as np
 
-HERE = Path(__file__).resolve().parent
+OUT_DIR = Path(__file__).resolve().parents[1] / "output"
 
 # name: (low, high). Narrow streets and deep shops on purpose.
 RANGES = {
@@ -62,7 +62,8 @@ def main():
         r["head_m"] = round(r["sill_m"] + r["win_height_m"], 2)
         rows.append(r)
 
-    out = HERE / "variants_v2.csv"
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    out = OUT_DIR / "variants_v2.csv"
     with open(out, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
         w.writeheader()

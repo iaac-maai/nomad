@@ -4,9 +4,9 @@ Latin hypercube sampling: every parameter range is cut into N equal slices and e
 used exactly once, so 50 variants cover the whole range evenly (better than pure random).
 
 Run from the repo root:
-    python exp1_daylight/make_variants.py            # 50 variants
-    python exp1_daylight/make_variants.py --n 300    # later, more data
-Output: exp1_daylight/variants.csv  (Grasshopper reads this file)
+    python "Bars's files/5_daylight/code/make_variants.py"            # 50 variants
+    python "Bars's files/5_daylight/code/make_variants.py" --n 300    # later, more data
+Output: Bars's files/5_daylight/output/variants.csv  (Grasshopper reads this file)
 """
 import argparse
 import csv
@@ -14,7 +14,7 @@ from pathlib import Path
 
 import numpy as np
 
-HERE = Path(__file__).resolve().parent
+OUT_DIR = Path(__file__).resolve().parents[1] / "output"
 
 RANGES = {
     "depth_m": (8.0, 25.0),           # shop depth
@@ -60,7 +60,8 @@ def main():
         r["head_m"] = round(r["sill_m"] + r["win_height_m"], 2)
         rows.append(r)
 
-    out = HERE / "variants.csv"
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    out = OUT_DIR / "variants.csv"
     with open(out, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
         w.writeheader()

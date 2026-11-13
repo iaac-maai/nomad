@@ -2,7 +2,7 @@
 #
 # Paste this code into a second Script component.
 # Inputs (rename exactly like this):
-#   out_path : text  - full path to exp1_daylight/results.csv (created automatically)
+#   out_path : text  - full path to Bars's files/5_daylight/output/results.csv (created automatically)
 #   row_json : text  - from the "read variant" component
 #   results  : numbers - "results" output of HB Daylight Factor
 #              IMPORTANT: right-click this input -> set it to "List Access"

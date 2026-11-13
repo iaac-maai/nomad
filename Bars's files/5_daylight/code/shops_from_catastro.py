@@ -1,7 +1,7 @@
 """Nomad - empty Barcelona shops (Open Data BCN census) + Catastro buildings -> shop variants CSV.
 
-Run in the "cadaster" conda environment (it needs geopandas), from the nomad repo root:
-    python exp1_daylight/shops_from_catastro.py --data C:/Users/barsb/nomad-hypercadaster_ES/data --district Eixample
+Run in a Python environment with geopandas, from the repo root:
+    python "Bars's files/5_daylight/code/shops_from_catastro.py" --data <hypercadaster-data-folder> --district Eixample
 Options:
     --district Eixample      one district (name as in Nom_Districte); leave out for the whole city
     --all-premises           use every ground-floor premise, not only the empty ones
@@ -10,7 +10,7 @@ Options:
 Inputs (both made by hypercadaster_ES in its data folder):
     data/barcelona_data.pkl.gz                    Catastro buildings (barcelona.py)
     data/open_data/barcelona_ground_premises.csv  Open Data BCN ground-floor census (CC BY 4.0)
-Output: exp1_daylight/shops_bcn.csv, one row per empty shop, same columns as variants.csv.
+Output: Bars's files/5_daylight/output/shops_bcn.csv, one row per empty shop, same columns as variants.csv.
 
 From data : empty / active status, address, district, cadastral reference, door point (census);
             width_m / depth_m = short / long side of the minimum rotated rectangle of the building
@@ -30,7 +30,7 @@ import pandas as pd
 import geopandas as gpd
 from shapely.geometry import LineString, Point
 
-HERE = Path(__file__).resolve().parent
+OUT_DIR = Path(__file__).resolve().parents[1] / "output"
 FLOOR_H, WWR, WIN_TARGET = 4.0, 0.6, 3.0
 RANGES = {"depth_m": (8, 25), "width_m": (4, 12), "obs_dist_m": (8, 20), "obs_height_m": (12, 25)}
 
@@ -99,7 +99,7 @@ def main():
     ap.add_argument("--district", default="", help="e.g. Eixample (empty = whole city)")
     ap.add_argument("--all-premises", action="store_true", help="also active shops, not only empty ones")
     ap.add_argument("--census", default="", help="ground-floor census CSV (default: <data>/open_data/barcelona_ground_premises.csv, the 2022 census)")
-    ap.add_argument("--out", default=str(HERE / "shops_bcn.csv"))
+    ap.add_argument("--out", default=str(OUT_DIR / "shops_bcn.csv"))
     ap.add_argument("--search", type=float, default=60.0, help="max distance to the opposite building (m)")
     ap.add_argument("--min-area", type=float, default=50.0, help="ignore smaller footprints across the street (kiosks, metro exits)")
     args = ap.parse_args()
@@ -244,6 +244,7 @@ def main():
     out["out_of_range"] = [",".join(x) for x in outside_cols]
     out.insert(0, "id", range(len(out)))
 
+    Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(args.out, index=False, encoding="utf-8")
     print("\nsaved %d shops to %s" % (len(out), args.out))
     print("inside ALL training ranges: %d (%.0f %%)" % (inside.sum(), 100 * inside.mean()))
