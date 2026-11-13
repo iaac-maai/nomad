@@ -1,5 +1,5 @@
 """Tests for tools/annex4_grup.py on CAT records written by hand to the format's positions (no real Catastro data).
-Run from the repo root:  python tools/test_annex4_grup.py
+Run from the repo root:  python "Bars's files/6_check_the_shop/code/test_annex4_grup.py"
 """
 import gzip
 import sys
