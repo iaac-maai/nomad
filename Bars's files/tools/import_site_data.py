@@ -2,14 +2,14 @@
 
 Until 9 Nov 2026 the site's data lived only in the published artifact (321 files). This script reads a folder that
 holds a copy of those files (same paths: data/..., rulebook/..., py/..., img/..., models/...), and:
-  1. copies the files the cleaned site uses into  nomad/04_Website/  , removing what the cleanup took
+  1. copies the files the cleaned site uses into  Bars's files/app/  , removing what the cleanup took
      out (prices, daylight predictions, home counts, layout-engine data, Catastro Visor 3D units);
   2. writes docs/DATA_INVENTORY.md: every file, its type and size, where it came from, where the site uses it,
      and what happened to it.
 Law PDFs (rulebook/parts) are not copied: tools/get_rulebook.py downloads them from their official URLs.
 Pyodide (py/pyodide*) is not copied: the parked layout engine loads a pinned version from a CDN when it returns.
 
-Run from the repo root:  python tools/import_site_data.py <folder with the published files>
+Run from the repo root:  python "Bars's files/tools/import_site_data.py" <folder with the published files>
 """
 import json
 import shutil
@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE = ROOT / "nomad" / "04_Website"
+SITE = ROOT / "Bars's files" / "app"
 B = "nomad/02_Code/src/"
 
 # path pattern -> (where it came from, where the cleaned site uses it, decision)

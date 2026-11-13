@@ -15,15 +15,15 @@ published. Nothing is lost: everything removed from `main` is on a branch (see t
 
 | What | Why | How |
 | --- | --- | --- |
-| **Exp 4: the XGBoost daylight model**, the per-shop daylight classes and the "dark → not liveable" rule | A prediction is not a simulation; per-shop daylight will come from a grid simulation | Removed `train_daylight.py`, `predict_shops.py`, `map_shops.py`, `shops_bcn_pred.csv`, `daylight_site.py`, `bars_daylight.py`, `data/daylight.json` and their outputs, and the xgboost dependency. The site now says "daylight: per-shop grid simulation, coming". The 5 shops simulated in Radiance stay as **validated examples** (`tools/daylight_validated.py`, read straight from the sensor grid, no model); the experiments page keeps "tried, dropped, replaced by grid simulation". |
+| **Exp 4: the XGBoost daylight model**, the per-shop daylight classes and the "dark → not liveable" rule | A prediction is not a simulation; per-shop daylight will come from a grid simulation | Removed `train_daylight.py`, `predict_shops.py`, `map_shops.py`, `shops_bcn_pred.csv`, `daylight_site.py`, `bars_daylight.py`, `data/daylight.json` and their outputs, and the xgboost dependency. The site now says "daylight: per-shop grid simulation, coming". The 5 shops simulated in Radiance stay as **validated examples** (`Bars's files/5_daylight/code/daylight_validated.py`, read straight from the sensor grid, no model); the experiments page keeps "tried, dropped, replaced by grid simulation". |
 | **Layouts and home counts from footprints** ("Your homes", Results, For the city) | A count of homes is a design result, not a zoning answer; the counts were never checked by an architect | "Your homes" parked (below). The Results section removed (it also held the metropolitan-area map, which went with it). Every place now has a **category**: candidate (zone YES, no avoid flag) / risky (zone CHECK, or "keep it a shop": the 10 % of shops with the fewest shops within 100 m) / zoning doesn't allow (NO), on the shop answer, the map and the 3D city. **For the city** counts the three categories per district and lists the places; no charts. **Saved** and the **PDF report** keep only the zoning answer and its sources. `build_site.py` no longer writes home counts. |
 | **Catastro Visor 3D units** | Not open data ("download and private use"; Catastro legal notice: reproduction, distribution, public communication and transformation "totalmente prohibida salvo que medie autorización expresa") | The building of a shop is drawn from the Catastro building parts only; the 600 buildings that only had Visor units point to City in 3D. `catastro_plans.py` (the Visor scraper) removed; `catastro_site.py` no longer reads it. |
 | **idealista18 prices** | A 2018 asking price is not a value; the feature was not asked for | Price box, comparison row and source row removed; `value.py` and `premises_value.csv` removed; `build_site.py` no longer writes prices. |
 
-## 2. Parked (on `parked/before-cleanup`, see PARKED.md)
+## 2. Parked (on `parked/before-cleanup`, see Bars's files/docs/PARKED.md)
 
 The weight sliders, the "Your homes" layout engine (with its Pyodide worker, demo shops and data), the plan upload
-(`readPlanImage`, DXF/JSON plans) and "Ask NOMAD". PARKED.md lists each one's files and what must be true before it
+(`readPlanImage`, DXF/JSON plans) and "Ask NOMAD". Bars's files/docs/PARKED.md lists each one's files and what must be true before it
 comes back. The layout engine's data, which had lived only in the published artifact, was committed to that branch so it
 cannot be lost. The shared-housing text (Llei 18/2007 art. 18 bis) is parked with "Your homes": Catalonia gives 24 m²
 private + at least 6 m² common, at least 36 m² in total (Decret llei 50/2020, transitional provision 10); no official
@@ -41,18 +41,18 @@ The rulebook flipbook, the 16 rule cards and their source sentences, the precede
   with its type, size, origin, use and fate. No file is over 5 MB, so Git LFS was not needed. Pyodide is not in the
   repo (only the parked engine used it; it will come from a pinned CDN). The 23 law PDFs are downloaded from their
   official URLs (BOE, codigotecnico.org, Portal Jurídic ELI, Agència de l'Habitatge, RPUC, AMB, Ajuntament) by
-  `tools/get_rulebook.py`, which builds the book's pages. **One command opens the site: `python serve.py`.**
+  `Bars's files/4_laws_and_rules/code/get_rulebook.py`, which builds the book's pages. **One command opens the site: `python serve.py`.**
 - **b) Law texts.** The 16 rule cards' sentences were compared with the official PDFs: 12 are found word for word in
   the text PDFs; 4 come from the MPGM 2004 scan (no text layer) and were read by eye on the page images. 7 were
   corrected (4 OCR errors, 2 table-markup or cut-off quotes, 1 missing quote); none had to be removed; no value
-  changed. Every change is listed in `docs/LAW_TEXT_CHECK.md`; `tools/check_quotes.py` repeats the check.
-- **c) 18 bis** — see section 2 and PARKED.md.
+  changed. Every change is listed in `docs/LAW_TEXT_CHECK.md`; `Bars's files/4_laws_and_rules/code/check_quotes.py` repeats the check.
+- **c) 18 bis** — see section 2 and Bars's files/docs/PARKED.md.
 - **d) AI log.** Bhavini's rows marked. The model the code calls is `gemini-3.5-flash-lite` (GEMINI_MODEL in `.env`;
   150 of the 155 logged drafts), so "Gemini 3.5 Flash Lite" was right; the exact id is now in the log and Sources.
 - **Golden-set score removed (10 Nov, option B).** The score (16 questions, "100 % answered right by NOMAD's code")
   was computed by `run_golden.py` on the layout engine's code, which is parked, so main cannot reproduce it. The score
   boxes and the Exp 3 "after the fixes" chart were removed; the Rule cards page keeps "16 / 16 cards checked against
-  the official text". The score comes back with the engine (PARKED.md).
+  the official text". The score comes back with the engine (Bars's files/docs/PARKED.md).
 - **e) Sources.** Tesseract: "OCR of PGM/RPUC legal texts for the rulebook". CubiCasa5K: not for commercial use.
   The weather file (TMYx, climate.onebuilding.org): checked, no licence stated, cited as the site asks, not
   redistributed. The metropolitan "to check" row went with the Results section. No row is left "to check".
@@ -63,7 +63,7 @@ Every file was sorted into used by the site / experiment / dead (approved on 10 
 - **Dead (removed):** `.vscode/settings.json` (personal settings, already in .gitignore; `git rm --cached`).
 - **Experiments (moved to `archive/experiments`, 395 files):** Exp 2/3 rule-card drafting, Bhavini's lab book E01–E32,
   Rhino/Grasshopper, the layout engine and plan-reading code, results and research documents. `experiments/README.md`
-  keeps one line for each. `exp1_daylight/` stays on main: the grid simulation builds on it.
+  keeps one line for each. `Bars's files/5_daylight/` stays on main: the grid simulation builds on it.
 - **Main now:** 312 files, 33 MB. README.md has a map of every folder and file.
 
 ## 6. How it was tested
@@ -79,7 +79,7 @@ Every file was sorted into used by the site / experiment / dead (approved on 10 
   law PDFs the site works and the book says how to get them (28 of 30: the book's pages and the same phone failure).
 - **The rulebook:** all 23 PDFs downloaded from their official URLs; the book compiled (1,409 pages); every bookmark
   of a text page checked to be on the page that holds its phrase.
-- **Law texts:** `tools/check_quotes.py`: 16 of 16 cards checked.
+- **Law texts:** `Bars's files/4_laws_and_rules/code/check_quotes.py`: 16 of 16 cards checked.
 
 ## 7. Open, for later
 
@@ -106,7 +106,7 @@ Every file was sorted into used by the site / experiment / dead (approved on 10 
 - **Bhavini's newer site** (her published artifact, after v43) holds work that is in no branch; ask her to push it.
 - ~~**Rename** `Bhavini_NOMAD Files/` to `nomad/`~~ — done on 10 Nov 2026 in PR #2 (every path updated, all tests and the clean-clone test run again).
 - **Legal questions** (Annex 4 Grup C/D, "sobre o sota rasant", whether MPGM 2004 area-01 and facade-01 are still in
-  force after the OME) are now in `docs/OPEN_QUESTIONS.md`. The missing "≤" of Grup C was checked on 10 Nov 2026:
+  force after the OME) are now in `Bars's files/docs/OPEN_QUESTIONS.md`. The missing "≤" of Grup C was checked on 10 Nov 2026:
   it is in the original DOGC 6245, page 53451.
 - **Source of the Exp 3 chart** (keyword search 4/10, vector search 8/10): `outputs/run_pdf/exp2_summary.md` (keyword)
   and `outputs/run_notebook/exp2_summary.md` (vector), on the branch `archive/experiments`; also in `AGENTS.md`

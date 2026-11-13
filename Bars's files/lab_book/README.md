@@ -2,13 +2,13 @@
 
 The experiments that are not part of the website were moved off `main` on 10 Nov 2026. Their code, data, figures and
 documents are complete on the branch **`archive/experiments`** (`git switch archive/experiments`); the parked website
-features are on `parked/before-cleanup` (see `PARKED.md`). On both branches the folder `nomad/` still has its old
+features are on `parked/before-cleanup` (see `Bars's files/docs/PARKED.md`). On both branches the folder `nomad/` still has its old
 name, `Bhavini_NOMAD Files/`, so the paths below are given as they are there. One line each:
 
 ## Team experiments
 
 - **Exp 2/3 — rule cards drafted by AI** (`exp2_rules/`, `outputs/`, `data/regulations/`): Gemini 3.5 Flash Lite drafted 10 rule cards × 5 runs from Decret 141/2012; with vector search (open-notebook) 38/50 drafts were right, with keyword search 23/50.
-- **Exp 4 — daylight predictor (XGBoost)**: learned the daylight factor from Radiance runs (R² 0.80 vs 0.65 for the rule of thumb); dropped, replaced by grid simulation. The simulation set-up itself stays on main in `exp1_daylight/`; the model's plots are in `outputs/` on the archive branch.
+- **Exp 4 — daylight predictor (XGBoost)**: learned the daylight factor from Radiance runs (R² 0.80 vs 0.65 for the rule of thumb); dropped, replaced by grid simulation. The simulation set-up itself stays on main in `Bars's files/5_daylight/`; the model's plots are in `outputs/` on the archive branch.
 
 ## Bhavini's lab book (E01–E32, `Bhavini_NOMAD Files/05_Lab_book/`)
 
