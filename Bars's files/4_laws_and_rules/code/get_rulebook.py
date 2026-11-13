@@ -1,26 +1,14 @@
-"""NOMAD - the law PDFs of the rulebook: download them from their official sources, pin their versions, build the book.
+"""Fetch pinned official law texts and build Bars's previous site's rulebook.
 
-The rulebook (the flipbook in "The laws") is 22 official documents (plus the Ajuntament's guide, version-locked but
-only linked, see compile_rulebook.py LINK_ONLY) compiled into one book with a cover, an index,
-dividers and page numbers (nomad/02_Code/src/rulebook/compile_rulebook.py). The PDFs are not kept in git: this script
-downloads each one from the body that publishes it (BOE, codigotecnico.org, Portal Jurídic de Catalunya, Agència de
-l'Habitatge, RPUC, AMB, Ajuntament de Barcelona) and builds the book into nomad/04_Website/rulebook/parts/.
+Pinned versions: Bars's files/4_laws_and_rules/input/rulebook/sources.lock.json.
+Downloaded PDFs and check snapshots stay local under ignored nomad/02_Code/data/;
+compiled pages are written into Bars's files/app/rulebook/parts/.
 
-Pinned versions: nomad/04_Website/rulebook/sources.lock.json (in git) holds, for every document, the URL of the version
-used, its official version date (and what that date is based on), the download date, the file's sha256, the sha256 of
-its normalised text (spaces, line-break hyphens and the Portal Jurídic page footer ignored) and one hash per article
-(or per page, for documents without articles). A scan has no text, so for a scan the file's sha256 is what counts.
-
-  python tools/get_rulebook.py            build the book from the pinned versions (downloads what is missing); stops if
-                                          a downloaded file's text is not the pinned one
-  python tools/get_rulebook.py --check    download today's official versions into 02_Code/data/_check/ and compare them
-                                          with the lock: lists the articles that changed (with the words that changed
-                                          when the pinned file is on this computer); changes nothing; exit code 2 if a
-                                          text changed
-  python tools/get_rulebook.py --accept   the same, then takes the new versions: updates the lock and rebuilds the book;
-                                          bookmarks in unchanged documents move with their document, bookmarks in a
-                                          changed document are searched again
-Needs: pip install pymupdf pillow   (about 190 MB of downloads, once).  Run from the repo root.
+From the repository root run:
+  python "Bars's files/4_laws_and_rules/code/get_rulebook.py"            build from pinned versions
+  python "Bars's files/4_laws_and_rules/code/get_rulebook.py" --check    compare with today's official texts
+  python "Bars's files/4_laws_and_rules/code/get_rulebook.py" --accept   accept reviewed changes
+Needs pymupdf and pillow. The output serves Bars's previous site only.
 """
 import datetime as dt
 import difflib
@@ -33,13 +21,14 @@ import sys
 import unicodedata
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[3]
+BARS = ROOT / "Bars's files"
 CODE = ROOT / "nomad" / "02_Code"
 DATA = CODE / "data"                                   # where compile_rulebook.py reads the PDFs (not in git)
 CHECK = DATA / "_check"                                # today's official versions, for --check / --accept (not in git)
 BUILT = CODE / "results" / "rulebook"                  # where compile_rulebook.py writes the book (not in git)
-SITE = ROOT / "nomad" / "04_Website" / "rulebook"
-LOCK = SITE / "sources.lock.json"
+SITE = BARS / "app" / "rulebook"
+LOCK = BARS / "4_laws_and_rules" / "input" / "rulebook" / "sources.lock.json"
 
 BOE = "https://www.boe.es/buscar/pdf/{y}/{id}-consolidado.pdf"
 PJ = "https://portaljuridic.gencat.cat/eli/es-ct/{eli}/cat/pdf"

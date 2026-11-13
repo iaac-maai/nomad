@@ -1,18 +1,19 @@
 """NOMAD - 9 Nov 2026: replace the rule cards' source sentences that PDF/OCR reading had garbled with the official text.
 
-Each new quote was read in the official PDF downloaded by tools/get_rulebook.py:
+Each new quote was read in the official PDF downloaded by Bars's files/4_laws_and_rules/code/get_rulebook.py:
   - text PDFs (Decret 141/2012, CTE DB-SUA): copied from the PDF's text, word for word;
   - the MPGM 2004 scan (RPUC expedient 215050, document 126035), which has no text layer: read by eye on the page
     image, pages 19 (Disposició addicional primera) and 21 (arts. 318 and 323).
-Writes the same quotes into 07_Rules_and_evaluation/rules/rules.json (the source) and 04_Website/data/nomad.json
-(the site). Run once from the repo root:  python tools/fix_rule_quotes.py   (running it again changes nothing)
+Writes checked quotes into Bars's files/4_laws_and_rules/output/rules/rules.json and
+Bars's files/app/data/nomad.json. Run from the repo root:  python "Bars's files/4_laws_and_rules/code/fix_rule_quotes.py"
 """
 import json
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-FILES = [ROOT / "nomad" / "07_Rules_and_evaluation" / "rules" / "rules.json",
-         ROOT / "nomad" / "04_Website" / "data" / "nomad.json"]
+ROOT = Path(__file__).resolve().parents[3]
+BARS = ROOT / "Bars's files"
+FILES = [BARS / "4_laws_and_rules" / "output" / "rules" / "rules.json",
+         BARS / "app" / "data" / "nomad.json"]
 SCAN = ("by eye against the official scan (RPUC document 126035, page {p}): read by Claude from the page image on 9 Nov 2026, "
         "checked by a human (Bars) on 10 Nov 2026; the PDF has no text layer")
 TEXT = "word for word in the official PDF, 9 Nov 2026"

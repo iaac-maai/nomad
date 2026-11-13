@@ -5,13 +5,15 @@
 2. height-04C and patio-01 get `extra_quotes`: the other sentences that decide them, each with its page.
 3. rules/annex4.json: the Annex 4 note for the Rule cards page: Grups B, C and D word for word, and the parts of
    Annex 1 apartat 2 that apply in Grups B and D (2.1, 2.2.2, 2.6; whether the lift rule 2.4.1 a) applies is open).
-Every quote must be found word for word in the official PDF (the one tools/get_rulebook.py downloads, pinned in
-nomad/04_Website/rulebook/sources.lock.json), or the script stops. The pages are the PDF's own page numbers.
+Every quote must be found word for word in the official PDF (the one downloaded by
+Bars's files/4_laws_and_rules/code/get_rulebook.py, pinned in
+Bars's files/4_laws_and_rules/input/rulebook/sources.lock.json), or the script stops. The pages are the PDF's own page numbers.
 
 The consolidated PDF prints Grup C as "( 50%": the "≤" is missing. It is in the original DOGC 6245 (2 Nov 2012,
 page 53451); the note says so, and the comparison ignores the "≤".
-Writes the same data into 07_Rules_and_evaluation/rules/rules.json (the source) and 04_Website/data/nomad.json (the site).
-Needs pymupdf.   Run from the repo root:  python tools/annex4_cards.py
+Writes checked cards to Bars's files/4_laws_and_rules/output/rules/rules.json and updates
+Bars's files/app/data/nomad.json for the previous site.
+Needs pymupdf.   Run from the repo root:  python "Bars's files/4_laws_and_rules/code/annex4_cards.py"
 """
 import json
 import re
@@ -21,12 +23,13 @@ from pathlib import Path
 
 import pymupdf
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[3]
+BARS = ROOT / "Bars's files"
 PDF = ROOT / "nomad" / "02_Code" / "data" / "catalonia" / "raw" / "D141-2012.pdf"
-RULES = ROOT / "nomad" / "07_Rules_and_evaluation" / "rules" / "rules.json"
-ANNEX4 = ROOT / "nomad" / "07_Rules_and_evaluation" / "rules" / "annex4.json"
-SITE = ROOT / "nomad" / "04_Website" / "data" / "nomad.json"
-LOCK = ROOT / "nomad" / "04_Website" / "rulebook" / "sources.lock.json"
+RULES = BARS / "4_laws_and_rules" / "output" / "rules" / "rules.json"
+ANNEX4 = BARS / "4_laws_and_rules" / "output" / "rules" / "annex4.json"
+SITE = BARS / "app" / "data" / "nomad.json"
+LOCK = BARS / "4_laws_and_rules" / "input" / "rulebook" / "sources.lock.json"
 DOGC = {"issue": "DOGC 6245, 2 Nov 2012", "page": 53451,
         "url": "https://portaldogc.gencat.cat/utilsEADOP/PDF/6245/1267583.pdf"}
 

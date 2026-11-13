@@ -3,7 +3,8 @@
 For a PDF with text (Decret 141/2012, CTE): the quote must be found word for word in the PDF's text (spaces, line breaks,
 line-break hyphens and apostrophe styles are ignored). For a scan with no text layer (MPGM 2004): the script cannot
 read it; it prints the page the card says was checked by eye, so a person can look again.
-Needs the PDFs from tools/get_rulebook.py and pymupdf.   Run from the repo root:  python tools/check_quotes.py
+Needs the PDFs from Bars's files/4_laws_and_rules/code/get_rulebook.py and pymupdf.
+Run from the repo root:  python "Bars's files/4_laws_and_rules/code/check_quotes.py"
 """
 import json
 import re
@@ -13,9 +14,10 @@ from pathlib import Path
 
 import pymupdf
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[3]
+BARS = ROOT / "Bars's files"
 DATA = ROOT / "nomad" / "02_Code" / "data"
-RULES = ROOT / "nomad" / "07_Rules_and_evaluation" / "rules" / "rules.json"
+RULES = BARS / "4_laws_and_rules" / "output" / "rules" / "rules.json"
 ANNEX4 = RULES.with_name("annex4.json")
 PDF = {"Decret 141/2012": "catalonia/raw/D141-2012.pdf", "MPGM 2004": "pgm/raw/MPGM-2004-habitatges-parcela.pdf",
        "CTE-DB-SUA": "national/cte_db/DBSUA.pdf", "CTE DB-SUA": "national/cte_db/DBSUA.pdf"}
