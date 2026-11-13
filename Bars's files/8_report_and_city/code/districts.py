@@ -2,11 +2,11 @@
 
 Source: Open Data BCN, "Unitats administratives de la ciutat de Barcelona" (BarcelonaCiutat_Districtes.csv,
 geometry in ETRS89 / UTM 31N, the same coordinates as the site's data), CC BY 4.0, Ajuntament de Barcelona.
-Writes nomad/04_Website/data/districts.json: each district's rings, simplified to 1 m (the page finds a place's district
+Writes Bars's files/app/data/districts.json: each district's rings, simplified to 1 m (the page finds a place's district
 by point in polygon). Before, an empty shop took the census's district and a building with no census address took the
 district of the nearest census shop; the script counts the places that change.
 
-Run from the repo root:  python tools/districts.py [BarcelonaCiutat_Districtes.csv]   (downloads it when no file is given)
+Run from the repo root:  python "Bars's files/8_report_and_city/code/districts.py" [BarcelonaCiutat_Districtes.csv]
 """
 import csv
 import io
@@ -16,8 +16,8 @@ import sys
 import urllib.request
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-SITE = ROOT / "nomad" / "04_Website" / "data"
+ROOT = Path(__file__).resolve().parents[3]
+SITE = ROOT / "Bars's files" / "app" / "data"
 URL = ("https://opendata-ajuntament.barcelona.cat/data/dataset/808daafa-d9ce-48c0-925a-fa5afdb1ed41/resource/"
        "576bc645-9481-4bc4-b8bf-f5972c20df3f/download")
 TOL = 1.0                                                       # m, simplification
@@ -88,7 +88,7 @@ def main():
     text = (Path(sys.argv[1]).read_text(encoding="utf-8-sig") if len(sys.argv) > 1
             else urllib.request.urlopen(URL, timeout=120).read().decode("utf-8-sig"))
     full = [{"name": r["nom_districte"], "rings": rings_of(r["geometria_etrs89"])} for r in csv.DictReader(io.StringIO(text))]
-    out = {"about": "Barcelona's 10 districts (official boundaries), simplified to 1 m. Built by tools/districts.py.",
+    out = {"about": "Barcelona's 10 districts (official boundaries), simplified to 1 m. Built by Bars's files/8_report_and_city/code/districts.py.",
            "source": "Ajuntament de Barcelona, Open Data BCN: Unitats administratives de la ciutat (BarcelonaCiutat_Districtes.csv), CC BY 4.0",
            "crs": "EPSG:25831",
            "districts": [{"name": d["name"], "rings": [[[round(x, 1), round(y, 1)] for x, y in simplify(r, TOL)] for r in d["rings"]]}
