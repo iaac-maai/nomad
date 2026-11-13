@@ -1324,6 +1324,8 @@ async function showBuilding(ref, prem) {
   if ($("#bldg") !== box) return;                                     // another shop was picked meanwhile
   if (!b) { box.innerHTML = `<p class="meta">NOMAD holds no Catastro building for this premises.</p>`; return; }
   // floors: [{k, units: [{use, code, m2, pts}]}], from the units or from the building parts' outlines
+  const sv = prem && Number.isFinite(+prem.x) && Number.isFinite(+prem.y) ? [prem.x, prem.y] : b.origin;
+  const [svLat, svLng] = sv ? utmToLatLng(+sv[0], +sv[1]) : [null, null];
   const floors = b.source === "units" ? b.floors :
     (() => { const up = Math.max(1, ...b.parts.map(p => p.up)), down = Math.max(0, ...b.parts.map(p => p.down)), out = [];
       for (let k = -down; k < up; k++) out.push({ k, units: b.parts.filter(p => k >= 0 ? p.up > k : p.down >= -k).map(p => ({ use: "", code: "", m2: null, pts: p.pts })) });
@@ -1347,7 +1349,7 @@ async function showBuilding(ref, prem) {
     <div class="bgrid"><div><div class="bplan"></div><div class="bunits"></div></div>
       <div class="bstage"><canvas aria-label="3D model of the building, floor by floor. The plan beside it gives the same information."></canvas><span class="hint">drag to turn · scroll to zoom</span></div></div>
     <p class="meta">${b.source === "units" ? `Every unit as the Catastro records it (use and built area, m²); ${(FACS[ref] ? "floors at their measured heights and the street face's windows, doors and balconies from the approved facade drawing (facade + LiDAR)" : "floors drawn 3 m apart")}.` :
-      "The Catastro has no floor-by-floor plan of this building: its outline on each floor, from the building parts and their number of floors."} NOMAD's estimate from Dirección General del Catastro data, accessed ${b.source === "units" ? "11 Nov 2026" : "29 Oct 2026"}.</p><p class="meta"><a href="https://www1.sedecatastro.gob.es/Cartografia/FXCC/Visor3D.aspx?del=8&amp;mun=900&amp;refcat=${encodeURIComponent(ref.slice(0, 14))}&amp;final=" target="_blank" rel="noopener">Open this building in the Catastro 3D viewer</a></p>`;
+      "The Catastro has no floor-by-floor plan of this building: its outline on each floor, from the building parts and their number of floors."} NOMAD's estimate from Dirección General del Catastro data, accessed ${b.source === "units" ? "11 Nov 2026" : "29 Oct 2026"}.</p><p class="meta"><a href="https://www1.sedecatastro.gob.es/Cartografia/FXCC/Visor3D.aspx?del=8&amp;mun=900&amp;refcat=${encodeURIComponent(ref.slice(0, 14))}&amp;final=" target="_blank" rel="noopener">Open this building in the Catastro 3D viewer</a></p><p class="meta">${svLat != null ? `<a href="https://www.google.com/maps/@?api=1&amp;map_action=pano&amp;viewpoint=${svLat},${svLng}" target="_blank" rel="noopener">Open this location in Google Street View</a> (outbound Google link; no images are shown on this site).` : "Street View location unavailable."}</p>`;
   const pts = floors.flatMap(f => f.units.flatMap(u => u.pts)), xs = pts.map(q => q[0]), ys = pts.map(q => q[1]);
   const x0 = Math.min(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys), w = Math.max(...xs) - x0, h = y1 - y0, pad = 0.04 * Math.max(w, h);
   const fac = (await FAC)[ref];

@@ -14,6 +14,7 @@ IAAC asks us to declare every AI tool we use. Add one row each time.
 | 2026-11-14 | Bars | Codex (ChatGPT) | Added honest labels for daylight, home counts and zoning answer | XGBoost marked as a model estimate, counts as rough estimates, and zoning answer notes other checks remain |
 | 2026-11-14 | Bars | Codex (ChatGPT) | Reconciled the displayed tree total with the built Open Data BCN layer metadata | 222,918 matches the dated city index and its three dataset subtotals; 222,617 was stale copy |
 | 2026-11-14 | Bars | Codex (ChatGPT) | Added external Catastro 3D viewer link to every building details panel | Uses the checked refcat link pattern and opens in a new tab |
+| 2026-11-14 | Bars | Codex (ChatGPT) | Labeled Street View as an outbound Google link | Building panel opens Google Street View by location; site displays no images |
 | 2026-11-14 | Bars | Codex (ChatGPT) | Traced the Bhavini district display to its source | Site carries district names on the 2024 census records; it loads no official or other district-boundary polygon layer |
 | 2026-11-14 | Bars | Codex (ChatGPT) | Marked stored golden-set metrics as not reproducible yet | Named the 16-question CSV test set and answer accuracy, checked citation accuracy and search hit@5 metrics |
 | 2026-10-26 | | Claude | Starter kit scripts for experiments 1 and 2 | Scripts in exp1_daylight/ and exp2_rules/, reviewed by the team |
