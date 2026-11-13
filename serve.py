@@ -1,7 +1,7 @@
 """Open a NOMAD site on this computer: python serve.py [--site bhavini|bars]
 
-The default site is Bhavini's official site. Use --site bars for Bars's previous site. The first time, it may download
-law PDFs and build the book (needs `pip install pymupdf pillow`). Without them the whole site works except
+The default is Bhavini's official site, served from Bhavini's files/ at /app/. Use --site bars for Bars's site in
+Bars's files/app/. The first time, it may download law PDFs and build the book (needs `pip install pymupdf pillow`). Without them the whole site works except
 the pages of "The laws". Then it serves the site at http://localhost:8000 and opens it in the browser.
 Stop it with Ctrl+C.   Options: --port 8001, --no-browser, --no-rulebook
 """
@@ -14,9 +14,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 SITES = {
-    "bhavini": ROOT / "Bhavini's files" / "app",
+    "bhavini": ROOT / "Bhavini's files",
     "bars": ROOT / "Bars's files" / "app",
 }
+PAGES = {"bhavini": "/app/", "bars": "/"}
 
 
 def main():
@@ -25,6 +26,7 @@ def main():
     if site_name not in SITES:
         raise SystemExit("--site must be bhavini or bars")
     SITE = SITES[site_name]
+    PAGE = PAGES[site_name]
     port = int(args[args.index("--port") + 1]) if "--port" in args else 8000
     if site_name == "bars" and not (SITE / "rulebook" / "parts").exists() and "--no-rulebook" not in args:
         try:
@@ -35,11 +37,12 @@ def main():
             print("The rulebook pages are not built yet. To see them: pip install pymupdf pillow, then run python serve.py again.")
         except subprocess.CalledProcessError:
             print("Building the rulebook failed (see above). The rest of the site works; try again later.")
-    if site_name == "bhavini" and not (SITE / "rulebook" / "parts").exists() and "--no-rulebook" not in args:
+    if site_name == "bhavini" and not (SITE / "app" / "rulebook" / "parts").exists() and "--no-rulebook" not in args:
         print("Bhavini's rulebook pages are not built; serving the site without changing her files.")
     handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(SITE))
     with http.server.ThreadingHTTPServer(("127.0.0.1", port), handler) as srv:
-        url = f"http://localhost:{port}/"
+        url = f"http://localhost:{port}{PAGE}"
+        print(f"Serving folder: {SITE}")
         print(f"NOMAD ({site_name}) is running at {url}  (Ctrl+C to stop)")
         if "--no-browser" not in args:
             webbrowser.open(url)
