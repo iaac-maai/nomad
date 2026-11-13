@@ -6,14 +6,14 @@ data/catastro/b_*.json   per building: only the fields the site uses (use, dwell
                          Dropped: ref (the key already), source, origin, address.
 data/warehouses.json     built and ground area rounded to 10 m², street and open façade lengths to 0,5 m; x / y are
                          already whole metres. Every column is used by the site, so none is dropped.
-Run from the repo root after src/zoning/catastro_site.py and src/zoning/warehouses.py:  python tools/transform_catastro.py
+Run from the repo root after the shared source-building scripts:  python "Bars's files/2_building/code/transform_catastro.py"
 Files already transformed (no 'origin' field) are left as they are, so running it twice changes nothing.
 """
 import json
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "nomad" / "04_Website" / "data"
+ROOT = Path(__file__).resolve().parents[3]
+DATA = ROOT / "Bars's files" / "app" / "data"
 TOL, GRID = 0.5, 0.5
 
 
