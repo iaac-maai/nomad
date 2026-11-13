@@ -26,7 +26,10 @@ IAAC asks us to declare every AI tool we use. Add one row each time.
 | 2026-11-11 | Bhavini | Claude | Same branch: unit list rebuilt from the Catastro CAT file (shop_data.py step 0, records 14/15), cut shop shapes (rules A and B) and unit counts by use added back, transformed for the download licence | Checked against the old list: unit counts match in 5,325 of 5,328 buildings, shop areas within about 1 m² |
 | 2026-11-11 | Bars | Claude | Annex 4 v2 (PR #12): tools/annex4_grup.py rewritten (building area per parcel or own construction unit; shop area = ground-floor non-housing space + own basement; data-mismatch check), Grup B added to tools/annex4_cards.py and the site; run on the real CAT file (B 60, C 5,094, D 151, unknown 767) | 10/10 tests, 20/20 Annex 4 quotes (check_quotes.py), spot check by Bars of shops in each group; site checked after publishing |
 | 2026-11-12 | Bhavini | Claude | shop_data.py moved to tools/ (as Bars asked), paths set for the repo root and the CAT file in nomad/02_Code/data/barcelona/catastro/cat/ | Script parses; same code as Bhavini's local version |
+ bars/reorganise-my-files
+| 2026-11-13 | Bars | Codex (ChatGPT) | Reorganized Bars's work into the agreed numbered team folders, updated paths and site selection, documented outputs and verified the historical XGBoost provenance | Checked path mappings, git history, tests, output hashes, and both local server modes; results recorded in the reorganization PR branch |
 | 2026-11-12 | Alvaro | Claude | CLAUDE.md: handoff for Claude Code on Alvaro's PC (state of the project, history, branches and PRs, rules, the facade task from PR #16, open work, commands); updated the same day after PR #16 merged, with the three facade decisions Alvaro made | Reviewed by Alvaro before merging; no code or data changed |
+
 
 ## Sources, tools and licences
 

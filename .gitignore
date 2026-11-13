@@ -9,7 +9,11 @@ Thumbs.db
 .vscode/
 data/ESP_CT_Barcelona.081800_TMYx/
 *.rhl
-# law PDFs and the compiled rulebook: downloaded by tools/get_rulebook.py, never committed
+# law PDFs and compiled rulebooks: downloaded by Bars's rulebook code, never committed
 nomad/02_Code/data/
 nomad/02_Code/results/
 nomad/04_Website/rulebook/parts/
+Bars's files/app/rulebook/parts/
+
+# Each person's raw and licensed files stay local.
+**/private/
