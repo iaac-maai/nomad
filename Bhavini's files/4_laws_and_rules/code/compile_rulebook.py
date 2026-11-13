@@ -240,7 +240,11 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "parts").mkdir(exist_ok=True)
     srcs = []
+    links = []
     for lvl, rel, short, title, plain, url, scan in DOCS:
+        if rel.endswith("InforUrb_Canvi-us-habitatge.pdf"):
+            links.append(dict(level=lvl, short=short, title=title, plain=plain, url=url, link_only=True))
+            continue
         f = D / rel
         doc = pymupdf.open(f)
         srcs.append(dict(level=lvl, file=rel, short=short, title=title, plain=plain, url=url, scan=scan, pages=doc.page_count))
@@ -348,6 +352,11 @@ def main():
     anchors = {}
     by_short = {s["short"]: s for s in srcs}
     for key, name, short, phrases in ANCHORS:
+        if short not in by_short:
+            link = next((d for d in links if d["short"] == short), None)
+            anchors[key] = {"key": key, "name": name, "doc": short, "url": link["url"] if link else None,
+                            "note": "official source is linked in the book index; not reproduced in the book"}
+            continue
         s = by_short[short]
         found = None
         oc = ocr_pages(D / s["file"]) if s["scan"] else {}
@@ -400,7 +409,7 @@ def main():
     parts.insert(0, {"level": "front", "doc": "front", "file": "parts/00.pdf", "first_page": 1, "last_page": front,
                      "mb": round((OUT / "parts" / "00.pdf").stat().st_size / 1e6, 2)})
     idx = {"title": "NOMAD rulebook", "pages": total, "levels": [{"id": l, "name": n, "plain": p} for l, n, p in LEVELS],
-           "docs": [{k: s[k] for k in ("level", "short", "title", "plain", "url", "scan", "pages", "start")} for s in srcs],
+           "docs": [{k: s[k] for k in ("level", "short", "title", "plain", "url", "scan", "pages", "start")} for s in srcs] + links,
            "parts": parts}
     json.dump(idx, io.open(OUT / "index.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     json.dump(anchors, io.open(OUT / "anchors.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)

@@ -3091,7 +3091,7 @@ function cardPlain(c) {
   return plainHtml(ids);
 }
 const cardLaw = c => (CARD_ANCHORS[c.title] || []).find(k => BK.anchors && BK.anchors[k]) || (CARD_ANCHORS[c.title] || [])[0] || "";
-function openLaw(k) { const a = BK.anchors && BK.anchors[k]; if (a) { BK.hl = a; bookGo(a.page, true); lawOn(true); } }   // same as a click on the list beside the rulebook
+function openLaw(k) { const a = BK.anchors && BK.anchors[k]; if (a && a.url) window.open(a.url, "_blank", "noopener"); else if (a && a.page) { BK.hl = a; bookGo(a.page, true); lawOn(true); } }   // same as a click on the list beside the rulebook
 function lawOn(reveal) {                                        // the law open in the book is lit in the list beside it
   const k = BK.hl && BK.hl.key; document.querySelectorAll("#bkmarks .bk-item").forEach(i => i.classList.toggle("on", i.dataset.k === k));
   const it = reveal && $("#bkmarks .bk-item.on"), side = $(".bk-side");
@@ -3140,11 +3140,12 @@ function drawBookIndex(q) {
     I.levels.map(L => {
       const ds = I.docs.filter(d => d.level === L.id && (!f || norm(d.short + " " + d.title + " " + d.plain).includes(f)));
       if (!ds.length) return "";
-      return `<div class="bk-lvl">${esc(L.name)}</div><p class="bk-lvlp">${esc(L.plain)}</p>` + ds.map(d =>
-        `<button type="button" class="bk-doc" data-p="${d.start}"><span class="pg">p. ${d.start}</span><b>${esc(d.short)}</b> · ${esc(d.title)}<small>${esc(d.plain)}${d.scan ? " (scanned original)" : ""}${d.version_date ? ` · Official version ${esc(d.version_date)}, downloaded ${esc(d.downloaded)} (pinned source)` : ""}</small></button>`).join("");
+      return `<div class="bk-lvl">${esc(L.name)}</div><p class="bk-lvlp">${esc(L.plain)}</p>` + ds.map(d => d.link_only
+        ? `<a class="bk-doc" href="${esc(d.url)}" target="_blank" rel="noopener"><span class="pg">official link ↗</span><b>${esc(d.short)}</b> · ${esc(d.title)}<small>${esc(d.plain)} Open the Ajuntament source; it is not reproduced in this book.</small></a>`
+        : `<button type="button" class="bk-doc" data-p="${d.start}"><span class="pg">p. ${d.start}</span><b>${esc(d.short)}</b> · ${esc(d.title)}<small>${esc(d.plain)}${d.scan ? " (scanned original)" : ""}${d.version_date ? ` · Official version ${esc(d.version_date)}, downloaded ${esc(d.downloaded)} (pinned source)` : ""}</small></button>`).join("");
     }).join("") +
-    `<p class="hint2" style="margin-top:10px">Law texts as of ${I.as_of || "date not recorded"}; versions are pinned in the <a href="../4_laws_and_rules/input/rulebook/sources.lock.json" target="_blank" rel="noopener">source lock</a> (downloaded 9 Nov 2026). ${I.docs.length} official documents, ${fmt(I.pages)} pages. Sources: BOE, codigotecnico.org, Portal Jurídic de Catalunya, Agència de l'Habitatge, RPUC (Generalitat), AMB, Ajuntament de Barcelona.</p>`;
-  $("#bkindex").onclick = e => { const b = e.target.closest(".bk-doc"); if (b) { BK.hl = null; bookGo(+b.dataset.p, true); } };
+    `<p class="hint2" style="margin-top:10px">Law texts as of ${I.as_of || "date not recorded"}; versions are pinned in the <a href="../4_laws_and_rules/input/rulebook/sources.lock.json" target="_blank" rel="noopener">source lock</a> (downloaded 9 Nov 2026). ${I.docs.filter(d => !d.link_only).length} official documents in the book, ${fmt(I.pages)} pages${I.docs.some(d => d.link_only) ? `; ${I.docs.filter(d => d.link_only).length} guide linked, not reproduced` : ""}. Sources: BOE, codigotecnico.org, Portal Jurídic de Catalunya, Agència de l'Habitatge, RPUC (Generalitat), AMB, Ajuntament de Barcelona.</p>`;
+  $("#bkindex").onclick = e => { const b = e.target.closest(".bk-doc"); if (b && b.tagName === "BUTTON") { BK.hl = null; bookGo(+b.dataset.p, true); } };
 }
 /* each law in the list: its heading and what it means, in plain words (4_laws_and_rules/input/plain_words.json "laws") */
 const LAWHEAD = {
