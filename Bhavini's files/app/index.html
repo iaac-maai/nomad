@@ -1635,7 +1635,7 @@ function drawRules() {
   $("#golden").innerHTML = `<div><b class="num">${Math.round(100 * g.answer_accuracy)} %</b><span>of ${g.questions} golden questions answered right by NOMAD's code</span></div>
     <div><b class="num">${Math.round(100 * g.citation_accuracy_when_checked)} %</b><span>right article cited, when NOMAD checks the rule</span></div>
     <div><b class="num">${Math.round(100 * g["search_hit@5"])} %</b><span>keyword search finds the right article in its top 5</span></div>
-    <div><b class="num">${D.rules.filter(r => r.confidence === 1).length} / ${D.rules.length}</b><span>rule cards whose quote is found word for word</span></div>`;
+    <div><b class="num">${D.rules.filter(r => r.confidence === 1).length} / ${D.rules.length}</b><span>rule cards whose quote is found word for word</span></div><p class="hint2" style="grid-column:1/-1">Golden-set scores are not reproducible yet. Test set: 4_laws_and_rules/input/golden_set/golden_set.csv (16 questions). Shown metrics: answer accuracy, citation accuracy when checked, and search hit@5. The score below is stored data, not a verified rerun.</p>`;
   const val = r => r.unit === "ratio" ? (r.value === 0.125 ? "1/8" : r.value) : r.unit === "m per m2" ? "S/9" : `${String(r.value).replace(".", ",")} ${r.unit.replace("m2", "m²").replace(" per dwelling", "")}`;
   $("#rulegrid").innerHTML = D.rules.map(r => `<div class="rule panel">
       ${plainHtml([r.rule_id])}
@@ -1687,7 +1687,7 @@ function drawExps() {
       chart: bars([["admitted", z.housing.YES, C("--yes")], ["check the plan", z.housing.CHECK, C("--check")], ["not admitted", z.housing.NO, C("--no")]], z.empty_premises),
       l: "Zoning is rarely the problem in the dense city: the rules inside the shop decide." },
     { id: "exp3", tag: "EXP 3 · STEP 4", h: "Can AI read Decret 141 and write the rules correctly?",
-      p: `Team experiment: vector search raised fully correct rule cards from 4 to 8 of 10. NOMAD's own ${D.rules.length} rule cards were then tested against a golden set: ${e.golden.questions} questions, ${pct(e.golden.answer_accuracy)} % right after the fixes it found.`,
+      p: `Team experiment: vector search raised fully correct rule cards from 4 to 8 of 10. NOMAD's own ${D.rules.length} rule cards were then tested against a golden set: ${e.golden.questions} questions, ${pct(e.golden.answer_accuracy)} % right after the fixes it found (stored score; not reproducible yet; test set: golden_set.csv; metric: answer accuracy).`,
       chart: bars([["before the fixes", 75, C("--muted")], ["after", pct(e.golden.answer_accuracy), C("--yes")]], 100, " %"),
       l: "The golden set found real bugs: shop conversions need 2,40 m (Annex 4 Grups B, C and D), not 2,50 m, and 8 shops had been thrown out for it." },
     { id: "exp4", tag: "EXP 4 · STEP 5 · TEAM", h: "Can AI predict daylight without a simulation?",

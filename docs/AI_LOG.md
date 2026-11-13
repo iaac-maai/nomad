@@ -15,6 +15,7 @@ IAAC asks us to declare every AI tool we use. Add one row each time.
 | 2026-11-14 | Bars | Codex (ChatGPT) | Reconciled the displayed tree total with the built Open Data BCN layer metadata | 222,918 matches the dated city index and its three dataset subtotals; 222,617 was stale copy |
 | 2026-11-14 | Bars | Codex (ChatGPT) | Added external Catastro 3D viewer link to every building details panel | Uses the checked refcat link pattern and opens in a new tab |
 | 2026-11-14 | Bars | Codex (ChatGPT) | Traced the Bhavini district display to its source | Site carries district names on the 2024 census records; it loads no official or other district-boundary polygon layer |
+| 2026-11-14 | Bars | Codex (ChatGPT) | Marked stored golden-set metrics as not reproducible yet | Named the 16-question CSV test set and answer accuracy, checked citation accuracy and search hit@5 metrics |
 | 2026-10-26 | | Claude | Starter kit scripts for experiments 1 and 2 | Scripts in exp1_daylight/ and exp2_rules/, reviewed by the team |
 | 2026-10-27 | Bars | Claude | Debugging Grasshopper/Honeybee setup, switching Exp 1 to ground-floor shops, training script | Scripts and settings, reviewed by Bars |
 | 2026-10-27 | Bars | Gemini 3.5 Flash Lite (API, model `gemini-3.5-flash-lite`, set as GEMINI_MODEL in .env; 5 of the 155 logged drafts in outputs/run_pdf used the code default `gemini-2.5-flash`) | Drafting 10 rule cards x 5 runs from Decret 141/2012 (Exp 2) | Drafts only, scored against human gold cards |
