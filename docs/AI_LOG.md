@@ -11,6 +11,7 @@ IAAC asks us to declare every AI tool we use. Add one row each time.
 | 2026-11-13 | Bars | Codex (ChatGPT) | Added lawbook as-of date and pinned official source version metadata | Lawbook entries carry version/download dates from Bars sources lock; signed Circular 8 PDF is absent from git |
 | 2026-11-14 | Bars | Codex (ChatGPT) | Included the pinned source lock in Bhavini lawbook data | Published the nonsensitive sources.lock.json needed by the site link from the law index |
 | 2026-11-13 | Bars | Codex (ChatGPT) | Added research scope and source credits to Bhavini Sources table | Added academic/non-commercial scope, transformed Catastro INSPIRE Buildings, ICGC LiDAR CC BY 4.0, and IAAC credit |
+| 2026-11-14 | Bars | Codex (ChatGPT) | Added honest labels for daylight, home counts and zoning answer | XGBoost marked as a model estimate, counts as rough estimates, and zoning answer notes other checks remain |
 | 2026-10-26 | | Claude | Starter kit scripts for experiments 1 and 2 | Scripts in exp1_daylight/ and exp2_rules/, reviewed by the team |
 | 2026-10-27 | Bars | Claude | Debugging Grasshopper/Honeybee setup, switching Exp 1 to ground-floor shops, training script | Scripts and settings, reviewed by Bars |
 | 2026-10-27 | Bars | Gemini 3.5 Flash Lite (API, model `gemini-3.5-flash-lite`, set as GEMINI_MODEL in .env; 5 of the 155 logged drafts in outputs/run_pdf used the code default `gemini-2.5-flash`) | Drafting 10 rule cards x 5 runs from Decret 141/2012 (Exp 2) | Drafts only, scored against human gold cards |

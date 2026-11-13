@@ -1085,7 +1085,7 @@ const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "
 const fmt = n => Number(n).toLocaleString("en-US");
 const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const norm = s => String(s || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toUpperCase().replace(/\s+/g, " ").trim();
-const WORD = { YES: "Homes allowed", CHECK: "Maybe: the local plan decides", NO: "Homes not allowed" };   // changed by applyLang
+const WORD = { YES: "Zoning allows it; other checks not done yet", CHECK: "Maybe: the local plan decides", NO: "Homes not allowed" };   // changed by applyLang
 let D, P, B, DL = null;
 
 Promise.all(["data/nomad.json", "data/premises.json", "data/basemap.json"].map(u => fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); }))
@@ -1139,7 +1139,7 @@ function dlNote() {
   return `the daylight model (Exp 4): ${DL.simulations} Radiance simulations + ${esc(DL.model)}; lit depth checked on ${v.shops} real shops against Radiance, mean error ${dec(v.lit_depth_mae_m)} m. Floor height and windows assumed.`;
 }
 function dlHtml(d) {                                             // one shop's daylight, in words
-  return `<span class="pill ${DLC[d.cls][1]}">${DLC[d.cls][0]}</span> ${dec(d.lit, 1)} m of floor in from the window reach the target (${Math.round(100 * d.share)} % of the floor)`
+  return `<span class="pill ${DLC[d.cls][1]}">${DLC[d.cls][0]}</span> ${dec(d.lit, 1)} m of floor in from the window reach the target (${Math.round(100 * d.share)} % of the floor) · model estimate (XGBoost); will be replaced by a sky-view (VSC) check`
     + (d.check ? ` · <b>check the street width by hand</b>` : "");
 }
 
@@ -2895,11 +2895,11 @@ const I18N = {
     res_hint: "The shop as it is and its layouts appear here, one for each circulation strategy that adds homes: flats on both façades, a corridor to the block interior, or small flats filling the shop.",
     save: "Save this shop", report: "Download the report (PDF)", saved_eb: "Step 3 · keep and share", saved_h: "Saved shops, side by side",
     saved_lede: "Every shop you save keeps your requirements and NOMAD's answer. Tick two or more to compare them. Only you can see your saved shops.",
-    YES: "Homes allowed", CHECK: "Maybe: the local plan decides", NO: "Homes not allowed", simple: "Simple view", expert: "Full view",
+    YES: "Zoning allows it; other checks not done yet", CHECK: "Maybe: the local plan decides", NO: "Homes not allowed", simple: "Simple view", expert: "Full view",
     s_yes: (n, a) => `Yes: ${n} home${n === 1 ? "" : "s"} fit in ${a} and pass every rule.`,
     s_partly: (n, k, a) => `Partly: ${n} home${n === 1 ? "" : "s"} fit in ${a}; ${k} of the flats you asked for do not.`,
     s_no: a => `No: ${a} cannot become homes as it is.`, s_why: "Why:", law_show: "Show the law", law_hide: "Hide the law",
-    v_title: "Rough value", v_price: "Asking price nearby (2018, ground-floor flats)", v_homes: "Homes", v_value: "Value of the homes",
+    v_title: "Rough value", v_price: "Asking price nearby (2018, ground-floor flats)", v_homes: "Homes (rough estimate)", v_value: "Value of the homes",
     v_cost: "Your cost of the works (€ per m²)", v_margin: "Value minus works", v_note: "2018 asking prices of ground-floor flats within 800 m (idealista18, ODbL). Not today's market: a first order of magnitude.",
     no_saved: "Nothing saved yet. Make the layouts for a shop and press “Save this shop”.", compare: "Compare", saved_ok: "Saved.", saved_local: "Saved in this browser only.",
     rep_ok: "Report ready.", rep_no: "This view cannot save files.", del: "Remove" },
@@ -2909,11 +2909,11 @@ const I18N = {
     res_hint: "Aquí apareixen el local tal com és i les seves distribucions, una per cada manera d'arribar als habitatges que n'afegeix: pisos a les dues façanes, un passadís cap a l'interior d'illa o pisos petits que omplen el local.",
     save: "Desa aquest local", report: "Descarrega l'informe (PDF)", saved_eb: "Pas 8 · informe · els teus locals", saved_h: "Locals desats, un al costat de l'altre",
     saved_lede: "Cada local que desis guarda les teves necessitats i la resposta de NOMAD. Marca'n dos o més per comparar-los. Només tu veus els teus locals desats.",
-    YES: "Habitatge admès", CHECK: "Cal revisar el pla de la zona", NO: "No admès", simple: "Vista senzilla", expert: "Vista completa",
+    YES: "La zona admet habitatges; falten altres comprovacions", CHECK: "Cal revisar el pla de la zona", NO: "No admès", simple: "Vista senzilla", expert: "Vista completa",
     s_yes: (n, a) => `Sí: hi caben ${n} habitatge${n === 1 ? "" : "s"} a ${a} i compleixen totes les normes.`,
     s_partly: (n, k, a) => `En part: hi caben ${n} habitatge${n === 1 ? "" : "s"} a ${a}; ${k} dels pisos que demanes no.`,
     s_no: a => `No: ${a} no es pot convertir en habitatges tal com és.`, s_why: "Per què:", law_show: "Mostra la norma", law_hide: "Amaga la norma",
-    v_title: "Valor aproximat", v_price: "Preu demanat a prop (2018, pisos en planta baixa)", v_homes: "Habitatges", v_value: "Valor dels habitatges",
+    v_title: "Valor aproximat", v_price: "Preu demanat a prop (2018, pisos en planta baixa)", v_homes: "Habitatges (estimació aproximada)", v_value: "Valor dels habitatges",
     v_cost: "El teu cost d'obra (€ per m²)", v_margin: "Valor menys obra", v_note: "Preus demanats el 2018 per pisos en planta baixa a menys de 800 m (idealista18, ODbL). No és el mercat d'avui: un primer ordre de magnitud.",
     no_saved: "Encara no has desat res. Fes les distribucions d'un local i prem «Desa aquest local».", compare: "Compara", saved_ok: "Desat.", saved_local: "Desat només en aquest navegador.",
     rep_ok: "Informe preparat.", rep_no: "Aquesta vista no pot desar fitxers.", del: "Esborra" },
@@ -2923,11 +2923,11 @@ const I18N = {
     res_hint: "Aquí aparecen el local tal como está y sus distribuciones, una por cada forma de llegar a las viviendas que añade alguna: pisos en las dos fachadas, un pasillo hacia el interior de manzana o pisos pequeños que llenan el local.",
     save: "Guardar este local", report: "Descargar el informe (PDF)", saved_eb: "Paso 8 · informe · tus locales", saved_h: "Locales guardados, uno al lado del otro",
     saved_lede: "Cada local que guardes conserva tus necesidades y la respuesta de NOMAD. Marca dos o más para compararlos. Solo tú ves tus locales guardados.",
-    YES: "Vivienda admitida", CHECK: "Hay que revisar el plan de la zona", NO: "No admitida", simple: "Vista sencilla", expert: "Vista completa",
+    YES: "La zona admite viviendas; faltan otras comprobaciones", CHECK: "Hay que revisar el plan de la zona", NO: "No admitida", simple: "Vista sencilla", expert: "Vista completa",
     s_yes: (n, a) => `Sí: caben ${n} vivienda${n === 1 ? "" : "s"} en ${a} y cumplen todas las normas.`,
     s_partly: (n, k, a) => `En parte: caben ${n} vivienda${n === 1 ? "" : "s"} en ${a}; ${k} de los pisos que pides no.`,
     s_no: a => `No: ${a} no puede convertirse en viviendas tal como está.`, s_why: "Por qué:", law_show: "Mostrar la norma", law_hide: "Ocultar la norma",
-    v_title: "Valor aproximado", v_price: "Precio pedido cerca (2018, pisos en planta baja)", v_homes: "Viviendas", v_value: "Valor de las viviendas",
+    v_title: "Valor aproximado", v_price: "Precio pedido cerca (2018, pisos en planta baja)", v_homes: "Viviendas (estimación aproximada)", v_value: "Valor de las viviendas",
     v_cost: "Tu coste de obra (€ por m²)", v_margin: "Valor menos obra", v_note: "Precios pedidos en 2018 por pisos en planta baja a menos de 800 m (idealista18, ODbL). No es el mercado de hoy: un primer orden de magnitud.",
     no_saved: "Aún no has guardado nada. Haz las distribuciones de un local y pulsa «Guardar este local».", compare: "Comparar", saved_ok: "Guardado.", saved_local: "Guardado solo en este navegador.",
     rep_ok: "Informe listo.", rep_no: "Esta vista no puede guardar archivos.", del: "Borrar" }
