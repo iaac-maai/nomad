@@ -827,8 +827,8 @@ header.bar .wrap { grid-template-columns: auto auto minmax(0, 1fr) auto }
       <form class="citypanel" id="citypanel" onsubmit="return false"></form></div>
     <div class="bar2"><button class="chip" id="cv-top">from above</button><button class="chip" id="cv-tilt">tilted</button><button class="chip" id="cv-street">street level</button>
       <span class="hint2">Left drag: move · right drag or two fingers: turn · scroll: zoom</span></div>
-    <p class="vh-summary" id="citysum">What you see: Barcelona's buildings raised from the Catastro, coloured by their PGM zone; streets, paths, parks, rail and water from the zoning map; 222,617 trees; and the ground floor of each empty shop coloured by what its zone allows. Click a building for its details.</p>
-    <div class="note">Buildings: Catastro (heights estimated: 5 m ground floor + 3 m per upper floor). Roads, paths, parks, rail, water and zones: Mapa Urbanístic de Catalunya. Trees: Open Data BCN street, zone and park trees (CC BY 4.0). Sun: computed for Barcelona on the chosen date and time. Façade textures are not open data: the Street View link shows the real street.</div>
+    <p class="vh-summary" id="citysum">What you see: Barcelona's buildings raised from the Catastro, coloured by their PGM zone; streets, paths, parks, rail and water from the zoning map; 222,918 trees; and the ground floor of each empty shop coloured by what its zone allows. Click a building for its details.</p>
+    <div class="note">Buildings: Catastro (heights estimated: 5 m ground floor + 3 m per upper floor). Roads, paths, parks, rail, water and zones: Mapa Urbanístic de Catalunya. Trees: Open Data BCN street, zone and park trees (1 Oct 2026; CC BY 4.0). Sun: computed for Barcelona on the chosen date and time. Façade textures are not open data: the Street View link shows the real street.</div>
   </div>
 </div></section>
 
@@ -2675,7 +2675,7 @@ function initCity() {
 let cityPick = 0;
 function buildPanel() {
   const today = new Date(), iso = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
-  const lay = [["buildings", "buildings"], ["shops", "empty shops (ground floor)"], ["trees", "trees (222,617)"], ...Object.entries(GROUND).map(([k, [l]]) => [k, l]), ["zoning", "zoning tint: can it take housing?"]];
+  const lay = [["buildings", "buildings"], ["shops", "empty shops (ground floor)"], ["trees", "trees (222,918)"], ...Object.entries(GROUND).map(([k, [l]]) => [k, l]), ["zoning", "zoning tint: can it take housing?"]];
   lay.forEach(([k]) => { city.show[k] = k !== "zoning"; });
   $("#citypanel").innerHTML = `
     <fieldset><legend>Layers</legend>${lay.map(([k, l]) => `<label><input type="checkbox" data-l="${k}" ${city.show[k] ? "checked" : ""}>${l}</label>`).join("")}</fieldset>
