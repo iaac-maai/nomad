@@ -17,3 +17,6 @@ Bars's files/app/rulebook/parts/
 
 # Each person's raw and licensed files stay local.
 **/private/
+
+# Bhavini's law PDFs: downloaded locally, never committed (same rule as above)
+Bhavini's files/4_laws_and_rules/output/rulebook/parts/
