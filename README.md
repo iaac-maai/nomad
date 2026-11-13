@@ -80,9 +80,9 @@ Bars's former site files are in `Bars's files/app/`; the official site is in `Bh
 
 ## Rebuilding the data (for the team)
 
-The website's data is in git, so nobody needs to rebuild it to open the site. To rebuild it you need the raw data in
-`nomad/02_Code/data/` and `pip install -r requirements.txt`; then run the scripts in
-`nomad/02_Code/src/` (each one says how at its top) and copy their output into `Bars's files/app/data/`.
+The official site data is in git, so it can be opened without rebuilding. The shared scripts in
+`nomad/02_Code/src/` remain in place and belong to Bhavini's current pipeline; check their headers before running.
+Bars's previous site data is self-contained in `Bars's files/app/`.
 After new Radiance runs of real shops: `python "Bars's files/5_daylight/code/daylight_validated.py"`.
 
 Grup C or D for each shop (Decret 141 Annex 4), after downloading the Catastro CAT file (needs a login; see
