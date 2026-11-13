@@ -53,7 +53,7 @@ def main():
         norm = c["source"]["norm"]
         rel = next((v for k, v in PDF.items() if norm.startswith(k)), None)
         if rel is None or not (DATA / rel).exists():
-            print(f"?    {c['rule_id']:<26} no PDF for '{norm}' (run tools/get_rulebook.py)"); bad += 1; continue
+            print(f"?    {c['rule_id']:<26} no PDF for '{norm}' (run Bars's files/4_laws_and_rules/code/get_rulebook.py)"); bad += 1; continue
         if rel not in texts:
             texts[rel] = fold(" ".join(p.get_text() for p in pymupdf.open(DATA / rel)))
         q = c.get("quote") or ""

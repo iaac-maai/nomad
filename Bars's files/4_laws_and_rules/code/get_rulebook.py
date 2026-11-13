@@ -280,7 +280,7 @@ def run_build(lock):
         if compare(lock, short, fingerprint(f)):
             bad.append(short)
     if bad:
-        print("\nSTOP: not the pinned version of", ", ".join(bad), "\nRun  python tools/get_rulebook.py --check  to see "
+        print("\nSTOP: not the pinned version of", ", ".join(bad), "\nRun  python \"Bars's files/4_laws_and_rules/code/get_rulebook.py\" --check  to see "
               "what changed, then  --accept  if the new text is fine.")
         sys.exit(2)
     build(lock, [])
@@ -311,7 +311,7 @@ def run_check(lock, accept):
         return
     if not accept:
         print(f"\n{len(changes)} official text(s) changed. Nothing was changed here. If the new texts are fine:  "
-              "python tools/get_rulebook.py --accept")
+              "python \"Bars's files/4_laws_and_rules/code/get_rulebook.py\" --accept")
         sys.exit(2)
     for short, (new, new_path) in changes.items():
         shutil.copyfile(new_path, DATA / SOURCES[short][0])
@@ -323,7 +323,7 @@ def run_check(lock, accept):
 
 def run_init():
     """write the lock from the PDFs on this computer (once, from the versions the book was built with)"""
-    lock = {"about": "The versions of the 23 law PDFs in the rulebook. Written by tools/get_rulebook.py; change it only "
+    lock = {"about": "The versions of the 23 law PDFs in the rulebook. Written by Bars's files/4_laws_and_rules/code/get_rulebook.py; change it only "
                      "with --accept.", "docs": {}}
     for short, (rel, src) in SOURCES.items():
         url = resolve(src)

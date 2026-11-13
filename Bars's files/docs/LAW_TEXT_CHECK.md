@@ -1,10 +1,10 @@
 # Law texts: the rule cards checked against the official PDFs (9 Nov 2026)
 
 Every rule card on the website shows the sentence of the law its number comes from. On 9 Nov 2026 each sentence was
-compared with the official PDF, downloaded from the body that publishes it (`tools/get_rulebook.py`).
+compared with the official PDF, downloaded from the body that publishes it (`Bars's files/4_laws_and_rules/code/get_rulebook.py`).
 
 - **Text PDFs** (Decret 141/2012 from the Portal Jurídic, CTE DB-SUA from codigotecnico.org): the sentence must be
-  found word for word in the PDF's text. `python tools/check_quotes.py` repeats this check.
+  found word for word in the PDF's text. `python "Bars's files/4_laws_and_rules/code/check_quotes.py"` repeats this check.
 - **Scans** (MPGM 2004 from the RPUC, document 126035): the official PDF is a picture of the pages, with no text.
   The old sentences came from our own OCR (Tesseract), which made mistakes. They were replaced by the text read on
   the page images (rendered at 110–150 dpi) and typed by Claude, the AI assistant; this is not OCR. **Checked by a
@@ -33,7 +33,7 @@ already found word for word; only the new `"checked"` field was added.
 
 ## The rulebook's own text
 
-In this version the flipbook shows the official PDF pages themselves (`tools/get_rulebook.py`); it adds no quotes of
+In this version the flipbook shows the official PDF pages themselves (`Bars's files/4_laws_and_rules/code/get_rulebook.py`); it adds no quotes of
 its own, and the scanned PGM pages carry no OCR text (it is added only if `ocr_pgm.py` has been run with Tesseract).
 So there was no rulebook quote to correct. (Bhavini's later version, on `parked/bhavini-v43`, added OCR text under
 some bookmarks, with the same errors as above: it is not on main.)

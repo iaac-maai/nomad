@@ -3,8 +3,8 @@
 A shop that becomes homes is a change of use of a building or of part of one. Decret 141/2012 Annex 4 says which
 rules of Annex 1 (new buildings) apply then. For a shop it is **Grup B** (the whole building changes use), **Grup C**
 (≤ 50 % of the building's built area, above or below ground, changes use) or **Grup D** (> 50 %). Official text: the
-consolidated Decret 141/2012 that `tools/get_rulebook.py` downloads (pinned in
-`nomad/04_Website/rulebook/sources.lock.json`), Annex 4 apartat 2, **page 23**.
+consolidated Decret 141/2012 that `Bars's files/4_laws_and_rules/code/get_rulebook.py` downloads (pinned in
+`Bars's files/app/rulebook/sources.lock.json`), Annex 4 apartat 2, **page 23**.
 
 | | Grup B (whole building) | Grup C (≤ 50 %) | Grup D (> 50 %) |
 | --- | --- | --- | --- |
@@ -15,9 +15,9 @@ consolidated Decret 141/2012 that `tools/get_rulebook.py` downloads (pinned in
 
 ## On the rule cards (no value changed)
 
-`tools/annex4_cards.py` adds to every Decret 141 card `scope` (who it applies to), `conversion` (what changes for a
+`Bars's files/4_laws_and_rules/code/annex4_cards.py` adds to every Decret 141 card `scope` (who it applies to), `conversion` (what changes for a
 conversion) and `source.page`; height-04C and patio-01 get `extra_quotes`; `rules/annex4.json` holds the Annex 4 note
-shown above the cards. Every quote is found word for word on its page (`tools/check_quotes.py`: 16/16 cards, 20/20
+shown above the cards. Every quote is found word for word on its page (`Bars's files/4_laws_and_rules/code/check_quotes.py`: 16/16 cards, 20/20
 Annex 4 quotes).
 
 | Card | For | Conversion |
@@ -31,7 +31,7 @@ The MPGM 2004 and CTE cards are not Decret 141: Annex 4 does not change them.
 
 ## Grup B, C or D for each shop
 
-`tools/annex4_grup.py` (version 2, 11 Nov 2026) computes, for each empty premises of the 2024 census,
+`Bars's files/6_check_the_shop/code/annex4_grup.py` (version 2, 11 Nov 2026) computes, for each empty premises of the 2024 census,
 **the shop's built area ÷ the building's total built area (above and below ground)**:
 - **Grup B**: the shop is the whole building (at least 90 % of its built area, and no housing in it);
 - **Grup C**: ≤ 50 %;
@@ -59,7 +59,7 @@ basement only when the unit holds no homes. Common elements count only in the bu
 
 **Result** (CAT file of 14 Aug 2026, accessed 11 Nov 2026): 6,072 premises — Grup B 60, Grup C 5,094, Grup D 151,
 not known 767. Found by `same` 3,643, `only` 1,586, `door` 76. 181 shops would change group if above and below ground
-were counted separately (`docs/OPEN_QUESTIONS.md`, question 2).
+were counted separately (`Bars's files/docs/OPEN_QUESTIONS.md`, question 2).
 
 ### How to run it again (needs Bars: the download needs a login)
 
@@ -69,13 +69,13 @@ were counted separately (`docs/OPEN_QUESTIONS.md`, question 2).
 2. Put it in `nomad/02_Code/data/barcelona/catastro/cat/` (not in git: `nomad/02_Code/data/` is ignored).
 3. The census: `nomad/02_Code/data/barcelona/census/2024_CensComercial_BCN.csv` from Open Data BCN
    (https://opendata-ajuntament.barcelona.cat/data/dataset/cens-locals-planta-baixa-act-economica, CC BY 4.0).
-4. `python tools/annex4_grup.py --cat <file>.CAT.gz --accessed YYYY-MM-DD`
-   → `nomad/04_Website/data/annex4_grup.json` (site: group, %, how found) and
+4. `python "Bars's files/6_check_the_shop/code/annex4_grup.py" --cat <file>.CAT.gz --accessed YYYY-MM-DD`
+   → `Bars's files/app/data/annex4_grup.json` (site: group, %, how found) and
    `nomad/02_Code/results/annex4/spotcheck.md` (local only: counts, how each unit was found, shops of each group
    (B, C, D, not known) with their m², and how many shops would change group if above and below ground were counted
    separately).
-5. Tests without real data: `python tools/test_annex4_grup.py` (CAT records written by hand to the format; 10/10).
-6. Then `python tools/annex4_cards.py` and `python tools/check_quotes.py`.
+5. Tests without real data: `python "Bars's files/6_check_the_shop/code/test_annex4_grup.py"` (CAT records written by hand to the format; 10/10).
+6. Then `python "Bars's files/4_laws_and_rules/code/annex4_cards.py"` and `python "Bars's files/4_laws_and_rules/code/check_quotes.py"`.
 
 The site shows, for each shop, the group, the % and how the unit was found, as "NOMAD's estimate from Dirección
 General del Catastro data, accessed 2026-11-11".
@@ -99,4 +99,4 @@ which the download asks to accept:
   estimate", never "Catastro information".
 - **Term:** 10 years from the download (13).
 The licence PDF is dated 24 Oct 2011 and names the "Ministerio de Economía y Hacienda"; the Catastro is now under the
-Ministerio de Hacienda. Open questions are in `docs/OPEN_QUESTIONS.md`.
+Ministerio de Hacienda. Open questions are in `Bars's files/docs/OPEN_QUESTIONS.md`.

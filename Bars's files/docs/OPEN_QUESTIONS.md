@@ -35,7 +35,7 @@ Legal and data questions NOMAD cannot settle by itself. Each says what we know, 
 
 7. **Which unit is the shop.** The census and the Catastro number doors differently; when several ground-floor units
    could be the shop and they give different groups, NOMAD says "not known" rather than guess
-   (`docs/ANNEX4.md`). A visit or the owner's deed settles it.
+   (`Bars's files/docs/ANNEX4.md`). A visit or the owner's deed settles it.
 
 8. **When is a shop the whole building (Grup B)?** NOMAD says Grup B when the shop's area is at least 90 % of the
    building's and the Catastro records no housing in the building; the 10 % margin allows for common elements
