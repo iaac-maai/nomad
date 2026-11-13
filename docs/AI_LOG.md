@@ -13,6 +13,7 @@ IAAC asks us to declare every AI tool we use. Add one row each time.
 | 2026-11-13 | Bars | Codex (ChatGPT) | Added research scope and source credits to Bhavini Sources table | Added academic/non-commercial scope, transformed Catastro INSPIRE Buildings, ICGC LiDAR CC BY 4.0, and IAAC credit |
 | 2026-11-14 | Bars | Codex (ChatGPT) | Added honest labels for daylight, home counts and zoning answer | XGBoost marked as a model estimate, counts as rough estimates, and zoning answer notes other checks remain |
 | 2026-11-14 | Bars | Codex (ChatGPT) | Reconciled the displayed tree total with the built Open Data BCN layer metadata | 222,918 matches the dated city index and its three dataset subtotals; 222,617 was stale copy |
+| 2026-11-14 | Bars | Codex (ChatGPT) | Added external Catastro 3D viewer link to every building details panel | Uses the checked refcat link pattern and opens in a new tab |
 | 2026-10-26 | | Claude | Starter kit scripts for experiments 1 and 2 | Scripts in exp1_daylight/ and exp2_rules/, reviewed by the team |
 | 2026-10-27 | Bars | Claude | Debugging Grasshopper/Honeybee setup, switching Exp 1 to ground-floor shops, training script | Scripts and settings, reviewed by Bars |
 | 2026-10-27 | Bars | Gemini 3.5 Flash Lite (API, model `gemini-3.5-flash-lite`, set as GEMINI_MODEL in .env; 5 of the 155 logged drafts in outputs/run_pdf used the code default `gemini-2.5-flash`) | Drafting 10 rule cards x 5 runs from Decret 141/2012 (Exp 2) | Drafts only, scored against human gold cards |
