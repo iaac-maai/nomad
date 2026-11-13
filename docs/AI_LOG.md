@@ -60,3 +60,4 @@ The same list as the website's Sources table (9 Nov 2026). No row is left "to ch
 
 Removed on 9 Nov 2026 with the features that used them: ResPlan, IfcOpenShell/trimesh and Pyodide (parked layout
 engine, see PARKED.md), the metropolitan-area data (Results section), idealista18 prices, Catastro Visor 3D units.
+| 2026-11-13 | Bars | Codex (ChatGPT) | Corrected Bhavini site rule quotes and added checked page/provenance metadata for item 1 | Synced the 16 loaded rules with Bars checked rule data; values unchanged |
