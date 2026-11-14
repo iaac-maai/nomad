@@ -18,6 +18,7 @@ IAAC asks us to declare every AI tool we use. Add one row each time.
 | 2026-11-14 | Bars | Codex (ChatGPT) | Link the Ajuntament change-of-use guide instead of reproducing it | Book compiler skips the guide PDF and emits an external-link entry; book index opens the official source in a new tab |
 | 2026-11-14 | Bars | Codex (ChatGPT) | Added honest scope note beside scenarios, counts and PDF layouts | Preserved the layout engine and added the requested estimated-outline / rough-range note in the app and report |
 | 2026-11-14 | Bars | Codex (ChatGPT) | Traced the Bhavini district display to its source | Site carries district names on the 2024 census records; it loads no official or other district-boundary polygon layer |
+| 2026-11-14 | Bars | Codex (ChatGPT) | Busted cached Annex 4 group-data URL after verifying Bars and Bhavini payloads match | Refreshed the UI fetch version; ratio, maximum ratio and method remain sourced from CAT results; no calculation changed |
 | 2026-11-14 | Bars | Codex (ChatGPT) | Marked stored golden-set metrics as not reproducible yet | Named the 16-question CSV test set and answer accuracy, checked citation accuracy and search hit@5 metrics |
 | 2026-10-26 | | Claude | Starter kit scripts for experiments 1 and 2 | Scripts in exp1_daylight/ and exp2_rules/, reviewed by the team |
 | 2026-10-27 | Bars | Claude | Debugging Grasshopper/Honeybee setup, switching Exp 1 to ground-floor shops, training script | Scripts and settings, reviewed by Bars |

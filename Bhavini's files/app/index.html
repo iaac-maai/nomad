@@ -2090,7 +2090,7 @@ function basisText(B) {
 }
 const CORE_HIT = { tower: "lands on the real hall in 93 % of 171 tested buildings", well: "lands on the real hall in 91 % of 88 tested buildings", box: "lands on the real hall in 72 % of 294 tested buildings" };
 const CORES = fetch("data/cores.json?v=2").then(r => r.ok ? r.json() : {}).catch(() => ({}));   /* rule C: assumed hall and stair (src/building/shop_data.py step 2b) */
-const ANNEX4 = fetch("data/annex4_grup.json?v=1").then(r => r.ok ? r.json() : {}).catch(() => ({}));
+const ANNEX4 = fetch("data/annex4_grup.json?v=2").then(r => r.ok ? r.json() : {}).catch(() => ({}));
 const GRUP_EN = {
   C: "Grup C: the shop is half the building or less. Annex 1 apartat 2 is exempt except 2.2.1. A patio is not required. Clear height: 2,40 m.",
   D: "Grup D: the shop is more than half the building. Annex 1 apartat 2 applies: accessible route, 1,50 m landing and a community room from 8 homes. Patio minimum areas may be 10 % smaller. Clear height: 2,40 m.",
